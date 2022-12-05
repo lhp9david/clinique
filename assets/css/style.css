@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  padding: 0;
+
+  background-image: url(../img/background.png);
+  background-attachment: fixed;
+}
+
+.pokelogo {
+  width: 30px;
+}
+
+.logo {
+  height: 50.39px;
+  width: auto;
+}
+
+.icon {
+  width: 80px;
+}
+
+.card {
+  width: 300px;
+}
+
+.toast-header {
+  background-color: green;
+}
+
+#pokeballs {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin-left : 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.card-body input {
+  margin: 15px;
+}
