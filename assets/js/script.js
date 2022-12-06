@@ -32,6 +32,7 @@ window.addEventListener('click', event => {
 
 
 function pokeballs () {
+    document.querySelector('.container').innerHTML = "";
     fetch('assets/json/store.json')
         .then(response => response.json())
         .then((data) => {
@@ -85,6 +86,7 @@ function pokeballs () {
 
 
 function battleItems () {
+    document.querySelector('.container').innerHTML = "";
     fetch('assets/json/store.json')
         .then(response => response.json())
         .then((data) => {
@@ -134,6 +136,7 @@ function battleItems () {
     };
 
 function medicine () {
+    document.querySelector('.container').innerHTML = "";
     fetch('assets/json/store.json')
         .then(response => response.json())
         .then((data) => {
@@ -183,6 +186,7 @@ function medicine () {
     };
 
 function TMs () {
+    document.querySelector('.container').innerHTML = "";
     fetch('assets/json/store.json')
         .then(response => response.json())
         .then((data) => {
