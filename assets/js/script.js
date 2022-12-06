@@ -29,131 +29,207 @@ window.addEventListener('click', event => {
 });
 
 
-    // fetch('assets/json/store.json')
-    //     .then(response => response.json())
-    //     .then((data) => {
-    //         let db = data;
+function pokeballs () {
+    fetch('assets/json/store.json')
+        .then(response => response.json())
+        .then((data) => {
+            let db = data;
 
-            // db.items.forEach(element => {
+            db.items.forEach(element => {
 
+                let id = element.id;
+                let name = element.name;
+                let category = element.category;
+                let image = element.image;
+                let overview = element.overview;
+                let price = element.price;
+
+                let anchor = document.createElement('div');
+                anchor.innerHTML = '<div class="card-body" id='+id+'>';
                 
+                if (category == 'Pokeballs') {
+                    
+                    anchor.className = 'card text-center';
+                    anchor = document.querySelector('.container').appendChild(anchor);
 
-            //     let id = element.id;
-            //     let name = element.name;
-            //     let category = element.category;
-            //     let image = element.image;
-            //     let overview = element.overview;
-            //     let price = element.price;
+                    let cardId = document.getElementById(id);
+                    
+                    let cardImg = document.createElement('img');
+                    cardImg.src = 'assets/img/'+image+'';
+                    cardImg.alt = name;
+                    cardImg = cardId.appendChild(cardImg);
 
-            //     let anchor = document.createElement('div');
-            //     anchor.innerHTML = '<div class="card-body" id='+id+'>';
+                    let cardName = document.createElement('div');
+                    cardName.textContent = name;
+                    cardName = cardId.appendChild(cardName);
+
+                    let cardOverview = document.createElement('div');
+                    cardOverview.textContent = overview;
+                    cardOverview = cardId.appendChild(cardOverview);
+
+                    let cardInput = document.createElement('input');
+                    cardInput.placeholder = 'Quantité';
+                    cardInput.minLength = 1;
+                    cardInput.maxLength = 2;
+                    cardInput = cardId.appendChild(cardInput);
+
+                    let cardPrice = document.createElement('div');
+                    cardPrice.textContent = price+'¥';
+                    cardPrice = cardId.appendChild(cardPrice);
+                }
+            });
+        });
+};
+
+
+function battleItems () {
+    fetch('assets/json/store.json')
+        .then(response => response.json())
+        .then((data) => {
+            let db = data;
+
+            db.items.forEach(element => {
+
+                let id = element.id;
+                let name = element.name;
+                let category = element.category;
+                let image = element.image;
+                let overview = element.overview;
+                let price = element.price;
+
+                let anchor = document.createElement('div');
+                anchor.innerHTML = '<div class="card-body" id='+id+'>';
                 
-                // if (category == 'Pokeballs') {
-                    
-                //     anchor.className = 'card text-center';
-                //     anchor = document.getElementById('pokeballs').appendChild(anchor);
+                    if (category == 'Battle items') {
 
-                //     let cardId = document.getElementById(id);
-                    
-                //     let cardImg = document.createElement('img');
-                //     cardImg.src = 'assets/img/'+image+'';
-                //     cardImg.alt = name;
-                //     cardImg = cardId.appendChild(cardImg);
+                        anchor.className = 'card text-center';
+                        anchor = document.querySelector('.container').appendChild(anchor);
+    
+                        let cardId = document.getElementById(id);
 
-                //     let cardName = document.createElement('div');
-                //     cardName.textContent = name;
-                //     cardName = cardId.appendChild(cardName);
+                        let cardImg = document.createElement('img');
+                        cardImg.src = 'assets/img/'+image+'';
+                        cardImg = cardId.appendChild(cardImg);
 
-                //     let cardOverview = document.createElement('div');
-                //     cardOverview.textContent = overview;
-                //     cardOverview = cardId.appendChild(cardOverview);
+                        let cardName = document.createElement('div');
+                        cardName.textContent = name;
+                        cardName = cardId.appendChild(cardName);
 
-                //     let cardInput = document.createElement('input');
-                //     cardInput.placeholder = 'Quantité';
-                //     cardInput.minLength = 1;
-                //     cardInput.maxLength = 2;
-                //     cardInput = cardId.appendChild(cardInput);
+                        let cardOverview = document.createElement('div');
+                        cardOverview.textContent = overview;
+                        cardOverview = cardId.appendChild(cardOverview);
 
-                //     let cardPrice = document.createElement('div');
-                //     cardPrice.textContent = price+'¥';
-                //     cardPrice = cardId.appendChild(cardPrice);
+                        let cardInput = document.createElement('input');
+                        cardInput.placeholder = 'Quantité';
+                        cardInput = cardId.appendChild(cardInput);
 
-                // }
-            // else if (category == 'Battle items') {
+                        let cardPrice = document.createElement('div');
+                        cardPrice.textContent = price+'¥';
+                        cardPrice = cardId.appendChild(cardPrice);
+                    }
+                });
+            });
+    };
 
-            //     let cardImg = document.createElement('img');
-            //     cardImg.src = 'assets/img/'+image+'';
-            //     cardImg = cardId.appendChild(cardImg);
 
-            //     let cardName = document.createElement('div');
-            //     cardName.textContent = name;
-            //     cardName = cardId.appendChild(cardName);
+function Medicine () {
+    fetch('assets/json/store.json')
+        .then(response => response.json())
+        .then((data) => {
+            let db = data;
 
-            //     let cardOverview = document.createElement('div');
-            //     cardOverview.textContent = overview;
-            //     cardOverview = cardId.appendChild(cardOverview);
+            db.items.forEach(element => {
 
-            //     let cardInput = document.createElement('input');
-            //     cardInput.placeholder = 'Quantité';
-            //     cardInput = cardId.appendChild(cardInput);
+                let id = element.id;
+                let name = element.name;
+                let category = element.category;
+                let image = element.image;
+                let overview = element.overview;
+                let price = element.price;
 
-            //     let cardPrice = document.createElement('div');
-            //     cardPrice.textContent = price+'¥';
-            //     cardPrice = cardId.appendChild(cardPrice);
-            // }
-            // else if (category == 'Medicine') {
+                let anchor = document.createElement('div');
+                anchor.innerHTML = '<div class="card-body" id='+id+'>';
 
-            //     let cardImg = document.createElement('img');
-            //     cardImg.src = 'assets/img/'+image+'';
-            //     cardImg = cardId.appendChild(cardImg);
+                    if (category == 'Medicine') {
 
-            //     let cardName = document.createElement('div');
-            //     cardName.textContent = name;
-            //     cardName = cardId.appendChild(cardName);
+                        anchor.className = 'card text-center';
+                        anchor = document.querySelector('.container').appendChild(anchor);
+    
+                        let cardId = document.getElementById(id);
 
-            //     let cardOverview = document.createElement('div');
-            //     cardOverview.textContent = overview;
-            //     cardOverview = cardId.appendChild(cardOverview);
+                        let cardImg = document.createElement('img');
+                        cardImg.src = 'assets/img/'+image+'';
+                        cardImg = cardId.appendChild(cardImg);
 
-            //     let cardInput = document.createElement('input');
-            //     cardInput.placeholder = 'Quantité';
-            //     cardInput = cardId.appendChild(cardInput);
+                        let cardName = document.createElement('div');
+                        cardName.textContent = name;
+                        cardName = cardId.appendChild(cardName);
 
-            //     let cardPrice = document.createElement('div');
-            //     cardPrice.textContent = price+'¥';
-            //     cardPrice = cardId.appendChild(cardPrice);
-            // }
-            // else if (category == 'Machines') {
+                        let cardOverview = document.createElement('div');
+                        cardOverview.textContent = overview;
+                        cardOverview = cardId.appendChild(cardOverview);
 
-            //     let cardImg = document.createElement('img');
-            //     cardImg.src = 'assets/img/'+image+'';
-            //     cardImg = cardId.appendChild(cardImg);
+                        let cardInput = document.createElement('input');
+                        cardInput.placeholder = 'Quantité';
+                        cardInput = cardId.appendChild(cardInput);
 
-            //     let cardName = document.createElement('div');
-            //     cardName.textContent = name;
-            //     cardName = cardId.appendChild(cardName);
+                        let cardPrice = document.createElement('div');
+                        cardPrice.textContent = price+'¥';
+                        cardPrice = cardId.appendChild(cardPrice);
+                    }
+                });
+            });
+    };
 
-            //     let cardOverview = document.createElement('div');
-            //     cardOverview.textContent = overview;
-            //     cardOverview = cardId.appendChild(cardOverview);
+TMs ()
+function TMs () {
+    fetch('assets/json/store.json')
+        .then(response => response.json())
+        .then((data) => {
+            let db = data;
 
-            //     let cardInput = document.createElement('input');
-            //     cardInput.placeholder = 'Quantité';
-            //     cardInput = cardId.appendChild(cardInput);
+            db.items.forEach(element => {
 
-            //     let cardPrice = document.createElement('div');
-            //     cardPrice.textContent = price+'¥';
-            //     cardPrice = cardIds.appendChild(cardPrice);
-            // }
+                let id = element.id;
+                let name = element.name;
+                let category = element.category;
+                let image = element.image;
+                let overview = element.overview;
+                let price = element.price;
 
-// });
-//     });
-// else {
-//     document.querySelector('.tab').id = 'landing';
-// }
-// });
-// // Tabs 
+                let anchor = document.createElement('div');
+                anchor.innerHTML = '<div class="card-body" id='+id+'>';
 
+                if (category == 'TMs') {
+
+                    anchor.className = 'card text-center';
+                    anchor = document.querySelector('.container').appendChild(anchor);
+
+                    let cardId = document.getElementById(id);
+
+                    let cardImg = document.createElement('img');
+                    cardImg.src = 'assets/img/'+image+'';
+                    cardImg = cardId.appendChild(cardImg);
+            
+                    let cardName = document.createElement('div');
+                    cardName.textContent = name;
+                    cardName = cardId.appendChild(cardName);
+            
+                    let cardOverview = document.createElement('div');
+                    cardOverview.textContent = overview;
+                    cardOverview = cardId.appendChild(cardOverview);
+            
+                    let cardInput = document.createElement('input');
+                    cardInput.placeholder = 'Quantité';
+                    cardInput = cardId.appendChild(cardInput);
+            
+                    let cardPrice = document.createElement('div');
+                    cardPrice.textContent = price+'¥';
+                    cardPrice = cardIds.appendChild(cardPrice);
+                }
+                });
+            });
+    };
 
 
 
