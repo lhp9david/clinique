@@ -8,7 +8,6 @@ window.addEventListener('click', event => {
         if (event.target.classList.contains('nav-link')) { 
             event.target.classList.add('active');
             event.target.removeAttribute('href');
-            document.querySelector('.tab').id = event.target.classList[1]
             tabs.forEach(element => {
                 if (element != event.target) {
                     element.classList.remove('active');
@@ -16,15 +15,18 @@ window.addEventListener('click', event => {
                 }
         });
         }
-        else {
-            document.querySelector('.tab').id = 'landing';
-            tabs.forEach(element => {
-                if (element != event.target) {
-                    element.classList.remove('active');
-                    element.setAttribute('href', '#')
-                }
-            });
-        }
+    }
+    if (event.target.classList.contains('pokeballs')) {
+        pokeballs ()
+    }
+    if (event.target.classList.contains('battleItems')) {
+        battleItems ()
+    }
+    if (event.target.classList.contains('medicines')) {
+        medicine ()
+    }
+    if (event.target.classList.contains('TMs')) {
+        TMs ()
     }
 });
 
@@ -131,8 +133,7 @@ function battleItems () {
             });
     };
 
-
-function Medicine () {
+function medicine () {
     fetch('assets/json/store.json')
         .then(response => response.json())
         .then((data) => {
@@ -181,7 +182,6 @@ function Medicine () {
             });
     };
 
-TMs ()
 function TMs () {
     fetch('assets/json/store.json')
         .then(response => response.json())
@@ -225,7 +225,7 @@ function TMs () {
             
                     let cardPrice = document.createElement('div');
                     cardPrice.textContent = price+'¥';
-                    cardPrice = cardIds.appendChild(cardPrice);
+                    cardPrice = cardId.appendChild(cardPrice);
                 }
                 });
             });
