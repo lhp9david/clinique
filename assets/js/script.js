@@ -17,16 +17,19 @@ window.addEventListener('click', event => {
         }
     }
     if (event.target.classList.contains('pokeballs')) {
-        pokeballs ()
+        pokeballs ();
     }
     if (event.target.classList.contains('battleItems')) {
-        battleItems ()
+        battleItems ();
     }
     if (event.target.classList.contains('medicines')) {
-        medicine ()
+        medicine ();
     }
     if (event.target.classList.contains('TMs')) {
-        TMs ()
+        TMs ();
+    }
+    if (event.target.classList.contains('logo')) {
+        News ();
     }
 });
 
@@ -235,7 +238,10 @@ function TMs () {
             });
     };
 
-
+function News () {
+    document.querySelector('.container').innerHTML = "";
+    document.querySelector('.container').innerHTML = "Prout"
+}
 
 
 //     console.log(document.querySelector(element).classList != 'active');
