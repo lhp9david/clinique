@@ -7,20 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PokeMart</title>
   <!-- CSS only -->
-  <link rel="stylesheet" href="assets/css/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <link rel="icon" href="assets/img/pokelogo.png" />
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
+
   <header class="bg-white sticky-top">
     <div class="d-flex justify-content-between">
       <div>
-        <a href="#"><img class="logo m-2" src="assets/img/logo.svg" alt=""></a>
+        <a href="#"><img class="logo m-2" src="assets/img/logo.svg" alt="" onClick="window.location.reload();"></a>
       </div>
       <div>
-        <button class="btn col-sm-2 m-2"><img src="assets/img/panier.png" alt=""></button>
+        <button class="btn col-sm-2 m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img
+            src="assets/img/panier.png" alt=""></button>
       </div>
     </div>
 
@@ -30,11 +32,13 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link battleItems" href="#"><img class="pokemart" src="assets/img/pokemon_mart_logo.png" alt=""> Battle
+        <a class="nav-link battleItems" href="#"><img class="pokemart" src="assets/img/pokemon_mart_logo.png" alt="">
+          Battle
           items</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link medicines" href="#"><img class="pokemart" src="assets/img/pokemon_mart_logo.png" alt=""> Medicines</a>
+        <a class="nav-link medicines" href="#"><img class="pokemart" src="assets/img/pokemon_mart_logo.png" alt="">
+          Medicines</a>
       </li>
       <li class="nav-item">
         <a class="nav-link TMs" href="#"><img class="pokemart" src="assets/img/pokemon_mart_logo.png" alt=""> TMs</a>
@@ -42,25 +46,182 @@
     </ul>
   </header>
 
-  <main class="container mt-3">
-      
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"><img class="xmaspikachu2"
+              src="assets/img/pikachusanta.svg" alt="pikachu santa"> Check your shopping cart <img class="xmaspikachu2"
+              src="assets/img/pikachusanta.svg" alt="pikachu santa"></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I'm not finished yet!</button>
+          <button type="button" class="btn btn-primary">Complete your order</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    
+  <main class="container">  
 
+  <div class="banner">
+      <div class="slider-container">
+        <span><img class="xmaspikachu" src="assets/img/pikachu_noel.png" alt=""></span>
+        <span class="h5"> WELCOME TO THE POKEMON CENTER </span>
+        <span><img class="xmas" src="assets/img/icon.png" alt=""></span>
+        <span class="h5"> WELCOME TO THE POKEMON CENTER </span>
+        <span><img class="xmaspikachu" src="assets/img/pikachu_noel.png" alt=""></span>
+        <span class="h5"> WELCOME TO THE POKEMON CENTER </span>
+        <span><img class="xmas" src="assets/img/icon.png" alt=""></span>
+        <span class="h5"> WELCOME TO THE POKEMON CENTER </span>
+        <span><img class="xmaspikachu" src="assets/img/pikachu_noel.png" alt=""></span>
+        <span class="h5"> WELCOME TO THE POKEMON CENTER </span>
+        <span><img class="xmas" src="assets/img/icon.png" alt=""></span>
+        <span class="h5"> WELCOME TO THE POKEMON CENTER </span>
+        <span><img class="xmaspikachu" src="assets/img/pikachu_noel.png" alt=""></span>
+        <span class="h5"> WELCOME TO THE POKEMON CENTER </span>
+        <span><img class="xmas" src="assets/img/icon.png" alt=""></span>
+        <span class="h5"> WELCOME TO THE POKEMON CENTER </span>
+        <span><img class="xmaspikachu" src="assets/img/pikachu_noel.png" alt=""></span>
+        <span class="h5"> WELCOME TO THE POKEMON CENTER </span>
+        <span><img class="xmas" src="assets/img/icon.png" alt=""></span>
+        <span class="h5"> WELCOME TO THE POKEMON CENTER </span>
+      </div>
+    </div>
 
-  </main>
-  <footer>
-        <!-- toast-container -->
-        <div class="toast-container position-fixed top-50 end-0 translate-middle-y p-3" >
-          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" >
-            <div class="toast-header text-white bg-success">
-              <img class="pokelogo" src="assets/img/plus.png" class="rounded me-2" alt="...">
-              <strong class="me-auto">  Product added to cart</strong>
-              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
+    <div class="row" data-masonry='{"percentPosition": true }'>
+      <div class="col-sm-3">
+        <div class="card border-danger">
+          <img src="assets/img/pokemonholidayspecial.jpg" class="img-fluid card-img-top" alt="pokemon holiday special">
+          <div class="card-body">
+            <p class="card-text">Check out our exciting holiday sales !</p>
+            <a href="" class="btn btn-primary">Learn more</a>
           </div>
         </div>
+      </div>
+      <div class="col-sm-3 ">
+        <div class="card border-info ">
+          <img class="img-fluid card-img-top" src="assets/img/trainers-guide.jpg" alt="map of paldea">
+          <div class="card-body">
+            <p class="card-text">Discover the Paldea region with us</p>
+            <a href="https://scarletviolet.pokemon.com/en-us/news/trainers_guide_news/" class="btn btn-primary">Learn
+              more</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card border-primary">
+          <img src="assets/img/pokeballs.jpg" class="img-fluid card-img-top" alt="Pokeballs">
+          <div class="card-body">
+            <p class="card-text">New Pokeballs release soon !</p>
+            <a href="" class="btn btn-primary">Learn more</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card border-success">
+          <img src="assets/img/pokemontrainer.jpg" class="card-img-top" alt="Pokeballs">
+          <div class="card-body">
+            <p class="card-text">Meet the new Galar champions !</p>
+            <a href="" class="btn btn-primary">Learn more</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3 mt-4">
+        <div class="card border-info">
+          <img src="assets/img/items.jpg" class="card-img-top" alt="motisma">
+          <div class="card-body">
+            <p class="card-text">What's in your bag ??</p>
+            <a href="" class="btn btn-primary">Learn more</a>
+          </div>
+
+
+        </div>
+      </div>
+      <div class="col-sm-3 mt-4">
+        <div class="card border-secondary">
+          <img src="assets/img/wooper.jpg" class="card-img-top" alt="Pokeballs">
+          <div class="card-body">
+            <p class="card-text">Paldeon or Johto Wooper ? let's vote ! </p>
+            <a href="" class="btn btn-primary">Learn more</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3 mt-4">
+        <div class="card border-warning">
+          <img src="assets/img/interview.jpg" class="card-img-top" alt="Pokeballs">
+          <div class="card-body">
+            <p class="card-text">Check out the exclusif interview of legend trainer Blue !</p>
+            <a href="" class="btn btn-primary">Learn more</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3 mt-4">
+        <div class="card border-danger">
+          <img src="assets/img/fuecoco.jpg" class="card-img-top" alt="Pokeballs">
+          <div class="card-body">
+            <p class="card-text">Look at this cutie ! Why people love Fuecoco so much </p>
+            <a href="" class="btn btn-primary">Learn more</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3 mt-4">
+        <div class="card border-info">
+          <img src="assets/img/MOTISMA.jpg" class="card-img-top" alt="motisma">
+          <div class="card-body">
+            <p class="card-text">Next step for Pokemongear ??</p>
+            <a href="" class="btn btn-primary">Learn more</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3 mt-4">
+        <div class="card border-danger">
+          <img
+            src="https://furansujapon.com/wp-content/uploads/2022/11/teracristallisation-pokemon-ecarlate-violet-1052x592.webp"
+            class="card-img-top" alt="motisma">
+          <div class="card-body">
+            <p class="card-text">Master the Paldea Region's Terastal Phenomenon</p>
+            <a href="" class="btn btn-primary">Learn more</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3 mt-4">
+        <div class="card border-warning">
+          <img
+            src="https://cdn.vox-cdn.com/thumbor/bbPYU-h49kXKKVIBnsJ86mkCu34=/0x0:1280x720/1200x800/filters:focal(684x368:888x572)/cdn.vox-cdn.com/uploads/chorus_image/image/65732096/2019110423384000_B8FAEF4816CAC2B76D11869B05CA7601.0.jpg"
+            class="card-img-top" alt="Pokeballs">
+          <div class="card-body">
+            <p class="card-text">How to get Gigantamax Pokémon</p>
+            <a href="" class="btn btn-primary">Learn more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+  <footer>
+    <ul class="nav nav-tabs nav-fill">
+      <li class="nav-item">Customer Service</li>
+      <li class="nav-item">About us </li>
+      <li class="nav-item">Legal info </li>
+    </ul>
+    <!-- toast-container -->
+    <div class="toast-container position-fixed top-50 end-0 translate-middle-y p-3">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header text-white bg-success">
+          <img class="pokelogo" src="assets/img/plus.png" class="rounded me-2" alt="...">
+          <strong class="me-auto"> Product added to cart</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
@@ -76,8 +237,11 @@
         toast.show()
       })
     }
-    </script>
-    <script src="assets/js/script.js"></script>
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
+    async></script>
+  <script src="assets/js/script.js"></script>
 </body>
 
 </html>

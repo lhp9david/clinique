@@ -9,7 +9,7 @@
                 "name": "Poké Ball",
                 "image": "pokeball.png",
                 "overview": "A device for catching wild Pokémon. It's thrown like a ball at a Pokémon, comfortably encapsulating its target.",
-                "price": ""
+                "price": "200"
             },
             {
                 "id"  : "2",
@@ -17,7 +17,7 @@
                 "name": "Great Ball",
                 "image": "greatball.png",
                 "overview": "A good, high-performance Poké Ball that provides a higher success rate for catching Pokémon than a standard Poké Ball.",
-                "price": ""
+                "price": "600"
             },
             {
                 "id"  : "3",
@@ -25,7 +25,7 @@
                 "name": "Ultra Ball",
                 "image": "ultraball.png",
                 "overview": "An ultra-high-performance Poké Ball that provides a higher success rate for catching Pokémon than a Great Ball.",
-                "price": ""
+                "price": "800"
             },
             {
                 "id"  : "4",
@@ -33,7 +33,7 @@
                 "name": "Dive Ball",
                 "image": "diveball.png",
                 "overview": "A somewhat different Poké Ball that is more effective when catching Pokémon in or on the water.",
-                "price": ""
+                "price": "1000"
             },
             {
                 "id"  : "5",
@@ -41,7 +41,7 @@
                 "name": "Dusk Ball",
                 "image": "duskball.png",
                 "overview": "A somewhat different Poké Ball that is more effective when catching Pokémon at night or in dark places, such as caves.",
-                "price": ""
+                "price": "1000"
             },
             {
                 "id"  : "6",
@@ -49,7 +49,7 @@
                 "name": "Heal Ball",
                 "image": "healball.png",
                 "overview": "A remedial Poké Ball that restores HP and eliminates status conditions for a Pokémon caught with it.",
-                "price": ""
+                "price": "300"
             },
             {
                 "id"  : "7",
@@ -57,7 +57,7 @@
                 "name": "Net Ball",
                 "image": "netball.png",
                 "overview": "A somewhat different Poké Ball that is more effective when catching Water- or Bug-type Pokémon.",
-                "price": ""
+                "price": "1000"
             },
             {
                 "id"  : "8",
@@ -65,7 +65,7 @@
                 "name": "Luxury Ball",
                 "image": "luxuryball.png",
                 "overview": "A particularly comfortable Poké Ball that makes a wild Pokémon quickly grow friendlier after being caught.",
-                "price": ""
+                "price": "3000"
             },
 
             
@@ -76,7 +76,7 @@
                 "name": "Dire Hit",
                 "image": "DireHit.png",
                 "overview": "An item that can be used once to sharply boost the critical-hit ratio of a Pokémon in battle. This effect disappears if the Pokémon leaves the battle.",
-                "price": ""
+                "price": "650"
             },
             {
                 "id"  : "10",
@@ -84,7 +84,7 @@
                 "name": "Guard Spec.",
                 "image": "guardspec.png",
                 "overview": "An item that prevents Pokémon on your side from having their stats lowered in battle for five turns.",
-                "price": ""
+                "price": "700"
             },
             {
                 "id"  : "11",
@@ -92,7 +92,7 @@
                 "name": "X Accuracy",
                 "image": "xaccuracy.png",
                 "overview": "An item that sharply boosts a Pokémon's accuracy in battle. This effect disappears if the Pokémon leaves the battle.",
-                "price": ""
+                "price": "950"
             },
             {
                 "id"  : "12",
@@ -100,7 +100,7 @@
                 "name": "X Attack",
                 "image": "xattack.png",
                 "overview": "An item that sharply boosts the Attack stat of a Pokémon in battle. This effect disappears if the Pokémon leaves the battle.",
-                "price": ""
+                "price": "500"
             },
             {
                 "id"  : "13",
@@ -108,7 +108,7 @@
                 "name": "X Defense",
                 "image": "xdefense.png",
                 "overview": "An item that sharply boosts the Defense stat of a Pokémon in battle. This effect disappears if the Pokémon leaves the battle.",
-                "price": ""
+                "price": "500"
             },
             {
                 "id"  : "14",
@@ -116,7 +116,7 @@
                 "name": "X Sp.Atk",
                 "image": "xsp.atk.png",
                 "overview": "An item that sharply boosts the Sp. Atk stat of a Pokémon in battle. This effect disappears if the Pokémon leaves the battle.",
-                "price": ""
+                "price": "350"
             },
             {
                 "id"  : "15",
@@ -124,7 +124,7 @@
                 "name": "X Sp.Def",
                 "image": "xsp.def.png",
                 "overview": "An item that sharply boosts the Sp. Def stat of a Pokémon in battle. This effect disappears if the Pokémon leaves the battle.",
-                "price": ""
+                "price": "350"
             },
             {
                 "id"  : "16",
@@ -132,7 +132,7 @@
                 "name": "X Speed",
                 "image": "xspeed.png",
                 "overview": "An item that sharply boosts the Speed stat of a Pokémon in battle. This effect disappears if the Pokémon leaves the battle.",
-                "price": ""
+                "price": "350"
             },
 
             
@@ -143,7 +143,7 @@
                 "name": "Antidote",
                 "image": "antidote.png",
                 "overview": "A spray-type medicine for treating poisoning. It can be used to lift the effects of being poisoned from a Pokémon.",
-                "price": ""
+                "price": "100"
             },
             {
                 "id"  : "18",
@@ -151,7 +151,7 @@
                 "name": "Awakening",
                 "image": "awakening.png",
                 "overview": "A spray-type medicine to wake the sleeping. It can be used to rouse a Pokémon from the clutches of sleep.",
-                "price": ""
+                "price": "250"
             },
             {
                 "id"  : "19",
@@ -159,7 +159,7 @@
                 "name": "Burn Heal",
                 "image": "burnheal.png",
                 "overview": "A spray-type medicine for treating burns. It can be used to cure a Pokémon suffering from a burn.",
-                "price": ""
+                "price": "250"
             },
             {
                 "id"  : "20",
@@ -167,7 +167,7 @@
                 "name": "Ice Heal",
                 "image": "iceheal.png",
                 "overview": "Heals the Frozen Status Ailment.",
-                "price": ""
+                "price": "250"
             },
             {
                 "id"  : "21",
@@ -175,7 +175,7 @@
                 "name": "Elixir",
                 "image": "elixir.png",
                 "overview": "Restores the PP of all of the Pokémon's moves by 10PP.",
-                "price": ""
+                "price": "1000"
             },
             {
                 "id"  : "22",
@@ -183,7 +183,7 @@
                 "name": "Max Elixir",
                 "image": "maxelixir.png",
                 "overview": "Completely restores the PP of all of the Pokémon's moves by 10PP.",
-                "price": ""
+                "price": "3000"
             },
             {
                 "id"  : "23",
@@ -191,7 +191,7 @@
                 "name": "Ether",
                 "image": "ether.png",
                 "overview": "Restores the PP of one of the Pokémon's moves by 10PP.",
-                "price": ""
+                "price": "700"
             },
             {
                 "id"  : "24",
@@ -199,7 +199,7 @@
                 "name": "Max Ether",
                 "image": "maxether.png",
                 "overview": "A medicine that can be used to fully restore the max PP of a single move that a Pokémon knows.",
-                "price": ""
+                "price": "1500"
             },
             {
                 "id"  : "25",
@@ -207,7 +207,7 @@
                 "name": "Full Restore",
                 "image": "fullrestore.png",
                 "overview": "A medicine that can be used to fully restore the max HP of a Pokémon and cure any status condition it may have.",
-                "price": ""
+                "price": "3000"
             },
             {
                 "id"  : "26",
@@ -215,7 +215,7 @@
                 "name": "Potion",
                 "image": "potion.png",
                 "overview": "A spray-type medicine for treating wounds. It can be used to restore 20 HP to a Pokémon.",
-                "price": ""
+                "price": "300"
             },
             {
                 "id"  : "27",
@@ -223,7 +223,7 @@
                 "name": "Super Potion",
                 "image": "superpotion.png",
                 "overview": "A spray-type medicine for treating wounds. It can be used to restore 60 HP to a Pokémon.",
-                "price": ""
+                "price": "700"
             },
             {
                 "id"  : "28",
@@ -231,7 +231,7 @@
                 "name": "Hyper Potion",
                 "image": "hyperpotion.png",
                 "overview": "A spray-type medicine for treating wounds. It can be used to restore 120 HP to a Pokémon.",
-                "price": ""
+                "price": "1500"
             },
             {
                 "id"  : "29",
@@ -239,7 +239,7 @@
                 "name": "Max Potion",
                 "image": "maxpotion.png",
                 "overview": "A spray-type medicine for treating wounds. It can be used to fully restore the max HP of a Pokémon.",
-                "price": ""
+                "price": "2500"
             },
             {
                 "id"  : "30",
@@ -247,7 +247,7 @@
                 "name": "Revive",
                 "image": "revive.png",
                 "overview": "A medicine that can be used to revive a Pokémon that has fainted. It also restores half the Pokémon's max HP.",
-                "price": ""
+                "price": "1500"
             },
             {
                 "id"  : "31",
@@ -255,7 +255,7 @@
                 "name": "Max Revive",
                 "image": "maxrevive.png",
                 "overview": "A medicine that can be used to revive a Pokémon that has fainted. It also fully restores the Pokémon's max HP.",
-                "price": ""
+                "price": "3000"
             },
 
 
@@ -266,7 +266,7 @@
                 "name": "Acid Spray",
                 "image": "tmpoison.png",
                 "overview": "The user attacks by spitting fluid that works to melt the target. This also harshly lowers the target’s Sp. Def stat.",
-                "price": ""
+                "price": "10 000"
             },
             {
                 "id"  : "33",
@@ -274,7 +274,7 @@
                 "name": "Acrobatics",
                 "image": "tmflying.png",
                 "overview": "The user nimbly strikes the target. This attack does massive damage if the user isn’t holding an item.",
-                "price": ""
+                "price": "10 000"
             },
             {
                 "id"  : "34",
@@ -282,7 +282,7 @@
                 "name": "Blizzard",
                 "image": "tmice.png",
                 "overview": "A howling blizzard is summoned to strike opposing Pokémon. This may also leave the opposing Pokémon frozen.",
-                "price": ""
+                "price": "30 000"
             },
             {
                 "id"  : "35",
@@ -290,7 +290,7 @@
                 "name": "Charm",
                 "image": "tmfairy.png",
                 "overview": "The user gazes at the target rather charmingly, making it less wary. This lowers the target’s Attack stat.",
-                "price": ""
+                "price": "10 000"
             },
             {
                 "id"  : "36",
@@ -298,7 +298,7 @@
                 "name": "Dragon Claw",
                 "image": "tmdragon.png",
                 "overview": "The user slashes the target with huge, sharp claws to inflict damage.",
-                "price": ""
+                "price": "80 000"
             },
             {
                 "id"  : "37",
@@ -306,7 +306,7 @@
                 "name": "Electro Ball",
                 "image": "tmelectric.png",
                 "overview": "The user hurls an electric orb at the target. The faster the user is that the target, the greater the move’s power.",
-                "price": ""
+                "price": "80 000"
             },
             {
                 "id"  : "38",
@@ -314,7 +314,7 @@
                 "name": "Flamethrower",
                 "image": "tmfire.png",
                 "overview": "The target is scorched with an intense blast of fire. This may also leave the target with a burn.",
-                "price": ""
+                "price": "160 000"
             },
             {
                 "id"  : "39",
@@ -322,7 +322,7 @@
                 "name": "Hydro Cannon",
                 "image": "tmwater.png",
                 "overview": "The target is hit with a watery blast. The user can’t move on the next turn.",
-                "price": ""
+                "price": "160 000"
             },
             {
                 "id"  : "40",
@@ -330,7 +330,7 @@
                 "name": "Solar Beam",
                 "image": "tmgrass.png",
                 "overview": "The user gathers light on the first turn, then blasts a bundled beam on the next turn.",
-                "price": ""
+                "price": "160 000"
             }
         ]
         

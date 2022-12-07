@@ -1,9 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
 body {
   margin: 0;
   padding: 0;
 
   background-image: url(../img/background.png);
   background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+.row {
+  position : relative;
+}
+
+.cardImg {
+  width: 100px;
+}
+
+.cardImg1 {
+  width: 80px;
 }
 
 .pokelogo {
@@ -19,25 +34,97 @@ body {
   width: 80px;
 }
 
-.card {
-  width: 300px;
-}
-
 .toast-header {
   background-color: green;
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
+.nav{
+  font-family: 'Roboto', sans-serif;
 }
 
-.card {
-  margin-left : 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
+.cardthomas {
+  width: 300px;
+
+  margin-top: 30px;
+  margin-left : 50px;
+  margin-right: 50px;
+  margin-bottom: 20px;
 }
+
+.card:hover {
+  box-shadow: rgba(55, 28, 255, 0.199) -10px 10px, rgba(150, 184, 245, 0.19) -20px 20px ;
+  transform: scale(1.1,1.1); 
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height:max-content;
+}
+
 
 .card-body input {
   margin: 15px;
+}
+
+.thomas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  margin-bottom: 15px;
+}
+
+
+@keyframes slidein {
+  from {
+      margin-left: 100%;
+      width: 100%;
+  }
+
+  to {
+      margin-left: 0%;
+      width: 100%;
+  }
+}
+
+.xmaspikachu {
+  width: 40px;
+}
+.xmaspikachu2 {
+  width: 60px;
+}
+.xmas {
+  width: 30px;
+}
+
+
+.slider-container {    
+  animation: bannermove 10s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+  white-space: nowrap;
+
+  background-color: rgba(214, 0, 0, 0.453);
+  color: beige;
+}
+
+
+@keyframes bannermove {
+0% {
+  transform: translate(0, 0);
+}
+100% {
+  transform: translate(-50%, 0);
+}
 }

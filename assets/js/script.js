@@ -1,4 +1,4 @@
-// Choix du Tab
+// Choix et affichage des Tabs
 
 const tabs = document.querySelectorAll('.nav-link')
 
@@ -33,9 +33,15 @@ window.addEventListener('click', event => {
     }
 });
 
+// Fonctions pour afficher les elements du container
 
 function pokeballs () {
     document.querySelector('.container').innerHTML = "";
+
+    let itemContainer = document.createElement('div');
+    itemContainer.className = "thomas";
+    itemContainer = document.querySelector('.container').appendChild(itemContainer);
+
     fetch('assets/json/store.json')
         .then(response => response.json())
         .then((data) => {
@@ -55,33 +61,43 @@ function pokeballs () {
                 
                 if (category == 'Pokeballs') {
                     
-                    anchor.className = 'card text-center';
-                    anchor = document.querySelector('.container').appendChild(anchor);
+                    anchor.className = 'card card'+id+' cardthomas text-center';
+                    anchor = document.querySelector('.thomas').appendChild(anchor);
 
                     let cardId = document.getElementById(id);
                     
                     let cardImg = document.createElement('img');
                     cardImg.src = 'assets/img/'+image+'';
                     cardImg.alt = name;
+                    cardImg.className = "cardImg"
                     cardImg = cardId.appendChild(cardImg);
 
-                    let cardName = document.createElement('div');
+                    let cardName = document.createElement('p');
                     cardName.textContent = name;
+                    cardName.className = "card-title";
                     cardName = cardId.appendChild(cardName);
 
-                    let cardOverview = document.createElement('div');
+                    let cardOverview = document.createElement('p');
                     cardOverview.textContent = overview;
+                    cardOverview.className = "card-text"
                     cardOverview = cardId.appendChild(cardOverview);
 
                     let cardInput = document.createElement('input');
-                    cardInput.placeholder = 'Quantité';
+                    cardInput.placeholder = 'Quantity';
                     cardInput.minLength = 1;
                     cardInput.maxLength = 2;
                     cardInput = cardId.appendChild(cardInput);
 
+                    let cardAdd = document.createElement('button');
+                    cardAdd.className = 'btn btn-primary add';
+                    cardAdd.type = 'button';
+                    cardAdd.textContent = "Add";
+                    cardAdd = cardId.appendChild(cardAdd);
+
                     let cardPrice = document.createElement('div');
                     cardPrice.textContent = price+'¥';
-                    cardPrice = cardId.appendChild(cardPrice);
+                    cardPrice.className = "card-footer"
+                    cardPrice = document.querySelector('.card'+id+'').appendChild(cardPrice);
                 }
             });
         });
@@ -90,6 +106,11 @@ function pokeballs () {
 
 function battleItems () {
     document.querySelector('.container').innerHTML = "";
+
+    let itemContainer = document.createElement('div');
+    itemContainer.className = "thomas";
+    itemContainer = document.querySelector('.container').appendChild(itemContainer);
+
     fetch('assets/json/store.json')
         .then(response => response.json())
         .then((data) => {
@@ -104,35 +125,50 @@ function battleItems () {
                 let overview = element.overview;
                 let price = element.price;
 
+                
+
                 let anchor = document.createElement('div');
                 anchor.innerHTML = '<div class="card-body" id='+id+'>';
                 
                     if (category == 'Battle items') {
 
-                        anchor.className = 'card text-center';
-                        anchor = document.querySelector('.container').appendChild(anchor);
-    
-                        let cardId = document.getElementById(id);
+                    anchor.className = 'card card'+id+' cardthomas text-center';
+                    anchor = document.querySelector('.thomas').appendChild(anchor);
 
-                        let cardImg = document.createElement('img');
-                        cardImg.src = 'assets/img/'+image+'';
-                        cardImg = cardId.appendChild(cardImg);
+                    let cardId = document.getElementById(id);
+                    
+                    let cardImg = document.createElement('img');
+                    cardImg.src = 'assets/img/'+image+'';
+                    cardImg.alt = name;
+                    cardImg.className = "cardImg"
+                    cardImg = cardId.appendChild(cardImg);
 
-                        let cardName = document.createElement('div');
-                        cardName.textContent = name;
-                        cardName = cardId.appendChild(cardName);
+                    let cardName = document.createElement('p');
+                    cardName.textContent = name;
+                    cardName.className = "card-title";
+                    cardName = cardId.appendChild(cardName);
 
-                        let cardOverview = document.createElement('div');
-                        cardOverview.textContent = overview;
-                        cardOverview = cardId.appendChild(cardOverview);
+                    let cardOverview = document.createElement('p');
+                    cardOverview.textContent = overview;
+                    cardOverview.className = "card-text"
+                    cardOverview = cardId.appendChild(cardOverview);
 
-                        let cardInput = document.createElement('input');
-                        cardInput.placeholder = 'Quantité';
-                        cardInput = cardId.appendChild(cardInput);
+                    let cardInput = document.createElement('input');
+                    cardInput.placeholder = 'Quantity';
+                    cardInput.minLength = 1;
+                    cardInput.maxLength = 2;
+                    cardInput = cardId.appendChild(cardInput);
 
-                        let cardPrice = document.createElement('div');
-                        cardPrice.textContent = price+'¥';
-                        cardPrice = cardId.appendChild(cardPrice);
+                    let cardAdd = document.createElement('button');
+                    cardAdd.className = 'btn btn-primary add';
+                    cardAdd.type = 'button';
+                    cardAdd.textContent = "Add";
+                    cardAdd = cardId.appendChild(cardAdd);
+
+                    let cardPrice = document.createElement('div');
+                    cardPrice.textContent = price+'¥';
+                    cardPrice.className = "card-footer"
+                    cardPrice = document.querySelector('.card'+id+'').appendChild(cardPrice);
                     }
                 });
             });
@@ -140,6 +176,11 @@ function battleItems () {
 
 function medicine () {
     document.querySelector('.container').innerHTML = "";
+
+    let itemContainer = document.createElement('div');
+    itemContainer.className = "thomas";
+    itemContainer = document.querySelector('.container').appendChild(itemContainer);
+
     fetch('assets/json/store.json')
         .then(response => response.json())
         .then((data) => {
@@ -159,30 +200,43 @@ function medicine () {
 
                     if (category == 'Medicine') {
 
-                        anchor.className = 'card text-center';
-                        anchor = document.querySelector('.container').appendChild(anchor);
+                        anchor.className = 'card card'+id+' cardthomas text-center';
+                        anchor = document.querySelector('.thomas').appendChild(anchor);
     
                         let cardId = document.getElementById(id);
-
+                        
                         let cardImg = document.createElement('img');
                         cardImg.src = 'assets/img/'+image+'';
+                        cardImg.alt = name;
+                        cardImg.className = "cardImg"
                         cardImg = cardId.appendChild(cardImg);
-
-                        let cardName = document.createElement('div');
+    
+                        let cardName = document.createElement('p');
                         cardName.textContent = name;
+                        cardName.className = "card-title";
                         cardName = cardId.appendChild(cardName);
-
-                        let cardOverview = document.createElement('div');
+    
+                        let cardOverview = document.createElement('p');
                         cardOverview.textContent = overview;
+                        cardOverview.className = "card-text"
                         cardOverview = cardId.appendChild(cardOverview);
-
+    
                         let cardInput = document.createElement('input');
-                        cardInput.placeholder = 'Quantité';
+                        cardInput.placeholder = 'Quantity';
+                        cardInput.minLength = 1;
+                        cardInput.maxLength = 2;
                         cardInput = cardId.appendChild(cardInput);
-
+    
+                        let cardAdd = document.createElement('button');
+                        cardAdd.className = 'btn btn-primary add';
+                        cardAdd.type = 'button';
+                        cardAdd.textContent = "Add";
+                        cardAdd = cardId.appendChild(cardAdd);
+    
                         let cardPrice = document.createElement('div');
                         cardPrice.textContent = price+'¥';
-                        cardPrice = cardId.appendChild(cardPrice);
+                        cardPrice.className = "card-footer"
+                        cardPrice = document.querySelector('.card'+id+'').appendChild(cardPrice);
                     }
                 });
             });
@@ -190,6 +244,11 @@ function medicine () {
 
 function TMs () {
     document.querySelector('.container').innerHTML = "";
+
+    let itemContainer = document.createElement('div');
+    itemContainer.className = "thomas";
+    itemContainer = document.querySelector('.container').appendChild(itemContainer);
+
     fetch('assets/json/store.json')
         .then(response => response.json())
         .then((data) => {
@@ -209,30 +268,43 @@ function TMs () {
 
                 if (category == 'TMs') {
 
-                    anchor.className = 'card text-center';
-                    anchor = document.querySelector('.container').appendChild(anchor);
+                    anchor.className = 'card card'+id+' cardthomas text-center';
+                    anchor = document.querySelector('.thomas').appendChild(anchor);
 
                     let cardId = document.getElementById(id);
-
+                    
                     let cardImg = document.createElement('img');
                     cardImg.src = 'assets/img/'+image+'';
+                    cardImg.alt = name;
+                    cardImg.className = "cardImg"
                     cardImg = cardId.appendChild(cardImg);
-            
-                    let cardName = document.createElement('div');
+
+                    let cardName = document.createElement('p');
                     cardName.textContent = name;
+                    cardName.className = "card-title";
                     cardName = cardId.appendChild(cardName);
-            
-                    let cardOverview = document.createElement('div');
+
+                    let cardOverview = document.createElement('p');
                     cardOverview.textContent = overview;
+                    cardOverview.className = "card-text"
                     cardOverview = cardId.appendChild(cardOverview);
-            
+
                     let cardInput = document.createElement('input');
-                    cardInput.placeholder = 'Quantité';
+                    cardInput.placeholder = 'Quantity';
+                    cardInput.minLength = 1;
+                    cardInput.maxLength = 2;
                     cardInput = cardId.appendChild(cardInput);
-            
+
+                    let cardAdd = document.createElement('button');
+                    cardAdd.className = 'btn btn-primary add';
+                    cardAdd.type = 'button';
+                    cardAdd.textContent = "Add";
+                    cardAdd = cardId.appendChild(cardAdd);
+
                     let cardPrice = document.createElement('div');
                     cardPrice.textContent = price+'¥';
-                    cardPrice = cardId.appendChild(cardPrice);
+                    cardPrice.className = "card-footer"
+                    cardPrice = document.querySelector('.card'+id+'').appendChild(cardPrice);
                 }
                 });
             });
@@ -240,54 +312,67 @@ function TMs () {
 
 function News () {
     document.querySelector('.container').innerHTML = "";
-    document.querySelector('.container').innerHTML = "Prout"
 }
 
+// Object 
 
-//     console.log(document.querySelector(element).classList != 'active');
-//     if (document.querySelector(element).classList != 'active') {
-//         document.querySelector('.tab').id = 'landing';
-//     }
-
-
-
-//     // document.querySelector(element).addEventListener('click', () => {
-//     //     if (element.classList != 'active') {
-//     //         element. = 'active';
-
-//     //     }
-//     // });
-// });
 
 
 
 
 // UX
 
-// let regex = /^[1-9]{1}[0-9]{0,1}$/;
+let regex = /^[1-9]{1}[0-9]{0,1}$/;
 
-// window.addEventListener('keydown', element => {
-//     if ((element.key === 'Enter')) {
-//         if (regex.test(element.target.value)) {
-//             console.log('hello')
-//             quantity = element.target.value;
-//             console.log(quantity);
-            
+window.addEventListener('keydown', element => {
+    if ((element.key === 'Enter')) {
+        if (regex.test(element.target.value)) {
+            quantity = element.target.value;
+            console.log(quantity);
+            let id = element.target.parentNode.id;
+            console.log(id); 
+        } 
+        else {
+            console.log("Veuillez saisir un élément valide");
+            // message.textContent = "Veuillez saisir un élément valide";
+        };
+    };
+});
 
+window.addEventListener('click', element => {
+    console.log(element.target.classList.contains('add'))
+    if ((element.target.classList.contains('add'))) {
+        if (regex.test(element.target.previousSibling.value)) {
+            quantity = element.target.previousSibling.value;
+            console.log(quantity);
+            let id = element.target.parentNode.id;
+            console.log(id); 
+        } 
+        else {
+            console.log("Veuillez saisir un élément valide");
+            // message.textContent = "Veuillez saisir un élément valide";
+        };
+    };
+});
 
-
-
-
-
-
-
-
-
-//         } 
-//         else {
-//             message.textContent = "Veuillez saisir un élément valide";
-//         };
-//     };
-// });
 
 // Modal
+
+function cart () {
+fetch('assets/json/store.json')
+        .then(response => response.json())
+        .then((data) => {
+            let db = data;
+
+            let id = element.id;
+            let name = element.name;
+            let category = element.category;
+            let image = element.image;
+            let overview = element.overview;
+            let price = element.price;
+
+
+
+        
+        });
+    };
