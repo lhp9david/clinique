@@ -89,6 +89,9 @@ function pokeballs () {
                     cardInput = cardId.appendChild(cardInput);
 
                     let cardAdd = document.createElement('button');
+                    cardAdd.dataset.name = name;
+                    cardAdd.dataset.image = image;
+                    cardAdd.dataset.price = price;
                     cardAdd.className = 'btn btn-primary add';
                     cardAdd.type = 'button';
                     cardAdd.textContent = "Add";
@@ -160,6 +163,9 @@ function battleItems () {
                     cardInput = cardId.appendChild(cardInput);
 
                     let cardAdd = document.createElement('button');
+                    cardAdd.dataset.name = name;
+                    cardAdd.dataset.image = image;
+                    cardAdd.dataset.price = price;
                     cardAdd.className = 'btn btn-primary add';
                     cardAdd.type = 'button';
                     cardAdd.textContent = "Add";
@@ -228,6 +234,9 @@ function medicine () {
                         cardInput = cardId.appendChild(cardInput);
     
                         let cardAdd = document.createElement('button');
+                        cardAdd.dataset.name = name;
+                        cardAdd.dataset.image = image;
+                        cardAdd.dataset.price = price;
                         cardAdd.className = 'btn btn-primary add';
                         cardAdd.type = 'button';
                         cardAdd.textContent = "Add";
@@ -296,6 +305,9 @@ function TMs () {
                     cardInput = cardId.appendChild(cardInput);
 
                     let cardAdd = document.createElement('button');
+                    cardAdd.dataset.name = name;
+                    cardAdd.dataset.image = image;
+                    cardAdd.dataset.price = price;
                     cardAdd.className = 'btn btn-primary add';
                     cardAdd.type = 'button';
                     cardAdd.textContent = "Add";
@@ -314,39 +326,44 @@ function News () {
     document.querySelector('.container').innerHTML = "";
 }
 
-// Object 
-
-
-
-
-
 // UX
 
 let regex = /^[1-9]{1}[0-9]{0,1}$/;
 
-window.addEventListener('keydown', element => {
-    if ((element.key === 'Enter')) {
-        if (regex.test(element.target.value)) {
-            quantity = element.target.value;
-            console.log(quantity);
-            let id = element.target.parentNode.id;
-            console.log(id); 
-        } 
-        else {
-            console.log("Veuillez saisir un élément valide");
-            // message.textContent = "Veuillez saisir un élément valide";
-        };
-    };
-});
+// window.addEventListener('keydown', element => {
+//     if ((element.key === 'Enter')) {
+//         if (regex.test(element.target.value)) {
+//             let quantity = element.target.value;
+//             let id = element.target.parentNode.id;
+//             element.target.value = "";
+//         } 
+//         else {
+//             console.log("Veuillez saisir un élément valide");
+//             // message.textContent = "Veuillez saisir un élément valide";
+//         };
+//     };
+// });
+
 
 window.addEventListener('click', element => {
-    console.log(element.target.classList.contains('add'))
     if ((element.target.classList.contains('add'))) {
         if (regex.test(element.target.previousSibling.value)) {
-            quantity = element.target.previousSibling.value;
-            console.log(quantity);
+
             let id = element.target.parentNode.id;
-            console.log(id); 
+            let quantity = element.target.previousSibling.value;
+
+            console.log(id);
+            console.log(element.target.dataset.name);
+            console.log(element.target.dataset.image);
+            console.log(element.target.dataset.price);
+            console.log(quantity)
+
+            let modal = document.querySelector('.modal-body');
+            let modalLine = document.createElement('div');
+            modalLine.innerHTML = `${id} : ${element.target.dataset.name} , ${element.target.dataset.image} , ${element.target.dataset.price} , ${quantity}.`
+            modalLine = modal.appendChild(modalLine);
+
+            
         } 
         else {
             console.log("Veuillez saisir un élément valide");
@@ -356,23 +373,7 @@ window.addEventListener('click', element => {
 });
 
 
-// Modal
-
-function cart () {
-fetch('assets/json/store.json')
-        .then(response => response.json())
-        .then((data) => {
-            let db = data;
-
-            let id = element.id;
-            let name = element.name;
-            let category = element.category;
-            let image = element.image;
-            let overview = element.overview;
-            let price = element.price;
 
 
 
-        
-        });
-    };
+
