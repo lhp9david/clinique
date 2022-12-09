@@ -35,6 +35,8 @@ window.addEventListener('click', event => {
 
 // Fonctions pour afficher les elements du container
 
+// Catégorie Pokeballs
+
 function pokeballs() {
     document.querySelector('.container').innerHTML = "";
 
@@ -106,6 +108,7 @@ function pokeballs() {
         });
 };
 
+// Catégorie Battle Items
 
 function battleItems() {
     document.querySelector('.container').innerHTML = "";
@@ -180,6 +183,8 @@ function battleItems() {
         });
 };
 
+// Catégorie Medicine
+
 function medicine() {
     document.querySelector('.container').innerHTML = "";
 
@@ -250,6 +255,8 @@ function medicine() {
             });
         });
 };
+
+// Catégorie TMs
 
 function TMs() {
     document.querySelector('.container').innerHTML = "";
@@ -322,6 +329,8 @@ function TMs() {
         });
 };
 
+// La "landing" page d'accueil  
+
 function News() {
     document.querySelector('.container').innerHTML = "";
 }
@@ -329,6 +338,8 @@ function News() {
 // Panier
 
 let regex = /^[1-9]{1}[0-9]{0,1}$/;
+
+// A la pression de la touche Enter
 
 // window.addEventListener('keydown', element => {
 //     if ((element.key === 'Enter')) {
@@ -344,6 +355,7 @@ let regex = /^[1-9]{1}[0-9]{0,1}$/;
 //     };
 // });
 
+// Au click sur le button "Add"
 
 window.addEventListener('click', element => {
 
@@ -352,135 +364,245 @@ window.addEventListener('click', element => {
     if (element.target.classList.contains('add')) {
         if (regex.test(element.target.previousSibling.value)) {
 
-            let id = element.target.parentNode.id;
+            let itemId = element.target.parentNode.id;
             let quantity = element.target.previousSibling.value;
 
-            let modal = document.querySelector('.modal-body ul');
-            
-            let modalLine = document.createElement('li');
-            modalLine = modal.appendChild(modalLine);
+            let checkIds = document.querySelectorAll('.modal-body ul li');
 
-            let modalImage = document.createElement('div');
-            modalImage.innerHTML = '<img class="cartItem" src="assets/img/'+element.target.dataset.image+'"/>';
-            modalImage = modalLine.appendChild(modalImage);
+            let i = 0
+            if (checkIds.length != 0) {
+                
+                checkIds.forEach(element => {
+                    if (element.className == itemId) {
+                        i++
+                    }
+                    if (i == 1) {
+                        console.log('Cas n°3 : Doublons');
+                        let changeQuantity = parseInt(element.children[3].textContent) + parseInt(quantity);
+                        element.children[3].textContent = changeQuantity;
+                    }  
+                });
+            };
 
-            let modalName = document.createElement('div');
-            modalName.className = 'h5 text';
-            modalName.textContent = element.target.dataset.name
-            modalName = modalLine.appendChild(modalName);
+            if (checkIds.length == 0) {
+                console.log('Cas n°1 : Premier article ajouté au panier')
+                let modal = document.querySelector('.modal-body ul');
 
-            let modalPrice = document.createElement('div');
-            modalPrice.className = 'modalPrice';
-            modalPrice.textContent = element.target.dataset.price+'¥';
-            modalPrice = modalLine.appendChild(modalPrice);
+                let modalLine = document.createElement('li');
+                modalLine.className = itemId;
+                modalLine = modal.appendChild(modalLine);
 
-            let modalQuantity = document.createElement('div');
-            modalQuantity.className = 'modalQuantity';
-            modalQuantity.textContent = quantity;
-            modalQuantity = modalLine.appendChild(modalQuantity);
+                let modalImage = document.createElement('div');
+                modalImage.className = 'modalImg';
+                modalImage.innerHTML = '<img class="cartItem" src="assets/img/' + element.target.dataset.image + '"/>';
+                modalImage = modalLine.appendChild(modalImage);
 
-            let editBtn = document.createElement('button');
-            editBtn.classList.add('btn');
-            editBtn.classList.add('btn-light');
-            editBtn.type = 'button';
-            editBtn.innerHTML = '<img class="Editer" src="https://img.icons8.com/color-glass/38/null/edit--v1.png"/>';
-            editBtn = modalLine.appendChild(editBtn);
+                let modalName = document.createElement('div');
+                modalName.className = 'modalName h5 text';
+                modalName.textContent = element.target.dataset.name
+                modalName = modalLine.appendChild(modalName);
 
-            let removeBtn = document.createElement('button');
-            removeBtn.classList.add("btn");
-            removeBtn.classList.add('btn-light');
-            removeBtn.type = 'button';
-            removeBtn.innerHTML = '<img class="Supprimer" src="https://img.icons8.com/fluency/38/null/delete-forever.png"/>';
-            removeBtn = modalLine.appendChild(removeBtn);
+                let modalPrice = document.createElement('div');
+                modalPrice.className = 'modalPrice';
+                modalPrice.textContent = element.target.dataset.price + '¥';
+                modalPrice = modalLine.appendChild(modalPrice);
+
+                let modalQuantity = document.createElement('div');
+                modalQuantity.className = 'modalQuantity';
+                modalQuantity.textContent = quantity;
+                modalQuantity = modalLine.appendChild(modalQuantity);
+
+                let editBtn = document.createElement('button');
+                editBtn.classList.add('btn');
+                editBtn.classList.add('btn-light');
+                editBtn.type = 'button';
+                editBtn.innerHTML = '<img class="Editer" src="https://img.icons8.com/color-glass/38/null/edit--v1.png"/>';
+                editBtn = modalLine.appendChild(editBtn);
+
+                let removeBtn = document.createElement('button');
+                removeBtn.classList.add("btn");
+                removeBtn.classList.add('btn-light');
+                removeBtn.type = 'button';
+                removeBtn.innerHTML = '<img class="Supprimer" src="https://img.icons8.com/fluency/38/null/delete-forever.png"/>';
+                removeBtn = modalLine.appendChild(removeBtn);
+            }
+
+            else if (i == 0) {
+                console.log('Cas n°2 : Pas de doublons')
+                let modal = document.querySelector('.modal-body ul');
+
+                let modalLine = document.createElement('li');
+                modalLine.className = itemId;
+                modalLine = modal.appendChild(modalLine);
+
+                let modalImage = document.createElement('div');
+                modalImage.className = 'modalImg';
+                modalImage.innerHTML = '<img class="cartItem" src="assets/img/' + element.target.dataset.image + '"/>';
+                modalImage = modalLine.appendChild(modalImage);
+
+                let modalName = document.createElement('div');
+                modalName.className = 'modalName h5 text';
+                modalName.textContent = element.target.dataset.name
+                modalName = modalLine.appendChild(modalName);
+
+                let modalPrice = document.createElement('div');
+                modalPrice.className = 'modalPrice';
+                modalPrice.textContent = element.target.dataset.price + '¥';
+                modalPrice = modalLine.appendChild(modalPrice);
+
+                let modalQuantity = document.createElement('div');
+                modalQuantity.className = 'modalQuantity';
+                modalQuantity.textContent = quantity;
+                modalQuantity = modalLine.appendChild(modalQuantity);
+
+                let editBtn = document.createElement('button');
+                editBtn.classList.add('btn');
+                editBtn.classList.add('btn-light');
+                editBtn.type = 'button';
+                editBtn.innerHTML = '<img class="Editer" src="https://img.icons8.com/color-glass/38/null/edit--v1.png"/>';
+                editBtn = modalLine.appendChild(editBtn);
+
+                let removeBtn = document.createElement('button');
+                removeBtn.classList.add("btn");
+                removeBtn.classList.add('btn-light');
+                removeBtn.type = 'button';
+                removeBtn.innerHTML = '<img class="Supprimer" src="https://img.icons8.com/fluency/38/null/delete-forever.png"/>';
+                removeBtn = modalLine.appendChild(removeBtn);
+            }
+
+            let clearInput = document.querySelectorAll('.card-body input');
+            clearInput.forEach(element => {
+                element.value = '';
+            });
 
         }
         else {
             message.textContent = "Veuillez saisir un élément valide";
         };
-    };
+
         // Edition du panier 
 
-    // Edition 
+        // Edition 
 
-    if (element.target.classList == 'Valider') {
-        let modif = element.target.parentNode.previousSibling.value;
-        let quantityDiv = document.createElement('div');
-        quantityDiv.className = 'modalQuantity';
-        quantityDiv.textContent = modif;
-        element.target.parentNode.previousSibling.replaceWith(quantityDiv);
-        console.log(element.target.parentNode.parentNode.firstChild);
-        element.target.src = "https://img.icons8.com/color-glass/38/null/edit--v1.png"
-    };
+        if (element.target.classList == 'Valider') {
+
+            let quantityDiv = document.createElement('div');
+            quantityDiv.className = 'modalQuantity';
+            quantityDiv.textContent = element.target.parentNode.previousSibling.value;
+            element.target.parentNode.previousSibling.replaceWith(quantityDiv);
+            element.target.src = "https://img.icons8.com/color-glass/38/null/edit--v1.png"
+        };
 
 
-    if (element.target.classList == 'Editer') {
-        let quantityInput = document.createElement('input');
-        quantityInput.classList = 'modalQuantityInput'
-        quantityInput.value = element.target.parentNode.previousSibling.textContent;
-        element.target.parentNode.previousSibling.replaceWith(quantityInput);
-        console.log(element.target);
-        element.target.src = "https://img.icons8.com/color-glass/38/null/verified-account--v1.png";
-        element.target.classList = 'Valider'
+        if (element.target.classList == 'Editer') {
+
+            let regex = /^[1-9]{1}[0-9]{0,1}$/;
+            let quantityInput = document.createElement('input');
+            quantityInput.classList = 'modalQuantityInput'
+            quantityInput.value = element.target.parentNode.previousSibling.textContent;
+            if (regex.test(quantityInput.value)) {
+                element.target.parentNode.previousSibling.replaceWith(quantityInput);
+                element.target.src = "https://img.icons8.com/color-glass/38/null/verified-account--v1.png";
+                element.target.classList = 'Valider'
+            }
+            else {
+                message.textContent = "Veuillez saisir un élément valide";
+            }
         }
 
-    //Suppression
+        //Suppression
 
-    if (element.target.classList.contains('Supprimer')) {
-        element.target.parentNode.parentNode.remove();
-    }
+        if (element.target.classList.contains('Supprimer')) {
+            element.target.parentNode.parentNode.remove();
+        }
 
         // Sauvegarde dans un JSON 
 
-//         let array = document.querySelectorAll('li');
+        if (element.target.classList.contains('checkOut')) {
 
-//         let listTextContent = [];
-//         array.forEach(element => {
-//             console.log(element.textContent);
-//             listTextContent.push(element.textContent);
-//         });
-//         console.log(listTextContent)
+            let allItems = document.querySelectorAll('.modal-body ul li');
+            let cart = []
+            allItems.forEach(element => {
 
-//         localStorage.setItem("list", JSON.stringify(listTextContent));
+                let item = {
+                    itemId: element.className,
+                    img: element.firstChild.firstChild.src,
+                    name: element.children[1].textContent,
+                    price: element.children[2].firstChild.textContent,
+                    quantity: element.children[3].textContent
+                }
+                console.log(element.className);
+                console.log(element.firstChild.firstChild.src);
+                console.log(element.children[1].textContent);
+                console.log(element.children[2].firstChild.textContent);
+                console.log(element.children[3].textContent);
 
+                cart.push(item)
+            });
+
+            localStorage.setItem("panier", JSON.stringify(cart));
+
+        };
+    }
 });
-
 
 // Initialisation - Récupération des données JSON
 
-// let local = JSON.parse(localStorage.getItem('list'));
+let local = JSON.parse(localStorage.getItem('panier'));
 
-// if (local != null) {
-//     local.forEach(element => {
+if (local != null) {
+    local.forEach(element => {
 
-//         let flex = document.createElement('div');
-//         flex.id = 'flex';
-//         flex = list.appendChild(flex);
+        let itemId = element.itemId;
+        let name = element.name;
+        //    let category = element.category;
+        let image = element.img;
+        console.log(image);
+        let price = element.price;
+        let quantity = element.quantity;
 
-//         let newLi = document.createElement('li');
-//         newLi.textContent = element;
-//         newLi = flex.appendChild(newLi);
+        // Reconstruction de la structure HTML du panier
 
-//         let flexBtn = document.createElement('div');
-//         flexBtn = flex.appendChild(flexBtn);
+        let modal = document.querySelector('.modal-body ul');
 
-//         let removeBtn = document.createElement('button');
-//         removeBtn.classList.add("remove");
-//         removeBtn.type = 'button';
+        let modalLine = document.createElement('li');
+        modalLine.className = itemId;
+        modalLine = modal.appendChild(modalLine);
 
-//         removeBtn.textContent = "-";
-//         removeBtn = flexBtn.appendChild(removeBtn);
+        let modalImage = document.createElement('div');
+        modalImage.className = 'modalImg';
+        modalImage.innerHTML = '<img class="cartItem" src="' + image + '"/>';
+        modalImage = modalLine.appendChild(modalImage);
 
-//         let editBtn = document.createElement('button');
-//         editBtn.classList.add('edit');
-//         editBtn.type = 'button';
+        let modalName = document.createElement('div');
+        modalName.className = 'modalName h5 text';
+        modalName.textContent = name
+        modalName = modalLine.appendChild(modalName);
 
-//         editBtn.textContent = 'Edit';
-//         editBtn = flexBtn.appendChild(editBtn);
-//     });
-// };
+        let modalPrice = document.createElement('div');
+        modalPrice.className = 'modalPrice';
+        modalPrice.textContent = price;
+        modalPrice = modalLine.appendChild(modalPrice);
 
+        let modalQuantity = document.createElement('div');
+        modalQuantity.className = 'modalQuantity';
+        modalQuantity.textContent = quantity;
+        modalQuantity = modalLine.appendChild(modalQuantity);
 
+        let editBtn = document.createElement('button');
+        editBtn.classList.add('btn');
+        editBtn.classList.add('btn-light');
+        editBtn.type = 'button';
+        editBtn.innerHTML = '<img class="Editer" src="https://img.icons8.com/color-glass/38/null/edit--v1.png"/>';
+        editBtn = modalLine.appendChild(editBtn);
 
+        let removeBtn = document.createElement('button');
+        removeBtn.classList.add("btn");
+        removeBtn.classList.add('btn-light');
+        removeBtn.type = 'button';
+        removeBtn.innerHTML = '<img class="Supprimer" src="https://img.icons8.com/fluency/38/null/delete-forever.png"/>';
+        removeBtn = modalLine.appendChild(removeBtn);
 
-
+    });
+};
 
