@@ -18,7 +18,7 @@ body {
 }
 
 .cardImg1 {
-  width: 80px;
+  width: 70px;
 }
 
 .pokelogo {
@@ -38,6 +38,9 @@ body {
   background-color: green;
 }
 
+.attention {
+    background-color: red;
+}
 .nav{
   font-family: 'Roboto', sans-serif;
 }
@@ -49,6 +52,8 @@ body {
   margin-left : 50px;
   margin-right: 50px;
   margin-bottom: 20px;
+
+  transition: 0.7s;
 }
 
 .card:hover {
@@ -79,6 +84,10 @@ button {
   margin-bottom: 15px;
 }
 
+.pikanews {
+  animation: slidein 1s ease;
+  transition: 0.7s;
+}
 
 @keyframes slidein {
   from {
@@ -129,6 +138,11 @@ button {
 }
 }
 
+.modal-body ul {
+  margin: 0;
+  padding: 0;
+}
+
 .cartItem {
 
   width: 38px;
@@ -153,6 +167,46 @@ li {
   width: 30px;
 }
 
-.modalQuantityInput {
-  width: 3rem;
+.modalQuantity {
+  width: 2rem;
+}
+
+.card-title {
+    font-size: large;
+    font-weight: bold;
+}
+
+.card-text {
+    color: gray;
+}
+
+.slider-container {
+ opacity: 0.7;
+}
+
+.toast {
+  opacity : 0.7;
+}
+
+.footer {
+  height: 5rem;
+  align-items: center;
+  color: grey;
+}
+
+.modal-title {
+  margin-left: 2.8rem;
+}
+
+@media only screen and (max-width: 600px){
+  .pikanews {
+    margin: 0.4rem;
+  }
+  .xmaspikachu2 {
+    width: 35px;
+  }
+
+  .modal-title {
+    margin: 0;
+  }
 }

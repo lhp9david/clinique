@@ -38,7 +38,46 @@ window.addEventListener('click', event => {
 // Catégorie Pokeballs
 
 function pokeballs() {
-    document.querySelector('.container').innerHTML = "";
+    document.querySelector('.container').innerHTML = `<div class="banner">
+    <div class="slider-container bg-primary">
+      <span><img class="xmaspikachu" src="assets/img/pokeball.png" alt=""></span>
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/greatball.png" alt=""></span>
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/ultraball.png" alt=""></span>
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/healball.png" alt=""></span>
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/diveball.png" alt=""></span>        
+      
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/duskball.png" alt=""></span>
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/netball.png" alt=""></span>        
+      
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/luxuryball.png" alt=""></span>
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/pokeball.png" alt=""></span>
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/greatball.png" alt=""></span>
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/ultraball.png" alt=""></span>
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/healball.png" alt=""></span>
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/diveball.png" alt=""></span>        
+      
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/duskball.png" alt=""></span>
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/netball.png" alt=""></span>        
+      
+      <span class="h5"> POKEBALLS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/luxuryball.png" alt=""></span>
+      <span class="h5"> POKEBALLS CATEGORY </span>
+    </div>
+  </div>`;
 
     let itemContainer = document.createElement('div');
     itemContainer.className = "thomas";
@@ -111,7 +150,46 @@ function pokeballs() {
 // Catégorie Battle Items
 
 function battleItems() {
-    document.querySelector('.container').innerHTML = "";
+    document.querySelector('.container').innerHTML = `<div class="banner">
+    <div class="slider-container bg-secondary">
+      <span><img class="xmaspikachu" src="assets/img/direhit.png" alt=""></span>
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/guardspec.png" alt=""></span>
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/xaccuracy.png" alt=""></span>
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/xattack.png" alt=""></span>
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/xdefense.png" alt=""></span>        
+      
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/xsp.atk.png" alt=""></span>
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/xsp.def.png" alt=""></span>        
+      
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/xspeed.png" alt=""></span>
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/direhit.png" alt=""></span>
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/guardspec.png" alt=""></span>
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/xaccuracy.png" alt=""></span>
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/xattack.png" alt=""></span>
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/xdefense.png" alt=""></span>        
+      
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/xsp.atk.png" alt=""></span>
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/xsp.def.png" alt=""></span>        
+      
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+      <span><img class="xmaspikachu" src="assets/img/xspeed.png" alt=""></span>
+      <span class="h5"> BATTLE ITEMS CATEGORY </span>
+    </div>
+  </div>`;
 
     let itemContainer = document.createElement('div');
     itemContainer.className = "thomas";
@@ -186,7 +264,43 @@ function battleItems() {
 // Catégorie Medicine
 
 function medicine() {
-    document.querySelector('.container').innerHTML = "";
+    document.querySelector('.container').innerHTML = `<div class="banner">
+    <div class="slider-container bg-success">
+    <span><img class="xmaspikachu" src="assets/img/antidote.png" alt=""></span>
+    <span class="h5"> MEDICINE CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/awakening.png" alt=""></span>
+    <span class="h5"> MEDICINE CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/bunrheal.png" alt=""></span>
+    <span class="h5"> MEDICINE CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/iceheal.png" alt=""></span>
+    <span class="h5"> MEDICINE CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/fullrestore.png" alt=""></span>        
+    
+    <span class="h5"> MEDICINE CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/potion.png" alt=""></span>
+    <span class="h5"> MEDICINE CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/superpotion.png" alt=""></span>        
+    
+    <span class="h5"> MEDICINE CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/hyperpotion.png" alt=""></span>
+    <span class="h5"> MEDICINE CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/maxpotion.png" alt=""></span>
+    <span class="h5"> MEDICINE CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/ether.png" alt=""></span>
+    <span class="h5"> MEDICINE CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/maxether.png" alt=""></span>
+    <span class="h5"> MEDICINE CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/elixir.png" alt=""></span>
+    <span class="h5"> MEDICINE CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/maxelixir.png" alt=""></span>        
+    
+    <span class="h5"> MEDICINE CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/revive.png" alt=""></span>
+    <span class="h5"> MEDICINE CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/maxrevive.png" alt=""></span>        
+    <span class="h5"> MEDICINE CATEGORY </span>
+    </div>
+  </div>`;
 
     let itemContainer = document.createElement('div');
     itemContainer.className = "thomas";
@@ -259,7 +373,49 @@ function medicine() {
 // Catégorie TMs
 
 function TMs() {
-    document.querySelector('.container').innerHTML = "";
+    document.querySelector('.container').innerHTML = `<div class="banner">
+    <div class="slider-container bg-info">
+    <span><img class="xmaspikachu" src="assets/img/tmdragon.png" alt=""></span>
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmelectric.png" alt=""></span>
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmfairy.png" alt=""></span>
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmfire.png" alt=""></span>
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmflying.png" alt=""></span>        
+    
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmgrass.png" alt=""></span>
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmice.png" alt=""></span>        
+    
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmpoison.png" alt=""></span>
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmwater.png" alt=""></span>
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmdragon.png" alt=""></span>
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmelectric.png" alt=""></span>
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmfairy.png" alt=""></span>
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmfire.png" alt=""></span>
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmflying.png" alt=""></span>        
+    
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmgrass.png" alt=""></span>
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmice.png" alt=""></span>        
+    
+    <span class="h5"> TMS CATEGORY </span>
+    <span><img class="xmaspikachu" src="assets/img/tmpoison.png" alt=""></span>
+    <span class="h5"> TMS CATEGORY </span>
+    
+    </div>
+  </div>`;
 
     let itemContainer = document.createElement('div');
     itemContainer.className = "thomas";
@@ -292,7 +448,7 @@ function TMs() {
                     let cardImg = document.createElement('img');
                     cardImg.src = 'assets/img/' + image + '';
                     cardImg.alt = name;
-                    cardImg.className = "cardImg"
+                    cardImg.className = "cardImg1"
                     cardImg = cardId.appendChild(cardImg);
 
                     let cardName = document.createElement('p');
@@ -371,17 +527,21 @@ window.addEventListener('click', element => {
 
             let i = 0
             if (checkIds.length != 0) {
-                
+
                 checkIds.forEach(element => {
                     if (element.className == itemId) {
                         i++
+                        
+                        if (i == 1) {
+                            console.log('Cas n°3 : Doublons');
+                            console.log(element.children[4].value)
+                            let changeQuantity = parseInt(element.children[4].value) + parseInt(quantity);
+                            element.children[4].value = changeQuantity;
+                        }
                     }
-                    if (i == 1) {
-                        console.log('Cas n°3 : Doublons');
-                        let changeQuantity = parseInt(element.children[3].textContent) + parseInt(quantity);
-                        element.children[3].textContent = changeQuantity;
-                    }  
+                    
                 });
+
             };
 
             if (checkIds.length == 0) {
@@ -403,14 +563,25 @@ window.addEventListener('click', element => {
                 modalName = modalLine.appendChild(modalName);
 
                 let modalPrice = document.createElement('div');
-                modalPrice.className = 'modalPrice';
-                modalPrice.textContent = element.target.dataset.price + '¥';
+                modalPrice.className = 'modalPrice'
+                modalPrice.innerHTML = `(<span class="total">${element.target.dataset.price}</span>¥)`;
                 modalPrice = modalLine.appendChild(modalPrice);
 
-                let modalQuantity = document.createElement('div');
+                // Calcul du total par objet
+
+                let modalTotal = document.createElement('div');
+                modalTotal.className = 'modalTotal fw-bold text-success';
+                modalTotal.innerHTML = `<span class="itemsTotal">${element.target.dataset.price * quantity}</span>¥`
+                modalTotal = modalLine.appendChild(modalTotal);
+
+                let modalQuantity = document.createElement('input');
                 modalQuantity.className = 'modalQuantity';
-                modalQuantity.textContent = quantity;
+                modalQuantity.type = "text";
+                modalQuantity.disabled = true;
+                modalQuantity.value = quantity;
                 modalQuantity = modalLine.appendChild(modalQuantity);
+
+                // Création des boutons
 
                 let editBtn = document.createElement('button');
                 editBtn.classList.add('btn');
@@ -425,6 +596,7 @@ window.addEventListener('click', element => {
                 removeBtn.type = 'button';
                 removeBtn.innerHTML = '<img class="Supprimer" src="https://img.icons8.com/fluency/38/null/delete-forever.png"/>';
                 removeBtn = modalLine.appendChild(removeBtn);
+
             }
 
             else if (i == 0) {
@@ -446,14 +618,25 @@ window.addEventListener('click', element => {
                 modalName = modalLine.appendChild(modalName);
 
                 let modalPrice = document.createElement('div');
-                modalPrice.className = 'modalPrice';
-                modalPrice.textContent = element.target.dataset.price + '¥';
+                modalPrice.className = 'modalPrice'
+                modalPrice.innerHTML = `(<span class="total">${element.target.dataset.price}</span>¥)`;
                 modalPrice = modalLine.appendChild(modalPrice);
 
-                let modalQuantity = document.createElement('div');
+                // Calcul du total par objet
+
+                let modalTotal = document.createElement('div');
+                modalTotal.className = 'modalTotal fw-bold text-success';
+                modalTotal.innerHTML = `<span class="itemsTotal">${element.target.dataset.price * quantity}</span>¥`
+                modalTotal = modalLine.appendChild(modalTotal);
+
+                let modalQuantity = document.createElement('input');
                 modalQuantity.className = 'modalQuantity';
-                modalQuantity.textContent = quantity;
+                modalQuantity.type = "text";
+                modalQuantity.disabled = true;
+                modalQuantity.value = quantity;
                 modalQuantity = modalLine.appendChild(modalQuantity);
+
+                // Création des boutons
 
                 let editBtn = document.createElement('button');
                 editBtn.classList.add('btn');
@@ -468,82 +651,106 @@ window.addEventListener('click', element => {
                 removeBtn.type = 'button';
                 removeBtn.innerHTML = '<img class="Supprimer" src="https://img.icons8.com/fluency/38/null/delete-forever.png"/>';
                 removeBtn = modalLine.appendChild(removeBtn);
+
             }
 
-            let clearInput = document.querySelectorAll('.card-body input');
-            clearInput.forEach(element => {
-                element.value = '';
-            });
+            // Toast
 
+            const toastLiveExample = document.getElementById('liveToast')
+            const toast = new bootstrap.Toast(toastLiveExample)
+            toast.show()
+            
         }
         else {
-            message.textContent = "Veuillez saisir un élément valide";
+
+            // Toast : Message d'erreur
+
+            const toastLiveExample = document.getElementById('liveToast1')
+            const toast = new bootstrap.Toast(toastLiveExample)
+            toast.show()
         };
+    };
 
-        // Edition du panier 
+    // Edition du panier 
 
-        // Edition 
+    if (element.target.classList == 'Editer') {
+        
+        element.target.src = "https://img.icons8.com/color-glass/38/null/verified-account--v1.png";
+        element.target.className = 'Valider';
+        let modif = element.target.parentNode.previousSibling;
+        modif.disabled = false;
 
-        if (element.target.classList == 'Valider') {
+    } else if (element.target.classList == 'Valider') {
+        let modif = element.target.parentNode.previousSibling;
+        modif.disabled = true;
+        element.target.src = "https://img.icons8.com/color-glass/38/null/edit--v1.png"
+        element.target.className = 'Editer';
 
-            let quantityDiv = document.createElement('div');
-            quantityDiv.className = 'modalQuantity';
-            quantityDiv.textContent = element.target.parentNode.previousSibling.value;
-            element.target.parentNode.previousSibling.replaceWith(quantityDiv);
-            element.target.src = "https://img.icons8.com/color-glass/38/null/edit--v1.png"
-        };
+        // Recalcul du prix
 
+        let unitPrice = element.target.parentNode.parentNode.children[2].children[0].innerText;
+        let total = element.target.parentNode.parentNode.children[3]
+        total.innerHTML = `<span class="itemsTotal">${unitPrice * modif.value}</span>¥`;
 
-        if (element.target.classList == 'Editer') {
+    };
 
-            let regex = /^[1-9]{1}[0-9]{0,1}$/;
-            let quantityInput = document.createElement('input');
-            quantityInput.classList = 'modalQuantityInput'
-            quantityInput.value = element.target.parentNode.previousSibling.textContent;
-            if (regex.test(quantityInput.value)) {
-                element.target.parentNode.previousSibling.replaceWith(quantityInput);
-                element.target.src = "https://img.icons8.com/color-glass/38/null/verified-account--v1.png";
-                element.target.classList = 'Valider'
-            }
-            else {
-                message.textContent = "Veuillez saisir un élément valide";
-            }
-        }
+    // Suppression
 
-        //Suppression
-
-        if (element.target.classList.contains('Supprimer')) {
-            element.target.parentNode.parentNode.remove();
-        }
-
-        // Sauvegarde dans un JSON 
-
-        if (element.target.classList.contains('checkOut')) {
-
-            let allItems = document.querySelectorAll('.modal-body ul li');
-            let cart = []
-            allItems.forEach(element => {
-
-                let item = {
-                    itemId: element.className,
-                    img: element.firstChild.firstChild.src,
-                    name: element.children[1].textContent,
-                    price: element.children[2].firstChild.textContent,
-                    quantity: element.children[3].textContent
-                }
-                console.log(element.className);
-                console.log(element.firstChild.firstChild.src);
-                console.log(element.children[1].textContent);
-                console.log(element.children[2].firstChild.textContent);
-                console.log(element.children[3].textContent);
-
-                cart.push(item)
-            });
-
-            localStorage.setItem("panier", JSON.stringify(cart));
-
-        };
+    if (element.target.classList.contains('Supprimer')) {
+        element.target.parentNode.parentNode.remove();
     }
+
+    // Vider le panier + Icone panier vide 
+
+    let deleteAll = document.querySelector('#deleteAll');
+    deleteAll.addEventListener('click', () => {
+        document.querySelector('.modal-body ul').innerHTML = "";
+        document.querySelector('.deleteAll').innerText = 'Your Shopping Cart is empty';
+        document.querySelector('#ShoppingCart').src = 'assets/img/panier.png';
+    });
+
+    // Icone du panier rempli
+
+    document.querySelector('#ShoppingCart').src = "assets/img/panier-fill.png"
+
+    // Supprimer tout le panier 
+
+    document.querySelector('.deleteAll').innerText = ''
+
+    // Vider l'input des cards
+
+    let clearInput = document.querySelectorAll('.card-body input');
+    clearInput.forEach(element => {
+        element.value = '';
+    });
+
+    // Sauvegarde dans un JSON 
+
+    if (element.target.classList.contains('checkOut')) {
+
+        let allItems = document.querySelectorAll('.modal-body ul li');
+        let cart = []
+        allItems.forEach(element => {
+
+            let item = {
+                itemId: element.className,
+                img: element.firstChild.firstChild.src,
+                name: element.children[1].textContent,
+                price: element.children[2].children[0].textContent,
+                quantity: element.children[4].value
+            }
+            console.log(element.className);
+            console.log(element.firstChild.firstChild.src);
+            console.log(element.children[1].textContent);
+            console.log(element.children[2].children[0].textContent);
+            console.log(element.children[4].value);
+
+            cart.push(item)
+        });
+
+        localStorage.setItem("panier", JSON.stringify(cart));
+
+    };
 });
 
 // Initialisation - Récupération des données JSON
@@ -557,7 +764,6 @@ if (local != null) {
         let name = element.name;
         //    let category = element.category;
         let image = element.img;
-        console.log(image);
         let price = element.price;
         let quantity = element.quantity;
 
@@ -571,7 +777,7 @@ if (local != null) {
 
         let modalImage = document.createElement('div');
         modalImage.className = 'modalImg';
-        modalImage.innerHTML = '<img class="cartItem" src="' + image + '"/>';
+        modalImage.innerHTML = '<img class="cartItem" src="'+image+'"/>';
         modalImage = modalLine.appendChild(modalImage);
 
         let modalName = document.createElement('div');
@@ -580,14 +786,25 @@ if (local != null) {
         modalName = modalLine.appendChild(modalName);
 
         let modalPrice = document.createElement('div');
-        modalPrice.className = 'modalPrice';
-        modalPrice.textContent = price;
+        modalPrice.className = 'modalPrice'
+        modalPrice.innerHTML = `(<span class="total">${price}</span>¥)`;
         modalPrice = modalLine.appendChild(modalPrice);
 
-        let modalQuantity = document.createElement('div');
+        // Calcul du total par objet
+
+        let modalTotal = document.createElement('div');
+        modalTotal.className = 'modalTotal fw-bold text-success';
+        modalTotal.innerHTML = `<span class="itemsTotal">${price * quantity}</span>¥`
+        modalTotal = modalLine.appendChild(modalTotal);
+
+        let modalQuantity = document.createElement('input');
         modalQuantity.className = 'modalQuantity';
-        modalQuantity.textContent = quantity;
+        modalQuantity.type = "text";
+        modalQuantity.disabled = true;
+        modalQuantity.value = quantity;
         modalQuantity = modalLine.appendChild(modalQuantity);
+
+        // Création des boutons
 
         let editBtn = document.createElement('button');
         editBtn.classList.add('btn');
