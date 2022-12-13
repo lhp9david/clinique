@@ -491,6 +491,35 @@ function News() {
     document.querySelector('.container').innerHTML = "";
 }
 
+// Icone du panier 
+
+function fillOrNot() {
+    let checkcontent = document.querySelectorAll('.modal-body ul li');
+    if (checkcontent.length != 0) {
+        document.querySelector('#ShoppingCart').src = "assets/img/panier-fill.png";
+        document.querySelector('.deleteAll').innerText = '';
+    }
+    else {
+        document.querySelector('#ShoppingCart').src = "assets/img/panier.png";
+        document.querySelector('.deleteAll').innerText = 'Your Shopping Cart is empty';
+    };
+};
+
+// Calcul du prix total
+
+function checkout() {
+    let checkcontent = document.querySelectorAll('.modal-body ul li');
+    if (checkcontent.length != 0) {
+        let items = document.querySelectorAll('.itemsTotal');
+        let  CheckOutArray = [];
+        items.forEach(element => CheckOutArray.push(parseInt(element.innerText)));
+        document.querySelector('.checkOutTotal').innerText = 'Total = ' + CheckOutArray.reduce((a, b) => a + b, 0) + '¥';
+    }
+    else {
+        document.querySelector('.checkOutTotal').innerText = '';
+    }
+};
+
 // Panier
 
 let regex = /^[1-9]{1}[0-9]{0,1}$/;
@@ -515,6 +544,9 @@ let regex = /^[1-9]{1}[0-9]{0,1}$/;
 
 window.addEventListener('click', element => {
 
+    fillOrNot();
+    checkout();
+
     // Affichage du panier
 
     if (element.target.classList.contains('add')) {
@@ -531,15 +563,16 @@ window.addEventListener('click', element => {
                 checkIds.forEach(element => {
                     if (element.className == itemId) {
                         i++
-                        
+
                         if (i == 1) {
                             console.log('Cas n°3 : Doublons');
-                            console.log(element.children[4].value)
                             let changeQuantity = parseInt(element.children[4].value) + parseInt(quantity);
                             element.children[4].value = changeQuantity;
+                            let initialPrice = element.children[2].children[0].textContent;
+                            element.children[3].children[0].textContent = initialPrice * changeQuantity;
                         }
                     }
-                    
+
                 });
 
             };
@@ -659,7 +692,7 @@ window.addEventListener('click', element => {
             const toastLiveExample = document.getElementById('liveToast')
             const toast = new bootstrap.Toast(toastLiveExample)
             toast.show()
-            
+
         }
         else {
 
@@ -669,12 +702,14 @@ window.addEventListener('click', element => {
             const toast = new bootstrap.Toast(toastLiveExample)
             toast.show()
         };
+        fillOrNot();
+        checkout();
     };
 
     // Edition du panier 
 
     if (element.target.classList == 'Editer') {
-        
+
         element.target.src = "https://img.icons8.com/color-glass/38/null/verified-account--v1.png";
         element.target.className = 'Valider';
         let modif = element.target.parentNode.previousSibling;
@@ -691,7 +726,6 @@ window.addEventListener('click', element => {
         let unitPrice = element.target.parentNode.parentNode.children[2].children[0].innerText;
         let total = element.target.parentNode.parentNode.children[3]
         total.innerHTML = `<span class="itemsTotal">${unitPrice * modif.value}</span>¥`;
-
     };
 
     // Suppression
@@ -705,17 +739,8 @@ window.addEventListener('click', element => {
     let deleteAll = document.querySelector('#deleteAll');
     deleteAll.addEventListener('click', () => {
         document.querySelector('.modal-body ul').innerHTML = "";
-        document.querySelector('.deleteAll').innerText = 'Your Shopping Cart is empty';
-        document.querySelector('#ShoppingCart').src = 'assets/img/panier.png';
+        localStorage.clear();
     });
-
-    // Icone du panier rempli
-
-    document.querySelector('#ShoppingCart').src = "assets/img/panier-fill.png"
-
-    // Supprimer tout le panier 
-
-    document.querySelector('.deleteAll').innerText = ''
 
     // Vider l'input des cards
 
@@ -739,11 +764,11 @@ window.addEventListener('click', element => {
                 price: element.children[2].children[0].textContent,
                 quantity: element.children[4].value
             }
-            console.log(element.className);
-            console.log(element.firstChild.firstChild.src);
-            console.log(element.children[1].textContent);
-            console.log(element.children[2].children[0].textContent);
-            console.log(element.children[4].value);
+            // console.log(element.className);
+            // console.log(element.firstChild.firstChild.src);
+            // console.log(element.children[1].textContent);
+            // console.log(element.children[2].children[0].textContent);
+            // console.log(element.children[4].value);
 
             cart.push(item)
         });
@@ -751,6 +776,8 @@ window.addEventListener('click', element => {
         localStorage.setItem("panier", JSON.stringify(cart));
 
     };
+    fillOrNot();
+    checkout();
 });
 
 // Initialisation - Récupération des données JSON
@@ -777,7 +804,7 @@ if (local != null) {
 
         let modalImage = document.createElement('div');
         modalImage.className = 'modalImg';
-        modalImage.innerHTML = '<img class="cartItem" src="'+image+'"/>';
+        modalImage.innerHTML = '<img class="cartItem" src="' + image + '"/>';
         modalImage = modalLine.appendChild(modalImage);
 
         let modalName = document.createElement('div');
@@ -822,4 +849,19 @@ if (local != null) {
 
     });
 };
+fillOrNot();
+checkout();
 
+// popup
+
+window.onload = function () {
+    OpenBootstrapPopup();
+};
+function OpenBootstrapPopup() {
+    $("#simpleModal").modal('show');
+}
+
+// Tooltips
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))

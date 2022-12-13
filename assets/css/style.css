@@ -198,6 +198,7 @@ li {
   margin-left: 2.8rem;
 }
 
+
 @media only screen and (max-width: 600px){
   .pikanews {
     margin: 0.4rem;
@@ -209,4 +210,54 @@ li {
   .modal-title {
     margin: 0;
   }
+}
+
+.modalContentPopup {
+  background-image: url(https://img.freepik.com/free-vector/unfocussed-winter-background-with-snowflakes_1393-271.jpg?w=2000);
+}
+
+.pikapopup {
+  width: 300px;
+}
+
+.col-sm-3 a {
+  animation: bounce2 0.2s ease infinite alternate;
+}
+
+@keyframes bounce2 {
+  from {
+      transform: translateY(0);
+  }
+
+  to {
+      transform: translateY(-2px);
+  }
+}
+
+.one {
+  background-color: rgb(252, 87, 87);
+}
+
+.two {
+  background-color: rgb(184, 114, 249);
+}
+
+.three {
+  background-color: rgb(127, 127, 250);
+}
+
+.four {
+  background-color: rgb(45, 222, 110);
+}
+
+.five {
+  background-color: pink;
+}
+
+.six {
+  background-color: rgb(89, 227, 227);
+}
+
+.deleteAll {
+  text-align: center
 }
