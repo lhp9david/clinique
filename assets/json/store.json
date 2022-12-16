@@ -74,7 +74,7 @@
                 "id"  : "9",
                 "category" : "Battle items",
                 "name": "Dire Hit",
-                "image": "DireHit.png",
+                "image": "direhit.png",
                 "overview": "An item that can be used once to sharply boost the critical-hit ratio of a Pokémon in battle. This effect disappears if the Pokémon leaves the battle.",
                 "price": "650"
             },
