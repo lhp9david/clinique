@@ -1,0 +1,21 @@
+body {
+    background-image: url(../IMG/background.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    overflow-x: hidden;
+
+}
+
+/* page de LOGIN */
+.row.login {
+    height: 100vh;
+    align-items: center;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.771);
+}
+
