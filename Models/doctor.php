@@ -1,17 +1,7 @@
 <?php
-// créer une class Doctor avec les attributs : doctor_id, doctor_lastname, doctor_firstname, doctor_phone, doctor_phone_emergency, doctor_mail, doctor_adress, doctor_photo, doctor_password, specialty_id
+
 class Doctor
 {
-    private $doctor_id;
-    private $doctor_lastname;
-    private $doctor_firstname;
-    private $doctor_phone;
-    private $doctor_phone_emergency;
-    private $doctor_mail;
-    private $doctor_adress;
-    private $doctor_photo;
-    private $doctor_password;
-    private $specialty_id;
 
     private object $_pdo;
 
@@ -32,5 +22,33 @@ class Doctor
     {
         $this->_pdo = Database::connect();
     }
+
+    /**
+     * methode pour créer un nouveau médecin
+     *
+     * @return array
+     */
+
+    public function AddNewDoctor($doctor_id, $doctor_lastname, $doctor_firstname, $doctor_speciality, $doctor_mail, $doctor_adress, $doctor_photo): void
+    {
+        $query = $this->_pdo->prepare('INSERT INTO cl_doctor (doctor_id, doctor_lastname, doctor_firstname, doctor_speciality, doctor_mail, doctor_adress, doctor_photo) VALUE (:doctor_id, :doctor_lastname, :doctor_firstname, :doctor_speciality, :doctor_mail, :doctor_adress, :doctor_photo)');
+        $query->execute([
+            ':doctor_id' => $doctor_id,
+            ':doctor_lastname' => $this->$doctor_lastname,
+            ':doctor_firstname' => $this->$doctor_firstname,
+            ':doctor_speciality' => $this->$doctor_speciality,
+            ':doctor_mail' => $this->$doctor_mail,
+            ':doctor_adress' => $this->$doctor_adress,
+            ':doctor_photo' => $this->$doctor_photo,
+        ]);
+    }
+
+    /**
+     * methode pour se connecter
+     *
+     * @return array
+     */
+
+     //???
 
 }
