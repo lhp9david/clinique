@@ -22,7 +22,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col m-1">
                 <div class="card container-fluid">
                     <div class="card-body ">
@@ -32,7 +31,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col m-1">
                 <div class="card container-fluid">
                     <div class="card-body">
