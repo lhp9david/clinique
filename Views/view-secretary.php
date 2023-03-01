@@ -22,7 +22,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col m-1">
                 <div class="card container-fluid">
                     <div class="card-body ">
@@ -32,7 +31,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col m-1">
                 <div class="card container-fluid">
                     <div class="card-body">
@@ -172,14 +170,14 @@
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-person-rolodex"></i></div>
                             <select name="patient" id="patient">
-                                <?php ?>
+                                <?php displayPatients() ?>
                             </select>
                         </div>
                         <!-- select doctor (check BDD) -->
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-heart-pulse"></i></div>
                             <select name="doctor" id="doctor">
-                                <?php ?>
+                                <?php displayDoctors() ?>
                             </select>
                         </div>
 
@@ -191,11 +189,15 @@
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-clock-fill"></i></div>
                             <input type="time" name="hour" id="hour" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
+                        <div class="input-group">
+                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-chat-square-dots-fill"></i></div>
+                            <input type="textarea" name="description" id="description" class="form-control" placeholder="Description" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                        </div>
                         
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-outline-primary">Ajouter</button>
+                        <button type="submit" name="newAppointmentSubmit" class="btn btn-outline-primary">Ajouter</button>
                     </div>
                 </form>
                 
