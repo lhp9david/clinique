@@ -1,4 +1,5 @@
 <?php
+
 require ('../Models/doctor.php');
 require ('../helpers/Database.php'); 
 require ('../config/env.php');
@@ -66,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             
             // Rediriger vers la page d'accueil
-            // header("location: controller-doctor-appointment.php");
+            header("location: controller-doctor-appointments.php");
             echo "Bonjour $firstname $lastname.";
         } else if ($secretary->login()){
             // Assigner les données de la méthode login à des variables
