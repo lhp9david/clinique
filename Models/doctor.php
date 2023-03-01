@@ -57,6 +57,14 @@ class Doctor
             return false;
         }
     }
+    public function getDoctors()
+    {
+        $query = "SELECT * FROM `cl_doctors`";
+        $result = $this->_pdo->prepare($query);
+        $result->execute();
+        $doctors = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $doctors;
+    }
 }
 
 // créer une class Secretary
