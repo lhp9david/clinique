@@ -191,6 +191,10 @@
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-clock-fill"></i></div>
                             <input type="time" name="hour" id="hour" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
+                        <div class="input-group">
+                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-chat-square-dots-fill"></i></div>
+                            <input type="textarea" name="description" id="description" class="form-control" placeholder="Description" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                        </div>
                         
                     </div>
                     <div class="modal-footer">
