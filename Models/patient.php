@@ -63,7 +63,7 @@ class Patients
      */
     public function DisplayPatientList() : array
     {
-        $query = $this->_pdo->prepare('SELECT * FROM cl_patient');
+        $query = $this->_pdo->prepare('SELECT * FROM cl_patients');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
