@@ -23,6 +23,41 @@ class Doctor
         $this->_pdo = Database::connect();
     }
 
+
+    /**
+     * methode pour créer un nouveau docteur
+     * 
+     */
+
+    public function CreateDoctor()
+    {
+        $query = $this->_pdo->prepare('INSERT INTO cl_doctors (doctor_lastname, doctor_firstname, doctor_phone, doctor_phone_emergency, doctor_mail, doctor_adress, doctor_photo, doctor_password, specialty_id) VALUES (:doctor_lastname, :doctor_firstname, :doctor_phone, :doctor_phone_emergency, :doctor_mail, :doctor_adress, :doctor_photo, :doctor_password, :specialty_id)');
+        $query->execute([
+            ':doctor_lastname' => $this->doctor_lastname,
+            ':doctor_firstname' => $this->doctor_firstname,
+            ':doctor_phone' => $this->doctor_phone,
+            ':doctor_phone_emergency' => $this->doctor_phone_emergency,
+            ':doctor_mail' => $this->doctor_mail,
+            ':doctor_adress' => $this->doctor_adress,
+            ':doctor_photo' => $this->doctor_photo,
+            ':doctor_password' => $this->doctor_password,
+            ':specialty_id' => $this->specialty_id,
+        ]);
+    }
+
+    /**
+     * methode pour afficher la liste des docteurs
+     * 
+     * @return array
+     */
+
+    public function displayDoctorList(): array
+    {
+        $query = $this->_pdo->prepare('SELECT * FROM cl_doctors');
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // méthode pour se connecter
     public function login()
     {

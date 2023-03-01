@@ -1,5 +1,5 @@
 <?php
-
+include('../includes/head.php');
 ?>
 
 <!DOCTYPE html>
@@ -78,41 +78,41 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form action="" method="POST">
+      <form action="../Controllers/controller-doctor.php" method="POST">
         <div>
-            <label for="name">Nom</label>
-            <input type="text" name="name" id="name">
+            <label for="name">Nom</label><span><?=$errors['lastname'] ?? '' ?></span>
+            <input type="text" name="doctor_lastname" id="name" required>
         </div>
         <div>
             <label for="firstname">Prénom</label>
-            <input type="text" name="firstname" id="firstname">
+            <input type="text" name="doctor_firstname" id="firstname" required>
         </div>
         <div>
             <label for="phone">Numéro de téléphone</label>
-            <input type="phone" name="phone" id="phone">
+            <input type="phone" name="doctor_phone" id="phone" required>
         </div>
         <div>
-            <label for="phone">Numéro de téléphone d'urgence</label>
-            <input type="phone" name="phone" id="phone">
+            <label for="emergencyPhone">Numéro de téléphone d'urgence</label>
+            <input type="phone" name="doctor_phone_emergency" id="emergencyPhone" required>
         </div>
         <div>
             <label for="mail">Adresse mail</label>
-            <input type="mail" name="mail" id="mail">
+            <input type="mail" name="doctor_mail" id="mail" required>
         </div>
         <div>
-            <label for="firstname">Adresse</label>
-            <input type="text" name="firstname" id="firstname">
+            <label for="adress">Adresse</label>
+            <input type="text" name="doctor_adress" id="adress" required>
         </div>
         <div>
             <label for="password">Mot de passe</label>
-            <input type="password" name="password" id="password">
+            <input type="password" name="doctor_password" id="password" required>
         </div>
         <div>
-            <label for="password">Confirmer le mot de passe</label>
-            <input type="password" name="password" id="password">
+            <label for="confirmPass">Confirmer le mot de passe</label>
+            <input type="password" name="confirmPass" id="confirmPass" required>
         </div>
         <div>
-            <select name="speciality" id="speciality">
+            <select name="specialty_id" id="specialty" required>
                 <option value="">Specialité</option>
                 <option value="1">Ophtalmologue</option>
                 <option value="2">Dermatologue</option>
@@ -123,7 +123,7 @@
         <div>
             <!-- upload photo -->
             <label for="photo">Photo</label>
-            <input type="file" name="photo" id="photo" >
+            <input type="file" name="doctor_photo" id="photo" >
         </div>
         <div>
             <input type="submit">
