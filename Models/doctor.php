@@ -1,17 +1,7 @@
 <?php
-// créer une class Doctor 
+
 class Doctor
 {
-    private $doctor_id;
-    private $doctor_lastname;
-    private $doctor_firstname;
-    private $doctor_phone;
-    private $doctor_phone_emergency;
-    private $doctor_mail;
-    private $doctor_adress;
-    private $doctor_photo;
-    private $doctor_password;
-    private $specialty_id;
 
     private object $_pdo;
 
