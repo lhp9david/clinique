@@ -28,7 +28,7 @@
                     <div class="card-body ">
                         <h3 class="card-title mb-4"><img src="https://img.icons8.com/color/38/null/medical-doctor.png" /> Médecins</h3>
                         <button type="button" class="btn btn-outline-primary rounded-5 m-1" data-bs-toggle="modal" data-bs-target="#doctorModal">Créer un nouveau médecin</button>
-                        <button type="button" class="btn btn-outline-secondary rounded-5 m-1">Consulter la liste des médecins</button>
+                        <button type="button" class="btn btn-outline-secondary rounded-5 m-1"><a  href="../Controllers/controller-doctor.php">Consulter la liste des médecins</a></button>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
     </div>
 
     <!-- Modal Ajout patient -->
-    <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade " id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content">
                 <div class="modal-header">
@@ -96,47 +96,47 @@
     </div>
 
     <!-- Modal Ajout Medecin -->
-    <div class="modal fade" id="doctorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade <?= !empty($errors) ? 'openModal' : '' ?>" id="doctorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Créer un nouveau medecin</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" method="POST">
+                <form action="" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-person-fill"></i></div>
-                            <input type="text" name="name" id="name" class="form-control" placeholder="Nom" aria-label="Input group example" aria-describedby="btnGroupAddon">
-                            <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="text" name="doctor_lastname" id="name" class="form-control" placeholder="Nom" aria-label="Input group example" aria-describedby="btnGroupAddon"><span><?= $errors['lastname'] ?? ''?></span>
+                            <input type="text" name="doctor_firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" aria-describedby="btnGroupAddon"><span><?= $errors['firstname'] ?? ''?></span>
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></div>
-                            <input type="phone" name="phone" id="phone" class="form-control" placeholder="Téléphone" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="phone" name="doctor_phone" id="phone" class="form-control" placeholder="Téléphone" aria-label="Input group example" aria-describedby="btnGroupAddon"><span><?= $errors['phone'] ?? '' ?></span>
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-inbound-fill"></i></div>
-                            <input type="phone" name="emergency_phone" id="emergency_phone" class="form-control" placeholder="Téléphone d'urgence" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="phone" name="doctor_phone_emergency" id="emergency_phone" class="form-control" placeholder="Téléphone d'urgence" aria-label="Input group example" aria-describedby="btnGroupAddon"><span><?= $errors['phone_emergency']?? ''?></span>
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-envelope-fill"></i></div>
-                            <input type="mail" name="mail" id="mail" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="mail" name="doctor_mail" id="mail" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon"><span><?= $errors['mail'] ?? ''?></span>
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-geo-alt-fill"></i></div>
-                            <input type="text" name="adress" id="adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="text" name="doctor_adress" id="adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon"><span><?= $errors['adress'] ?? ''?></span>
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-shield-lock"></i></div>
-                            <input type="password" name="password" id="password" class="form-control" placeholder="Mot de passe" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="password" name="doctor_password" id="password" class="form-control" placeholder="Mot de passe" aria-label="Input group example" aria-describedby="btnGroupAddon"><span><?= $errors['password'] ?? ''?></span>
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-shield-lock-fill"></i></div>
-                            <input type="password" name="confirmed_password" id="confirmed_password" class="form-control" placeholder="Mot de passe" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="password" name="confirmPass" id="confirmed_password" class="form-control" placeholder="Mot de passe" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-activity"></i></div>
-                            <select name="speciality" id="speciality">
+                            <select name="specialty_id" id="specialty">
                                 <option value="" disabled selected>Specialité</option>
                                 <option value="1">Ophtalmologue</option>
                                 <option value="2">Dermatologue</option>
@@ -145,7 +145,7 @@
                             </select>
                             <div class="input-group">
                                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
-                                <input type="file" name="photo" id="photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                                <input type="file" name="doctor_photo" id="photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -202,8 +202,15 @@
             </div>
         </div>
     </div>
-
-
+ 
+    <script>
+        // creation de l'objet openModal, nous ciblons la classe openModal
+        let openModal = new bootstrap.Modal(document.querySelector('.openModal'), {
+            keyboard: false
+        })
+        // nous l'ouvrons avec la methode show()
+        openModal.show()
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 

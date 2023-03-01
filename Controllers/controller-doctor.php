@@ -6,6 +6,7 @@ require_once('../helpers/Database.php');
 
 
 $errors = [];
+var_dump($errors);
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
    
@@ -65,6 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
           
         }
+        
         if (isset($_POST['doctor_password'])) {
             if (empty($_POST['doctor_password'])) {
                 $errors['password'] = 'champ obligatoire';
@@ -102,14 +104,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $obj_doc->doctor_mail = $_POST['doctor_mail'];
             $obj_doc->doctor_adress = $_POST['doctor_adress'];
             $obj_doc->doctor_photo = $_POST['doctor_photo'];
-            $obj_doc->doctor_password = $_POST['doctor_password'];
+            $obj_doc->doctor_password = password_hash($_POST['doctor_password'], PASSWORD_DEFAULT);
             $obj_doc->specialty_id = $_POST['specialty_id'];
             $obj_doc->CreateDoctor();
             
         
         }
     }
-
 
 
 
