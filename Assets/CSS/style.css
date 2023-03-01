@@ -8,7 +8,7 @@ body {
     overflow-x: hidden;
 }
 
-.row.login, .row.secretary {
+.row.login, .row.secretary, .row.patient {
     height: 100vh;
     align-items: center;
 }
@@ -35,4 +35,10 @@ body {
 select {
     width: 425px;
    
+}
+
+table.table {
+    background-color: rgba(255, 255, 255, 0.684);
+    border-radius: 20px;
+
 }
