@@ -23,32 +23,93 @@ class Doctor
         $this->_pdo = Database::connect();
     }
 
-    /**
-     * methode pour créer un nouveau médecin
-     *
-     * @return array
-     */
-
-    public function AddNewDoctor($doctor_id, $doctor_lastname, $doctor_firstname, $doctor_speciality, $doctor_mail, $doctor_adress, $doctor_photo): void
+    // méthode pour se connecter
+    public function login()
     {
-        $query = $this->_pdo->prepare('INSERT INTO cl_doctor (doctor_id, doctor_lastname, doctor_firstname, doctor_speciality, doctor_mail, doctor_adress, doctor_photo) VALUE (:doctor_id, :doctor_lastname, :doctor_firstname, :doctor_speciality, :doctor_mail, :doctor_adress, :doctor_photo)');
-        $query->execute([
-            ':doctor_id' => $doctor_id,
-            ':doctor_lastname' => $this->$doctor_lastname,
-            ':doctor_firstname' => $this->$doctor_firstname,
-            ':doctor_speciality' => $this->$doctor_speciality,
-            ':doctor_mail' => $this->$doctor_mail,
-            ':doctor_adress' => $this->$doctor_adress,
-            ':doctor_photo' => $this->$doctor_photo,
-        ]);
+        // requête pour vérifier si le mail et le mot de passe correspondent
+        $query = "SELECT * FROM `cl_doctors` WHERE `doctor_mail` = :doctor_mail AND `doctor_password` = :doctor_password";
+        // préparer la requête
+        $result = $this->_pdo->prepare($query);
+        // assigner les valeurs aux marqueurs nominatifs
+        $result->bindValue(':doctor_mail', $this->doctor_mail, PDO::PARAM_STR);
+        $result->bindValue(':doctor_password', $this->doctor_password, PDO::PARAM_STR);
+        // exécuter la requête
+        $result->execute();
+        // vérifier si la requête a retourné un résultat
+        if ($result->rowCount() > 0) {
+            // assigner les données de la requête à des variables
+            $data = $result->fetch(PDO::FETCH_OBJ);
+            // assigner les données de la requête aux attributs de l'objet
+            $this->doctor_id = $data->doctor_id;
+            $this->doctor_lastname = $data->doctor_lastname;
+            $this->doctor_firstname = $data->doctor_firstname;
+            $this->doctor_phone = $data->doctor_phone;
+            $this->doctor_phone_emergency = $data->doctor_phone_emergency;
+            $this->doctor_mail = $data->doctor_mail;
+            $this->doctor_adress = $data->doctor_adress;
+            $this->doctor_photo = $data->doctor_photo;
+            $this->doctor_password = $data->doctor_password;
+            $this->specialty_id = $data->specialty_id;
+            // retourner true
+            return true;
+        } else {
+            // retourner false
+            return false;
+        }
+    }
+}
+
+// créer une class Secretary
+class Secretary
+{
+    private int $secretary_id;
+    private string $secretary_login;
+    private string $secretary_password;
+
+    private object $_pdo;
+
+    // méthode magique pour get les attributs
+    public function __get($attribut)
+    {
+        return $this->$attribut;
     }
 
-    /**
-     * methode pour se connecter
-     *
-     * @return array
-     */
+    // méthode magique pour set les attributs
+    public function __set($attribut, $value)
+    {
+        $this->$attribut = $value;
+    }
 
-     //???
+    // créer un constructeur pour instancier la connexion
+    public function __construct()
+    {
+        $this->_pdo = Database::connect();
+    }
 
+    // méthode pour se connecter
+    public function login()
+    {
+        // requête pour vérifier si le login et le mot de passe correspondent
+        $query = "SELECT * FROM `cl_secretary` WHERE `secretary_login` = :secretary_login AND `secretary_password` = :secretary_password";
+        $result = $this->_pdo->prepare($query);
+        // assigner les valeurs aux marqueurs nominatifs
+        $result->bindValue(':secretary_login', $this->secretary_login, PDO::PARAM_STR);
+        $result->bindValue(':secretary_password', $this->secretary_password, PDO::PARAM_STR);
+        // exécuter la requête
+        $result->execute();
+        // vérifier si la requête a retourné un résultat
+        if ($result->rowCount() > 0) {
+            // assigner les données de la requête à des variables
+            $data = $result->fetch(PDO::FETCH_OBJ);
+            // assigner les données de la requête aux attributs de l'objet
+            $this->secretary_id = $data->secretary_id;
+            $this->secretary_login = $data->secretary_login;
+            $this->secretary_password = $data->secretary_password;
+            // retourner true
+            return true;
+        } else {
+            // retourner false
+            return false;
+        }
+    }
 }
