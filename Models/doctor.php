@@ -1,5 +1,5 @@
 <?php
-// créer une class Doctor avec les attributs : doctor_id, doctor_lastname, doctor_firstname, doctor_phone, doctor_phone_emergency, doctor_mail, doctor_adress, doctor_photo, doctor_password, specialty_id
+// créer une class Doctor 
 class Doctor
 {
     private $doctor_id;
