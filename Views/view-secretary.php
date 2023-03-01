@@ -29,15 +29,6 @@
                     <div class="row d-flex justify-content-center">
                         <button type="button" class="btn btn-secondary col-10 m-1">Consulter la liste des patients</button>
                     </div>
-                    <div class="row d-flex justify-content-center">
-                        <button type="button" class="btn btn-success col-10 m-1">Consulter les informations d'un patient</button>
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                        <button type="button" class="btn btn-warning col-10 m-1">Modifier les information d'un patient</button>
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                        <button type="button" class="btn btn-danger col-10 m-1">Supprimer les informations d'un patient</button>
-                    </div>
 
                 </div>
             </div>
@@ -52,15 +43,6 @@
                     <div class="row d-flex justify-content-center">
                         <button type="button" class="btn btn-secondary col-10 m-1">Consulter la liste des médecins</button>
                     </div>
-                    <div class="row d-flex justify-content-center">
-                        <button type="button" class="btn btn-success col-10 m-1">Consulter les informations du médecins</button>
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                        <button type="button" class="btn btn-warning col-10 m-1">Modifier les informations du médecin</button>
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                        <button type="button" class="btn btn-danger col-10 m-1">Supprimer les information du médecin</button>
-                    </div>
 
                 </div>
             </div>
@@ -74,15 +56,6 @@
                     </div>
                     <div class="row d-flex justify-content-center">
                         <button type="button" class="btn btn-secondary col-10 m-1">Consulter la liste des consultations</button>
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                        <button type="button" class="btn btn-success col-10 m-1">Consulter les informations d'une consultation</button>
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                        <button type="button" class="btn btn-warning col-10 m-1">Modifier les informations d'une consultation</button>
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                        <button type="button" class="btn btn-danger col-10 m-1">Supprimer les informations d'une consultation</button>
                     </div>
 
                 </div>
