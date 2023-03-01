@@ -99,4 +99,16 @@ class Appointment
             ':appointment_id' => $appointment_id,
         ]);
     }
+
+    public function createAppointment($appointment_date, $appointment_hour, $patient_id, $doctor_id, $appointment_description): void
+    {
+        $query = $this->_pdo->prepare('INSERT INTO cl_appointments (appointment_date, appointment_hour, appointment_description, patient_id, doctor_id) VALUES (:appointment_date, :appointment_hour, :appointment_description, :patient_id, :doctor_id)');
+        $query->execute([
+            ':appointment_date' => $appointment_date,
+            ':appointment_hour' => $appointment_hour,
+            ':appointment_description' => $appointment_description,
+            ':patient_id' => $patient_id,
+            ':doctor_id' => $doctor_id
+        ]);
+    }
 }

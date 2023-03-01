@@ -172,14 +172,14 @@
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-person-rolodex"></i></div>
                             <select name="patient" id="patient">
-                                <?php ?>
+                                <?php displayPatients() ?>
                             </select>
                         </div>
                         <!-- select doctor (check BDD) -->
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-heart-pulse"></i></div>
                             <select name="doctor" id="doctor">
-                                <?php ?>
+                                <?php displayDoctors() ?>
                             </select>
                         </div>
 
@@ -199,7 +199,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-outline-primary">Ajouter</button>
+                        <button type="submit" name="newAppointmentSubmit" class="btn btn-outline-primary">Ajouter</button>
                     </div>
                 </form>
                 
