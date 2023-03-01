@@ -147,36 +147,36 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form action="" method="POST">
+      <form action="./controller-patient.php" method="POST" enctype="multipart/form-data">
         <div>
-            <label for="name">Nom</label>
-            <input type="text" name="name" id="name">
+            <label for="patient_lastname">Nom</label>
+            <input type="text" name="patient_lastname" id="patient_lastname">
         </div>
         <div>
-            <label for="firstname">Prénom</label>
-            <input type="text" name="firstname" id="firstname">
+            <label for="patient_lastname">Prénom</label>
+            <input type="text" name="patient_firstname" id="patient_lastname">
         </div>
         <div>
-            <label for="phone">Numéro de téléphone</label>
-            <input type="phone" name="phone" id="phone">
+            <label for="patient_lastname">Numéro de téléphone</label>
+            <input type="phone" name="patient_phone" id="patient_lastname">
         </div>
         <div>
-            <label for="social">Numéro de sécurité social</label>
-            <input type="text" name="social" id="social">
+            <label for="patient_secu">Numéro de sécurité social</label>
+            <input type="text" name="patient_secu" id="patient_secu">
         </div>
         <div>
-            <label for="mail">Adresse mail</label>
-            <input type="mail" name="mail" id="mail">
+            <label for="patient_mail">Adresse mail</label>
+            <input type="mail" name="patient_mail" id="patient_mail">
         </div>
         <div>
-            <label for="firstname">Adresse</label>
-            <input type="text" name="firstname" id="firstname">
+            <label for="patient_adress">Adresse</label>
+            <input type="text" name="patient_adress" id="patient_adress">
         </div>
 
         <div>
             <!-- upload photo -->
-            <label for="photo">Photo</label>
-            <input type="file" name="photo" id="photo" >
+            <label for="patient_photo">Photo</label>
+            <input type="file" name="patient_photo" id="patient_photo" >
         </div>
         <div>
             <input type="submit">
