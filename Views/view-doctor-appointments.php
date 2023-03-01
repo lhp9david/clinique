@@ -19,30 +19,10 @@
                                 <th scope="col">Heure du rendez-vous</th>
                                 <th scope="col">Téléphone</th>
                                 <th scope="col">Numéro de Sécu</th>
-
-                                <th scope="col"><a href="controller-doctor-appointments.php?sort=ASC"><i class="bi bi-sort-up"></i></a></th>
-                                <th scope="col"><a href="controller-doctor-appointments.php?sort=DESC"><i class="bi bi-sort-down"></i></a></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Skurt</td>
-                                <td>Gérard</td>
-                                <td>2021-10-10</td>
-                                <td>10:00</td>
-                                <td>0606060606</td>
-                                <td>123456789123456</td>
-
-                            </tr>
-                            <tr>
-                                <td>Poulop</td>
-                                <td>Thierry</td>
-                                <td>2021-10-10</td>
-                                <td>10:00</td>
-                                <td>0606060606</td>
-                                <td>123456789123456</td>
-
-                            </tr>
+                            <?php Appointments::displayAllAppointments(); ?>
                         </tbody>
                     </table>
                 </div>

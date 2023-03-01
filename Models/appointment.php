@@ -1,6 +1,6 @@
 <?php
 // créer une class Doctor avec les attributs : doctor_id, doctor_lastname, doctor_firstname, doctor_phone, doctor_phone_emergency, doctor_mail, doctor_adress, doctor_photo, doctor_password, specialty_id
-class Appointement
+class Appointment
 {
 
     private object $_pdo;
@@ -31,7 +31,7 @@ class Appointement
 
     public function DisplayAppointmentList(): array
     {
-        $query = $this->_pdo->prepare('SELECT * FROM cl_appointment');
+        $query = $this->_pdo->prepare('SELECT * FROM cl_appointments');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }

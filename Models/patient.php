@@ -76,7 +76,7 @@ class Patients
 
     public function ConsultPatientInfo($patient_id) : array
     {
-        $query = $this->_pdo->prepare('SELECT * FROM cl_patient WHERE patient_id = :patient_id');
+        $query = $this->_pdo->prepare('SELECT * FROM cl_patients WHERE patient_id = :patient_id');
         $query->execute([
             ':patient_id' => $patient_id,
         ]);
