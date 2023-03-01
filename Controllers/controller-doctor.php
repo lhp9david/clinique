@@ -6,7 +6,7 @@ require_once('../helpers/Database.php');
 
 
 $errors = [];
-var_dump($errors);
+
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
    
@@ -116,6 +116,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 $doc = new Doctor();
 $doctorList = $doc->displayDoctorList();
+var_dump($errors);
 
 
 
