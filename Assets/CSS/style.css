@@ -6,16 +6,33 @@ body {
     background-attachment: fixed;
 
     overflow-x: hidden;
-
 }
 
-/* page de LOGIN */
-.row.login {
+.row.login, .row.secretary {
     height: 100vh;
     align-items: center;
 }
 
-.card {
-    background-color: rgba(255, 255, 255, 0.771);
+.card, nav.navbar {
+    background-color: rgba(255, 255, 255, 0.684);
 }
 
+.card.container-fluid {
+    height: 220px;
+    border-radius: 20px;
+    border-color: white;
+}
+
+.card-body button {
+    width: 300px !important;
+}
+
+.modal-content {
+    border-radius: 20px;
+    border-color: white;
+}
+
+select {
+    width: 425px;
+   
+}

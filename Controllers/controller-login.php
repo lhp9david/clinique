@@ -79,7 +79,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $_SESSION["secretary_login"] = $login;
             // Rediriger vers la page d'accueil
 
-            // header("location: controller-secretary.php");
+            header("location: controller-secretary.php");
             echo "Bonjour $login.";
         }
         
