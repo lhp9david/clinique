@@ -11,7 +11,6 @@ class NewAppointment
 {
     public static function verifyPost()
     {
-        var_dump($_POST);
         if (!empty($_POST['date']) && !empty($_POST['hour']) && !empty($_POST['patient']) && !empty($_POST['doctor']) && !empty($_POST['description'])) {
             $date = $_POST['date'];
             $hour = $_POST['hour'];
@@ -53,7 +52,7 @@ function displayDoctors() // Affiche la liste des médecins dans un select
 
 function getPatients() // Retourne la liste des patients
 {
-    $patients = new Patients;
+    $patients = new Patient;
     $patients = $patients->DisplayPatientList();
     return $patients;
 }
