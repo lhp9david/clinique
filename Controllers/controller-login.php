@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Vérifier si les champs sont vides
     if(empty(trim($_POST["login"])) || empty(trim($_POST["password"]))){
-        $errorsArray['missing'] = $missing;
+        $errorsArray['error'] = $missing;
     } else{
         // Assigner les données du formulaire à des variables
         $login = trim($_POST["login"]);
@@ -85,7 +85,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         
         else{
             // Assigner une erreur à la variable wrong
-            $errorsArray['wrong'] = $wrong;
+            $errorsArray['error'] = $wrong;
         }
 
         

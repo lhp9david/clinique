@@ -13,13 +13,13 @@
 
                                 <!-- Login -->
                                 <div class="input-group m-1">
-                                    <div class="input-group-text" id="btnGroupAddon"><?= $errorsArray['missing'] ?? '<i class="bi bi-person-circle"></i>'?></div>
+                                    <div class="input-group-text" id="btnGroupAddon"><?= $errorsArray['error'] ?? '<i class="bi bi-person-circle"></i>'?></div>
                                     <input type="text" class="form-control" placeholder="Login" aria-label="Input group example" aria-describedby="btnGroupAddon" name="login">
                                 </div>
 
                                 <!-- Password -->
                                 <div class="input-group m-1">
-                                    <div class="input-group-text" id="btnGroupAddon"><?= $errorsArray['missing'] ?? '<i class="bi bi-shield-lock"></i>'?></div>
+                                    <div class="input-group-text" id="btnGroupAddon"><?= $errorsArray['error'] ?? '<i class="bi bi-shield-lock"></i>'?></div>
                                     <input type="password" class="form-control" placeholder="Mot de passe" aria-label="Input group example" aria-describedby="btnGroupAddon" name="password">
                                 </div>
 
