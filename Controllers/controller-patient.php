@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+// session_start();
 
 require_once '../config/env.php';
 require_once '../helpers/Database.php';
@@ -9,9 +9,11 @@ require_once '../models/patient.php';
 
 $obj_patient = new Patient();
 
-$errors = [];
+$errors_patient = [];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient']) ) {
+   
 
     if (isset($_POST['patient_lastname'])) {
 
@@ -132,6 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     echo json_encode($errors_patient);
 
+    if (empty($errors_patient)) {
     if (empty($errors_patient)) {
 
         $patient_id = $_POST['patient_id'];

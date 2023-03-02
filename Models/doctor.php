@@ -32,7 +32,7 @@ class Doctor
     public function CreateDoctor()
     {
 
-  
+
 
         $query = $this->_pdo->prepare('INSERT INTO cl_doctors (doctor_lastname, doctor_firstname, doctor_phone, doctor_phone_emergency, doctor_mail, doctor_adress, doctor_photo, doctor_password, specialty_id) VALUES (:doctor_lastname, :doctor_firstname, :doctor_phone, :doctor_phone_emergency, :doctor_mail, :doctor_adress, :doctor_photo, :doctor_password, :specialty_id)');
         $query->execute([
@@ -103,6 +103,16 @@ class Doctor
         $doctors = $result->fetchAll(PDO::FETCH_ASSOC);
         return $doctors;
     }
+
+    public function getDoctorById($doctor_id)
+    {
+        $query = "SELECT * FROM `cl_doctors` WHERE `doctor_id` = :doctor_id";
+        $result = $this->_pdo->prepare($query);
+        $result->bindValue(':doctor_id', $doctor_id, PDO::PARAM_INT);
+        $result->execute();
+        $doctor = $result->fetch(PDO::FETCH_ASSOC);
+        return $doctor;
+    }
 }
 
 // créer une class Secretary
@@ -160,31 +170,9 @@ class Secretary
     }
 
 
-    /*
-    /*methode de verification d'image jpg ou png , pas plus de 5mo
-    */
-    public function checkImage($image)
-    {
-        $maxSize = 5000000;
-        $validExt = array('jpg', 'jpeg', 'png');
-        if ($image['size'] <= $maxSize) {
-            $uploadExt = strtolower(substr(strrchr($image['name'], '.'), 1));
-            if (in_array($uploadExt, $validExt)) {
-                $uploadName = md5(uniqid(rand(), true));
-                $uploadDir = '../assets/img/';
-                $uploadFile = $uploadDir . $uploadName . '.' . $uploadExt;
-                move_uploaded_file($image['tmp_name'], $uploadFile);
-                return $uploadFile;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
+
 
 
 
 
 }
-
