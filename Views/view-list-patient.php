@@ -19,8 +19,8 @@
             <th scope="col">Prénom</th>
             <th scope="col">Date de naissance</th>
             <th scope="col">Num Sécu</th>
-            <th scope="col">Tel</th>
             <th scope="col">Mail</th>
+            <th scope="col">Téléphone</th>
             <th scope="col">Adresse</th>
             <th scope="col"></th>
 
@@ -82,6 +82,8 @@
                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-geo-alt-fill"></i></div>
                 <input type="text" name="patient_adress" id="patient_adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= $patient['patient_adress'] ?>'>
               </div>
+              <input type="hidden" name="patient_id" value='<?= $patient['patient_id'] ?>'>
+              <input type="hidden" name="patient_photo" value='<?= $patient['patient_mail'] ?>'>
               <div class="input-group">
                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
                 <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">

@@ -117,5 +117,4 @@ $doctorList = $doc->displayDoctorList();
 var_dump($errors);
 
 
-
 include('../Views/view-doctor.php');

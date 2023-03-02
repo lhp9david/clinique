@@ -75,17 +75,19 @@ class Patient
     /**
      * methode pour modifier les informations d'un patient
      *
-     * @return array
+     * @return void
      */
-    public function ModifyPatientInfo($patient_lastname, $patient_firstname, $patient_birthday, $patient_secu, $patient_mail, $patient_adress, $patient_photo) : void
+    public function ModifyPatientInfo($patient_id,$patient_lastname, $patient_firstname, $patient_birthday, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo) : void
     {
-        $query = $this->_pdo->prepare('UPDATE cl_patients SET patient_lastname = :patient_lastname, patient_firstname = :patient_firstname, patient_secu = :patient_secu, patient_mail = :patient_mail, patient_adress = :patient_adress, patient_photo = :patient_photo WHERE patient_id = :patient_id');
+        $query = $this->_pdo->prepare('UPDATE cl_patients SET patient_id = :patient_id, patient_lastname = :patient_lastname, patient_firstname = :patient_firstname, patient_birthday = :patient_birthday, patient_secu = :patient_secu, patient_mail = :patient_mail, patient_phone = :patient_phone, patient_adress = :patient_adress, patient_photo = :patient_photo WHERE patient_id = :patient_id');
         $query->execute([
+            ':patient_id' => $patient_id,
             ':patient_lastname' => $patient_lastname,
             ':patient_firstname' => $patient_firstname,
             ':patient_birthday' => $patient_birthday,
             ':patient_secu' => $patient_secu,
             ':patient_mail' => $patient_mail,
+            ':patient_phone' => $patient_phone,
             ':patient_adress' => $patient_adress,
             ':patient_photo' => $patient_photo,
         ]);
@@ -148,5 +150,20 @@ class Patient
             ]);
             return $query->fetch(PDO::FETCH_COLUMN);
         }
+
+     /**
+     * methode pour récuperer une photo
+     *
+     * @return array
+     */
+
+     public function GetPhotoName($patient_photo) : array
+     {
+         $query = $this->_pdo->prepare('SELECT * FROM cl_patients WHERE patient_photo = :patient_photo');
+         $query->execute([
+             ':patient_photo' => $patient_photo,
+         ]);
+         return $query->fetch(PDO::FETCH_COLUMN);
+     }
 }
 
