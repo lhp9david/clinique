@@ -31,9 +31,6 @@ class Doctor
 
     public function CreateDoctor()
     {
-
-  
-
         $query = $this->_pdo->prepare('INSERT INTO cl_doctors (doctor_lastname, doctor_firstname, doctor_phone, doctor_phone_emergency, doctor_mail, doctor_adress, doctor_photo, doctor_password, specialty_id) VALUES (:doctor_lastname, :doctor_firstname, :doctor_phone, :doctor_phone_emergency, :doctor_mail, :doctor_adress, :doctor_photo, :doctor_password, :specialty_id)');
         $query->execute([
             ':doctor_lastname' => $this->doctor_lastname,
@@ -95,6 +92,8 @@ class Doctor
             return false;
         }
     }
+
+    // méthode pour récupérer les docteurs
     public function getDoctors()
     {
         $query = "SELECT * FROM `cl_doctors`";
@@ -102,6 +101,49 @@ class Doctor
         $result->execute();
         $doctors = $result->fetchAll(PDO::FETCH_ASSOC);
         return $doctors;
+    }
+
+    // méthode pour supprimer un docteur
+    public function deleteDoctor($doctor_id)
+    {
+        $query = $this->_pdo->prepare('DELETE FROM cl_doctors WHERE doctor_id = :doctor_id');
+        $query->execute([
+            ':doctor_id' => $doctor_id,
+        ]);
+    }
+
+    // méthode pour modifier les informations d'un docteur
+    public function updateDoctor($doctor_id, $doctor_lastname, $doctor_firstname, $doctor_phone, $doctor_phone_emergency, $doctor_mail, $doctor_adress, $doctor_photo, $specialty_id)
+    {
+        $query = $this->_pdo->prepare('UPDATE cl_doctors SET doctor_lastname = :doctor_lastname, doctor_firstname = :doctor_firstname, doctor_phone = :doctor_phone, doctor_phone_emergency = :doctor_phone_emergency, doctor_mail = :doctor_mail, doctor_adress = :doctor_adress, doctor_photo = :doctor_photo, specialty_id = :specialty_id WHERE doctor_id = '.$doctor_id.'');
+        $query->execute([
+            ':doctor_lastname' => $doctor_lastname,
+            ':doctor_firstname' => $doctor_firstname,
+            ':doctor_phone' => $doctor_phone,
+            ':doctor_phone_emergency' => $doctor_phone_emergency,
+            ':doctor_mail' => $doctor_mail,
+            ':doctor_adress' => $doctor_adress,
+            ':doctor_photo' => $doctor_photo,           
+            ':specialty_id' => $specialty_id
+        ]);
+    }
+
+    // méthode pour afficher un docteur (id)
+    public function getDoctorById($doctor_id)
+    {
+        $query = $this->_pdo->prepare('SELECT * FROM cl_doctors WHERE doctor_id = :doctor_id');
+        $query->execute([
+            ':doctor_id' => $doctor_id,
+        ]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // afficher tous les noms des docteurs
+    public function getDoctorLastname()
+    {
+        $query = $this->_pdo->prepare('SELECT doctor_lastname FROM cl_doctors');
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 
