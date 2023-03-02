@@ -106,7 +106,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>Etes-vous sur de vouloir supprimer ce patient ?</p>
+            <p>Etes-vous sur de vouloir supprimer ce patient :</p>
+            <p class="text-center"><strong><?= $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] ?></strong></p> 
           </div>
           <div class="modal-footer">
             <form action="../Controllers/controller-list-patient.php" method="get">

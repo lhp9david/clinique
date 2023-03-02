@@ -12,8 +12,8 @@ $obj_patient = new Patient();
 $errors_patient = [];
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient']) ) {
-   
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
+
 
     if (isset($_POST['patient_lastname'])) {
 
@@ -135,29 +135,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient']) ) {
     echo json_encode($errors_patient);
 
     if (empty($errors_patient)) {
-    if (empty($errors_patient)) {
+        if (empty($errors_patient)) {
 
-        $patient_id = $_POST['patient_id'];
-        $patient_lastname = $_POST['patient_lastname'];
-        $patient_firstname = $_POST['patient_firstname'];
-        $patient_birthday = $_POST['patient_birthday'];
-        $patient_secu = $_POST['patient_secu'];
-        $patient_mail = $_POST['patient_mail'];
-        $patient_phone = $_POST['patient_phone'];
-        $patient_adress = $_POST['patient_adress'];
-        if (isset($_FILES["patient_photo"]) && $_FILES["patient_photo"]['error'] = 0) {
-            $patient_photo = $filename . "." . $extension;
-            // recupèrer l'ancienne photo du patient et la supprimer du dossier uploads
-            if ($obj_patient->GetPhotoName($patient_photo) != ' ') {
-                unlink(__DIR__ . "/../uploads/" . $obj_patient->GetPhotoName($patient_photo));
+            $patient_id = $_POST['patient_id'];
+            $patient_lastname = $_POST['patient_lastname'];
+            $patient_firstname = $_POST['patient_firstname'];
+            $patient_birthday = $_POST['patient_birthday'];
+            $patient_secu = $_POST['patient_secu'];
+            $patient_mail = $_POST['patient_mail'];
+            $patient_phone = $_POST['patient_phone'];
+            $patient_adress = $_POST['patient_adress'];
+            if (isset($_FILES["patient_photo"]) && $_FILES["patient_photo"]['error'] = 0) {
+                $patient_photo = $filename . "." . $extension;
+                // recupèrer l'ancienne photo du patient et la supprimer du dossier uploads
+                if ($obj_patient->GetPhotoName($patient_photo) != ' ') {
+                    unlink(__DIR__ . "/../uploads/" . $obj_patient->GetPhotoName($patient_photo));
+                }
+            } else {
+                $patient_photo = ' ';
             }
-        } else {
-            $patient_photo = ' ';
+
+            $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthday, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
+
+            echo 'Le patient a bien été ajouté !';
         }
-
-        $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthday, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
-
-        echo 'Le patient a bien été ajouté !';
     }
 }
 
