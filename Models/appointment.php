@@ -116,4 +116,13 @@ class Appointment
             ':doctor_id' => $doctor_id
         ]);
     }
+    public function GetAppointmentListByDoctor($doctor_id): array
+    {
+        $query = $this->_pdo->prepare('SELECT * FROM cl_appointments WHERE doctor_id = :doctor_id');
+        $query->execute([
+            ':doctor_id' => $doctor_id,
+        ]);
+        $appointmentList = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $appointmentList;
+    }
 }

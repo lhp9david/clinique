@@ -15,7 +15,13 @@ class Appointments
 
     public static function displayAllAppointments() // Affiche la liste des rendez-vous
     {
-        $appointmentList = self::GetAppointmentList(); // Fais appel à la méthode GetAppointmentList() pour récupérer la liste des rendez-vous
+        if (isset($_GET['doctor'])) { // Si le médecin est passé en paramètre, on affiche les rendez-vous du médecin
+            $appointmentList = new Appointment();
+            $appointmentList = $appointmentList->GetAppointmentListByDoctor($_GET['doctor']);
+        } else { // Si le médecin n'est pas passé en paramètre, on affiche tous les rendez-vous
+            $appointmentList = new Appointment();
+            $appointmentList = $appointmentList->DisplayAppointmentList();
+        }
         foreach ($appointmentList as $appointment) {
             $patient = new Patient(); // Création d'un objet patient
             $patient = $patient->ConsultPatientInfo($appointment['patient_id']); // Récupère les informations du patient par rapport à son id
@@ -96,6 +102,13 @@ class Appointments
         $appointment = new Appointment();
         $appointment->DeleteAppointment($id);
     }
+
+    public function GetAppointmentListByDoctor($doctor_id) // Méthode pour récupérer la liste des rendez-vous d'un docteur
+    {
+        $appointment = new Appointment();
+        $appointmentList = $appointment->GetAppointmentListByDoctor($doctor_id);
+        return $appointmentList;
+    }
 }
 
 
@@ -121,4 +134,22 @@ if (isset($_GET['deleteAppointment'])) { // Si l'id du rendez-vous est passé en
         echo '</div>';
     }
 }
+
+function getDoctors() // Retourne la liste des médecins
+{
+    $doctors = new Doctor;
+    $doctors = $doctors->getDoctors();
+    return $doctors;
+}
+
+function displayDoctors() // Affiche la liste des médecins dans un select
+{
+    $doctors = getDoctors();
+    echo '<option selected disabled>Choisir un médecin</option>';
+    foreach ($doctors as $doctor) {
+        echo '<option value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</option>';
+    }
+}
+
+
 include('../Views/view-doctor-appointments.php');
