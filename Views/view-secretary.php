@@ -155,7 +155,7 @@ require_once('../Controllers/controller-secretary.php');
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-                            <button type="submit" name="newDoctor" class="btn btn-outline-primary">Ajouter</button>
+                            <button name="submitNewDoctor" type="submit" class="btn btn-outline-primary">Ajouter</button>
                         </div>
                 </form>
             </div>
