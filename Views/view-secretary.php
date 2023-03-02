@@ -57,32 +57,32 @@ require('../Controllers/controller-doctor.php')
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Créer un nouveau patient</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" method="POST">
+                <form action="./view-patient.php" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-person-fill"></i></div>
-                            <input type="text" name="name" id="name" class="form-control" placeholder="Nom" aria-label="Input group example" aria-describedby="btnGroupAddon">
-                            <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="text" name="patient_lastname" id="patient_lastname" class="form-control" placeholder="Nom" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="text" name="patient_firstname" id="patient_firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></i></div>
-                            <input type="phone" name="phone" id="phone" class="form-control" placeholder="Téléphone" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="phone" name="patient_phone" id="patient_phone" class="form-control" placeholder="Téléphone" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-file-earmark-medical-fill"></i></div>
-                            <input type="text" name="social" id="social" class="form-control" placeholder="Numéro de sécurité social" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="text" name="patient_secu" id="patient_secu" class="form-control" placeholder="Numéro de sécurité social" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-envelope-fill"></i></div>
-                            <input type="mail" name="mail" id="mail" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="mail" name="patient_mail" id="patient_mail" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-geo-alt-fill"></i></div>
-                            <input type="text" name="adress" id="adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="text" name="patient_adress" id="patient_adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
-                            <input type="file" name="photo" id="photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
 
                         </div>
                     </div>

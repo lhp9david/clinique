@@ -177,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-header('Location: ../views/patient.php')
+header('Location: ../views/patient.php');
 
 
 
