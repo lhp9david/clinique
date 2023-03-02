@@ -8,10 +8,9 @@ require_once('../controllers/controller-patient.php');
 
 session_start();
 
-var_dump($errors_patient);
 class NewAppointment
 {
-    
+
     public static function verifyPost()
     {
         // Initialisation du tableau d'erreurs
