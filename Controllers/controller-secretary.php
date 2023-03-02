@@ -1,4 +1,8 @@
 <?php
+$errors = [];
+    // Initialisation du tableau d'erreurs
+ 
+    $errors_patient = [];
 require_once '../helpers/Database.php';
 require_once '../Models/appointment.php';
 require_once '../config/env.php';
@@ -8,23 +12,23 @@ require_once('../controllers/controller-patient.php');
 
 session_start();
 
+
 class NewAppointment
 {
 
     public static function verifyPost()
     {
-        // Initialisation du tableau d'erreurs
-        $errors = [];
+        $errors_appointment = [];
 
         // Vérification de la date
         if (!empty($_POST['date'])) {
             $date = $_POST['date'];
             // Vérification du format de la date
             if (!preg_match("/^\d{4}-\d{2}-\d{2}$/", $date)) {
-                $errors[] = "Le format de la date n'est pas valide.";
+                $errors_appointment[] = "Le format de la date n'est pas valide.";
             }
         } else {
-            $errors['date'] = "La date est manquante.";
+            $errors_appointment['date'] = "La date est manquante.";
         }
 
         // Vérification de l'heure
@@ -32,39 +36,40 @@ class NewAppointment
             $hour = $_POST['hour'];
             // Vérification du format de l'heure
             if (!preg_match("/^\d{2}:\d{2}$/", $hour)) {
-                $errors[] = "Le format de l'heure n'est pas valide.";
+                $errors_appointment[] = "Le format de l'heure n'est pas valide.";
             }
         } else {
-            $errors['hour'] = "L'heure est manquante.";
+            $errors_appointment['hour'] = "L'heure est manquante.";
         }
 
         // Vérification de l'identifiant du patient
         if (!empty($_POST['patient'])) {
             $patientId = $_POST['patient'];
         } else {
-            $errors['patient'] = "L'identifiant du patient est manquant.";
+            $errors_appointment['patient'] = "L'identifiant du patient est manquant.";
         }
 
         // Vérification de l'identifiant du médecin
         if (!empty($_POST['doctor'])) {
             $doctorId = $_POST['doctor'];
         } else {
-            $errors['doctor'] = "L'identifiant du médecin est manquant.";
+            $errors_appointment['doctor'] = "L'identifiant du médecin est manquant.";
         }
 
         // Vérification de la description
         if (!empty($_POST['description'])) {
             $description = $_POST['description'];
         } else {
-            $errors['description'] = "La description est manquante.";
+            $errors_appointment['description'] = "La description est manquante.";
         }
-        var_dump($errors);
+
 
         // Si le tableau d'erreurs est vide, créer le rendez-vous
-        if (empty($errors)) {
-            // $newAppointment = new NewAppointment();
-            // $newAppointment::createAppointment($date, $hour, $patientId, $doctorId, $description);
+        if (empty($errors_appointment)) {
+            $newAppointment = new NewAppointment();
+            $newAppointment::createAppointment($date, $hour, $patientId, $doctorId, $description);
         }
+        return $errors_appointment;
     }
     public static function createAppointment($date, $hour, $patientId, $doctorId, $description)
     {
@@ -74,7 +79,8 @@ class NewAppointment
 }
 // Utilisation de la fonction verifyPost() pour vérifier si le formulaire a été soumis
 if (isset($_POST['newAppointmentSubmit'])) {
-    NewAppointment::verifyPost();
+    $errors_appointment = NewAppointment::verifyPost();
+
 }
 
 function getDoctors() // Retourne la liste des médecins
@@ -114,7 +120,7 @@ function displayPatients() // Affiche la liste des patients dans un select
 // CONTROLLER POUR LES NOUVEAUX DOCTEURS
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
-    $errors = [];
+   
     if (isset($_POST['doctor_lastname'])) {
         if (empty($_POST['doctor_lastname'])) {
             $errors['lastname'] = 'champ obligatoire';
@@ -201,5 +207,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         $obj_doc->CreateDoctor();
     }
 }
+var_dump($errors);
+var_dump($errors_appointment);
+var_dump($errors_patient);
 
 include '../views/view-secretary.php';

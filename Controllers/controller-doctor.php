@@ -5,7 +5,7 @@ require_once('../helpers/Database.php');
 
 
 
-$errors = [];
+
 
 
 

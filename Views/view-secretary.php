@@ -1,7 +1,8 @@
 <?php include "../includes/head.php";
+require_once('../Controllers/controller-secretary.php');
 require_once('../Controllers/controller-doctor.php');
 require_once('../Controllers/controller-patient.php');
-require_once('../Controllers/controller-secretary.php');
+
 
 
 
@@ -55,7 +56,7 @@ require_once('../Controllers/controller-secretary.php');
     </div>
 
     <!-- Modal Ajout patient -->
-    <div class="modal fade <?= !empty($errors_patient) ? 'openModal2' : '' ?>" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade <?= !empty($errors_patient) ? 'openModal' : '' ?>" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content">
                 <div class="modal-header">
@@ -164,7 +165,8 @@ require_once('../Controllers/controller-secretary.php');
     </div>
 
     <!-- Modal Ajout consultation -->
-    <div class="modal fade <?= !empty($errors) ? 'openModal3' : '' ?>" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <?php var_dump(!empty($errors_appointment))?>
+    <div class="modal fade <?= !empty($errors_appointment) ? 'openModal' : '' ?>" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -222,23 +224,8 @@ require_once('../Controllers/controller-secretary.php');
         });
          // nous l'ouvrons avec la methode show()
          openModal.show();
-        let openModal2 = new bootstrap.Modal(document.querySelector('.openModal2'), {
-            keyboard: false
-        });
-        let openModal3 = new bootstrap.Modal(document.querySelector('.openModal3'), {
-            keyboard: false
-        });
-       
+  
 
-        // creation de l'objet openModal, nous ciblons la classe openModal
-   
-        // nous l'ouvrons avec la methode show()
-        openModal2.show();
-
-        // creation de l'objet openModal, nous ciblons la classe openModal
-
-        // nous l'ouvrons avec la methode show()
-        openModal3.show();
     </script>
 </body>
 
