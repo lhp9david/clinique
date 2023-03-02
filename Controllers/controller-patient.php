@@ -6,9 +6,6 @@ require_once '../config/env.php';
 require_once '../helpers/Database.php';
 require_once '../models/patient.php';
 
-echo "test";
-var_dump($_POST);
-var_dump($_FILES);
 
 $obj_patient = new Patient();
 
@@ -125,10 +122,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // **********************************************************
         
 
-    if (!isset($_FILES["patient_photo"])) {
-        $errors['patient_adress'] = "Aucune photo n'a été sélectionnée.";
-    }
-    
+    if ($_FILES["patient_photo"]['error'] = 0) {
+
     $filepath = $_FILES['patient_photo']['tmp_name'];
     $fileSize = filesize($filepath);
     $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -161,23 +156,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['patient_adress'] = "La copie de l'image a échouée.";
     }
     unlink($filepath); // Delete the temp file
+    }
+    
+    
 
     if (empty($error)) {
 
     $patient_lastname = $_POST['patient_lastname'];
     $patient_firstname = $_POST['patient_firstname'];
+    $patient_birthday = $_POST['patient_birthday'];
     $patient_secu = $_POST['patient_secu'];
     $patient_mail = $_POST['patient_mail'];
     $patient_phone = $_POST['patient_phone'];
     $patient_adress = $_POST['patient_adress'];
-    $patient_photo = $filename . "." . $extension;
+    if ($_FILES["patient_photo"]['error'] = 0) {
+        $patient_photo = $filename . "." . $extension;
+    } else {
+        $patient_photo = "";
+    }
 
-    $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
+    $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthday, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
 
     }
 }
 
-header('Location: ../views/patient.php');
+header('Location: ../views/view-secretary.php');
 
 
 

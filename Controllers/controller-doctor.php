@@ -108,16 +108,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $obj_doc->specialty_id = $_POST['specialty_id'];
             $obj_doc->CreateDoctor();
             
-        
         }
     }
-
 
 
 $doc = new Doctor();
 $doctorList = $doc->displayDoctorList();
 var_dump($errors);
-
 
 
 

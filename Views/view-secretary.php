@@ -57,7 +57,7 @@ require('../Controllers/controller-doctor.php')
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Créer un nouveau patient</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="./view-patient.php" method="POST" enctype="multipart/form-data">
+                <form action="./controller-patient.php" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-person-fill"></i></div>
@@ -83,7 +83,6 @@ require('../Controllers/controller-doctor.php')
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
                             <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
-
                         </div>
                     </div>
                     <div class="modal-footer">

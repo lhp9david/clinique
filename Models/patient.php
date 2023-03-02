@@ -5,18 +5,6 @@ class Patient
 
     private object $_pdo;
 
-    // méthode magique pour get les attributs
-    public function __get($attribut)
-    {
-        return $this->$attribut;
-    }
-
-    // méthode magique pour set les attributs
-    public function __set($attribut, $value)
-    {
-        $this->$attribut = $value;
-    }
-
     // créer un constructeur pour instancier la connexion
     public function __construct()
     {
@@ -28,12 +16,13 @@ class Patient
      *
      * @return void
      */
-    public function addNewPatient($patient_lastname, $patient_firstname, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo) : void
+    public function addNewPatient($patient_lastname, $patient_firstname, $patient_birthday, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo) : void
     {
         $query = $this->_pdo->prepare('INSERT INTO cl_patients (patient_lastname, patient_firstname, patient_secu, patient_mail, patient_phone, patient_adress, patient_photo) VALUE (:patient_lastname, :patient_firstname, :patient_secu, :patient_mail, :patient_photo, :patient_adress, :patient_photo)');
         $query->execute([
             ':patient_lastname' => $patient_lastname,
             ':patient_firstname' => $patient_firstname,
+            ':patient_birthday' => $patient_birthday,
             ':patient_secu' => $patient_secu,
             ':patient_mail' => $patient_mail,
             ':patient_phone' => $patient_phone,
@@ -88,24 +77,24 @@ class Patient
      *
      * @return array
      */
-    public function ModifyPatientInfo($patient_id, $patient_lastname, $patient_firstname, $patient_secu, $patient_mail, $patient_adress, $patient_photo) : void
+    public function ModifyPatientInfo($patient_lastname, $patient_firstname, $patient_birthday, $patient_secu, $patient_mail, $patient_adress, $patient_photo) : void
     {
         $query = $this->_pdo->prepare('UPDATE cl_patients SET patient_lastname = :patient_lastname, patient_firstname = :patient_firstname, patient_secu = :patient_secu, patient_mail = :patient_mail, patient_adress = :patient_adress, patient_photo = :patient_photo WHERE patient_id = :patient_id');
         $query->execute([
-            ':patient_id' => $patient_id,
-            ':patient_lastname' => $this-> $patient_lastname,
-            ':patient_firstname' => $this-> $patient_firstname,
-            ':patient_secu' => $this-> $patient_secu,
-            ':patient_mail' => $this-> $patient_mail,
-            ':patient_adress' => $this-> $patient_adress,
-            ':patient_photo' => $this-> $patient_photo,
+            ':patient_lastname' => $patient_lastname,
+            ':patient_firstname' => $patient_firstname,
+            ':patient_birthday' => $patient_birthday,
+            ':patient_secu' => $patient_secu,
+            ':patient_mail' => $patient_mail,
+            ':patient_adress' => $patient_adress,
+            ':patient_photo' => $patient_photo,
         ]);
     }
 
     /**
      * methode pour supprimer un patient
      *
-     * @return array
+     * @return void
      */
     public function DeletePatient($patient_id) : void
     {
