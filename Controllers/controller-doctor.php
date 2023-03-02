@@ -7,8 +7,7 @@ require_once('../helpers/Database.php');
 
 $errors = [];
 
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['newDoctor']) ){
    
         
         if (isset($_POST['doctor_lastname'])) {
@@ -107,7 +106,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $obj_doc->doctor_password = password_hash($_POST['doctor_password'], PASSWORD_DEFAULT);
             $obj_doc->specialty_id = $_POST['specialty_id'];
             $obj_doc->CreateDoctor();
-            
         
         }
     }
@@ -116,9 +114,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 $doc = new Doctor();
 $doctorList = $doc->displayDoctorList();
-var_dump($errors);
 
+var_dump($_POST);
 
-
-
-include('../Views/view-doctor.php');

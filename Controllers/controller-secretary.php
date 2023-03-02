@@ -4,11 +4,14 @@ require_once '../Models/appointment.php';
 require_once '../config/env.php';
 require_once '../Models/doctor.php';
 require_once '../Models/patient.php';
+require_once('../controllers/controller-patient.php');
 
 session_start();
 
+var_dump($errors_patient);
 class NewAppointment
 {
+    
     public static function verifyPost()
     {
         if (!empty($_POST['date']) && !empty($_POST['hour']) && !empty($_POST['patient']) && !empty($_POST['doctor']) && !empty($_POST['description'])) {
@@ -67,4 +70,4 @@ function displayPatients() // Affiche la liste des patients dans un select
 }
 
 
-include '../views/view-secretary.php';
+include '../Views/view-secretary.php';
