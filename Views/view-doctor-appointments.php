@@ -22,13 +22,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php Appointments::displayAllAppointments(); ?>
+                            <?php Appointments::displayAllAppointments(); ?> <!-- Affiche la liste des rendez-vous -->
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
     </main>
+    <?php Appointments::displayAppointmentsModals(); ?> <!-- Affiche les modals de modification de rendez-vous -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -59,7 +59,7 @@ class Appointment
 
     public function ConsultAppointmentInfo($appointment_id): array
     {
-        $query = $this->_pdo->prepare('SELECT * FROM cl_appointment WHERE appointment_id = :appointment_id');
+        $query = $this->_pdo->prepare('SELECT * FROM cl_appointments WHERE appointment_id = :appointment_id');
         $query->execute([
             ':appointment_id' => $appointment_id,
         ]);
@@ -72,17 +72,14 @@ class Appointment
      * @return array
      */
 
-    public function ModifyAppointmentInfo($appointment_id, $appointment_date, $appointment_hour, $appointment_reason, $appointment_status, $appointment_patient, $appointment_doctor): void
+    public function ModifyAppointment($appointment_id, $appointment_date, $appointment_hour, $appointment_description): void
     {
-        $query = $this->_pdo->prepare('UPDATE cl_appointment SET appointment_date = :appointment_date, appointment_hour = :appointment_hour, appointment_reason = :appointment_reason, appointment_status = :appointment_status, appointment_patient = :appointment_patient, appointment_doctor = :appointment_doctor WHERE appointment_id = :appointment_id');
+        $query = $this->_pdo->prepare('UPDATE cl_appointments SET appointment_date = :appointment_date, appointment_hour = :appointment_hour, appointment_description = :appointment_description WHERE appointment_id = :appointment_id');
         $query->execute([
             ':appointment_id' => $appointment_id,
-            ':appointment_date' => $this->$appointment_date,
-            ':appointment_hour' => $this->$appointment_hour,
-            ':appointment_reason' => $this->$appointment_reason,
-            ':appointment_status' => $this->$appointment_status,
-            ':appointment_patient' => $this->$appointment_patient,
-            ':appointment_doctor' => $this->$appointment_doctor,
+            ':appointment_date' => $appointment_date,
+            ':appointment_hour' => $appointment_hour,
+            ':appointment_description' => $appointment_description
         ]);
     }
 
@@ -94,10 +91,18 @@ class Appointment
 
     public function DeleteAppointment($appointment_id): void
     {
-        $query = $this->_pdo->prepare('DELETE FROM cl_appointment WHERE appointment_id = :appointment_id');
+        // On vérifie si le rendez-vous existe
+        $query = $this->_pdo->prepare('SELECT * FROM cl_appointments WHERE appointment_id = :appointment_id');
         $query->execute([
             ':appointment_id' => $appointment_id,
         ]);
+        $appointment = $query->fetch(PDO::FETCH_ASSOC);
+        if ($appointment) { // Si le rendez-vous existe, on le supprime
+            $query = $this->_pdo->prepare('DELETE FROM cl_appointments WHERE appointment_id = :appointment_id');
+            $query->execute([
+                ':appointment_id' => $appointment_id,
+            ]);
+        }
     }
 
     public function createAppointment($appointment_date, $appointment_hour, $patient_id, $doctor_id, $appointment_description): void

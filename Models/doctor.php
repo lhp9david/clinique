@@ -32,7 +32,7 @@ class Doctor
     public function CreateDoctor()
     {
 
-  
+
 
         $query = $this->_pdo->prepare('INSERT INTO cl_doctors (doctor_lastname, doctor_firstname, doctor_phone, doctor_phone_emergency, doctor_mail, doctor_adress, doctor_photo, doctor_password, specialty_id) VALUES (:doctor_lastname, :doctor_firstname, :doctor_phone, :doctor_phone_emergency, :doctor_mail, :doctor_adress, :doctor_photo, :doctor_password, :specialty_id)');
         $query->execute([
@@ -102,6 +102,16 @@ class Doctor
         $result->execute();
         $doctors = $result->fetchAll(PDO::FETCH_ASSOC);
         return $doctors;
+    }
+
+    public function getDoctorById($doctor_id)
+    {
+        $query = "SELECT * FROM `cl_doctors` WHERE `doctor_id` = :doctor_id";
+        $result = $this->_pdo->prepare($query);
+        $result->bindValue(':doctor_id', $doctor_id, PDO::PARAM_INT);
+        $result->execute();
+        $doctor = $result->fetch(PDO::FETCH_ASSOC);
+        return $doctor;
     }
 }
 
@@ -182,9 +192,4 @@ class Secretary
             return false;
         }
     }
-
-
-
-
 }
-
