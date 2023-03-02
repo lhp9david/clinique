@@ -150,7 +150,7 @@ require('../Controllers/controller-doctor.php')
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-                            <button type="submit" class="btn btn-outline-primary">Ajouter</button>
+                            <button name="submitNewDoctor" type="submit" class="btn btn-outline-primary">Ajouter</button>
                         </div>
                 </form>
             </div>
