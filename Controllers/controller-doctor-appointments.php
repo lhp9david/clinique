@@ -47,7 +47,7 @@ class Appointments
             $patient = $patient->ConsultPatientInfo($appointment['patient_id']); // Récupère les informations du patient par rapport à son id
             $doctor = new Doctor(); // Création d'un objet doctor
             $doctor = $doctor->getDoctorById($appointment['doctor_id']); // Récupère les informations du docteur par rapport à son id
-
+            var_dump($doctor);
             echo '<div class="modal fade" id="modifyAppointment' . $appointment['appointment_id'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -63,7 +63,7 @@ class Appointments
                             </div>
                             <div class="input-group">
                                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-heart-pulse"></i></div>
-                               <p>' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</p>
+                               <p>' . $doctor[0]['doctor_lastname'] . ' ' . $doctor[0]['doctor_firstname'] . '</p>
                             </div>
        
                             <div class="input-group">

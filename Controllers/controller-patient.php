@@ -9,7 +9,7 @@ require_once '../models/patient.php';
 
 $obj_patient = new Patient();
 
-$errors_patient = [];
+
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
