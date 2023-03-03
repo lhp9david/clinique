@@ -8,9 +8,9 @@ require_once '../Models/appointment.php';
 require_once '../config/env.php';
 require_once '../Models/doctor.php';
 require_once '../Models/patient.php';
-require_once('../controllers/controller-patient.php');
 
-session_start();
+
+
 
 
 class NewAppointment
@@ -207,8 +207,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         $obj_doc->CreateDoctor();
     }
 }
-var_dump($errors);
-var_dump($errors_appointment);
-var_dump($errors_patient);
 
-include '../views/view-secretary.php';
+
+include '../Views/view-secretary.php';
+?>
