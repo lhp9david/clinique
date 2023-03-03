@@ -5,11 +5,18 @@
     <nav class="navbar fixed-top">
       <div class="container-fluid">
         <h3 class="navbar-brand" href="#">Liste des patients</h3>
-        <a href="controller-secretary.php"><button type="button" class="btn btn-secondary rounded-5"><img src="https://img.icons8.com/ios-filled/30/FFFFFF/u-turn-to-left.png" /></button></a>
+        <a href="controller-secretary.php"><button type="button" class="btn btn-secondary rounded-5"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/u-turn-to-left.png" /></button></a>
       </div>
     </nav>
   </header>
   <div class="container">
+    <form action="../Controllers/controller-list-patient.php" method="get" style="margin-top : 80px">
+      <label for="SSNumber">Rechercher un patient par numéro de sécurité sociale :</label>
+      <input type="text" id="SSNumber" name="SSNumber" required minlength="15" maxlength="15" size="15">
+      <input type="submit" value="Rechercher">
+    </form>
+
+
     <div class="row patient">
       <table class="table">
         <thead>
@@ -29,7 +36,7 @@
         <tbody>
           <!-- fetch all clients -->
           <?php
-          foreach ($obj_patient->DisplayPatientList() as $patient) { ?>
+          foreach ($patients as $patient) { ?>
             <tr>
               <td><?= $patient['patient_lastname'] ?></td>
               <td><?= $patient['patient_firstname'] ?></td>
@@ -107,7 +114,7 @@
           </div>
           <div class="modal-body">
             <p>Etes-vous sur de vouloir supprimer ce patient :</p>
-            <p class="text-center"><strong><?= $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] ?></strong></p> 
+            <p class="text-center"><strong><?= $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] ?></strong></p>
           </div>
           <div class="modal-footer">
             <form action="../Controllers/controller-list-patient.php" method="get">

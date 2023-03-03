@@ -126,7 +126,7 @@ class Doctor
             ':doctor_phone_emergency' => $doctor_phone_emergency,
             ':doctor_mail' => $doctor_mail,
             ':doctor_adress' => $doctor_adress,
-            ':doctor_photo' => $doctor_photo,           
+            ':doctor_photo' => $doctor_photo,
             ':specialty_id' => $specialty_id
         ]);
     }
