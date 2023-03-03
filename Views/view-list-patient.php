@@ -1,3 +1,5 @@
+<html>
+
 <?php include('../includes/head.php'); ?>
 
 <body>
@@ -33,7 +35,7 @@
             <tr>
               <td><?= $patient['patient_lastname'] ?></td>
               <td><?= $patient['patient_firstname'] ?></td>
-              <td><?= $patient['patient_birthday'] ?></td>
+              <td><?= $patient['patient_birthdate'] ?></td>
               <td><?= $patient['patient_secu'] ?></td>
               <td><?= $patient['patient_mail'] ?></td>
               <td><?= $patient['patient_phone'] ?></td>
@@ -64,7 +66,7 @@
               </div>
               <div class="input-group">
                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-calendar"></i></i></div>
-                <input type="text" name="patient_birthday" id="patient_birthday" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= $patient['patient_birthday'] ?>'>
+                <input type="text" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= $patient['patient_birthdate'] ?>'>
               </div>
               <div class="input-group">
                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></i></div>
@@ -106,7 +108,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>Etes-vous sur de vouloir supprimer ce patient ?</p>
+            <p>Etes-vous sur de vouloir supprimer ce patient :</p>
+            <p class="text-center"><strong><?= $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] ?></strong></p>
           </div>
           <div class="modal-footer">
             <form action="../Controllers/controller-list-patient.php" method="get">
@@ -117,9 +120,13 @@
         </div>
       </div>
     </div>
+  </div>
 
+  <?php
+  include '../includes/footer.php';
+  ?>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+</body>
 
-    <?php
-    include '../includes/footer.php';
-    ?>
+</html>

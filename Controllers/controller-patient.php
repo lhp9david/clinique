@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient']) ) {
     if (empty($errors_patient)) {
     if (empty($errors_patient)) {
 
-        $patient_id = $_POST['patient_id'];
+        // $patient_id = $_POST['patient_id'];
         $patient_lastname = $_POST['patient_lastname'];
         $patient_firstname = $_POST['patient_firstname'];
         $patient_birthday = $_POST['patient_birthday'];
@@ -159,7 +159,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient']) ) {
 
         echo 'Le patient a bien été ajouté !';
     }
-}
+}}
 
 
-header('Location: ../views/view-secretary.php');
+include('../Views/view-list-patient.php');
+?>
