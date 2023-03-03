@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     if ($doc == null) {
       // on redirige vers la page d'accueil
-      // header('Location:controller-doctor.php');
+      header('Location:controller-doctor.php');
       echo 'nope';
     } else {
       if ($_GET['doctor_photo'] == '') {
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
       }
       $doc = new Doctor();
       $doc->updateDoctor($_GET['doctor_id'], $_GET['doctor_lastname'], $_GET['doctor_firstname'], $_GET['doctor_phone'], $_GET['doctor_phone_emergency'], $_GET['doctor_mail'], $_GET['doctor_adress'], $doctor_photo, $_GET['specialty_id']);
-      // header('Location:controller-doctor.php');
+      header('Location:controller-doctor.php');
     }
   }
 
@@ -131,7 +131,6 @@ function displayDoctorList()
 
 echo '<p> Fichier existant : "'. $doctor['doctor_photo'].'" </p>' ;
 
-// Afficher le champ de fichier avec la valeur par défaut de l'image existante
 echo '<div class="input-group">';
 echo '<div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>';
 echo '<input type="file" name="doctor_photo" id="photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">';
