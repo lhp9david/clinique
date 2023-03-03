@@ -33,7 +33,7 @@
             <tr>
               <td><?= $patient['patient_lastname'] ?></td>
               <td><?= $patient['patient_firstname'] ?></td>
-              <td><?= $patient['patient_birthday'] ?></td>
+              <td><?= $patient['patient_birthdate'] ?></td>
               <td><?= $patient['patient_secu'] ?></td>
               <td><?= $patient['patient_mail'] ?></td>
               <td><?= $patient['patient_phone'] ?></td>
@@ -64,7 +64,7 @@
               </div>
               <div class="input-group">
                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-calendar"></i></i></div>
-                <input type="text" name="patient_birthday" id="patient_birthday" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= $patient['patient_birthday'] ?>'>
+                <input type="text" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= $patient['patient_birthdate'] ?>'>
               </div>
               <div class="input-group">
                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></i></div>
@@ -118,8 +118,6 @@
         </div>
       </div>
     </div>
-
-
 
     <?php
     include '../includes/footer.php';

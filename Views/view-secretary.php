@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <h3 class="card-title mb-4"><img src="https://img.icons8.com/color/38/null/triangular-bandage.png" />Patients</h3>
                         <button type="button" class="btn btn-outline-primary rounded-5 m-1" data-bs-toggle="modal" data-bs-target="#patientModal">Créer un nouveau patient</button>
-                        <button type="button" class="btn btn-outline-secondary rounded-5 m-1">Consulter la liste des patients</button>
+                        <button type="button" class="btn btn-outline-secondary rounded-5 m-1"><a href="../Controllers/controller-list-patient.php">Consulter la liste des patients</a></button>
                     </div>
                 </div>
             </div>
@@ -63,6 +63,10 @@
                             <input type="text" name="patient_firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_firstname'] ?? '' ?></span>
                         </div>
                         <div class="input-group">
+                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-calendar"></i></i></div>
+                            <input type="text" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_birthdate'] ?? '' ?></span>
+                        </div>
+                        <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></i></div>
                             <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_phone'] ?? '' ?></span>
                         </div>
@@ -81,8 +85,8 @@
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
                             <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_photo'] ?? '' ?></span>
-
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
