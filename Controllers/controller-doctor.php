@@ -3,7 +3,6 @@ require_once('../Models/doctor.php');
 require_once('../config/env.php');
 require_once('../helpers/Database.php');
 
-
 // affichage des docteurs en table
 $doc = new Doctor();
 $doctorList = $doc->displayDoctorList();
@@ -12,22 +11,17 @@ $doctorList = $doc->displayDoctorList();
 $doc = new Doctor();
 $doctorListName = $doc->getDoctorLastName();
 
-
 // méthode GET 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
   // Update des informations
   if (isset($_GET['doctor_id'])) {
 
-
-    // on vérifie que le docteur existe
     $doc = new Doctor();
     $doc = $doc->getDoctorById($_GET['doctor_id']);
 
     if ($doc == null) {
-      // on redirige vers la page d'accueil
       header('Location:controller-doctor.php');
-      echo 'nope';
     } else {
       if ($_GET['doctor_photo'] == '') {
         $doctor_photo = $doc[0]['doctor_photo'];
@@ -42,25 +36,23 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
   // Supression du docteur
   if (isset($_GET['delete'])) {
-
-    // On vérifie que le docteur existe
     $doc = new Doctor();
     $doc = $doc->getDoctorById($_GET['delete']);
     if ($doc == null) {
-      // On redirige vers la page d'accueil 
       header('Location:controller-doctor.php');
     } else {
       $doc = new Doctor();
       $doc->deleteDoctor($_GET['delete']);
-      // On redirige vers la page d'accueil 
       header('Location:controller-doctor.php');
     }
   }
 }
 
+// Affichage des docteurs
 function displayDoctorList()
 {
   if (isset($_GET['doctor_select'])) {
+    // filtrage par nom
     $doc = new Doctor();
     $doctorList = $doc->getDoctorById($_GET['doctor_select']);
     $return = '<button class="btn btn-secondary rounded-5"><a href="controller-doctor.php"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/u-turn-to-left.png" /></a></button>';
@@ -83,7 +75,6 @@ function displayDoctorList()
         <button type="button" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modal' . $doctor['doctor_id'] . $doctor['doctor_lastname'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button>
         ' . $return . '</td>
         </tr>';
-
     echo '
         <div class="modal fade" id="modal' . $doctor['doctor_id'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -92,8 +83,6 @@ function displayDoctorList()
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier les informations</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-
-              <!-- formulaire de modification -->
               <form action="" method="get">
                 <div class="modal-body">
                   <input type="hidden" name="doctor_id" value="' . $doctor['doctor_id'] . '">
@@ -126,22 +115,17 @@ function displayDoctorList()
                         <option value="2" ' . ($doctor['specialty_id'] == 2 ? 'selected' : '') . '>Dermatologue</option>
                         <option value="3" ' . ($doctor['specialty_id'] == 3 ? 'selected' : '') . '>Gynécologue</option>
                         <option value="4" ' . ($doctor['specialty_id'] == 4 ? 'selected' : '') . '>Généraliste</option>
-                      </select> ';
-
-
-echo '<p> Fichier existant : "'. $doctor['doctor_photo'].'" </p>' ;
-
-echo '<div class="input-group">';
-echo '<div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>';
-echo '<input type="file" name="doctor_photo" id="photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">';
-    echo
-    '</div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-                    <button type="submit" class="btn btn-outline-primary">Sauvegarder</button>
-                  </div>
+                      </select>
+                      <p> Fichier existant : "'. $doctor['doctor_photo'].'" </p>
+                      <div class="input-group">
+                        <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
+                        <input type="file" name="doctor_photo" id="photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-outline-primary">Sauvegarder</button>
+                      </div>
               </form>
-
             </div>
           </div>
         </div>
