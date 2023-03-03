@@ -1,15 +1,14 @@
 <?php
 $errors = [];
-    // Initialisation du tableau d'erreurs
- 
-    $errors_patient = [];
+// Initialisation du tableau d'erreurs
+
+$errors_patient = [];
 require_once '../helpers/Database.php';
 require_once '../Models/appointment.php';
 require_once '../config/env.php';
 require_once '../Models/doctor.php';
 require_once '../Models/patient.php';
 
-session_start();
 
 
 class NewAppointment
@@ -79,7 +78,6 @@ class NewAppointment
 // Utilisation de la fonction verifyPost() pour vérifier si le formulaire a été soumis
 if (isset($_POST['newAppointmentSubmit'])) {
     $errors_appointment = NewAppointment::verifyPost();
-
 }
 
 function getDoctors() // Retourne la liste des médecins
@@ -89,12 +87,12 @@ function getDoctors() // Retourne la liste des médecins
     return $doctors;
 }
 
-function displayDoctors() // Affiche la liste des médecins dans un select
+function displayDoctors() // Affiche la liste des médecins dans un select, avec la valeur sélectionnée si le formulaire a été soumis
 {
     $doctors = getDoctors();
     echo '<option selected disabled>Choisir un médecin</option>';
     foreach ($doctors as $doctor) {
-        echo '<option value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</option>';
+        echo '<option ' . (isset($_POST['doctor']) && $_POST['doctor'] == $doctor['doctor_id'] ? 'selected' : '') . ' value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</option>';
     }
 }
 
@@ -105,12 +103,12 @@ function getPatients() // Retourne la liste des patients
     return $patients;
 }
 
-function displayPatients() // Affiche la liste des patients dans un select
+function displayPatients() // Affiche la liste des patients dans un select, avec la valeur sélectionnée si le formulaire a été soumis
 {
     $patients = getPatients();
     echo '<option selected disabled>Choisir un patient</option>';
     foreach ($patients as $patient) {
-        echo '<option value="' . $patient['patient_id'] . '">' . $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] . '</option>';
+        echo '<option ' . (isset($_POST['patient']) && $_POST['patient'] == $patient['patient_id'] ? 'selected' : '') . ' value="' . $patient['patient_id'] . '">' . $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] . '</option>';
     }
 }
 
@@ -118,9 +116,8 @@ function displayPatients() // Affiche la liste des patients dans un select
 // CONTROLLER POUR LES NOUVEAUX DOCTEURS
 
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
-   
+
     if (isset($_POST['doctor_lastname'])) {
         if (empty($_POST['doctor_lastname'])) {
             $errors['lastname'] = 'champ obligatoire';
@@ -359,4 +356,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
 
 
-include '../views/view-secretary.php';
+
+include '../Views/view-secretary.php';

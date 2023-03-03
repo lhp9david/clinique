@@ -1,3 +1,4 @@
+<html>
 <?php include "../includes/head.php"; ?>
 
 <body>
@@ -18,7 +19,7 @@
                     <div class="card-body">
                         <h3 class="card-title mb-4"><img src="https://img.icons8.com/color/38/null/triangular-bandage.png" />Patients</h3>
                         <button type="button" class="btn btn-outline-primary rounded-5 m-1" data-bs-toggle="modal" data-bs-target="#patientModal">Créer un nouveau patient</button>
-                        <button type="button" class="btn btn-outline-secondary rounded-5 m-1"><a href="../Controllers/controller-list-patient.php">Consulter la liste des patients</a></button>
+                        <a href="controller-patient.php"><button type="button" class="btn btn-outline-secondary rounded-5 m-1">Consulter la liste des patients</button></a>
                     </div>
                 </div>
             </div>
@@ -27,7 +28,7 @@
                     <div class="card-body ">
                         <h3 class="card-title mb-4"><img src="https://img.icons8.com/color/38/null/medical-doctor.png" /> Médecins</h3>
                         <button type="button" class="btn btn-outline-primary rounded-5 m-1" data-bs-toggle="modal" data-bs-target="#doctorModal">Créer un nouveau médecin</button>
-                        <button type="button" class="btn btn-outline-secondary rounded-5 m-1"><a href="../Controllers/controller-doctor.php">Consulter la liste des médecins</a></button>
+                        <a href="controller-doctor.php"><button type="button" class="btn btn-outline-secondary rounded-5 m-1">Consulter la liste des médecins</button></a>
                     </div>
                 </div>
             </div>
@@ -38,7 +39,7 @@
 
                         <button type="button" class="btn btn-outline-primary rounded-5 m-1" data-bs-toggle="modal" data-bs-target="#appointmentModal">Créer une consultation</button>
 
-                        <button type="button" class="btn btn-outline-secondary rounded-5 m-1">Consulter la liste des consultations</button>
+                        <a href="controller-doctor-appointments.php"><button type="button" class="btn btn-outline-secondary rounded-5 m-1">Consulter la liste des consultations</button></a>
 
                     </div>
                 </div>
@@ -64,7 +65,7 @@
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-calendar"></i></i></div>
-                            <input type="text" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_birthdate'] ?? '' ?></span>
+                            <input type="date" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_birthdate'] ?? '' ?></span>
                         </div>
 
                         <div class="input-group">
@@ -162,7 +163,7 @@
     </div>
 
     <!-- Modal Ajout consultation -->
-    <?php var_dump(!empty($errors_appointment)) ?>
+
     <div class="modal fade <?= !empty($errors_appointment) ? 'openModal' : '' ?>" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -186,18 +187,17 @@
                                 <?php displayDoctors() ?>
                             </select>
                         </div>
-
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-calendar-event-fill"></i></div>
-                            <input type="date" name="date" id="date" class="form-control" placeholder="Numéro de sécurité social" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input value='<?= $_POST['date'] ?? '' ?>' type="date" name="date" id="date" class="form-control" placeholder="Numéro de sécurité social" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-clock-fill"></i></div>
-                            <input type="time" name="hour" id="hour" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input value='<?= $_POST['hour'] ?? '' ?>' type="time" name="hour" id="hour" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-chat-square-dots-fill"></i></div>
-                            <input type="textarea" name="description" id="description" class="form-control" placeholder="Description" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input value='<?= $_POST['description'] ?? '' ?>' type="textarea" name="description" id="description" class="form-control" placeholder="Description" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
 
                     </div>
@@ -211,7 +211,7 @@
         </div>
     </div>
 
-
+    <?php include '../includes/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
         // creation de l'objet openModal, nous ciblons la classe openModal
