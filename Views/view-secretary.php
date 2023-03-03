@@ -64,7 +64,7 @@
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-calendar"></i></i></div>
-                            <input type="text" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_birthdate'] ?? '' ?></span>
+                            <input type="date" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_birthdate'] ?? '' ?></span>
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></i></div>
