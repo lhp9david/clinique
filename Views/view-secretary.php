@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <h3 class="card-title mb-4"><img src="https://img.icons8.com/color/38/null/triangular-bandage.png" />Patients</h3>
                         <button type="button" class="btn btn-outline-primary rounded-5 m-1" data-bs-toggle="modal" data-bs-target="#patientModal">Créer un nouveau patient</button>
-                        <button type="button" class="btn btn-outline-secondary rounded-5 m-1"><a href="../Controllers/controller-list-patient.php">Consulter la liste des patients</a></button>
+                        <a href="controller-patient.php"><button type="button" class="btn btn-outline-secondary rounded-5 m-1">Consulter la liste des patients</button></a>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     <div class="card-body ">
                         <h3 class="card-title mb-4"><img src="https://img.icons8.com/color/38/null/medical-doctor.png" /> Médecins</h3>
                         <button type="button" class="btn btn-outline-primary rounded-5 m-1" data-bs-toggle="modal" data-bs-target="#doctorModal">Créer un nouveau médecin</button>
-                        <button type="button" class="btn btn-outline-secondary rounded-5 m-1"><a href="../Controllers/controller-doctor.php">Consulter la liste des médecins</a></button>
+                        <a href="controller-doctor.php"><button type="button" class="btn btn-outline-secondary rounded-5 m-1">Consulter la liste des médecins</button></a>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
 
                         <button type="button" class="btn btn-outline-primary rounded-5 m-1" data-bs-toggle="modal" data-bs-target="#appointmentModal">Créer une consultation</button>
 
-                        <button type="button" class="btn btn-outline-secondary rounded-5 m-1">Consulter la liste des consultations</button>
+                        <a href="controller-appointment.php"><button type="button" class="btn btn-outline-secondary rounded-5 m-1">Consulter la liste des consultations</button></a>
 
                     </div>
                 </div>
