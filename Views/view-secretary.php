@@ -63,6 +63,10 @@
                             <input type="text" name="patient_firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_firstname'] ?? '' ?></span>
                         </div>
                         <div class="input-group">
+                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-calendar"></i></i></div>
+                            <input type="text" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_birthdate'] ?? '' ?></span>
+                        </div>
+                        <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></i></div>
                             <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_phone'] ?? '' ?></span>
                         </div>
@@ -81,8 +85,8 @@
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
                             <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_photo'] ?? '' ?></span>
-
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -157,7 +161,7 @@
     </div>
 
     <!-- Modal Ajout consultation -->
-    <?php var_dump(!empty($errors_appointment))?>
+
     <div class="modal fade <?= !empty($errors_appointment) ? 'openModal' : '' ?>" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
