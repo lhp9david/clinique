@@ -1,3 +1,4 @@
+<html>
 <?php include "../includes/head.php"; ?>
 
 <body>
@@ -210,17 +211,15 @@
         </div>
     </div>
 
-
+    <?php include '../includes/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
         // creation de l'objet openModal, nous ciblons la classe openModal
         let openModal = new bootstrap.Modal(document.querySelector('.openModal'), {
             keyboard: false
         });
-         // nous l'ouvrons avec la methode show()
-         openModal.show();
-  
-
+        // nous l'ouvrons avec la methode show()
+        openModal.show();
     </script>
 </body>
 

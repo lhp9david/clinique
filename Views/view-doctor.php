@@ -1,31 +1,33 @@
-<?php include('../includes/head.php');
-?>
-<header>
-  <nav class="navbar fixed-top">
-    <div class="container-fluid">
-      <h3 class="navbar-brand" href="#">Liste des médecins</h3>
-      <div>
-        <!-- button select -->
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle rounded-5" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-search"></i>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <!-- Filtrage par nom -->
-            <?php foreach ($doctorList as $doctor) { ?>
-              <li><a class="dropdown-item" href="controller-doctor.php?doctor_select=<?= $doctor['doctor_id'] ?>"><?= $doctor['doctor_lastname'] ?></a></li>
-            <?php } ?>
-          </ul>
+<html>
 
-          <!-- button return -->
-          <a href="controller-secretary.php"><button type="button" class="btn btn-secondary rounded-5"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/u-turn-to-left.png" /></button></a>
-        </div>
-      </div>
-    </div>
-  </nav>
-</header>
+<?php include('../includes/head.php'); ?>
+
 
 <body>
+  <header>
+    <nav class="navbar fixed-top">
+      <div class="container-fluid">
+        <h3 class="navbar-brand" href="#">Liste des médecins</h3>
+        <div>
+          <!-- button select -->
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle rounded-5" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-search"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <!-- Filtrage par nom -->
+              <?php foreach ($doctorList as $doctor) { ?>
+                <li><a class="dropdown-item" href="controller-doctor.php?doctor_select=<?= $doctor['doctor_id'] ?>"><?= $doctor['doctor_lastname'] ?></a></li>
+              <?php } ?>
+            </ul>
+
+            <!-- button return -->
+            <a href="controller-secretary.php"><button type="button" class="btn btn-secondary rounded-5"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/u-turn-to-left.png" /></button></a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
 
   <div class="container">
     <div class="row doctor">
@@ -47,12 +49,12 @@
         <tbody>
           <?php displayDoctorList() ?>
 
-    </tbody>
-    </table>
-  </div>
+        </tbody>
+      </table>
+    </div>
 
   </div>
-
+  <?php include('../includes/footer.php'); ?>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 
