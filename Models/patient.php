@@ -16,13 +16,13 @@ class Patient
      *
      * @return void
      */
-    public function addNewPatient($patient_lastname, $patient_firstname, $patient_birthday, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo) : void
+    public function addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo) : void
     {
-        $query = $this->_pdo->prepare('INSERT INTO cl_patients (patient_lastname, patient_firstname, patient_secu, patient_mail, patient_phone, patient_adress, patient_photo) VALUE (:patient_lastname, :patient_firstname, :patient_secu, :patient_mail, :patient_photo, :patient_adress, :patient_photo)');
+        $query = $this->_pdo->prepare('INSERT INTO cl_patients (patient_lastname, patient_firstname, patient_birthdate, patient_secu, patient_mail, patient_phone, patient_adress, patient_photo) VALUE (:patient_lastname, :patient_firstname, :patient_birthdate, :patient_secu, :patient_mail, :patient_photo, :patient_adress, :patient_photo)');
         $query->execute([
             ':patient_lastname' => $patient_lastname,
             ':patient_firstname' => $patient_firstname,
-            ':patient_birthday' => $patient_birthday,
+            ':patient_birthdate' => $patient_birthdate,
             ':patient_secu' => $patient_secu,
             ':patient_mail' => $patient_mail,
             ':patient_phone' => $patient_phone,
@@ -78,14 +78,14 @@ class Patient
      *
      * @return void
      */
-    public function ModifyPatientInfo($patient_id,$patient_lastname, $patient_firstname, $patient_birthday, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo) : void
+    public function ModifyPatientInfo($patient_id,$patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo) : void
     {
-        $query = $this->_pdo->prepare('UPDATE cl_patients SET patient_id = :patient_id, patient_lastname = :patient_lastname, patient_firstname = :patient_firstname, patient_birthday = :patient_birthday, patient_secu = :patient_secu, patient_mail = :patient_mail, patient_phone = :patient_phone, patient_adress = :patient_adress, patient_photo = :patient_photo WHERE patient_id = :patient_id');
+        $query = $this->_pdo->prepare('UPDATE cl_patients SET patient_id = :patient_id, patient_lastname = :patient_lastname, patient_firstname = :patient_firstname, patient_birthdate = :patient_birthdate, patient_secu = :patient_secu, patient_mail = :patient_mail, patient_phone = :patient_phone, patient_adress = :patient_adress, patient_photo = :patient_photo WHERE patient_id = :patient_id');
         $query->execute([
             ':patient_id' => $patient_id,
             ':patient_lastname' => $patient_lastname,
             ':patient_firstname' => $patient_firstname,
-            ':patient_birthday' => $patient_birthday,
+            ':patient_birthdate' => $patient_birthdate,
             ':patient_secu' => $patient_secu,
             ':patient_mail' => $patient_mail,
             ':patient_phone' => $patient_phone,

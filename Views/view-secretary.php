@@ -1,12 +1,4 @@
-<?php include "../includes/head.php";
-require_once('../Controllers/controller-secretary.php');
-require_once('../Controllers/controller-doctor.php');
-require_once('../Controllers/controller-patient.php');
-
-
-
-
-?>
+<?php include "../includes/head.php"; ?>
 
 <body>
     <header>
@@ -26,7 +18,7 @@ require_once('../Controllers/controller-patient.php');
                     <div class="card-body">
                         <h3 class="card-title mb-4"><img src="https://img.icons8.com/color/38/null/triangular-bandage.png" />Patients</h3>
                         <button type="button" class="btn btn-outline-primary rounded-5 m-1" data-bs-toggle="modal" data-bs-target="#patientModal">Créer un nouveau patient</button>
-                        <button type="button" class="btn btn-outline-secondary rounded-5 m-1">Consulter la liste des patients</button>
+                        <button type="button" class="btn btn-outline-secondary rounded-5 m-1"><a href="../Controllers/controller-list-patient.php">Consulter la liste des patients</a></button>
                     </div>
                 </div>
             </div>
@@ -71,9 +63,8 @@ require_once('../Controllers/controller-patient.php');
                             <input type="text" name="patient_firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_firstname'] ?? '' ?></span>
                         </div>
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-person-fill"></i></div>
-                            <input type="date" name="patient_birthday" id="patient_birthday" class="form-control" placeholder="" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_lastname'] ?? '' ?></span>
-                         
+                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-calendar"></i></i></div>
+                            <input type="text" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_birthdate'] ?? '' ?></span>
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></i></div>
@@ -94,8 +85,8 @@ require_once('../Controllers/controller-patient.php');
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
                             <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_photo'] ?? '' ?></span>
-
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -221,7 +212,6 @@ require_once('../Controllers/controller-patient.php');
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
     <script>
         // creation de l'objet openModal, nous ciblons la classe openModal
         let openModal = new bootstrap.Modal(document.querySelector('.openModal'), {
