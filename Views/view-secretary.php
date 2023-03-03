@@ -38,7 +38,7 @@
 
                         <button type="button" class="btn btn-outline-primary rounded-5 m-1" data-bs-toggle="modal" data-bs-target="#appointmentModal">Créer une consultation</button>
 
-                        <a href="controller-appointment.php"><button type="button" class="btn btn-outline-secondary rounded-5 m-1">Consulter la liste des consultations</button></a>
+                        <a href="controller-doctor-appointments.php"><button type="button" class="btn btn-outline-secondary rounded-5 m-1">Consulter la liste des consultations</button></a>
 
                     </div>
                 </div>
