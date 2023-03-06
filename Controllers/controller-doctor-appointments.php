@@ -30,20 +30,39 @@ class Appointments
             echo '<tr>';
             echo '<td>' . $patient['patient_firstname'] . '</td>';
             echo '<td>' . $patient['patient_lastname'] . '</td>';
-            echo '<td> ' . $appointment['appointment_date'] . ' </td>';
+            echo '<td>' . $appointment['appointment_date'] . ' </td>';
             echo '<td>' . $appointment['appointment_hour'] . '</td>';
             echo '<td>' . $patient['patient_phone'] . '</td>';
             echo '<td>' . $patient['patient_secu'] . '</td>';
-            if (isset($_GET['doctor'])) {
-                echo '
-                <td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
-                <a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '&doctor=' . $_GET['doctor'] . '><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button></a></td>';
-            } else {
-                echo '
-                <td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
-                <a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '"><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button></a></td>';
-            }
+            echo '<td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button><td>';
+            echo '<td><button type="button" id="btnDelete" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modalDelete' . $appointment['appointment_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png"></button><td>';
             echo '</tr>';
+
+            // Modal de suppression
+
+            echo ' <div class="modal fade" id="modalDelete' . $appointment['appointment_id'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-body text-center">
+                  <h6> Voulez-vous supprimer cet élément définitivement?</h6>
+                  <!-- bouton delete -->
+                  <div class="text-center">
+                    <button type="button" class="btn btn-primary"><a href="controller-doctor.php?delete=' . $appointment['appointment_id'] . '"><span class="text-white">oui</span></a></button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">non</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>';
+            // CODE à utiliser demain à Mathis PAS TOUCHER
+            //   if (isset($_GET['doctor'])) {
+            //     echo '
+            //     <a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '&doctor=' . $_GET['doctor'] . '><button type=" button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button></a></td>';
+            //     } else {
+            //     echo '
+            //     <td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
+            //         <a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '"><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button></a>
+            //     </td>';
         }
     }
 
@@ -153,12 +172,12 @@ function getDoctors() // Retourne la liste des médecins
 function displayDoctors() // Affiche la liste des médecins dans un select
 {
     $doctors = getDoctors();
-    
+
     foreach ($doctors as $doctor) {
         if (isset($_GET['doctor']) && $_GET['doctor'] == $doctor['doctor_id']) {
-            echo '<li><a href="controller-doctor-appointments.php?doctor='.$doctor['doctor_id'].'" class="dropdown-item" value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
+            echo '<li><a href="controller-doctor-appointments.php?doctor=' . $doctor['doctor_id'] . '" class="dropdown-item" value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
         } else {
-            echo '<li><a href="controller-doctor-appointments.php?doctor='.$doctor['doctor_id'].'" class="dropdown-item" value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
+            echo '<li><a href="controller-doctor-appointments.php?doctor=' . $doctor['doctor_id'] . '" class="dropdown-item" value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
         }
     }
 }
@@ -166,4 +185,3 @@ function displayDoctors() // Affiche la liste des médecins dans un select
 
 
 include('../Views/view-doctor-appointments.php');
-?>
