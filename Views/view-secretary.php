@@ -67,10 +67,7 @@
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-calendar"></i></i></div>
                             <input type="date" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_birthdate'] ?? '' ?></span>
                         </div>
-                        <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></i></div>
-                            <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_phone'] ?? '' ?></span>
-                        </div>
+
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-file-earmark-medical-fill"></i></div>
                             <input type="text" name="patient_secu" id="social" class="form-control" placeholder="Numéro de sécurité social" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_secu'] ?? '' ?></span>
@@ -78,6 +75,10 @@
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-envelope-fill"></i></div>
                             <input type="mail" name="patient_mail" id="mail" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_mail'] ?? '' ?></span>
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></i></div>
+                            <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_phone'] ?? '' ?></span>
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-geo-alt-fill"></i></div>
