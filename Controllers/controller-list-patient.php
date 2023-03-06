@@ -108,11 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // **********************************************************
 
-
-        if (!isset($_FILES["patient_photo"]) || $_FILES["patient_photo"]["error"] != 0) {
-            $errors_patient['patient_upload'] = "Pas de photo à uploader.";
-        }
-
         if ($_FILES["patient_photo"]["error"] = 0) {
             $filepath = $_FILES['patient_photo']['tmp_name'];
             $fileSize = filesize($filepath);
@@ -161,8 +156,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $patient_mail = $_POST['patient_mail'];
         $patient_phone = $_POST['patient_phone'];
         $patient_adress = $_POST['patient_adress'];
+
         if (isset($_FILES["patient_photo"]) && $_FILES["patient_photo"]['error'] = 0) {
-            $patient_photo = $_FILES["patient_photo"]['error'];
+            $patient_photo = $_FILES["patient_photo"]['name'];
             // recupèrer l'ancienne photo du patient et la supprimer du dossier uploads
             if ($obj_patient->GetPhotoName($patient_photo) != ' ') {
                 unlink(__DIR__ . "/../uploads/" . $obj_patient->GetPhotoName($patient_photo));
@@ -174,8 +170,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $obj_patient->ModifyPatientInfo($patient_id, $patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
 
         echo 'Le patient a bien été modifié';
+        header('Location: /controllers/controller-list-patient.php');
     }
 }
+
 
 
 require '../views/view-list-patient.php';

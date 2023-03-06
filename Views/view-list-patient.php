@@ -18,6 +18,12 @@
       <input type="submit" value="Rechercher">
     </form>
 
+    <form action="../Controllers/controller-list-patient.php" method="get" style="margin-top : 80px">
+      <label for="DDNumber">Rechercher un patient par date de naissance :</label>
+      <input type="date" id="DDNumber" name="DDNumber" class="text-center" value="<?= date('Y-m-d') ?>">
+      <input type="submit" value="Rechercher">
+    </form>
+
 
     <div class="row patient">
       <table class="table">
