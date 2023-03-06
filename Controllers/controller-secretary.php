@@ -332,9 +332,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
     // **********************************************************
 
 
-    if (!isset($_FILES["patient_photo"]) || $_FILES["patient_photo"]["error"] != 0) {
-        $errors_patient['patient_upload'] = "Pas de photo à uploader.";
-    }
     
     if ($_FILES["patient_photo"]["error"] = 0) {
         $filepath = $_FILES['patient_photo']['tmp_name'];
