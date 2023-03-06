@@ -71,7 +71,7 @@
 
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-file-earmark-medical-fill"></i></div>
-                            <input type="text" name="patient_secu" id="social" class="form-control" placeholder="Numéro de sécurité social" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_secu'] ?? '' ?>"><span class="text-danger"><?= $errors_patient['patient_secu'] ?? '' ?></span>
+                            <input type="text" name="patient_secu" id="social" class="form-control" placeholder="Numéro de sécurité social" minlength="15" maxlength="15" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_secu'] ?? '' ?>"><span class="text-danger"><?= $errors_patient['patient_secu'] ?? '' ?></span>
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-envelope-fill"></i></div>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></i></div>
-                            <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger" value="<?= $_POST['patient_phone'] ?? '' ?>"><?= $errors_patient['patient_phone'] ?? '' ?></span>
+                            <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" minlength="10" maxlength="10" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger" value="<?= $_POST['patient_phone'] ?? '' ?>"><?= $errors_patient['patient_phone'] ?? '' ?></span>
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-geo-alt-fill"></i></div>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" name="newPatient" class="btn btn-outline-primary">Ajouter</button>
+                        <button type="submit" class="btn btn-outline-primary">Ajouter</button>
                     </div>
                 </form>
             </div>
