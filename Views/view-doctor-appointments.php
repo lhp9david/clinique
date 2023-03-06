@@ -29,7 +29,7 @@
     </header>
 
     <main>
-        <div class="container">gitgit
+        <div class="container">
             <div class="row appointments">
 
                 <div class="col-12">
