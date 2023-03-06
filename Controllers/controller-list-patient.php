@@ -184,3 +184,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 require '../views/view-list-patient.php';
+?>

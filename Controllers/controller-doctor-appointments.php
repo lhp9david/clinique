@@ -91,7 +91,7 @@ class Appointments
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-                            <button type="submit" name="ModifyAppointment" class="btn btn-outline-primary">Ajouter</button>
+                            <button type="submit" name="ModifyAppointment" class="btn btn-outline-primary">Modifier</button>
                         </div>
                     </form>
                 </div>
@@ -166,3 +166,4 @@ function displayDoctors() // Affiche la liste des médecins dans un select
 
 
 include('../Views/view-doctor-appointments.php');
+?>
