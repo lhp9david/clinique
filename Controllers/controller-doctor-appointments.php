@@ -34,11 +34,14 @@ class Appointments
             echo '<td>' . $appointment['appointment_hour'] . '</td>';
             echo '<td>' . $patient['patient_phone'] . '</td>';
             echo '<td>' . $patient['patient_secu'] . '</td>';
-            echo '<td><a data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary">Modifier</a></td>';
             if (isset($_GET['doctor'])) {
-                echo '<td><a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '&doctor=' . $_GET['doctor'] . '" class="btn btn-danger">Supprimer</a></td>';
+                echo '
+                <td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
+                <a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '&doctor=' . $_GET['doctor'] . '><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button></a></td>';
             } else {
-                echo '<td><a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '" class="btn btn-danger">Supprimer</a></td>';
+                echo '
+                <td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
+                <a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '"><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button></a></td>';
             }
             echo '</tr>';
         }
