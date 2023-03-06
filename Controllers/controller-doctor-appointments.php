@@ -149,15 +149,16 @@ function getDoctors() // Retourne la liste des médecins
 function displayDoctors() // Affiche la liste des médecins dans un select
 {
     $doctors = getDoctors();
-    echo '<option selected disabled>Choisir un médecin</option>';
+    
     foreach ($doctors as $doctor) {
         if (isset($_GET['doctor']) && $_GET['doctor'] == $doctor['doctor_id']) {
-            echo '<option value="' . $doctor['doctor_id'] . '" selected>' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</option>';
+            echo '<li><a href="controller-doctor-appointments.php?doctor='.$doctor['doctor_id'].'" class="dropdown-item" value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
         } else {
-            echo '<option value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</option>';
+            echo '<li><a href="controller-doctor-appointments.php?doctor='.$doctor['doctor_id'].'" class="dropdown-item" value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
         }
     }
 }
+
 
 
 include('../Views/view-doctor-appointments.php');

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $errors = [];
 // Initialisation du tableau d'erreurs
 
@@ -210,8 +212,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
 
 $obj_patient = new Patient();
 
-var_dump($_POST);
-var_dump($_FILES);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 

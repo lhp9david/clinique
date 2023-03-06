@@ -3,45 +3,53 @@
 <?php include('../includes/head.php'); ?>
 
 <body>
-    <main>
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1 class="text-center">Liste des rendez-vous</h1>
-                </div>
-            </div>
-            <div class="row">
+    <header>
+        <nav class="navbar fixed-top">
+            <div class="container-fluid">
+                <h3 class="navbar-brand" href="#">Liste des consultations</h3>
+                <div>
+                    <!-- button select -->
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle rounded-5" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-search"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <!-- Filtrage par nom -->
+                            <form action="" method="GET">
+                                <?php displayDoctors() ?> <!-- Affiche la liste des médecins -->
+                            </form>
+                        </ul>
 
-                <form action="" method="GET">
-                    <select name="doctor" id="doctor" class="form-select" aria-label="Default select example">
-
-
-                        <?php displayDoctors() ?> <!-- Affiche la liste des médecins -->
-
-                    </select>
-                    <a href="controller-secretary.php"><button type="button" class="btn btn-secondary rounded-5"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/u-turn-to-left.png" /></button></a>
-
-                    <button type="submit" class="btn btn-primary">Rechercher</button>
-                </form>
-                <div class="row">
-                    <div class="col-12">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nom</th>
-                                    <th scope="col">Prénom</th>
-                                    <th scope="col">Date du rendez-vous</th>
-                                    <th scope="col">Heure du rendez-vous</th>
-                                    <th scope="col">Téléphone</th>
-                                    <th scope="col">Numéro de Sécu</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php Appointments::displayAllAppointments(); ?> <!-- Affiche la liste des rendez-vous -->
-                            </tbody>
-                        </table>
+                        <!-- button return -->
+                        <a href="controller-secretary.php"><button type="button" class="btn btn-secondary rounded-5"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/u-turn-to-left.png" /></button></a>
                     </div>
                 </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">git
+            <div class="row appointments">
+
+                <div class="col-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prénom</th>
+                                <th scope="col">Date du rendez-vous</th>
+                                <th scope="col">Heure du rendez-vous</th>
+                                <th scope="col">Téléphone</th>
+                                <th scope="col">Numéro de Sécu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php Appointments::displayAllAppointments(); ?> <!-- Affiche la liste des rendez-vous -->
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
 
     </main>
