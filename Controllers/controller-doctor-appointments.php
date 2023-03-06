@@ -5,6 +5,7 @@ require_once('../helpers/Database.php');
 require_once('../Models/patient.php');
 require_once('../Models/appointment.php');
 
+
 class Appointments
 {
     public static function GetAppointmentList(): array // Récupère la liste des rendez-vous
@@ -25,7 +26,7 @@ class Appointments
         foreach ($appointmentList as $appointment) {
             $patient = new Patient(); // Création d'un objet patient
             $patient = $patient->ConsultPatientInfo($appointment['patient_id']); // Récupère les informations du patient par rapport à son id
-
+            $appointment['appointment_date'] = date('d/m/Y', strtotime($appointment['appointment_date'])); // Formate la date au format français
             echo '<tr>';
             echo '<td>' . $patient['patient_firstname'] . '</td>';
             echo '<td>' . $patient['patient_lastname'] . '</td>';
@@ -33,8 +34,15 @@ class Appointments
             echo '<td>' . $appointment['appointment_hour'] . '</td>';
             echo '<td>' . $patient['patient_phone'] . '</td>';
             echo '<td>' . $patient['patient_secu'] . '</td>';
-            echo '<td><a data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary">Modifier</a></td>';
-            echo '<td><a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '" class="btn btn-danger">Supprimer</a></td>';
+            if (isset($_GET['doctor'])) {
+                echo '
+                <td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
+                <a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '&doctor=' . $_GET['doctor'] . '><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button></a></td>';
+            } else {
+                echo '
+                <td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
+                <a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '"><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button></a></td>';
+            }
             echo '</tr>';
         }
     }
@@ -47,7 +55,7 @@ class Appointments
             $patient = $patient->ConsultPatientInfo($appointment['patient_id']); // Récupère les informations du patient par rapport à son id
             $doctor = new Doctor(); // Création d'un objet doctor
             $doctor = $doctor->getDoctorById($appointment['doctor_id']); // Récupère les informations du docteur par rapport à son id
-          
+
             echo '<div class="modal fade" id="modifyAppointment' . $appointment['appointment_id'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -145,11 +153,16 @@ function getDoctors() // Retourne la liste des médecins
 function displayDoctors() // Affiche la liste des médecins dans un select
 {
     $doctors = getDoctors();
-    echo '<option selected disabled>Choisir un médecin</option>';
+    
     foreach ($doctors as $doctor) {
-        echo '<option value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</option>';
+        if (isset($_GET['doctor']) && $_GET['doctor'] == $doctor['doctor_id']) {
+            echo '<li><a href="controller-doctor-appointments.php?doctor='.$doctor['doctor_id'].'" class="dropdown-item" value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
+        } else {
+            echo '<li><a href="controller-doctor-appointments.php?doctor='.$doctor['doctor_id'].'" class="dropdown-item" value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
+        }
     }
 }
+
 
 
 include('../Views/view-doctor-appointments.php');

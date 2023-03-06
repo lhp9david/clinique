@@ -5,14 +5,14 @@
     <header>
         <nav class="navbar fixed-top">
             <div class="container-fluid">
-                <h5 class="navbar-brand" href="#">Bonjour Mr Truc,
-                    <span class="h6 text-muted">vous êtes connecté en tant que secrétaire</span>
+                <h5 class="navbar-brand" href="#">Bonjour <?= $_SESSION["secretary_login"]?> ,
+                    <span class="h6 text-muted">vous êtes connecté(e) en tant que secrétaire</span>
                 </h5>
                 <a href="index.php?action=logout"><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/external-solid-style-bomsymbols-/30/FFFFFF/external-design-web-design-device-solid-style-set-2-solid-style-bomsymbols--13.png" /></button></a>
             </div>
         </nav>
     </header>
-    <div class="container text-center">
+    <div class="container text-center mb-5">
         <div class="row secretary">
             <div class="col m-1">
                 <div class="card container-fluid">

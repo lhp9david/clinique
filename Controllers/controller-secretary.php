@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $errors = [];
 // Initialisation du tableau d'erreurs
 
@@ -62,11 +64,31 @@ class NewAppointment
         }
 
 
-        // Si le tableau d'erreurs est vide, créer le rendez-vous
+        // Si le tableau d'erreurs est vide, on vérifie que le patient et le médecin existent, et que le patient n'a pas déjà un rendez-vous à cette date et à cette heure
         if (empty($errors_appointment)) {
-            $newAppointment = new NewAppointment();
-            $newAppointment::createAppointment($date, $hour, $patientId, $doctorId, $description);
+            // Vérification de l'existence du patient
+            $patient = new Patient();
+            $patient = $patient->ConsultPatientInfo($patientId);
+            if (empty($patient)) {
+                $errors_appointment['patient'] = "Le patient n'existe pas.";
+            } else {
+                // On vérifie si le patient n'a pas déjà un rendez-vous à cette date et à cette heure
+                $patient = new Patient();
+                $patient = $patient->checkIfPatientHasAppointment($patientId, $date, $hour);
+                if (!empty($patient)) {
+                    $errors_appointment['patient'] = "Le patient a déjà un rendez-vous à cette date et à cette heure.";
+                }
+            } // On vérifie si le médecin n'a pas déjà un rendez-vous à cette date et à cette heure
+            $doctor = new Doctor();
+            $doctor = $doctor->checkIfDoctorHasAppointment($doctorId, $date, $hour);
+            if (!empty($doctor)) {
+                $errors_appointment['appointment'] = "Le médecin a déjà un rendez-vous à cette date et à cette heure.";
+            } else if (empty($errors_appointment)) {
+                // Si le tableau d'erreurs est vide, on crée le rendez-vous
+                NewAppointment::createAppointment($date, $hour, $patientId, $doctorId, $description);
+            }
         }
+        var_dump($errors_appointment);
         return $errors_appointment;
     }
     public static function createAppointment($date, $hour, $patientId, $doctorId, $description)
