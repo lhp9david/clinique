@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // **********************************************************
 
-        if ($_FILES["patient_photo"]["error"] = 0) {
+        if ($_FILES["patient_photo"]["error"] == 0) {
             $filepath = $_FILES['patient_photo']['tmp_name'];
             $fileSize = filesize($filepath);
             $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
