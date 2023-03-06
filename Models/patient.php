@@ -32,7 +32,7 @@ class Patient
     }
 
     /**
-     * methode pour chercher un patient
+     * methode pour chercher un patient par son numéro de sécurité sociale
      *
      * @return array
      */
@@ -41,6 +41,20 @@ class Patient
         $query = $this->_pdo->prepare('SELECT * FROM cl_patients WHERE patient_secu = :patient_secu');
         $query->execute([
             ':patient_secu' => $SSNumber,
+        ]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * methode pour chercher un patient par sa date de naissance
+     *
+     * @return array
+     */
+    public function SearchPatientListByBdate($Bdate): array
+    {
+        $query = $this->_pdo->prepare('SELECT * FROM cl_patients WHERE patient_birthdate = :patient_birthdate');
+        $query->execute([
+            ':patient_birthdate' => $Bdate,
         ]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }

@@ -28,7 +28,13 @@ $errors_patient = [];
 if (($_SERVER['REQUEST_METHOD'] === 'GET') && (isset($_GET['SSNumber']))) {
     $patients = $obj_patient->SearchPatientListBySSNumber($_GET['SSNumber']);
     if (empty($patients)) {
-        $errors_patient['patient_secu'] = "Le numéro de sécurité sociale n'existe pas";
+        $errors_patient['patient_search'] = "Le numéro de sécurité sociale n'existe pas";
+    }
+} else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['Bdate'])) {
+    $Bdate_fr = $_GET['Bdate'];
+    $patients = $obj_patient->SearchPatientListByBdate($Bdate_fr);
+    if (empty($patients)) {
+        $errors_patient['patient_search'] = "Aucun patient n'est né à cette date";
     }
 } else {
     $patients = $obj_patient->DisplayPatientList();
@@ -108,12 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // **********************************************************
 
-
-        if (!isset($_FILES["patient_photo"]) || $_FILES["patient_photo"]["error"] != 0) {
-            $errors_patient['patient_upload'] = "Pas de photo à uploader.";
-        }
-
-        if ($_FILES["patient_photo"]["error"] = 0) {
+        if ($_FILES["patient_photo"]["error"] == 0) {
             $filepath = $_FILES['patient_photo']['tmp_name'];
             $fileSize = filesize($filepath);
             $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -147,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             unlink($filepath); // Delete the temp file
 
-            echo "Upload réussi :)";
+            echo "Upload réussi :)"; // PS : Message de debug personne ne le verra
         }
     }
 
@@ -161,8 +162,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $patient_mail = $_POST['patient_mail'];
         $patient_phone = $_POST['patient_phone'];
         $patient_adress = $_POST['patient_adress'];
+
         if (isset($_FILES["patient_photo"]) && $_FILES["patient_photo"]['error'] = 0) {
-            $patient_photo = $_FILES["patient_photo"]['error'];
+            $patient_photo = $_FILES["patient_photo"]['name'];
             // recupèrer l'ancienne photo du patient et la supprimer du dossier uploads
             if ($obj_patient->GetPhotoName($patient_photo) != ' ') {
                 unlink(__DIR__ . "/../uploads/" . $obj_patient->GetPhotoName($patient_photo));
@@ -173,9 +175,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $obj_patient->ModifyPatientInfo($patient_id, $patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
 
-        echo 'Le patient a bien été modifié';
+        echo 'Le patient a bien été modifié'; // PS : Message de debug personne ne le verra
+
+        header('Location: /controllers/controller-list-patient.php');
     }
 }
 
 
+
 require '../views/view-list-patient.php';
+?>

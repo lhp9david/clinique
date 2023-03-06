@@ -14,7 +14,7 @@ require_once '../config/env.php';
 require_once '../Models/doctor.php';
 require_once '../Models/patient.php';
 
-
+var_dump($_POST);
 
 class NewAppointment
 {
@@ -95,6 +95,7 @@ class NewAppointment
                 NewAppointment::createAppointment($date, $hour, $patientId, $doctorId, $description);
             }
         }
+        
         return $errors_appointment;
     }
     public static function createAppointment($date, $hour, $patientId, $doctorId, $description)
@@ -236,6 +237,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         }
     }
 
+    if (isset($_POST['doctor_photo'])) {
+        if (empty($_POST['doctor_photo'])) {
+            $errors['photo'] = 'champ obligatoire';
+        }
+    }
+    if(isset($_FILES['doctor_photo']) && $_FILES['doctor_photo']['error'] == 0) {
+        if($_FILES['doctor_photo']['size'] <= 1000000) {
+            $infosfichier = pathinfo($_FILES['doctor_photo']['name']);
+            $extension_upload = $infosfichier['extension'];
+            $extensions_autorisees = array('jpg', 'jpeg', 'png');
+            if (in_array($extension_upload, $extensions_autorisees)) {
+                move_uploaded_file($_FILES['doctor_photo']['tmp_name'], '../Uploads/' . basename($_FILES['doctor_photo']['name']));
+            }
+        }
+    }
+
+    if (isset($_POST['doctor_photo'])) {
+        if (empty($_POST['doctor_photo'])) {
+            $errors['photo'] = 'champ obligatoire';
+        }
+    }
+    if(isset($_FILES['doctor_photo']) && $_FILES['doctor_photo']['error'] == 0) {
+        if($_FILES['doctor_photo']['size'] <= 1000000) {
+            $infosfichier = pathinfo($_FILES['doctor_photo']['name']);
+            $extension_upload = $infosfichier['extension'];
+            $extensions_autorisees = array('jpg', 'jpeg', 'png');
+            if (in_array($extension_upload, $extensions_autorisees)) {
+                move_uploaded_file($_FILES['doctor_photo']['tmp_name'], '../Uploads/' . basename($_FILES['doctor_photo']['name']));
+            }
+        }
+    }
+
     if (empty($errors)) {
         $obj_doc = new Doctor();
 
@@ -245,7 +278,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         $obj_doc->doctor_phone_emergency = $_POST['doctor_phone_emergency'];
         $obj_doc->doctor_mail = $_POST['doctor_mail'];
         $obj_doc->doctor_adress = $_POST['doctor_adress'];
-        $obj_doc->doctor_photo = $_POST['doctor_photo'];
+        $obj_doc->doctor_photo = $_FILES['doctor_photo']['name'];
         $obj_doc->doctor_password = password_hash($_POST['doctor_password'], PASSWORD_DEFAULT);
         $obj_doc->specialty_id = $_POST['specialty_id'];
         $obj_doc->CreateDoctor();
@@ -260,8 +293,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
 
 $obj_patient = new Patient();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['patient_lastname'])) {
 
@@ -341,14 +373,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         }
     }
 
+
+    var_dump($_FILES["patient_photo"]["error"]);
+
     // **********************************************************
+    // UPLOAD DE LA PHOTO DU PATIENT
 
-
-    if (!isset($_FILES["patient_photo"]) || $_FILES["patient_photo"]["error"] != 0) {
-        $errors_patient['patient_upload'] = "Pas de photo à uploader.";
-    }
-
-    if ($_FILES["patient_photo"]["error"] = 0) {
+    if ($_FILES["patient_photo"]["error"] == 0) {
         $filepath = $_FILES['patient_photo']['tmp_name'];
         $fileSize = filesize($filepath);
         $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -381,26 +412,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
             $errors_patient['patient_upload'] = "La photo n'a pas pu être sauvegardée.";
         }
         unlink($filepath); // Delete the temp file
-
-
-
-        if (empty($errors_patient)) {
-
-            $patient_lastname = $_POST['patient_lastname'];
-            $patient_firstname = $_POST['patient_firstname'];
-            $patient_birthdate = $_POST['patient_birthdate'];
-            $patient_secu = $_POST['patient_secu'];
-            $patient_mail = $_POST['patient_mail'];
-            $patient_phone = $_POST['patient_phone'];
-            $patient_adress = $_POST['patient_adress'];
-            $patient_photo = $_FILES['patient_photo']['name'];
-
-            $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
-
-            $success['patient'] = "Nouveau patient ajouté avec succès";
-            $success['show'] = "alert alert-success";
-        }
+        
+        
+        echo "Upload réussi :)";
     }
+
+    if (empty($errors_patient)) {
+
+        $patient_lastname = $_POST['patient_lastname'];
+        $patient_firstname = $_POST['patient_firstname'];
+        $patient_birthdate = $_POST['patient_birthdate'];
+        $patient_secu = $_POST['patient_secu'];
+        $patient_mail = $_POST['patient_mail'];
+        $patient_phone = $_POST['patient_phone'];
+        $patient_adress = $_POST['patient_adress'];
+        if ($_FILES['patient_photo']['error'] == 0) {
+            $patient_photo = $_FILES['patient_photo']['name'];
+        }
+        else {
+            $patient_photo = '';
+        }
+
+        $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
+
+        echo 'Le patient a bien été ajouté !';
+    }
+
+    
+    
 }
 
 include '../Views/view-secretary.php';
+?>

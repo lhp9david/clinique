@@ -42,7 +42,7 @@
             <th scope="col">Mail</th>
             <th scope="col">Spécialité</th>
             <th scope="col">Adresse</th>
-            <th scope="col>"></th>
+            <th scope="col"></th>
 
           </tr>
         </thead>

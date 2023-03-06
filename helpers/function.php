@@ -12,7 +12,7 @@
             $uploadExt = strtolower(substr(strrchr($image['name'], '.'), 1));
             if (in_array($uploadExt, $validExt)) {
                 $uploadName = md5(uniqid(rand(), true));
-                $uploadDir = '../assets/img/';
+                $uploadDir = '../Assets/img/';
                 $uploadFile = $uploadDir . $uploadName . '.' . $uploadExt;
                 move_uploaded_file($image['tmp_name'], $uploadFile);
                 return $uploadFile;
