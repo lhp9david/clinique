@@ -20,9 +20,12 @@
 
     <form action="../Controllers/controller-list-patient.php" method="get" style="margin-top : 80px">
       <label for="DDNumber">Rechercher un patient par date de naissance :</label>
-      <input type="date" id="DDNumber" name="DDNumber" class="text-center" value="<?= date('Y-m-d') ?>">
+      <input type="date" id="DDNumber" name="Bdate" class="text-center" value="<?= date('Y-m-d') ?>">
       <input type="submit" value="Rechercher">
     </form>
+
+    <span> <?= $errors_patient['patient_search'] ?? '' ?> </span> 
+    <button onclick="window.location.href='./controller-list-patient.php'">Afficher tous les patients</button>
 
 
     <div class="row patient">
