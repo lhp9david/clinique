@@ -130,6 +130,7 @@ function displayDoctorList()
           </div>
         </div>
   </div>
+  </div>
 
   <div class="modal fade" id="modal' . $doctor['doctor_id'] . '' . $doctor['doctor_lastname'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -138,7 +139,7 @@ function displayDoctorList()
           <h6> Voulez-vous supprimer cet élément définitivement?</h6>
           <!-- bouton delete -->
           <div class="text-center">
-            <button type="button" class="btn btn-primary"><a href="controller-doctor.php?delete=' . $doctor['doctor_id'] . '">oui</a> </button>
+            <button type="button" class="btn btn-primary"><a href="controller-doctor.php?delete=' . $doctor['doctor_id'] . '"><span class="text-white">oui</span></a></button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">non</button>
           </div>
         </div>
