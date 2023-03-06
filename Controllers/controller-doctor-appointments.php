@@ -5,6 +5,7 @@ require_once('../helpers/Database.php');
 require_once('../Models/patient.php');
 require_once('../Models/appointment.php');
 
+
 class Appointments
 {
     public static function GetAppointmentList(): array // Récupère la liste des rendez-vous
@@ -25,7 +26,7 @@ class Appointments
         foreach ($appointmentList as $appointment) {
             $patient = new Patient(); // Création d'un objet patient
             $patient = $patient->ConsultPatientInfo($appointment['patient_id']); // Récupère les informations du patient par rapport à son id
-
+            $appointment['appointment_date'] = date('d/m/Y', strtotime($appointment['appointment_date'])); // Formate la date au format français
             echo '<tr>';
             echo '<td>' . $patient['patient_firstname'] . '</td>';
             echo '<td>' . $patient['patient_lastname'] . '</td>';
