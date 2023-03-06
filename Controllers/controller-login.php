@@ -81,7 +81,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Rediriger vers la page d'accueil
 
             header("location: controller-secretary.php");
-            echo "Bonjour $login.";
+           
         }
         
         else{

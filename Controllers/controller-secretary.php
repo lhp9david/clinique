@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $errors = [];
 // Initialisation du tableau d'erreurs
 
@@ -246,7 +248,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
 
 $obj_patient = new Patient();
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
 
@@ -332,62 +333,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
 
     if (!isset($_FILES["patient_photo"]) || $_FILES["patient_photo"]["error"] != 0) {
-        die("There is no file to upload.");
+        $errors_patient['patient_upload'] = "Pas de photo à uploader.";
     }
+    
+    if ($_FILES["patient_photo"]["error"] = 0) {
+        $filepath = $_FILES['patient_photo']['tmp_name'];
+        $fileSize = filesize($filepath);
+        $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
+        $filetype = finfo_file($fileinfo, $filepath);
 
-    $filepath = $_FILES['patient_photo']['tmp_name'];
-    $fileSize = filesize($filepath);
-    $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
-    $filetype = finfo_file($fileinfo, $filepath);
+        if ($fileSize === 0) {
+            $errors_patient['patient_upload'] = "La photo est vide.";
+        }
+        
+        if ($fileSize > 3145728) { // 3 MB (1 byte * 1024 * 1024 * 3 (for 3 MB))
+            $errors_patient['patient_upload'] = "La photo est trop volumineuse";
+        }
+        
+        $allowedTypes = [
+           'image/png' => 'png',
+           'image/jpeg' => 'jpg'
+        ];
+        
+        if (!in_array($filetype, array_keys($allowedTypes))) {
+            $errors_patient['patient_upload'] = "Extension non valide.";
+        }
+        
+        $filename = basename($filepath); // I'm using the original name here, but you can also change the name of the file here
+        $extension = $allowedTypes[$filetype];
+        $targetDirectory = __DIR__ . "/../uploads"; // __DIR__ is the directory of the current PHP file
+        
+        $newFilepath = $targetDirectory . "/" . $_FILES['patient_photo']['name'];
+        
+        if (!copy($filepath, $newFilepath)) { // Copy the file, returns false if failed
+            $errors_patient['patient_upload'] = "La photo n'a pas pu être sauvegardée.";
+        }
+        unlink($filepath); // Delete the temp file
+        
+        echo "Upload réussi :)";
+    
+        if (empty($errors_patient)) {
+    
+            $patient_lastname = $_POST['patient_lastname'];
+            $patient_firstname = $_POST['patient_firstname'];
+            $patient_birthdate = $_POST['patient_birthdate'];
+            $patient_secu = $_POST['patient_secu'];
+            $patient_mail = $_POST['patient_mail'];
+            $patient_phone = $_POST['patient_phone'];
+            $patient_adress = $_POST['patient_adress'];
+            $patient_photo = $_FILES['patient_photo']['name'];
+    
+            $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
+    
+            echo 'Le patient a bien été ajouté !';
+        }
 
-    if ($fileSize === 0) {
-        die("The file is empty.");
     }
-
-    if ($fileSize > 3145728) { // 3 MB (1 byte * 1024 * 1024 * 3 (for 3 MB))
-        die("The file is too large");
-    }
-
-    $allowedTypes = [
-        'image/png' => 'png',
-        'image/jpeg' => 'jpg'
-    ];
-
-    if (!in_array($filetype, array_keys($allowedTypes))) {
-        die("File not allowed.");
-    }
-
-    $filename = basename($filepath); // I'm using the original name here, but you can also change the name of the file here
-    $extension = $allowedTypes[$filetype];
-    $targetDirectory = __DIR__ . "/../uploads"; // __DIR__ is the directory of the current PHP file
-
-    $newFilepath = $targetDirectory . "/" . $_FILES['patient_photo']['name'];
-
-    if (!copy($filepath, $newFilepath)) { // Copy the file, returns false if failed
-        die("Can't move file.");
-    }
-    unlink($filepath); // Delete the temp file
-
-    echo "File uploaded successfully :)";
-
-    if (empty($errors_patient)) {
-
-        $patient_lastname = $_POST['patient_lastname'];
-        $patient_firstname = $_POST['patient_firstname'];
-        $patient_birthdate = $_POST['patient_birthdate'];
-        $patient_secu = $_POST['patient_secu'];
-        $patient_mail = $_POST['patient_mail'];
-        $patient_phone = $_POST['patient_phone'];
-        $patient_adress = $_POST['patient_adress'];
-        $patient_photo = $_FILES['patient_photo']['name'];
-
-        $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
-
-        echo 'Le patient a bien été ajouté !';
-    }
+    
 }
-
-
-
 
 include '../Views/view-secretary.php';

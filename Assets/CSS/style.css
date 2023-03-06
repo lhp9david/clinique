@@ -8,7 +8,7 @@ body {
     overflow-x: hidden;
 }
 
-.row.login, .row.secretary, .row.patient, .row.doctor {
+.row.login, .row.secretary, .row.patient, .row.doctor, .row.appointments {
     height: 100vh;
     align-items: center;
 }
@@ -54,4 +54,6 @@ footer {
     bottom: 0;
     z-index: 1020;
     width: 100%;
+
+    background-color: rgba(255, 255, 255, 0.684);
 }
