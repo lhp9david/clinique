@@ -15,9 +15,12 @@
                 <form action="" method="GET">
                     <select name="doctor" id="doctor" class="form-select" aria-label="Default select example">
 
+
                         <?php displayDoctors() ?> <!-- Affiche la liste des médecins -->
 
                     </select>
+                    <a href="controller-secretary.php"><button type="button" class="btn btn-secondary rounded-5"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/u-turn-to-left.png" /></button></a>
+
                     <button type="submit" class="btn btn-primary">Rechercher</button>
                 </form>
                 <div class="row">
