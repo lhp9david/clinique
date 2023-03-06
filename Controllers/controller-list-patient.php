@@ -28,7 +28,13 @@ $errors_patient = [];
 if (($_SERVER['REQUEST_METHOD'] === 'GET') && (isset($_GET['SSNumber']))) {
     $patients = $obj_patient->SearchPatientListBySSNumber($_GET['SSNumber']);
     if (empty($patients)) {
-        $errors_patient['patient_secu'] = "Le numéro de sécurité sociale n'existe pas";
+        $errors_patient['patient_search'] = "Le numéro de sécurité sociale n'existe pas";
+    }
+} else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['Bdate'])) {
+    $Bdate_fr = date('d/m/Y', strtotime($_GET['Bdate']));
+    $patients = $obj_patient->SearchPatientListByBdate($Bdate_fr);
+    if (empty($patients)) {
+        $errors_patient['patient_search'] = "Aucun patient n'est né à cette date";
     }
 } else {
     $patients = $obj_patient->DisplayPatientList();
@@ -142,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             unlink($filepath); // Delete the temp file
 
-            echo "Upload réussi :)";
+            echo "Upload réussi :)"; // PS : Message de debug personne ne le verra
         }
     }
 
@@ -169,7 +175,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $obj_patient->ModifyPatientInfo($patient_id, $patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
 
-        echo 'Le patient a bien été modifié';
+        echo 'Le patient a bien été modifié'; // PS : Message de debug personne ne le verra
+
         header('Location: /controllers/controller-list-patient.php');
     }
 }
