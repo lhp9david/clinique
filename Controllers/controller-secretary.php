@@ -86,7 +86,7 @@ class NewAppointment
                 NewAppointment::createAppointment($date, $hour, $patientId, $doctorId, $description);
             }
         }
-        var_dump($errors_appointment);
+        
         return $errors_appointment;
     }
     public static function createAppointment($date, $hour, $patientId, $doctorId, $description)
