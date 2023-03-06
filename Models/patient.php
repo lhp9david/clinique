@@ -16,7 +16,7 @@ class Patient
      *
      * @return void
      */
-    public function addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo) : void
+    public function addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo): void
     {
         $query = $this->_pdo->prepare('INSERT INTO cl_patients (patient_lastname, patient_firstname, patient_birthdate, patient_secu, patient_mail, patient_phone, patient_adress, patient_photo) VALUE (:patient_lastname, :patient_firstname, :patient_birthdate, :patient_secu, :patient_mail, :patient_phone, :patient_adress, :patient_photo)');
         $query->execute([
@@ -78,7 +78,7 @@ class Patient
      *
      * @return void
      */
-    public function ModifyPatientInfo($patient_id,$patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo) : void
+    public function ModifyPatientInfo($patient_id, $patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo): void
     {
         $query = $this->_pdo->prepare('UPDATE cl_patients SET patient_id = :patient_id, patient_lastname = :patient_lastname, patient_firstname = :patient_firstname, patient_birthdate = :patient_birthdate, patient_secu = :patient_secu, patient_mail = :patient_mail, patient_phone = :patient_phone, patient_adress = :patient_adress, patient_photo = :patient_photo WHERE patient_id = :patient_id');
         $query->execute([
@@ -143,27 +143,39 @@ class Patient
      * @return bool
      */
 
-        public function checkPhone($patient_phone) : bool
-        {
-            $query = $this->_pdo->prepare('SELECT * FROM cl_patients WHERE patient_phone = :patient_phone');
-            $query->execute([
-                ':patient_phone' => $patient_phone,
-            ]);
-            return $query->fetch(PDO::FETCH_COLUMN);
-        }
+    public function checkPhone($patient_phone): bool
+    {
+        $query = $this->_pdo->prepare('SELECT * FROM cl_patients WHERE patient_phone = :patient_phone');
+        $query->execute([
+            ':patient_phone' => $patient_phone,
+        ]);
+        return $query->fetch(PDO::FETCH_COLUMN);
+    }
 
-     /**
+    /**
      * methode pour récuperer une photo
      *
      * @return array
      */
 
-     public function GetPhotoName($patient_photo) : array
-     {
-         $query = $this->_pdo->prepare('SELECT * FROM cl_patients WHERE patient_photo = :patient_photo');
-         $query->execute([
-             ':patient_photo' => $patient_photo,
-         ]);
-         return $query->fetch(PDO::FETCH_COLUMN);
-     }
+    public function GetPhotoName($patient_photo): array
+    {
+        $query = $this->_pdo->prepare('SELECT * FROM cl_patients WHERE patient_photo = :patient_photo');
+        $query->execute([
+            ':patient_photo' => $patient_photo,
+        ]);
+        return $query->fetch(PDO::FETCH_COLUMN);
+    }
+
+    public function checkIfPatientHasAppointment($patient_id, $appointment_date, $appointment_hour)
+    {
+        $query = $this->_pdo->prepare('SELECT * FROM cl_appointments WHERE patient_id = :patient_id AND appointment_date = :appointment_date AND appointment_hour = :appointment_hour');
+        $query->execute([
+            ':patient_id' => $patient_id,
+            ':appointment_date' => $appointment_date,
+            ':appointment_hour' => $appointment_hour
+        ]);
+        $patient = $query->fetch(PDO::FETCH_ASSOC);
+        return $patient;
+    }
 }

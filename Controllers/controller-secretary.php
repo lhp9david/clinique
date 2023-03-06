@@ -64,11 +64,31 @@ class NewAppointment
         }
 
 
-        // Si le tableau d'erreurs est vide, créer le rendez-vous
+        // Si le tableau d'erreurs est vide, on vérifie que le patient et le médecin existent, et que le patient n'a pas déjà un rendez-vous à cette date et à cette heure
         if (empty($errors_appointment)) {
-            $newAppointment = new NewAppointment();
-            $newAppointment::createAppointment($date, $hour, $patientId, $doctorId, $description);
+            // Vérification de l'existence du patient
+            $patient = new Patient();
+            $patient = $patient->ConsultPatientInfo($patientId);
+            if (empty($patient)) {
+                $errors_appointment['patient'] = "Le patient n'existe pas.";
+            } else {
+                // On vérifie si le patient n'a pas déjà un rendez-vous à cette date et à cette heure
+                $patient = new Patient();
+                $patient = $patient->checkIfPatientHasAppointment($patientId, $date, $hour);
+                if (!empty($patient)) {
+                    $errors_appointment['patient'] = "Le patient a déjà un rendez-vous à cette date et à cette heure.";
+                }
+            } // On vérifie si le médecin n'a pas déjà un rendez-vous à cette date et à cette heure
+            $doctor = new Doctor();
+            $doctor = $doctor->checkIfDoctorHasAppointment($doctorId, $date, $hour);
+            if (!empty($doctor)) {
+                $errors_appointment['appointment'] = "Le médecin a déjà un rendez-vous à cette date et à cette heure.";
+            } else if (empty($errors_appointment)) {
+                // Si le tableau d'erreurs est vide, on crée le rendez-vous
+                NewAppointment::createAppointment($date, $hour, $patientId, $doctorId, $description);
+            }
         }
+        var_dump($errors_appointment);
         return $errors_appointment;
     }
     public static function createAppointment($date, $hour, $patientId, $doctorId, $description)
@@ -300,40 +320,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
     if (!isset($_FILES["patient_photo"]) || $_FILES["patient_photo"]["error"] != 0) {
         die("There is no file to upload.");
     }
-    
+
     $filepath = $_FILES['patient_photo']['tmp_name'];
     $fileSize = filesize($filepath);
     $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
     $filetype = finfo_file($fileinfo, $filepath);
-    
+
     if ($fileSize === 0) {
         die("The file is empty.");
     }
-    
+
     if ($fileSize > 3145728) { // 3 MB (1 byte * 1024 * 1024 * 3 (for 3 MB))
         die("The file is too large");
     }
-    
+
     $allowedTypes = [
-       'image/png' => 'png',
-       'image/jpeg' => 'jpg'
+        'image/png' => 'png',
+        'image/jpeg' => 'jpg'
     ];
-    
+
     if (!in_array($filetype, array_keys($allowedTypes))) {
         die("File not allowed.");
     }
-    
+
     $filename = basename($filepath); // I'm using the original name here, but you can also change the name of the file here
     $extension = $allowedTypes[$filetype];
     $targetDirectory = __DIR__ . "/../uploads"; // __DIR__ is the directory of the current PHP file
-    
+
     $newFilepath = $targetDirectory . "/" . $_FILES['patient_photo']['name'];
-    
+
     if (!copy($filepath, $newFilepath)) { // Copy the file, returns false if failed
         die("Can't move file.");
     }
     unlink($filepath); // Delete the temp file
-    
+
     echo "File uploaded successfully :)";
 
     if (empty($errors_patient)) {
@@ -351,7 +371,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
         echo 'Le patient a bien été ajouté !';
     }
-    
 }
 
 
