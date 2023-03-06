@@ -125,4 +125,5 @@ class Appointment
         $appointmentList = $query->fetchAll(PDO::FETCH_ASSOC);
         return $appointmentList;
     }
+
 }
