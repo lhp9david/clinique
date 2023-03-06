@@ -120,7 +120,7 @@ class Doctor
     // méthode pour modifier les informations d'un docteur
     public function updateDoctor($doctor_id, $doctor_lastname, $doctor_firstname, $doctor_phone, $doctor_phone_emergency, $doctor_mail, $doctor_adress, $doctor_photo, $specialty_id)
     {
-        $query = $this->_pdo->prepare('UPDATE cl_doctors SET doctor_lastname = :doctor_lastname, doctor_firstname = :doctor_firstname, doctor_phone = :doctor_phone, doctor_phone_emergency = :doctor_phone_emergency, doctor_mail = :doctor_mail, doctor_adress = :doctor_adress, doctor_photo = :doctor_photo, specialty_id = :specialty_id WHERE doctor_id = '.$doctor_id.'');
+        $query = $this->_pdo->prepare('UPDATE cl_doctors SET doctor_lastname = :doctor_lastname, doctor_firstname = :doctor_firstname, doctor_phone = :doctor_phone, doctor_phone_emergency = :doctor_phone_emergency, doctor_mail = :doctor_mail, doctor_adress = :doctor_adress, doctor_photo = :doctor_photo, specialty_id = :specialty_id WHERE doctor_id = ' . $doctor_id . '');
         $query->execute([
             ':doctor_lastname' => $doctor_lastname,
             ':doctor_firstname' => $doctor_firstname,
@@ -149,6 +149,20 @@ class Doctor
         $query = $this->_pdo->prepare('SELECT doctor_lastname FROM cl_doctors');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+
+    public function checkIfDoctorHasAppointment($doctor_id, $appointment_date, $appointment_hour)
+    {
+        $query = $this->_pdo->prepare('SELECT * FROM cl_appointments WHERE doctor_id = :doctor_id AND appointment_date = :appointment_date AND appointment_hour = :appointment_hour');
+        $query->execute([
+            ':doctor_id' => $doctor_id,
+            ':appointment_date' => $appointment_date,
+            ':appointment_hour' => $appointment_hour
+        ]);
+        $doctor = $query->fetch(PDO::FETCH_ASSOC);
+        return $doctor;
     }
 }
 
@@ -205,11 +219,4 @@ class Secretary
             return false;
         }
     }
-
-
-
-
-
-
-
 }

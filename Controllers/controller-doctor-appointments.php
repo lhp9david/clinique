@@ -34,7 +34,11 @@ class Appointments
             echo '<td>' . $patient['patient_phone'] . '</td>';
             echo '<td>' . $patient['patient_secu'] . '</td>';
             echo '<td><a data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary">Modifier</a></td>';
-            echo '<td><a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '" class="btn btn-danger">Supprimer</a></td>';
+            if (isset($_GET['doctor'])) {
+                echo '<td><a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '&doctor=' . $_GET['doctor'] . '" class="btn btn-danger">Supprimer</a></td>';
+            } else {
+                echo '<td><a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '" class="btn btn-danger">Supprimer</a></td>';
+            }
             echo '</tr>';
         }
     }
@@ -47,7 +51,7 @@ class Appointments
             $patient = $patient->ConsultPatientInfo($appointment['patient_id']); // Récupère les informations du patient par rapport à son id
             $doctor = new Doctor(); // Création d'un objet doctor
             $doctor = $doctor->getDoctorById($appointment['doctor_id']); // Récupère les informations du docteur par rapport à son id
-          
+
             echo '<div class="modal fade" id="modifyAppointment' . $appointment['appointment_id'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -147,7 +151,11 @@ function displayDoctors() // Affiche la liste des médecins dans un select
     $doctors = getDoctors();
     echo '<option selected disabled>Choisir un médecin</option>';
     foreach ($doctors as $doctor) {
-        echo '<option value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</option>';
+        if (isset($_GET['doctor']) && $_GET['doctor'] == $doctor['doctor_id']) {
+            echo '<option value="' . $doctor['doctor_id'] . '" selected>' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</option>';
+        } else {
+            echo '<option value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</option>';
+        }
     }
 }
 
