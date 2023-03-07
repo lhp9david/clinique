@@ -51,7 +51,7 @@
             <tr>
               <td><?= $patient['patient_lastname'] ?></td>
               <td><?= $patient['patient_firstname'] ?></td>
-              <td><?= $patient['patient_birthdate'] ?></td>
+              <td><?= date('d/m/Y', strtotime($patient['patient_birthdate'])) ?></td>
               <td><?= $patient['patient_secu'] ?></td>
               <td><?= $patient['patient_mail'] ?></td>
               <td><?= $patient['patient_phone'] ?></td>
