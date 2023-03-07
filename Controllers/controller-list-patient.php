@@ -31,7 +31,7 @@ if (($_SERVER['REQUEST_METHOD'] === 'GET') && (isset($_GET['SSNumber']))) {
         $errors_patient['patient_search'] = "Le numéro de sécurité sociale n'existe pas";
     }
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['Bdate'])) {
-    $Bdate_fr = date('d/m/Y', strtotime($_GET['Bdate']));
+    $Bdate_fr = $_GET['Bdate'];
     $patients = $obj_patient->SearchPatientListByBdate($Bdate_fr);
     if (empty($patients)) {
         $errors_patient['patient_search'] = "Aucun patient n'est né à cette date";

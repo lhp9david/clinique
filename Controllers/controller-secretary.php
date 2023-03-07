@@ -1,10 +1,13 @@
 <?php
 session_start();
 
-$errors = [];
-// Initialisation du tableau d'erreurs
 
+// Initialisation du tableau d'erreurs
+$errors = [];
 $errors_patient = [];
+$success = [];
+
+// require
 require_once '../helpers/Database.php';
 require_once '../Models/appointment.php';
 require_once '../config/env.php';
@@ -19,16 +22,19 @@ class NewAppointment
     public static function verifyPost()
     {
         $errors_appointment = [];
+        // Initialiser les variables d'erreur
+        $wrong = '<i class="bi bi-x-circle-fill text-danger"></i>';
+        $missing = '<i class="bi bi-exclamation-circle-fill text-danger"></i>';
 
         // Vérification de la date
         if (!empty($_POST['date'])) {
             $date = $_POST['date'];
             // Vérification du format de la date
             if (!preg_match("/^\d{4}-\d{2}-\d{2}$/", $date)) {
-                $errors_appointment[] = "Le format de la date n'est pas valide.";
+                $errors_appointment['date'] = $wrong;
             }
         } else {
-            $errors_appointment['date'] = "La date est manquante.";
+            $errors_appointment['date'] = $missing;
         }
 
         // Vérification de l'heure
@@ -36,31 +42,31 @@ class NewAppointment
             $hour = $_POST['hour'];
             // Vérification du format de l'heure
             if (!preg_match("/^\d{2}:\d{2}$/", $hour)) {
-                $errors_appointment[] = "Le format de l'heure n'est pas valide.";
+                $errors_appointment['hour'] = $wrong;
             }
         } else {
-            $errors_appointment['hour'] = "L'heure est manquante.";
+            $errors_appointment['hour'] = $missing;
         }
 
         // Vérification de l'identifiant du patient
         if (!empty($_POST['patient'])) {
             $patientId = $_POST['patient'];
         } else {
-            $errors_appointment['patient'] = "L'identifiant du patient est manquant.";
+            $errors_appointment['patient'] = $missing;
         }
 
         // Vérification de l'identifiant du médecin
         if (!empty($_POST['doctor'])) {
             $doctorId = $_POST['doctor'];
         } else {
-            $errors_appointment['doctor'] = "L'identifiant du médecin est manquant.";
+            $errors_appointment['doctor'] = $missing;
         }
 
         // Vérification de la description
         if (!empty($_POST['description'])) {
             $description = $_POST['description'];
         } else {
-            $errors_appointment['description'] = "La description est manquante.";
+            $errors_appointment['description'] = $missing;
         }
 
 
@@ -70,19 +76,20 @@ class NewAppointment
             $patient = new Patient();
             $patient = $patient->ConsultPatientInfo($patientId);
             if (empty($patient)) {
-                $errors_appointment['patient'] = "Le patient n'existe pas.";
+                $errors_appointment['patient'] = $missing;
             } else {
                 // On vérifie si le patient n'a pas déjà un rendez-vous à cette date et à cette heure
                 $patient = new Patient();
                 $patient = $patient->checkIfPatientHasAppointment($patientId, $date, $hour);
                 if (!empty($patient)) {
-                    $errors_appointment['patient'] = "Le patient a déjà un rendez-vous à cette date et à cette heure.";
+                    $errors_appointment['show'] = "alert alert-danger";
+                    $errors_appointment['error'] = "Le patient a déjà un rendez-vous à cette date et à cette heure.";
                 }
             } // On vérifie si le médecin n'a pas déjà un rendez-vous à cette date et à cette heure
             $doctor = new Doctor();
             $doctor = $doctor->checkIfDoctorHasAppointment($doctorId, $date, $hour);
             if (!empty($doctor)) {
-                $errors_appointment['appointment'] = "Le médecin a déjà un rendez-vous à cette date et à cette heure.";
+                $errors_appointment['error'] = "Le médecin a déjà un rendez-vous à cette date et à cette heure.";
             } else if (empty($errors_appointment)) {
                 // Si le tableau d'erreurs est vide, on crée le rendez-vous
                 NewAppointment::createAppointment($date, $hour, $patientId, $doctorId, $description);
@@ -100,6 +107,10 @@ class NewAppointment
 // Utilisation de la fonction verifyPost() pour vérifier si le formulaire a été soumis
 if (isset($_POST['newAppointmentSubmit'])) {
     $errors_appointment = NewAppointment::verifyPost();
+    if (empty($errors_appointment)) {
+        $success['appointment'] = "Nouvelle consultation créée avec succès";
+        $success['show'] = "alert alert-success";
+    }
 }
 
 function getDoctors() // Retourne la liste des médecins
@@ -136,61 +147,74 @@ function displayPatients() // Affiche la liste des patients dans un select, avec
 
 
 // CONTROLLER POUR LES NOUVEAUX DOCTEURS
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
-
+    // Initialiser les variables d'erreur
+    $wrong = '<i class="bi bi-x-circle-fill text-danger"></i>';
+    $missing = '<i class="bi bi-exclamation-circle-fill text-danger"></i>';
+    
     if (isset($_POST['doctor_lastname'])) {
         if (empty($_POST['doctor_lastname'])) {
-            $errors['lastname'] = 'champ obligatoire';
+            $errors['name'] = $missing;
         } else if (!preg_match('/^[a-zA-ZÀ-ÿ-]+$/', $_POST['doctor_lastname'])) {
-            $errors['lastname'] = 'Veuillez respecter le format';
+            $errors['name'] = $wrong;
+            $errors['show'] = 'alert alert-danger';
+            $errors['message'] = 'Veuillez respecter le format';
         }
     }
 
     if (isset($_POST['doctor_firstname'])) {
         if (empty($_POST['doctor_firstname'])) {
-            $errors['firstname'] = 'champ obligatoire';
+            $errors['name'] = $missing;
         } else if (!preg_match('/^[a-zA-ZÀ-ÿ-]+$/', $_POST['doctor_firstname'])) {
-            $errors['firstname'] = 'Veuillez respecter le format';
+            $errors['name'] = $wrong;
+            $errors['show'] = 'alert alert-danger';
+            $errors['message'] = 'Veuillez respecter le format';
         }
     }
 
     if (isset($_POST['doctor_mail'])) {
 
         if (empty($_POST['doctor_mail'])) {
-            $errors['mail'] = 'champ obligatoire';
+            $errors['mail'] = $missing;
         } else if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $_POST['doctor_mail'])) {
-            $errors['mail'] = 'Veuillez respecter le format';
+            $errors['mail'] = $wrong;
+            $errors['show'] = 'alert alert-danger';
+            $errors['message'] = 'Veuillez respecter le format';
         }
     }
 
     if (isset($_POST['doctor_phone'])) {
         if (empty($_POST['doctor_phone'])) {
-            $errors['phone'] = 'champ obligatoire';
+            $errors['phone'] = $missing;
         } else if (!preg_match('/^0[1-9]([-. ]?[0-9]{2}){4}$/', $_POST['doctor_phone'])) {
-            $errors['phone'] = 'Veuillez respecter le format';
+            $errors['phone'] = $wrong;
+            $errors['show'] = 'alert alert-danger';
+            $errors['message'] = 'Veuillez respecter le format';
         }
     }
 
     if (isset($_POST['doctor_phone_emergency'])) {
         if (empty($_POST['doctor_phone_emergency'])) {
-            $errors['phone_emergency'] = 'champ obligatoire';
+            $errors['phone_emergency'] = $missing;
         } else if (!preg_match('/^0[1-9]([-. ]?[0-9]{2}){4}$/', $_POST['doctor_phone_emergency'])) {
-            $errors['phone_emergency'] = 'Veuillez respecter le format';
+            $errors['phone_emergency'] = $wrong;
+            $errors['show'] = 'alert alert-danger';
+            $errors['message'] = 'Veuillez respecter le format';
         }
     }
     if (isset($_POST['doctor_adress'])) {
         if (empty($_POST['doctor_adress'])) {
-            $errors['adress'] = 'champ obligatoire';
+            $errors['adress'] = $missing;
         }
     }
 
     if (isset($_POST['doctor_password'])) {
         if (empty($_POST['doctor_password'])) {
-            $errors['password'] = 'champ obligatoire';
+            $errors['password'] = $missing;
         } else if (!preg_match('/^.{8,}$/', $_POST['doctor_password'])) {
-            $errors['password'] = '8 caractères minimum';
+            $errors['password'] = $wrong;
+            $errors['show'] = 'alert alert-danger';
+            $errors['message'] = '8 caractères minimum';
         } else {
             $password = $_POST['doctor_password'];
         }
@@ -199,15 +223,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
     if (isset($_POST['confirmPass'])) {
 
         if (empty($_POST['confirmPass'])) {
-            $errors['confirmPass'] = 'champ obligatoire';
+            $errors['confirmPass'] = $missing;
         } else if (!preg_match('/^.{8,}$/', $_POST['confirmPass'])) {
-            $errors['password'] = 'Veuillez respecter le format';
+            $errors['confirmPass'] = $wrong;
+            $errors['show'] = 'alert alert-danger';
+            $errors['message'] = 'Le mot de passe n\'est pas identique';
         }
     }
 
     if (isset($_POST['specialty_id'])) {
         if (empty($_POST['specialty_id'])) {
-            $errors['specialty'] = 'champ obligatoire';
+            $errors['specialty'] = $missing;
+        }
+    }
+
+    if (isset($_POST['doctor_photo'])) {
+        if (empty($_POST['doctor_photo'])) {
+            $errors['photo'] = 'champ obligatoire';
+        }
+    }
+    if(isset($_FILES['doctor_photo']) && $_FILES['doctor_photo']['error'] == 0) {
+        if($_FILES['doctor_photo']['size'] <= 1000000) {
+            $infosfichier = pathinfo($_FILES['doctor_photo']['name']);
+            $extension_upload = $infosfichier['extension'];
+            $extensions_autorisees = array('jpg', 'jpeg', 'png');
+            if (in_array($extension_upload, $extensions_autorisees)) {
+                move_uploaded_file($_FILES['doctor_photo']['tmp_name'], '../Uploads/' . basename($_FILES['doctor_photo']['name']));
+            }
         }
     }
 
@@ -240,6 +282,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         $obj_doc->doctor_password = password_hash($_POST['doctor_password'], PASSWORD_DEFAULT);
         $obj_doc->specialty_id = $_POST['specialty_id'];
         $obj_doc->CreateDoctor();
+
+        $success['show'] = "alert alert-success";
+        $success['doctor'] = 'Nouveau docteur crée avec succès';
     }
 }
 
@@ -343,26 +388,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($fileSize === 0) {
             $errors_patient['patient_upload'] = "La photo est vide.";
         }
-        
+
         if ($fileSize > 3145728) { // 3 MB (1 byte * 1024 * 1024 * 3 (for 3 MB))
             $errors_patient['patient_upload'] = "La photo est trop volumineuse";
         }
-        
+
         $allowedTypes = [
-           'image/png' => 'png',
-           'image/jpeg' => 'jpg'
+            'image/png' => 'png',
+            'image/jpeg' => 'jpg'
         ];
-        
+
         if (!in_array($filetype, array_keys($allowedTypes))) {
             $errors_patient['patient_upload'] = "Extension non valide.";
         }
-        
+
         $filename = basename($filepath); // I'm using the original name here, but you can also change the name of the file here
         $extension = $allowedTypes[$filetype];
         $targetDirectory = __DIR__ . "/../uploads"; // __DIR__ is the directory of the current PHP file
-        
+
         $newFilepath = $targetDirectory . "/" . $_FILES['patient_photo']['name'];
-        
+
         if (!copy($filepath, $newFilepath)) { // Copy the file, returns false if failed
             $errors_patient['patient_upload'] = "La photo n'a pas pu être sauvegardée.";
         }

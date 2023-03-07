@@ -57,7 +57,7 @@
               <td><?= $patient['patient_phone'] ?></td>
               <td><?= $patient['patient_adress'] ?></td>
               <td>
-                <button type="button" id="btnEdit" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $patient['patient_id'] ?>"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
+                <button type="button" id="btnAddApptmt" class="btn btn-info rounded-5"><img src=<img src="https://img.icons8.com/ios-filled/20/FFFFFF/plus-2-math.png" /></button>
                 <button type="button" id="btnEdit" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $patient['patient_id'] ?>"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
                 <button type="button" id="btnDelete" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modalDelete<?= $patient['patient_id'] ?>"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png"></button>
               </td>
@@ -70,6 +70,7 @@
 
     <?php
     foreach ($patients as $patient) { ?>
+
     <div class="modal" tabindex="-1" id="modalEdit<?= $patient['patient_id'] ?>" aria-labelledby="modalEditLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -86,7 +87,7 @@
               </div>
               <div class="input-group">
                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-calendar"></i></i></div>
-                <input type="text" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= $patient['patient_birthdate'] ?>'>
+                <input type="text" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= date('d/m/Y', strtotime($patient['patient_birthdate'])) ?>'>
               </div>
               <div class="input-group">
                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></i></div>
