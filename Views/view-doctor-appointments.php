@@ -23,6 +23,7 @@
                             <form action="" method="GET">
                                 <?php displayDoctors() ?> <!-- Affiche la liste des médecins -->
                             </form>
+                            <li><a href="controller-doctor-appointments.php" class="dropdown-item"><button type="button" class="btn btn-outline-success rounded-5">Liste complète</button> </a></li>
                         </ul>
 
                         <!-- button return -->

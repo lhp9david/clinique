@@ -55,11 +55,10 @@ function displayDoctorList()
     // filtrage par nom
     $doc = new Doctor();
     $doctorList = $doc->getDoctorById($_GET['doctor_select']);
-    $return = '<button class="btn btn-secondary rounded-5"><a href="controller-doctor.php"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/u-turn-to-left.png" /></a></button>';
   } else {
     $doc = new Doctor();
     $doctorList = $doc->displayDoctorList();
-    $return = '';
+    
   }
   foreach ($doctorList as $doctor) {
     echo '
@@ -72,8 +71,7 @@ function displayDoctorList()
         <td>' . $doctor['specialty_id'] . '</td>
         <td>' . $doctor['doctor_adress'] . '</td>
         <td> <button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modal' . $doctor['doctor_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
-        <button type="button" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modal' . $doctor['doctor_id'] . $doctor['doctor_lastname'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button>
-        ' . $return . '</td>
+        <button type="button" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modal' . $doctor['doctor_id'] . $doctor['doctor_lastname'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button></td>
         </tr>';
     echo '
         <div class="modal fade" id="modal' . $doctor['doctor_id'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

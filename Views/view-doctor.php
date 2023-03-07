@@ -22,8 +22,9 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <!-- Filtrage par nom -->
               <?php foreach ($doctorList as $doctor) { ?>
-                <li><a class="dropdown-item" href="controller-doctor.php?doctor_select=<?= $doctor['doctor_id'] ?>"><?= $doctor['doctor_lastname'] ?></a></li>
+                <li><a class="dropdown-item" href="controller-doctor.php?doctor_select=<?= $doctor['doctor_id'] ?>">Dr. <?= $doctor['doctor_lastname'] ?></a></li>
               <?php } ?>
+              <li><a href="controller-doctor.php" class="dropdown-item"><button type="button" class="btn btn-outline-success rounded-5">Liste complète</button> </a></li>
             </ul>
 
             <!-- button return -->
