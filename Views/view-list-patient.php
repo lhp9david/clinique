@@ -106,7 +106,7 @@
                 <input type="text" name="patient_adress" id="patient_adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= $patient['patient_adress'] ?>'>
               </div>
               <input type="hidden" name="patient_id" value='<?= $patient['patient_id'] ?>'>
-              <input type="hidden" name="patient_photo" value='<?= $patient['patient_mail'] ?>'>
+              <input type="hidden" name="patient_mail" value='<?= $patient['patient_mail'] ?>'>
               <div class="input-group">
                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
                 <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
