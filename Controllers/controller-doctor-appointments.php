@@ -34,8 +34,8 @@ class Appointments
             echo '<td>' . $appointment['appointment_hour'] . '</td>';
             echo '<td>' . $patient['patient_phone'] . '</td>';
             echo '<td>' . $patient['patient_secu'] . '</td>';
-            echo '<td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button><td>';
-            echo '<td><button type="button" id="btnDelete" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modalDelete' . $appointment['appointment_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png"></button><td>';
+            echo '<td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>';
+            echo '<button type="button" id="btnDelete" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modalDelete' . $appointment['appointment_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png"></button><td>';
             echo '</tr>';
 
             // Modal de suppression
