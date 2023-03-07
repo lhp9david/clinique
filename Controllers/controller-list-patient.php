@@ -15,7 +15,6 @@ $obj_patient = new Patient();
 
 $obj_patient->DisplayPatientList();
 
-
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (isset($_GET['delete'])) {
         $obj_patient->DeletePatient($_GET['delete']);
@@ -114,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // **********************************************************
 
-        if ($_FILES["patient_photo"]["error"] == 0) {
+        if (isset($_FILES['patient_photo']) && $_FILES["patient_photo"]["error"] == 0) {
             $filepath = $_FILES['patient_photo']['tmp_name'];
             $fileSize = filesize($filepath);
             $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
