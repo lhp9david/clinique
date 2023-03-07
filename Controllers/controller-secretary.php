@@ -11,7 +11,7 @@ require_once '../config/env.php';
 require_once '../Models/doctor.php';
 require_once '../Models/patient.php';
 
-var_dump($_POST);
+
 
 class NewAppointment
 {
@@ -329,7 +329,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-    var_dump($_FILES["patient_photo"]["error"]);
+  
 
     // **********************************************************
     // UPLOAD DE LA PHOTO DU PATIENT
