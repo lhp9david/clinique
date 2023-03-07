@@ -14,7 +14,7 @@ require_once '../config/env.php';
 require_once '../Models/doctor.php';
 require_once '../Models/patient.php';
 
-var_dump($_POST);
+
 
 class NewAppointment
 {
@@ -293,7 +293,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
 
 $obj_patient = new Patient();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
     if (isset($_POST['patient_lastname'])) {
 
@@ -372,9 +372,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors_patient['patient_adress'] = "L'adresse du patient doit contenir uniquement des lettres et des chiffres";
         }
     }
-
-
-    var_dump($_FILES["patient_photo"]["error"]);
 
     // **********************************************************
     // UPLOAD DE LA PHOTO DU PATIENT
