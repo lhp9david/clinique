@@ -6,9 +6,14 @@
     <header>
         <nav class="navbar fixed-top">
             <div class="container-fluid">
-                <h5 class="navbar-brand" href="#">Bonjour <?= $_SESSION["secretary_login"] ?> ,
-                    <span class="h6 text-muted">vous êtes connecté(e) en tant que secrétaire</span>
-                </h5>
+                <a class="navbar-brand" href="#">
+                    <img src="https://img.icons8.com/color/38/null/hospital-2.png" />
+                    <span class="text-muted fw-bold h5">
+                        Bonjour <?= $_SESSION["secretary_login"] ?>
+                        <span class="text-muted h6">vous êtes connecté(e) en tant que secrétaire</span>
+                    </span>
+                </a>
+                
                 <!-- fake toats message error / success -->
                 <div class="<?= $success['show'] ?? '' ?> rounded-5 m-0 p-2">
                     <?= $success['patient'] ?? '' ?>

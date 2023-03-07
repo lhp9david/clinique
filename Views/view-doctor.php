@@ -7,10 +7,15 @@
   <header>
     <nav class="navbar fixed-top">
       <div class="container-fluid">
-        <h3 class="navbar-brand" href="#">Liste des médecins</h3>
+      <a class="navbar-brand" href="#">
+          <img src="https://img.icons8.com/color/38/null/hospital-2.png"/>
+          <span class="text-muted fw-bold">
+            Liste des médecins
+          </span> 
+        </a>
         <div>
           <!-- button select -->
-          <div class="dropdown">
+          <div class="dropstart">
             <button class="btn btn-primary dropdown-toggle rounded-5" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="bi bi-search"></i>
             </button>
