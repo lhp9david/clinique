@@ -6,13 +6,20 @@
     <header>
         <nav class="navbar fixed-top">
             <div class="container-fluid">
-                <h5 class="navbar-brand" href="#">Bonjour <?= $_SESSION["secretary_login"]?> ,
+                <h5 class="navbar-brand" href="#">Bonjour <?= $_SESSION["secretary_login"] ?> ,
                     <span class="h6 text-muted">vous êtes connecté(e) en tant que secrétaire</span>
                 </h5>
+                <!-- fake toats message error / success -->
+                <div class="<?= $success['show'] ?? '' ?> rounded-5 m-0 p-2">
+                    <?= $success['patient'] ?? '' ?>
+                    <?= $success['doctor'] ?? '' ?>
+                    <?= $success['appointment'] ?? '' ?>
+                </div>
                 <a href="index.php?action=logout"><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/external-solid-style-bomsymbols-/30/FFFFFF/external-design-web-design-device-solid-style-set-2-solid-style-bomsymbols--13.png" /></button></a>
             </div>
         </nav>
     </header>
+
     <div class="container text-center mb-5">
         <div class="row secretary">
             <div class="col m-1">
@@ -93,7 +100,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-outline-primary">Ajouter</button>
+                        <button type="submit" id="add" name="newPatient" class="btn btn-outline-primary">Ajouter</button>
                     </div>
                 </form>
             </div>
@@ -111,36 +118,36 @@
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-person-fill"></i></div>
-                            <input type="text" name="doctor_lastname" id="name" class="form-control" placeholder="Nom" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors['lastname'] ?? '' ?></span>
-                            <input type="text" name="doctor_firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors['firstname'] ?? '' ?></span>
+                            <div class="input-group-text" id="btnGroupAddon"><?= $errors['name'] ?? '<i class="bi bi-person-fill"></i>' ?></div>
+                            <input type="text" name="doctor_lastname" id="name" class="form-control" placeholder="Nom" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <input type="text" name="doctor_firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></div>
-                            <input type="phone" name="doctor_phone" id="phone" class="form-control" placeholder="Téléphone" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors['phone'] ?? '' ?></span>
+                            <div class="input-group-text" id="btnGroupAddon"><?= $errors['phone'] ?? '<i class="bi bi-telephone-fill"></i>' ?></div>
+                            <input type="phone" name="doctor_phone" id="phone" class="form-control" placeholder="Téléphone" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-inbound-fill"></i></div>
-                            <input type="phone" name="doctor_phone_emergency" id="emergency_phone" class="form-control" placeholder="Téléphone d'urgence" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors['phone_emergency'] ?? '' ?></span>
+                            <div class="input-group-text" id="btnGroupAddon"><?= $errors['phone_emergency'] ?? '<i class="bi bi-telephone-inbound-fill"></i>' ?></div>
+                            <input type="phone" name="doctor_phone_emergency" id="emergency_phone" class="form-control" placeholder="Téléphone d'urgence" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-envelope-fill"></i></div>
-                            <input type="mail" name="doctor_mail" id="mail" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors['mail'] ?? '' ?></span>
+                            <div class="input-group-text" id="btnGroupAddon"><?= $errors['mail'] ?? '<i class="bi bi-envelope-fill"></i>' ?></div>
+                            <input type="mail" name="doctor_mail" id="mail" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-geo-alt-fill"></i></div>
-                            <input type="text" name="doctor_adress" id="adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors['adress'] ?? '' ?></span>
+                            <div class="input-group-text" id="btnGroupAddon"><?= $errors['adress'] ?? '<i class="bi bi-geo-alt-fill"></i>' ?></div>
+                            <input type="text" name="doctor_adress" id="adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-shield-lock"></i></div>
-                            <input type="password" name="doctor_password" id="password" class="form-control" placeholder="Mot de passe" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors['password'] ?? '' ?></span>
+                            <div class="input-group-text" id="btnGroupAddon"><?= $errors['password'] ?? '<i class="bi bi-shield-lock"></i>' ?></div>
+                            <input type="password" name="doctor_password" id="password" class="form-control" placeholder="Mot de passe" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-shield-lock-fill"></i></div>
+                            <div class="input-group-text" id="btnGroupAddon"><?= $errors['confirmPass'] ?? '<i class="bi bi-shield-lock-fill"></i>' ?></div>
                             <input type="password" name="confirmPass" id="confirmed_password" class="form-control" placeholder="Mot de passe" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-activity"></i></div>
+                            <div class="input-group-text" id="btnGroupAddon"><?= $errors['specialty'] ?? '<i class="bi bi-activity"></i>' ?></div>
                             <select name="specialty_id" id="specialty">
                                 <option value="" disabled selected>Specialité</option>
                                 <option value="1">Ophtalmologue</option>
@@ -152,10 +159,13 @@
                                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
                                 <input type="file" name="doctor_photo" id="photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
                             </div>
+                            <div class="<?= $errors['show'] ?? '' ?> rounded-5 mt-2 p-2">
+                                <?= $errors['message'] ?? '' ?>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-                            <button name="submitNewDoctor" type="submit" class="btn btn-outline-primary">Ajouter</button>
+                            <button name="submitNewDoctor" id="add" type="submit" class="btn btn-outline-primary">Ajouter</button>
                         </div>
                 </form>
             </div>
@@ -164,7 +174,6 @@
     </div>
 
     <!-- Modal Ajout consultation -->
-
     <div class="modal fade <?= !empty($errors_appointment) ? 'openModal' : '' ?>" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -176,41 +185,46 @@
                     <div class="modal-body">
                         <!-- select patient (check BDD) -->
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-person-rolodex"></i></div><span><?= $errors['empty'] ?? '' ?></span>
+                            <div class="input-group-text" id="btnGroupAddon"><?= $errors_appointment['patient'] ?? '<i class="bi bi-person-rolodex"></i>' ?></div>
                             <select name="patient" id="patient">
                                 <?php displayPatients() ?>
                             </select>
                         </div>
                         <!-- select doctor (check BDD) -->
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-heart-pulse"></i></div>
+                            <div class="input-group-text" id="btnGroupAddon"><?= $errors_appointment['doctor'] ?? '<i class="bi bi-heart-pulse"></i>' ?></div>
                             <select name="doctor" id="doctor">
                                 <?php displayDoctors() ?>
                             </select>
                         </div>
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-calendar-event-fill"></i></div>
+                            <div class="input-group-text" id="btnGroupAddon"><?= $errors_appointment['date'] ?? '<i class="bi bi-calendar-event-fill"></i>' ?></div>
                             <input value='<?= $_POST['date'] ?? '' ?>' type="date" name="date" id="date" class="form-control" placeholder="Numéro de sécurité social" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-clock-fill"></i></div>
+                            <div class="input-group-text" id="btnGroupAddon"><?= $errors_appointment['hour'] ?? '<i class="bi bi-clock-fill"></i>' ?></div>
                             <input value='<?= $_POST['hour'] ?? '' ?>' type="time" name="hour" id="hour" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-chat-square-dots-fill"></i></div>
+                            <div class="input-group-text" id="btnGroupAddon"><?= $errors_appointment['description'] ?? '<i class="bi bi-chat-square-dots-fill"></i>' ?></div>
                             <input value='<?= $_POST['description'] ?? '' ?>' type="textarea" name="description" id="description" class="form-control" placeholder="Description" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
-
+                        <div class="<?= $errors_appointment['show'] ?? '' ?> rounded-5 mt-2 p-2">
+                            <?= $errors_appointment['error'] ?? '' ?>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" name="newAppointmentSubmit" class="btn btn-outline-primary">Ajouter</button>
+                        <button type="submit" id="add" name="newAppointmentSubmit" class="btn btn-outline-primary">Ajouter</button>
                     </div>
                 </form>
 
             </div>
         </div>
     </div>
+
+
+
 
     <?php include '../includes/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
