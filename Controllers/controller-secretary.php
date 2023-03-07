@@ -95,7 +95,7 @@ class NewAppointment
                 NewAppointment::createAppointment($date, $hour, $patientId, $doctorId, $description);
             }
         }
-        
+
         return $errors_appointment;
     }
     public static function createAppointment($date, $hour, $patientId, $doctorId, $description)
@@ -151,14 +151,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
     // Initialiser les variables d'erreur
     $wrong = '<i class="bi bi-x-circle-fill text-danger"></i>';
     $missing = '<i class="bi bi-exclamation-circle-fill text-danger"></i>';
-    
+
     if (isset($_POST['doctor_lastname'])) {
         if (empty($_POST['doctor_lastname'])) {
             $errors['name'] = $missing;
         } else if (!preg_match('/^[a-zA-ZÀ-ÿ-]+$/', $_POST['doctor_lastname'])) {
             $errors['name'] = $wrong;
             $errors['show'] = 'alert alert-danger';
-            $errors['message'] = 'Veuillez respecter le format';
+            $errors['message'] = 'Format incorrect';
         }
     }
 
@@ -168,7 +168,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         } else if (!preg_match('/^[a-zA-ZÀ-ÿ-]+$/', $_POST['doctor_firstname'])) {
             $errors['name'] = $wrong;
             $errors['show'] = 'alert alert-danger';
-            $errors['message'] = 'Veuillez respecter le format';
+            $errors['message'] = 'Format incorrect';
         }
     }
 
@@ -179,7 +179,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         } else if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $_POST['doctor_mail'])) {
             $errors['mail'] = $wrong;
             $errors['show'] = 'alert alert-danger';
-            $errors['message'] = 'Veuillez respecter le format';
+            $errors['message'] = 'Format incorrect';
         }
     }
 
@@ -189,7 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         } else if (!preg_match('/^0[1-9]([-. ]?[0-9]{2}){4}$/', $_POST['doctor_phone'])) {
             $errors['phone'] = $wrong;
             $errors['show'] = 'alert alert-danger';
-            $errors['message'] = 'Veuillez respecter le format';
+            $errors['message'] = 'Format incorrect';
         }
     }
 
@@ -199,7 +199,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         } else if (!preg_match('/^0[1-9]([-. ]?[0-9]{2}){4}$/', $_POST['doctor_phone_emergency'])) {
             $errors['phone_emergency'] = $wrong;
             $errors['show'] = 'alert alert-danger';
-            $errors['message'] = 'Veuillez respecter le format';
+            $errors['message'] = 'Format incorrect';
         }
     }
     if (isset($_POST['doctor_adress'])) {
@@ -214,7 +214,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         } else if (!preg_match('/^.{8,}$/', $_POST['doctor_password'])) {
             $errors['password'] = $wrong;
             $errors['show'] = 'alert alert-danger';
-            $errors['message'] = '8 caractères minimum';
+            $errors['message'] = 'le mot de passe doit faire 8 caractères minimum';
         } else {
             $password = $_POST['doctor_password'];
         }
@@ -239,27 +239,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
 
     if (isset($_POST['doctor_photo'])) {
         if (empty($_POST['doctor_photo'])) {
-            $errors['photo'] = 'champ obligatoire';
+            $errors['photo'] = $missing;
         }
     }
-    if(isset($_FILES['doctor_photo']) && $_FILES['doctor_photo']['error'] == 0) {
-        if($_FILES['doctor_photo']['size'] <= 1000000) {
-            $infosfichier = pathinfo($_FILES['doctor_photo']['name']);
-            $extension_upload = $infosfichier['extension'];
-            $extensions_autorisees = array('jpg', 'jpeg', 'png');
-            if (in_array($extension_upload, $extensions_autorisees)) {
-                move_uploaded_file($_FILES['doctor_photo']['tmp_name'], '../Uploads/' . basename($_FILES['doctor_photo']['name']));
-            }
-        }
-    }
-
-    if (isset($_POST['doctor_photo'])) {
-        if (empty($_POST['doctor_photo'])) {
-            $errors['photo'] = 'champ obligatoire';
-        }
-    }
-    if(isset($_FILES['doctor_photo']) && $_FILES['doctor_photo']['error'] == 0) {
-        if($_FILES['doctor_photo']['size'] <= 1000000) {
+    if (isset($_FILES['doctor_photo']) && $_FILES['doctor_photo']['error'] == 0) {
+        if ($_FILES['doctor_photo']['size'] <= 1000000) {
             $infosfichier = pathinfo($_FILES['doctor_photo']['name']);
             $extension_upload = $infosfichier['extension'];
             $extensions_autorisees = array('jpg', 'jpeg', 'png');
@@ -295,39 +279,66 @@ $obj_patient = new Patient();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
+    // Initialiser les variables d'erreur
+    $wrong = '<i class="bi bi-x-circle-fill text-danger"></i>';
+    $missing = '<i class="bi bi-exclamation-circle-fill text-danger"></i>';
+
     if (isset($_POST['patient_lastname'])) {
 
         if (empty($_POST['patient_lastname'])) {
 
-            $errors_patient['patient_lastname'] = "Le nom du patient est obligatoire";
+            $errors_patient['patient_name'] = $missing;
         } else if (!preg_match('/^[a-zA-ZéèàêâùïüëöçÉÈÀÊÂÛÏÜËÖÇ -]+$/', $_POST['patient_lastname'])) {
 
-            $errors_patient['patient_lastname'] = "Le nom du patient doit contenir uniquement des lettres";
+            $errors_patient['patient_name'] = $wrong;
+            $errors_patient['show'] = 'alert alert-danger';
+            $errors_patient['message'] = "Format incorrect";
         }
 
         if (empty($_POST['patient_firstname'])) {
 
-            $errors_patient['patient_firstname'] = "Le prénom du patient est obligatoire";
+            $errors_patient['patient_name'] = $missing;
         } else if (!preg_match('/^[a-zA-ZéèàêâùïüëöçÉÈÀÊÂÛÏÜËÖÇ -]+$/', $_POST['patient_firstname'])) {
 
-            $errors_patient['patient_firstname'] = "Le prénom du patient doit contenir uniquement des lettres";
+            $errors_patient['patient_name'] = $wrong; 
+            $errors_patient['show'] = 'alert alert-danger';
+            $errors_patient['message']= "Format incorrect";
         }
+    }
+
+    if (isset ($_POST['patient_birthdate'])) {
+            
+            if (empty($_POST['patient_birthdate'])) {
+    
+                $errors_patient['patient_birthdate'] = $missing;
+            } else if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $_POST['patient_birthdate'])) {
+    
+                $errors_patient['patient_birthdate'] = $wrong;
+                $errors_patient['show'] = 'alert alert-danger';
+                $errors_patient['message'] = "Format incorrect";
+            }
     }
 
     if (isset($_POST['patient_phone'])) {
 
         if (empty($_POST['patient_phone'])) {
 
-            $errors_patient['patient_phone'] = "Le numéro de téléphone du patient est obligatoire";
+            $errors_patient['patient_phone'] = $missing;
         } else if (strlen($_POST['patient_phone']) != 10) {
 
-            $errors_patient['patient_phone'] = "Le numéro de téléphone du patient doit contenir 10 caractères";
+            $errors_patient['patient_phone'] = $wrong;
+            $errors_patient['show'] = 'alert alert-danger';
+            $errors_patient ['message'] = "Format incorrect";
         } else if (!preg_match('/^[0-9]{10}$/', $_POST['patient_phone'])) {
 
-            $errors_patient['patient_phone'] = "Le numéro de téléphone du patient doit contenir uniquement des chiffres";
+            $errors_patient['patient_phone'] = $wrong;
+            $errors_patient['show'] = 'alert alert-danger';
+            $errors_patient['message'] = "Format incorrect";
         } else if ($obj_patient->checkPhone($_POST['patient_phone']) === true) {
 
-            $errors_patient['patient_phone'] = "Le numéro de téléphone du patient est déjà utilisé";
+            $errors_patient['patient_phone'] = $wrong;
+            $errors_patient['show'] = 'alert alert-danger';
+            $errors_patient['message_phone'] = "Le numéro de téléphone du patient est déjà utilisé";
         }
     }
 
@@ -335,16 +346,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
         if (empty($_POST['patient_secu'])) {
 
-            $errors_patient['patient_secu'] = "Le numéro de sécurité sociale du patient est obligatoire";
+            $errors_patient['patient_secu'] = $missing;
         } else if (strlen($_POST['patient_secu']) != 15) {
 
-            $errors_patient['patient_secu'] = "Le numéro de sécurité sociale du patient doit contenir 15 caractères";
+            $errors_patient['patient_secu'] = $wrong;
+            $errors_patient['show'] = 'alert alert-danger';
+            $errors_patient['message'] = "Format incorrect";
         } else if (!preg_match('/^[0-9]{15}$/', $_POST['patient_secu'])) {
 
-            $errors_patient['patient_secu'] = "Le numéro de sécurité sociale du patient doit contenir uniquement des chiffres";
+            $errors_patient['patient_secu'] = $wrong;
+            $errors_patient['show'] = 'alert alert-danger';
+            $errors_patient['message'] = "Format incorrect";
         } else if ($obj_patient->checkSecu($_POST['patient_secu']) === true) {
 
-            $errors_patient['patient_secu'] = "Le numéro de sécurité sociale du patient est déjà utilisé";
+            $errors_patient['patient_secu'] = $wrong;
+            $errors_patient['show'] = 'alert alert-danger';
+            $errors_patient['message_secu'] = "Le numéro de sécurité sociale du patient est déjà utilisé";
         }
     }
 
@@ -352,13 +369,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
         if (empty($_POST['patient_mail'])) {
 
-            $errors_patient['patient_mail'] = "L'adresse mail du patient est obligatoire";
+            $errors_patient['patient_mail'] = $missing;
         } else if (!filter_var($_POST['patient_mail'], FILTER_VALIDATE_EMAIL)) {
 
-            $errors_patient['patient_mail'] = "L'adresse mail du patient est incorrecte";
+            $errors_patient['patient_mail'] = $wrong;
+            $errors_patient['show'] = 'alert alert-danger';
+            $errors_patient['message'] = "Format incorrect";
         } else if ($obj_patient->checkMail($_POST['patient_mail']) === true) {
 
-            $errors_patient['patient_mail'] = "L'adresse mail du patient est déjà utilisée";
+            $errors_patient['patient_mail'] = $wrong;
+            $errors_patient['show'] = 'alert alert-danger';
+            $errors_patient['message_mail'] = "L'adresse mail du patient est déjà utilisée";
         }
     }
 
@@ -366,10 +387,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
         if (empty($_POST['patient_adress'])) {
 
-            $errors_patient['patient_adress'] = "L'adresse du patient est obligatoire";
+            $errors_patient['patient_adress'] = $missing;
         } else if (!preg_match('/^[a-zA-Z0-9éèàêâùïüëöçÉÈÀÊÂÛÏÜËÖÇ -,]+$/', $_POST['patient_adress'])) {
 
-            $errors_patient['patient_adress'] = "L'adresse du patient doit contenir uniquement des lettres et des chiffres";
+            $errors_patient['patient_adress'] = $wrong;
+            $errors_patient['show'] = 'alert alert-danger';
+            $errors_patient['message'] = "Format incorrect";
         }
     }
 
@@ -379,68 +402,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
     // **********************************************************
     // UPLOAD DE LA PHOTO DU PATIENT
 
-    if ($_FILES["patient_photo"]["error"] == 0) {
-        $filepath = $_FILES['patient_photo']['tmp_name'];
-        $fileSize = filesize($filepath);
-        $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
-        $filetype = finfo_file($fileinfo, $filepath);
+    // if ($_FILES["patient_photo"]["error"] == 0) {
+    //     $filepath = $_FILES['patient_photo']['tmp_name'];
+    //     $fileSize = filesize($filepath);
+    //     $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
+    //     $filetype = finfo_file($fileinfo, $filepath);
 
-        if ($fileSize === 0) {
-            $errors_patient['patient_upload'] = "La photo est vide.";
-        }
+    //     if ($fileSize === 0) {
+    //         $errors_patient['patient_upload'] = "La photo est vide.";
+    //     }
 
-        if ($fileSize > 3145728) { // 3 MB (1 byte * 1024 * 1024 * 3 (for 3 MB))
-            $errors_patient['patient_upload'] = "La photo est trop volumineuse";
-        }
+    //     if ($fileSize > 3145728) { // 3 MB (1 byte * 1024 * 1024 * 3 (for 3 MB))
+    //         $errors_patient['patient_upload'] = "La photo est trop volumineuse";
+    //     }
 
-        $allowedTypes = [
-            'image/png' => 'png',
-            'image/jpeg' => 'jpg'
-        ];
+    //     $allowedTypes = [
+    //         'image/png' => 'png',
+    //         'image/jpeg' => 'jpg'
+    //     ];
 
-        if (!in_array($filetype, array_keys($allowedTypes))) {
-            $errors_patient['patient_upload'] = "Extension non valide.";
-        }
+    //     if (!in_array($filetype, array_keys($allowedTypes))) {
+    //         $errors_patient['patient_upload'] = "Extension non valide.";
+    //     }
 
-        $filename = basename($filepath); // I'm using the original name here, but you can also change the name of the file here
-        $extension = $allowedTypes[$filetype];
-        $targetDirectory = __DIR__ . "/../uploads"; // __DIR__ is the directory of the current PHP file
+    //     $filename = basename($filepath); // I'm using the original name here, but you can also change the name of the file here
+    //     $extension = $allowedTypes[$filetype];
+    //     $targetDirectory = __DIR__ . "/../uploads"; // __DIR__ is the directory of the current PHP file
 
-        $newFilepath = $targetDirectory . "/" . $_FILES['patient_photo']['name'];
+    //     $newFilepath = $targetDirectory . "/" . $_FILES['patient_photo']['name'];
 
-        if (!copy($filepath, $newFilepath)) { // Copy the file, returns false if failed
-            $errors_patient['patient_upload'] = "La photo n'a pas pu être sauvegardée.";
-        }
-        unlink($filepath); // Delete the temp file
-        
-        
-        echo "Upload réussi :)";
-    }
+    //     if (!copy($filepath, $newFilepath)) { // Copy the file, returns false if failed
+    //         $errors_patient['patient_upload'] = "La photo n'a pas pu être sauvegardée.";
+    //     }
+    //     unlink($filepath); // Delete the temp file
 
-    if (empty($errors_patient)) {
 
-        $patient_lastname = $_POST['patient_lastname'];
-        $patient_firstname = $_POST['patient_firstname'];
-        $patient_birthdate = $_POST['patient_birthdate'];
-        $patient_secu = $_POST['patient_secu'];
-        $patient_mail = $_POST['patient_mail'];
-        $patient_phone = $_POST['patient_phone'];
-        $patient_adress = $_POST['patient_adress'];
-        if ($_FILES['patient_photo']['error'] == 0) {
-            $patient_photo = $_FILES['patient_photo']['name'];
-        }
-        else {
-            $patient_photo = '';
-        }
+    //     echo "Upload réussi :)";
+    // }
 
-        $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
+    // if (empty($errors_patient)) {
 
-        echo 'Le patient a bien été ajouté !';
-    }
+    //     $patient_lastname = $_POST['patient_lastname'];
+    //     $patient_firstname = $_POST['patient_firstname'];
+    //     $patient_birthdate = $_POST['patient_birthdate'];
+    //     $patient_secu = $_POST['patient_secu'];
+    //     $patient_mail = $_POST['patient_mail'];
+    //     $patient_phone = $_POST['patient_phone'];
+    //     $patient_adress = $_POST['patient_adress'];
+    //     if ($_FILES['patient_photo']['error'] == 0) {
+    //         $patient_photo = $_FILES['patient_photo']['name'];
+    //     }
+    //     else {
+    //         $patient_photo = '';
+    //     }
 
-    
-    
+    //     $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
+
+    //     echo 'Le patient a bien été ajouté !';
+    // }
+
+
+
 }
 
 include '../Views/view-secretary.php';
-?>

@@ -11,14 +11,17 @@ body {
 .row.login, .row.secretary, .row.patient, .row.doctor, .row.appointments {
     height: 100vh;
     align-items: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
 .card, nav.navbar {
     background-color: rgba(255, 255, 255, 0.684);
 }
 
-.card.container-fluid {
+div.col div.card.container-fluid {
     height: 220px;
+    width: 400px;
     border-radius: 20px;
     border-color: white;
 }
@@ -37,6 +40,7 @@ select {
 }
 
 table.table {
+
     background-color: rgba(255, 255, 255, 0.684);
     border-radius: 20px;
 
@@ -56,4 +60,9 @@ footer {
     width: 100%;
 
     background-color: rgba(255, 255, 255, 0.684);
+}
+
+.dropdown-item.search {
+    width : 300px !important;
+
 }

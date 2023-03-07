@@ -34,8 +34,8 @@ class Appointments
             echo '<td>' . $appointment['appointment_hour'] . '</td>';
             echo '<td>' . $patient['patient_phone'] . '</td>';
             echo '<td>' . $patient['patient_secu'] . '</td>';
-            echo '<td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button><td>';
-            echo '<td><button type="button" id="btnDelete" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modalDelete' . $appointment['appointment_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png"></button><td>';
+            echo '<td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>';
+            echo '<button type="button" id="btnDelete" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modalDelete' . $appointment['appointment_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png"></button><td>';
             echo '</tr>';
 
             // Modal de suppression
@@ -170,9 +170,9 @@ function displayDoctors() // Affiche la liste des médecins dans un select
 
     foreach ($doctors as $doctor) {
         if (isset($_GET['doctor']) && $_GET['doctor'] == $doctor['doctor_id']) {
-            echo '<li><a href="controller-doctor-appointments.php?doctor=' . $doctor['doctor_id'] . '" class="dropdown-item" value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
+            echo '<li><a href="controller-doctor-appointments.php?doctor=' . $doctor['doctor_id'] . '" class="dropdown-item" value="' . $doctor['doctor_id'] . '">Dr. ' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
         } else {
-            echo '<li><a href="controller-doctor-appointments.php?doctor=' . $doctor['doctor_id'] . '" class="dropdown-item" value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
+            echo '<li><a href="controller-doctor-appointments.php?doctor=' . $doctor['doctor_id'] . '" class="dropdown-item" value="' . $doctor['doctor_id'] . '">Dr. ' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
         }
     }
 }

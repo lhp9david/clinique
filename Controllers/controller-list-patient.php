@@ -28,12 +28,14 @@ if (($_SERVER['REQUEST_METHOD'] === 'GET') && (isset($_GET['SSNumber']))) {
     $patients = $obj_patient->SearchPatientListBySSNumber($_GET['SSNumber']);
     if (empty($patients)) {
         $errors_patient['patient_search'] = "Le numéro de sécurité sociale n'existe pas";
+        $errors_patient['show'] = "alert alert-danger";
     }
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['Bdate'])) {
     $Bdate_fr = $_GET['Bdate'];
     $patients = $obj_patient->SearchPatientListByBdate($Bdate_fr);
     if (empty($patients)) {
         $errors_patient['patient_search'] = "Aucun patient n'est né à cette date";
+        $errors_patient['show'] = "alert alert-danger";
     }
 } else {
     $patients = $obj_patient->DisplayPatientList();
@@ -42,37 +44,61 @@ if (($_SERVER['REQUEST_METHOD'] === 'GET') && (isset($_GET['SSNumber']))) {
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+     // Initialiser les variables d'erreur
+     $wrong = '<i class="bi bi-x-circle-fill text-danger"></i>';
+     $missing = '<i class="bi bi-exclamation-circle-fill text-danger"></i>';
 
     if (isset($_POST['patient_lastname'])) {
 
         if (empty($_POST['patient_lastname'])) {
 
-            $errors_patient['patient_lastname'] = "Le nom du patient est obligatoire";
+            $errors_patient['patient_name'] = $missing;
         } else if (!preg_match('/^[a-zA-ZéèàêâùïüëöçÉÈÀÊÂÛÏÜËÖÇ -]+$/', $_POST['patient_lastname'])) {
 
-            $errors_patient['patient_lastname'] = "Le nom du patient doit contenir uniquement des lettres";
+            $errors_patient['patient_name'] = $wrong;
+            $errors_patient['show'] = "alert alert-danger";
+            $errors_patient['message'] = "Format incorrect";
         }
 
         if (empty($_POST['patient_firstname'])) {
 
-            $errors_patient['patient_firstname'] = "Le prénom du patient est obligatoire";
+            $errors_patient['patient_name'] = $missing;
         } else if (!preg_match('/^[a-zA-ZéèàêâùïüëöçÉÈÀÊÂÛÏÜËÖÇ -]+$/', $_POST['patient_firstname'])) {
 
-            $errors_patient['patient_firstname'] = "Le prénom du patient doit contenir uniquement des lettres";
+            $errors_patient['patient_name'] = $wrong;
+            $errors_patient['show'] = "alert alert-danger";
+            $errors_patient['message'] = "Format incorrect";
         }
     }
+
+    if (isset ($_POST['patient_birthdate'])) {
+            
+        if (empty($_POST['patient_birthdate'])) {
+
+            $errors_patient['patient_birthdate'] = $missing;
+        } else if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $_POST['patient_birthdate'])) {
+
+            $errors_patient['patient_birthdate'] = $wrong;
+            $errors_patient['show'] = 'alert alert-danger';
+            $errors_patient['message'] = "Format incorrect";
+        }
+}
 
     if (isset($_POST['patient_phone'])) {
 
         if (empty($_POST['patient_phone'])) {
 
-            $errors_patient['patient_phone'] = "Le numéro de téléphone du patient est obligatoire";
+            $errors_patient['patient_phone'] = $missing;
         } else if (strlen($_POST['patient_phone']) != 10) {
 
-            $errors_patient['patient_phone'] = "Le numéro de téléphone du patient doit contenir 10 caractères";
+            $errors_patient['patient_phone'] = $wrong;
+            $errors_patient['show'] = "alert alert-danger";
+            $errors_patient['message'] = "Format incorrect";
         } else if (!preg_match('/^[0-9]{10}$/', $_POST['patient_phone'])) {
 
-            $errors_patient['patient_phone'] = "Le numéro de téléphone du patient doit contenir uniquement des chiffres";
+            $errors_patient['patient_phone'] = $wrong;
+            $errors_patient['show'] = "alert alert-danger";
+            $errors_patient['message'] = "Le numéro de téléphone du patient doit contenir uniquement des chiffres";
         }
     }
 
@@ -80,13 +106,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (empty($_POST['patient_secu'])) {
 
-            $errors_patient['patient_secu'] = "Le numéro de sécurité sociale du patient est obligatoire";
+            $errors_patient['patient_secu'] = $missing;
         } else if (strlen($_POST['patient_secu']) != 15) {
 
-            $errors_patient['patient_secu'] = "Le numéro de sécurité sociale du patient doit contenir 15 caractères";
+            $errors_patient['patient_secu'] = $wrong;
+            $errors_patient['show'] = "alert alert-danger";
+            $errors_patient['message'] = "Format incorrect";
         } else if (!preg_match('/^[0-9]{15}$/', $_POST['patient_secu'])) {
 
-            $errors_patient['patient_secu'] = "Le numéro de sécurité sociale du patient doit contenir uniquement des chiffres";
+            $errors_patient['patient_secu'] = $wrong; 
+            $errors_patient['show'] = "alert alert-danger";  
+            $errors_patient['message'] = "Format incorrect";
         }
     }
 
@@ -94,20 +124,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (empty($_POST['patient_mail'])) {
 
-            $errors_patient['patient_mail'] = "L'adresse mail du patient est obligatoire";
+            $errors_patient['patient_mail'] = $missing;
         } else if (!filter_var($_POST['patient_mail'], FILTER_VALIDATE_EMAIL)) {
 
-            $errors_patient['patient_mail'] = "L'adresse mail du patient est incorrecte";
+            $errors_patient['patient_mail'] = $wrong;
+            $errors_patient['show'] = "alert alert-danger";
+            $errors_patient['message'] = "Format incorrect";
         }
 
         if (isset($_POST['patient_adress'])) {
 
             if (empty($_POST['patient_adress'])) {
 
-                $errors_patient['patient_adress'] = "L'adresse du patient est obligatoire";
+                $errors_patient['patient_adress'] = $missing;
             } else if (!preg_match('/^[a-zA-Z0-9éèàêâùïüëöçÉÈÀÊÂÛÏÜËÖÇ -,]+$/', $_POST['patient_adress'])) {
 
-                $errors_patient['patient_adress'] = "L'adresse du patient doit contenir uniquement des lettres et des chiffres";
+                $errors_patient['patient_adress'] = $wrong;
+                $errors_patient['show'] = "alert alert-danger";
+                $errors_patient['message'] = "Format incorrect";
             }
         }
 
@@ -120,11 +154,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $filetype = finfo_file($fileinfo, $filepath);
 
             if ($fileSize === 0) {
-                $errors_patient['patient_upload'] = "La photo est vide.";
+                $errors_patient['patient_upload'] = $missing;
             }
 
             if ($fileSize > 3145728) { // 3 MB (1 byte * 1024 * 1024 * 3 (for 3 MB))
-                $errors_patient['patient_upload'] = "La photo est trop volumineuse";
+
+                $errors_patient['patient_upload'] = $wrong;
+                $errors_patient['show'] = "alert alert-danger";
+                $errors_patient['message'] = "Format incorrect";
             }
 
             $allowedTypes = [
@@ -133,7 +170,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ];
 
             if (!in_array($filetype, array_keys($allowedTypes))) {
-                $errors_patient['patient_upload'] = "Extension non valide.";
+
+                $errors_patient['patient_upload'] = $wrong;
+                $errors_patient['show'] = "alert alert-danger";
+                $errors_patient['message'] = "Format incorrect";
             }
 
             $filename = basename($filepath); // I'm using the original name here, but you can also change the name of the file here
@@ -143,7 +183,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $newFilepath = $targetDirectory . "/" . $_FILES['patient_photo']['name'];
 
             if (!copy($filepath, $newFilepath)) { // Copy the file, returns false if failed
-                $errors_patient['patient_upload'] = "La photo n'a pas pu être sauvegardée.";
+
+                $errors_patient['patient_upload'] = $wrong;
+                $errors_patient['show'] = "alert alert-danger";
+                $errors_patient['message_upload'] = "La photo n'a pas pu être sauvegardée.";
             }
             unlink($filepath); // Delete the temp file
 
