@@ -101,6 +101,7 @@
                         </div>
                         <div class="<?= $errors_patient['show'] ?? '' ?> rounded-5 mt-2 p-2">
                             <?= $errors_patient['message'] ?? '' ?>
+                            <?= $errors_patient['missing'] ?? '' ?>
                             <?= $errors_patient['message_mail'] ?? '' ?>
                             <?= $errors_patient['message_phone'] ?? '' ?>
                             <?= $errors_patient['message_secu'] ?? '' ?>
@@ -169,6 +170,7 @@
                             </div>
                             <div class="<?= $errors['show'] ?? '' ?> rounded-5 mt-2 p-2">
                                 <?= $errors['message'] ?? '' ?>
+                                <?= $errors['missing'] ?? '' ?>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -219,6 +221,7 @@
                         </div>
                         <div class="<?= $errors_appointment['show'] ?? '' ?> rounded-5 mt-2 p-2">
                             <?= $errors_appointment['error'] ?? '' ?>
+                            <?= $errors_appointment['missing'] ?? '' ?>
                         </div>
                     </div>
                     <div class="modal-footer">
