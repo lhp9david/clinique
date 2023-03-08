@@ -11,7 +11,7 @@
                 <a class="navbar-brand" href="../Controllers/controller-secretary.php">
                     <img src="https://img.icons8.com/color/38/null/hospital-2.png" />
                     <span class="text-muted fw-bold">
-                        Liste des consultations
+                    <?=$_SESSION['doctor_lastname'] ?? 'Liste des consultations'?></p>
                     </span>
                 </a>
                 <div>
@@ -46,11 +46,13 @@
     <main>
         <div class="container">
             <div class="row appointments">
-                <?php
-                if (empty($AppointmentList)) { // Si la liste des rendez-vous est vide, on affiche un message
-                    echo '<tr>';
-                    echo '<td colspan="6">Vous n\'avez aucun rendez-vous</td>';
-                    echo '</tr>';
+                <?php if (empty($appointmentList)) {
+                    echo 
+                    '
+                        <div class="alert alert-primary rounded-5 text-center" role="alert">
+                        <i class="bi bi-info-circle-fill"></i> Vous n\'avez aucun rendez-vous
+                        </div>
+                    ';
                 } else { ?>
                     <div class="col-12">
                         <table class="table table-striped">

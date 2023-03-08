@@ -10,7 +10,7 @@
                     <img src="https://img.icons8.com/color/38/null/hospital-2.png" />
                     <span class="text-muted fw-bold h5">
                         Bonjour <?= $_SESSION["secretary_login"] ?>
-                        <span class="text-muted h6">vous êtes connecté(e) en tant que secrétaire</span>
+                       
                     </span>
                 </a>
 
