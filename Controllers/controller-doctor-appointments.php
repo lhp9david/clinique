@@ -42,8 +42,8 @@ class Appointments
             $patient = $patient->ConsultPatientInfo($appointment['patient_id']); // Récupère les informations du patient par rapport à son id
             $appointment['appointment_date'] = date('d/m/Y', strtotime($appointment['appointment_date'])); // Formate la date au format français
             echo '<tr>';
-            echo '<td>' . $patient['patient_firstname'] . '</td>';
-            echo '<td>' . $patient['patient_lastname'] . '</td>';
+            echo '<td>' . strtoupper($patient['patient_lastname']). '</td>';
+            echo '<td>' . ucfirst($patient['patient_firstname']) . '</td>';
             echo '<td>' . $appointment['appointment_date'] . ' </td>';
             echo '<td>' . $appointment['appointment_hour'] . '</td>';
             echo '<td>' . $patient['patient_phone'] . '</td>';
