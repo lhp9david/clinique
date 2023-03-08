@@ -132,9 +132,9 @@
                 <input type="hidden" name="patient_mail" value='<?= $patient['patient_mail'] ?>'>
                 <div class="input-group">
                   <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_upload'] ?? '<i class="bi bi-image-fill"></i>' ?></div>
-                  <label for="patient_photo" class="btn border">Choisissez une photo :</label>
-                  <input type="txt" class="form-control w-auto" value="<?= $patient['patient_photo'] ? $patient['patient_photo'] : 'Aucune photo sélectionnée' ?>">
-                  <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon" style="visibility:hidden;">
+                  <label for="patient_photo" class="btn border" onmouseover="this.style.background='#e9e3f1';" onmouseout="this.style.background='none';">Choisissez une photo :</label>
+                  <input type="txt" class="form-control" value="<?= $patient['patient_photo'] ? $patient['patient_photo'] : 'Aucune photo sélectionnée' ?>">
+                  <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon" style=display:none>
                 </div>
                 <div class="<?= $errors_patient['show'] ?? '' ?> rounded-5 mt-2 p-2">
                   <?= $errors_patient['message'] ?? '' ?>

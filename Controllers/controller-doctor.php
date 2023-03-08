@@ -122,9 +122,11 @@ function displayDoctorList()
                       </select>
                       <p> Fichier existant : "' . $doctor['doctor_photo'] . '" </p>
                       <div class="input-group">
-                        <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
-                        <input type="file" name="doctor_photo" id="photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
-                      </div>
+                      <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
+                      <label for="doctor_photo" class="btn border" onmouseover="this.style.background="#e9e3f1";" onmouseout="this.style.background="none";">Choisissez une photo :</label>
+                      <input type="txt" class="form-control">
+                      <input type="file" name="doctor_photo" id="doctor_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon" style=display:none>
+                  </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
                         <button type="submit" class="btn btn-outline-primary">Modifier</button>
