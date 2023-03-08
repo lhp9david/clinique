@@ -4,6 +4,11 @@ require ('../Models/doctor.php');
 require ('../helpers/Database.php'); 
 require ('../config/env.php');
 
+if(isset($_GET['logout'])){
+
+    session_destroy();
+    header('Location: ../index.php');
+}
 
 // Initialiser les variables d'erreur
 $wrong = '<i class="bi bi-x-circle-fill text-danger"></i>'; 

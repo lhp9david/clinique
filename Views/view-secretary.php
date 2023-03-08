@@ -20,7 +20,7 @@
                     <?= $success['doctor'] ?? '' ?>
                     <?= $success['appointment'] ?? '' ?>
                 </div>
-                <a href="index.php?action=logout"><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/external-solid-style-bomsymbols-/30/FFFFFF/external-design-web-design-device-solid-style-set-2-solid-style-bomsymbols--13.png" /></button></a>
+                <a href="../Controllers/controller-login.php?logout"><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/external-solid-style-bomsymbols-/30/FFFFFF/external-design-web-design-device-solid-style-set-2-solid-style-bomsymbols--13.png" /></button></a>
             </div>
         </nav>
     </header>
