@@ -1,7 +1,7 @@
 <footer class="text-center text-lg-start text-muted fixed-bottom ">
 
-    <div class="text-center p-4">
-        <button type="button" class= "btn-small btn-outline-dark rounded-5" data-bs-toggle="modal" data-bs-target="#mentions">
+    <div class="text-center p-2">
+        <button type="button" class= "btn btn-outline-secondary rounded-5" data-bs-toggle="modal" data-bs-target="#mentions">
             Mentions Légales
         </button>
     </div><!-- Button trigger modal -->

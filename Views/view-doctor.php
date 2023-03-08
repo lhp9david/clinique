@@ -7,18 +7,24 @@
   <header>
     <nav class="navbar fixed-top">
       <div class="container-fluid">
-        <h3 class="navbar-brand" href="#">Liste des médecins</h3>
+      <a class="navbar-brand" href="#">
+          <img src="https://img.icons8.com/color/38/null/hospital-2.png"/>
+          <span class="text-muted fw-bold">
+            Liste des médecins
+          </span> 
+        </a>
         <div>
           <!-- button select -->
-          <div class="dropdown">
+          <div class="dropstart">
             <button class="btn btn-primary dropdown-toggle rounded-5" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="bi bi-search"></i>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <!-- Filtrage par nom -->
               <?php foreach ($doctorList as $doctor) { ?>
-                <li><a class="dropdown-item" href="controller-doctor.php?doctor_select=<?= $doctor['doctor_id'] ?>"><?= $doctor['doctor_lastname'] ?></a></li>
+                <li><a class="dropdown-item" href="controller-doctor.php?doctor_select=<?= $doctor['doctor_id'] ?>">Dr. <?= $doctor['doctor_lastname'] ?></a></li>
               <?php } ?>
+              <li><a href="controller-doctor.php" class="dropdown-item"><button type="button" class="btn btn-outline-success rounded-5">Liste complète</button> </a></li>
             </ul>
 
             <!-- button return -->
