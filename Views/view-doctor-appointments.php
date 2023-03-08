@@ -11,7 +11,7 @@
                 <a class="navbar-brand" href="../Controllers/controller-secretary.php">
                     <img src="https://img.icons8.com/color/38/null/hospital-2.png" />
                     <span class="text-muted fw-bold">
-                        Liste des consultations
+                        <?= 'Bonjour Dr' .' ' . $_SESSION['doctor_lastname'] ?? ''?>
                     </span>
                 </a>
                 <div>
