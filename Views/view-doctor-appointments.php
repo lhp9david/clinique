@@ -45,26 +45,32 @@
     <main>
         <div class="container">
             <div class="row appointments">
-
-                <div class="col-12">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Prénom</th>
-                                <th scope="col">Date du rendez-vous</th>
-                                <th scope="col">Heure du rendez-vous</th>
-                                <th scope="col">Téléphone</th>
-                                <th scope="col">Numéro de Sécu</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php Appointments::displayAllAppointments(); ?> <!-- Affiche la liste des rendez-vous -->
-                        </tbody>
-                    </table>
-                </div>
+                <?php if (empty($appointmentList)) {
+                    echo '<tr>';
+                    echo '<td colspan="6">Vous n\'avez aucun rendez-vous</td>';
+                    echo '</tr>';
+                } else { ?>
+                    <div class="col-12">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Prénom</th>
+                                    <th scope="col">Date du rendez-vous</th>
+                                    <th scope="col">Heure du rendez-vous</th>
+                                    <th scope="col">Téléphone</th>
+                                    <th scope="col">Numéro de Sécu</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php Appointments::displayAllAppointments(); ?> <!-- Affiche la liste des rendez-vous -->
+                            </tbody>
+                        </table>
+                    </div>
+                <?php } ?>
 
             </div>
+
 
     </main>
     <?php Appointments::displayAppointmentsModals(); ?> <!-- Affiche les modals de modification de rendez-vous -->
