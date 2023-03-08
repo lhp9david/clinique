@@ -1,8 +1,30 @@
 <?php
 
-require ('../Models/doctor.php');
-require ('../helpers/Database.php'); 
-require ('../config/env.php');
+require('../Models/doctor.php');
+require('../helpers/Database.php');
+require('../config/env.php');
+
+session_start();
+
+
+// Gère la déconnexion
+if (isset($_GET["action"]) && $_GET["action"] == "logout") {
+    var_dump($_SESSION);
+    session_destroy();
+    header("location: controller-login.php");
+    exit;
+}
+
+
+// Si l'utilisateur est déjà connecté et est un docteur, rediriger vers la page d'accueil
+if (isset($_SESSION["doctor_id"])) {
+    header("location: controller-doctor-appointments.php");
+    exit;
+} elseif (isset($_SESSION["secretary_id"])) { // Sinon si l'utilisateur est déjà connecté et est une secrétaire, rediriger vers la page d'accueil
+    header("location: controller-secretary.php");
+    exit;
+}
+
 
 if(isset($_GET['logout'])){
 
@@ -11,25 +33,25 @@ if(isset($_GET['logout'])){
 }
 
 // Initialiser les variables d'erreur
-$wrong = '<i class="bi bi-x-circle-fill text-danger"></i>'; 
-$missing = '<i class="bi bi-exclamation-circle-fill text-danger"></i>'; 
+$wrong = '<i class="bi bi-x-circle-fill text-danger"></i>';
+$missing = '<i class="bi bi-exclamation-circle-fill text-danger"></i>';
 
 // Vérifier si le formulaire a été soumis
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Créer un tableau vide d'erreurs
     $errorsArray = [];
 
     // Vérifier si les champs sont vides
-    if(empty(trim($_POST["login"])) || empty(trim($_POST["password"]))){
+    if (empty(trim($_POST["login"])) || empty(trim($_POST["password"]))) {
         $errorsArray['error'] = $missing;
-    } else{
+    } else {
         // Assigner les données du formulaire à des variables
         $login = trim($_POST["login"]);
         $password = trim($_POST["password"]);
     }
 
     // Vérifier si le tableau d'erreurs est vide
-    if(empty($errorsArray)){
+    if (empty($errorsArray)) {
 
         // Créer un objet doctor
         $doctor = new Doctor();
@@ -46,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $secretary->login();
 
         // Vérifier si la méthode login a retourné un résultat
-        if($doctor->login()){
+        if ($doctor->login()) {
             // Assigner les données de la méthode login à des variables
             $id = $doctor->doctor_id;
             $lastname = $doctor->doctor_lastname;
@@ -69,12 +91,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $_SESSION["doctor_adress"] = $adress;
             $_SESSION["doctor_photo"] = $photo;
             $_SESSION["doctor_specialty_id"] = $specialty_id;
-            
-            
+
+
             // Rediriger vers la page d'accueil
             header("location: controller-doctor-appointments.php");
             echo "Bonjour $firstname $lastname.";
-        } else if ($secretary->login()){
+        } else if ($secretary->login()) {
             // Assigner les données de la méthode login à des variables
             $id = $secretary->secretary_id;
             $login = $secretary->secretary_login;
@@ -86,15 +108,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Rediriger vers la page d'accueil
 
             header("location: controller-secretary.php");
-           
-        }
-        
-        else{
+        } else {
             // Assigner une erreur à la variable wrong
             $errorsArray['error'] = $wrong;
         }
-
-        
     }
 }
 
@@ -119,5 +136,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 
-include('../Views/view-login.php'); 
-?>
+include('../Views/view-login.php');

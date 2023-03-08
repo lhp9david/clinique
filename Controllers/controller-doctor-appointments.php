@@ -5,6 +5,12 @@ require_once('../helpers/Database.php');
 require_once('../Models/patient.php');
 require_once('../Models/appointment.php');
 
+session_start();
+
+if (!isset($_SESSION['doctor_id']) && (!isset($_SESSION['secretary_id']))) { // Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion
+    header('location: controller-login.php');
+    exit;
+}
 
 class Appointments
 {

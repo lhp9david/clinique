@@ -46,8 +46,6 @@ class Doctor
             ':doctor_password' => $this->doctor_password,
             ':specialty_id' => $this->specialty_id,
         ]);
-
-
     }
 
     /**
@@ -184,9 +182,8 @@ class Doctor
             default:
                 return 'Spécialité inconnue';
                 break;
-            
-            }
         }
+    }
 }
 
 // créer une class Secretary
