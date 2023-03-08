@@ -46,9 +46,12 @@
         <div class="container">
             <div class="row appointments">
                 <?php if (empty($appointmentList)) {
-                    echo '<tr>';
-                    echo '<td colspan="6">Vous n\'avez aucun rendez-vous</td>';
-                    echo '</tr>';
+                    echo 
+                    '
+                        <div class="alert alert-primary rounded-5 text-center" role="alert">
+                        <i class="bi bi-info-circle-fill"></i> Vous n\'avez aucun rendez-vous
+                        </div>
+                    ';
                 } else { ?>
                     <div class="col-12">
                         <table class="table table-striped">
