@@ -53,7 +53,7 @@
                         
                     </div>
 
-                    <a href="#" class="btn btn-outline-primary mt-3">Liste des consultations</a>
+                    <a href="#" class="btn btn-outline-primary mt-3 rounded-5">Liste des consultations</a>
                 </div>
             </div>
         </div>
