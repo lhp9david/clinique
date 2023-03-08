@@ -3,6 +3,13 @@ require_once('../Models/doctor.php');
 require_once('../config/env.php');
 require_once('../helpers/Database.php');
 
+session_start();
+
+if (!isset($_SESSION['secretary_id'])) { // Si l'utilisateur n'est une secrétaire, on le redirige vers la page de connexion
+  header('location: controller-login.php');
+  exit;
+}
+
 // affichage des docteurs en table
 $doc = new Doctor();
 $doctorList = $doc->displayDoctorList();
@@ -58,7 +65,6 @@ function displayDoctorList()
   } else {
     $doc = new Doctor();
     $doctorList = $doc->displayDoctorList();
-    
   }
   foreach ($doctorList as $doctor) {
     echo '
@@ -114,7 +120,7 @@ function displayDoctorList()
                         <option value="3" ' . ($doctor['specialty_id'] == 3 ? 'selected' : '') . '>Gynécologue</option>
                         <option value="4" ' . ($doctor['specialty_id'] == 4 ? 'selected' : '') . '>Généraliste</option>
                       </select>
-                      <p> Fichier existant : "'. $doctor['doctor_photo'].'" </p>
+                      <p> Fichier existant : "' . $doctor['doctor_photo'] . '" </p>
                       <div class="input-group">
                       <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
                       <label for="doctor_photo" class="btn border" onmouseover="this.style.background="#e9e3f1";" onmouseout="this.style.background="none";">Choisissez une photo :</label>
@@ -160,4 +166,3 @@ function displayDoctorList()
 
 
 include('../Views/view-doctor.php');
-?>

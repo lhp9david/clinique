@@ -1,11 +1,5 @@
 <?php
-session_start();
 
-
-// Initialisation du tableau d'erreurs
-$errors = [];
-$errors_patient = [];
-$success = [];
 
 // require
 require_once '../helpers/Database.php';
@@ -14,7 +8,18 @@ require_once '../config/env.php';
 require_once '../Models/doctor.php';
 require_once '../Models/patient.php';
 
+session_start();
 
+if (!isset($_SESSION['secretary_id'])) { // Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion
+    header('location: controller-login.php');
+    exit;
+}
+
+
+// Initialisation du tableau d'erreurs
+$errors = [];
+$errors_patient = [];
+$success = [];
 
 class NewAppointment
 {
