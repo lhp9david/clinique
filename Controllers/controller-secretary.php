@@ -147,7 +147,10 @@ function displayPatients() // Affiche la liste des patients dans un select, avec
     $patients = getPatients();
     echo '<option selected disabled>Choisir un patient</option>';
     foreach ($patients as $patient) {
-        echo '<option ' . (isset($_POST['patient']) && $_POST['patient'] == $patient['patient_id'] ? 'selected' : '') . ' value="' . $patient['patient_id'] . '">' . $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] . '</option>';
+        if (isset($_GET['id']) && $_GET['id'] == $patient['patient_id']) { // Si un patient est passé en paramètre GET depuis la page patient.php, on sélectionne ce patient par défaut
+            echo '<option selected value="' . $patient['patient_id'] . '">' . $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] . '</option>';
+        } else
+            echo '<option ' . (isset($_POST['patient']) && $_POST['patient'] == $patient['patient_id'] ? 'selected' : '') . ' value="' . $patient['patient_id'] . '">' . $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] . '</option>';
     }
 }
 
@@ -318,9 +321,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
             $errors_patient['missing'] = "Champs obligatoire"; 
         } else if (!preg_match('/^[a-zA-ZéèàêâùïüëöçÉÈÀÊÂÛÏÜËÖÇ -]+$/', $_POST['patient_firstname'])) {
 
-            $errors_patient['patient_name'] = $wrong; 
+            $errors_patient['patient_name'] = $wrong;
             $errors_patient['show'] = 'alert alert-danger';
-            $errors_patient['message']= "Format incorrect";
+            $errors_patient['message'] = "Format incorrect";
         }
     }
 
@@ -348,7 +351,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
             $errors_patient['patient_phone'] = $wrong;
             $errors_patient['show'] = 'alert alert-danger';
-            $errors_patient ['message'] = "Format incorrect";
+            $errors_patient['message'] = "Format incorrect";
         } else if (!preg_match('/^[0-9]{10}$/', $_POST['patient_phone'])) {
 
             $errors_patient['patient_phone'] = $wrong;
@@ -420,7 +423,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
     }
 
 
-  
+
 
     // **********************************************************
     // UPLOAD DE LA PHOTO DU PATIENT
@@ -503,8 +506,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         $patient_adress = $_POST['patient_adress'];
         if ($_FILES['patient_photo']['error'] == 0) {
             $patient_photo = $_FILES['patient_photo']['name'];
-        }
-        else {
+        } else {
             $patient_photo = '';
         }
         $patient_lastname = $_POST['patient_lastname'];
@@ -516,8 +518,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         $patient_adress = $_POST['patient_adress'];
         if ($_FILES['patient_photo']['error'] == 0) {
             $patient_photo = $_FILES['patient_photo']['name'];
-        }
-        else {
+        } else {
             $patient_photo = '';
         }
 
@@ -525,9 +526,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
 
         echo 'Le patient a bien été ajouté !';
-    }
-
-
     }
 }
 
