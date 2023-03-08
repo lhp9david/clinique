@@ -6,7 +6,7 @@
     <header>
         <nav class="navbar fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="../Controllers/controller-secretary.php">
                     <img src="https://img.icons8.com/color/38/null/hospital-2.png" />
                     <span class="text-muted fw-bold h5">
                         Bonjour <?= $_SESSION["secretary_login"] ?>
