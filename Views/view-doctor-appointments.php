@@ -45,7 +45,8 @@
     <main>
         <div class="container">
             <div class="row appointments">
-                <?php if (empty($appointmentList)) {
+                <?php
+                if (empty($AppointmentList)) { // Si la liste des rendez-vous est vide, on affiche un message
                     echo '<tr>';
                     echo '<td colspan="6">Vous n\'avez aucun rendez-vous</td>';
                     echo '</tr>';
