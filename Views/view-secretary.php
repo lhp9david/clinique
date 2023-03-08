@@ -106,6 +106,16 @@
                             <?= $errors_patient['message_phone'] ?? '' ?>
                             <?= $errors_patient['message_secu'] ?? '' ?>
                         </div>
+                        <div class="<?= $errors_patient['show-mail'] ?? '' ?> rounded-5 mt-2 p-2">
+                            <?= $errors_patient['message_mail'] ?? '' ?>
+                        </div>
+                        <div class="<?= $errors_patient['show-phone'] ?? '' ?> rounded-5 mt-2 p-2">
+                            <?= $errors_patient['message_phone'] ?? '' ?>
+                        </div>
+                        <div class="<?= $errors_patient['show-secu'] ?? '' ?> rounded-5 mt-2 p-2">
+                            <?= $errors_patient['message_secu'] ?? '' ?>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -220,8 +230,11 @@
                             <input value='<?= $_POST['description'] ?? '' ?>' type="textarea" name="description" id="description" class="form-control" placeholder="Description" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="<?= $errors_appointment['show'] ?? '' ?> rounded-5 mt-2 p-2">
-                            <?= $errors_appointment['error'] ?? '' ?>
+                            <?= $errors_appointment['message'] ?? '' ?> 
                             <?= $errors_appointment['missing'] ?? '' ?>
+                        </div>
+                        <div class="<?= $errors_appointment['show-error'] ?? '' ?> rounded-5 mt-2 p-2">
+                            <?= $errors_appointment['error'] ?? '' ?> 
                         </div>
                     </div>
                     <div class="modal-footer">
