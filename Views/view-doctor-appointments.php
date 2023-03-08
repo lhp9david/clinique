@@ -15,24 +15,28 @@
                     </span>
                 </a>
                 <div>
-                    <!-- button select -->
-                    <div class="dropstart">
-                        <button class="btn btn-primary dropdown-toggle rounded-5" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-search"></i>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <!-- Filtrage par nom -->
-                            <form action="" method="GET">
-                                <?php displayDoctors() ?> <!-- Affiche la liste des médecins -->
-                            </form>
-                            <li><a href="controller-doctor-appointments.php" class="dropdown-item"><button type="button" class="btn btn-outline-success rounded-5">Liste complète</button> </a></li>
-                        </ul>
+                    <a href="controller-login.php?action=logout"><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/external-solid-style-bomsymbols-/30/FFFFFF/external-design-web-design-device-solid-style-set-2-solid-style-bomsymbols--13.png" /></button></a>
 
+                    <?php if (isset($_SESSION['secretary_id'])) { ?>
+
+                        <!-- button select -->
+                        <div class="dropstart">
+                            <button class="btn btn-primary dropdown-toggle rounded-5" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-search"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <!-- Filtrage par nom -->
+                                <form action="" method="GET">
+                                    <?php displayDoctors() ?> <!-- Affiche la liste des médecins -->
+                                </form>
+                                <li><a href="controller-doctor-appointments.php" class="dropdown-item"><button type="button" class="btn btn-outline-success rounded-5">Liste complète</button> </a></li>
+                            </ul>
+                        <?php } ?>
                         <!-- button return, si c'est un médecin, le bouton n'apparait pas -->
                         <?php if (isset($_SESSION['secretary_id'])) {
                             echo '<a href="controller-secretary.php"><button type="button" class="btn btn-secondary rounded-5"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/u-turn-to-left.png" /></button></a>';
                         } ?>
-                    </div>
+                        </div>
                 </div>
             </div>
         </nav>

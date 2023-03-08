@@ -18,7 +18,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "logout") {
 
 // Si l'utilisateur est déjà connecté et est un docteur, rediriger vers la page d'accueil
 if (isset($_SESSION["doctor_id"])) {
-    header("location: controller-doctor-appointments.php");
+    header("location: controller-doctor-appointments.php?doctor=" . $_SESSION["doctor_id"]);
     exit;
 } elseif (isset($_SESSION["secretary_id"])) { // Sinon si l'utilisateur est déjà connecté et est une secrétaire, rediriger vers la page d'accueil
     header("location: controller-secretary.php");
@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
             // Rediriger vers la page d'accueil
-            header("location: controller-doctor-appointments.php");
+            header("location: controller-doctor-appointments.php?doctor=$id");
             echo "Bonjour $firstname $lastname.";
         } else if ($secretary->login()) {
             // Assigner les données de la méthode login à des variables
