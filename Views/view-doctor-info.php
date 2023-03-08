@@ -26,9 +26,16 @@
             <div class="col-4 card text-center">
                 <div class="card-body">
                     <!-- doctor-photo en rounded circle-->
-                    <img src="https://img.icons8.com/color/48/null/woman-profile-skin-type-1.png" alt="profil picture" class="rounded-circle border border-5 border-light"/>
-                    <h5 class="card-title">NOM Prénom</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Spécialité</h6>
+                    <div class="row mb-2">
+                        <div class="col-4">
+                            <img src="https://img.icons8.com/officel/80/null/medical-doctor.png" alt="profil picture" class="rounded-circle border border-5 border-light" />
+                        </div>
+                        <div class="col p-3 text-start">
+                            <h5 class="card-title pt-2">NOM Prénom</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Spécialité</h6>
+                        </div>
+                    </div>
+
                     <div class="text-start">
                         <!-- adresse mail -->
                         <div class="input-group">
@@ -43,14 +50,14 @@
                         <!-- phone emergency -->
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></div>
-                            <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" minlength="10" maxlength="10" aria-label="Input group example" aria-describedby="btnGroupAddon" value=""disabled>
+                            <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" minlength="10" maxlength="10" aria-label="Input group example" aria-describedby="btnGroupAddon" value="" disabled>
                         </div>
                         <!-- adress -->
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-geo-alt-fill"></i></div>
-                            <input type="text" name="patient_adress" id="adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon" value=""disabled>
+                            <input type="text" name="patient_adress" id="adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon" value="" disabled>
                         </div>
-                        
+
                     </div>
 
                     <a href="#" class="btn btn-outline-primary mt-3 rounded-5">Liste des consultations</a>
