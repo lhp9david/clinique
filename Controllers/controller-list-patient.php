@@ -199,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $patient_id = $_POST['patient_id'];
         $patient_lastname = $_POST['patient_lastname'];
         $patient_firstname = $_POST['patient_firstname'];
-        $patient_birthdate = $_POST['patient_birthdate'];
+        $patient_birthdate = date('Y-m-d', strtotime($_POST['patient_birthdate']));
         $patient_secu = $_POST['patient_secu'];
         $patient_mail = $_POST['patient_mail'];
         $patient_phone = $_POST['patient_phone'];
