@@ -111,6 +111,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+        var_dump($_FILES);
+
         // **********************************************************
 
         if (isset($_FILES['patient_photo']) && $_FILES["patient_photo"]["error"] == 0) {
@@ -169,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 unlink(__DIR__ . "/../uploads/" . $obj_patient->GetPhotoName($patient_photo));
             }
         } else {
-            $patient_photo = ' ';
+            $patient_photo = '';
         }
 
         $obj_patient->ModifyPatientInfo($patient_id, $patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
