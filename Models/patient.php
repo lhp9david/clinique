@@ -172,16 +172,22 @@ class Patient
      * @return array
      */
 
-    public function GetPhotoName($patient_photo): array
+    public function GetPhotoName(int $patient_id): array
     {
-        $query = $this->_pdo->prepare('SELECT * FROM cl_patients WHERE patient_photo = :patient_photo');
+        $query = $this->_pdo->prepare('SELECT patient_photo FROM cl_patients WHERE patient_id = :patient_id');
         $query->execute([
-            ':patient_photo' => $patient_photo,
+            ':patient_id' => $patient_id,
         ]);
-        return $query->fetch(PDO::FETCH_COLUMN);
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function checkIfPatientHasAppointment($patient_id, $appointment_date, $appointment_hour)
+    /**
+     * methode pour vérifier si un patient a déjà un rendez-vous
+     *
+     * @return array
+     */
+
+    public function checkIfPatientHasAppointment($patient_id, $appointment_date, $appointment_hour) : array
     {
         $query = $this->_pdo->prepare('SELECT * FROM cl_appointments WHERE patient_id = :patient_id AND appointment_date = :appointment_date AND appointment_hour = :appointment_hour');
         $query->execute([

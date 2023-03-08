@@ -102,7 +102,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="../Controllers/controller-list-patient.php" method="POST" id="formEdit">
+              <form action="../Controllers/controller-list-patient.php" method="POST" id="formEdit<?= $patient['patient_id'] ?>" enctype="multipart/form-data">
                 <div class="input-group">
                   <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_name'] ?? '<i class="bi bi-person-fill"></i>' ?></div>
                   <input type="text" name="patient_lastname" id="patient_lastname" class="form-control" placeholder="Nom" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= $patient['patient_lastname'] ?>'>
@@ -142,7 +142,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-              <button type="submit" class="btn btn-outline-primary" onclick="document.forms['formEdit'].submit();">Modifier</button>
+              <button type="submit" class="btn btn-outline-primary" onclick="document.forms['formEdit<?= $patient['patient_id'] ?>'].submit();">Modifier</button>
             </div>
           </div>
         </div>
