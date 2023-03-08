@@ -59,7 +59,7 @@ class Appointments
                   <h6> Voulez-vous supprimer cet élément définitivement?</h6>
                   <!-- bouton delete -->
                   <div class="text-center">
-                    <button type="button" class="btn btn-primary"><a href="controller-doctor.php?delete=' . $appointment['appointment_id'] . '"><span class="text-white">oui</span></a></button>
+                    <button type="button" class="btn btn-primary"><a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '"><span class="text-white">oui</span></a></button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">non</button>
                   </div>
                 </div>

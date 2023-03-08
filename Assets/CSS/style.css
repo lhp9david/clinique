@@ -8,12 +8,14 @@ body {
     overflow-x: hidden;
 }
 
-.row.login, .row.secretary, .row.patient, .row.doctor, .row.appointments {
+
+.row.login,.row.secretary, .row.patient, .row.doctor, .row.appointments {
     height: 100vh;
     align-items: center;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+   
 }
+
+
 
 .card, nav.navbar {
     background-color: rgba(255, 255, 255, 0.684);

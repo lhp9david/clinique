@@ -110,7 +110,7 @@
                 </div>
                 <div class="input-group">
                   <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_birthdate'] ?? '<i class="bi bi-calendar"></i>' ?></div>
-                  <input type="text" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= date('d/m/Y', strtotime($patient['patient_birthdate'])) ?>'>
+                  <input type="date" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= date('d/m/Y', strtotime($patient['patient_birthdate'])) ?>'>
                 </div>
                 <div class="input-group">
                   <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_phone'] ?? '<i class="bi bi-telephone-fill"></i>' ?></div>
