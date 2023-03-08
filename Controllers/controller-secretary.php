@@ -35,6 +35,7 @@ class NewAppointment
             }
         } else {
             $errors_appointment['date'] = $missing;
+            $errors_appointment['missing'] = "Champs obligatoire"; 
         }
 
         // Vérification de l'heure
@@ -46,6 +47,7 @@ class NewAppointment
             }
         } else {
             $errors_appointment['hour'] = $missing;
+            $errors_appointment['missing'] = "Champs obligatoire"; 
         }
 
         // Vérification de l'identifiant du patient
@@ -53,6 +55,7 @@ class NewAppointment
             $patientId = $_POST['patient'];
         } else {
             $errors_appointment['patient'] = $missing;
+            $errors_appointment['missing'] = "Champs obligatoire"; 
         }
 
         // Vérification de l'identifiant du médecin
@@ -60,6 +63,7 @@ class NewAppointment
             $doctorId = $_POST['doctor'];
         } else {
             $errors_appointment['doctor'] = $missing;
+            $errors_appointment['missing'] = "Champs obligatoire"; 
         }
 
         // Vérification de la description
@@ -67,6 +71,7 @@ class NewAppointment
             $description = $_POST['description'];
         } else {
             $errors_appointment['description'] = $missing;
+            $errors_appointment['missing'] = "Champs obligatoire"; 
         }
 
 
@@ -77,6 +82,7 @@ class NewAppointment
             $patient = $patient->ConsultPatientInfo($patientId);
             if (empty($patient)) {
                 $errors_appointment['patient'] = $missing;
+                $errors_appointment['missing'] = "Champs obligatoire"; 
             } else {
                 // On vérifie si le patient n'a pas déjà un rendez-vous à cette date et à cette heure
                 $patient = new Patient();
@@ -158,6 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
     if (isset($_POST['doctor_lastname'])) {
         if (empty($_POST['doctor_lastname'])) {
             $errors['name'] = $missing;
+            $errors['missing'] = "Champs obligatoire"; 
         } else if (!preg_match('/^[a-zA-ZÀ-ÿ-]+$/', $_POST['doctor_lastname'])) {
             $errors['name'] = $wrong;
             $errors['show'] = 'alert alert-danger';
@@ -168,6 +175,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
     if (isset($_POST['doctor_firstname'])) {
         if (empty($_POST['doctor_firstname'])) {
             $errors['name'] = $missing;
+            $errors['missing'] = "Champs obligatoire"; 
         } else if (!preg_match('/^[a-zA-ZÀ-ÿ-]+$/', $_POST['doctor_firstname'])) {
             $errors['name'] = $wrong;
             $errors['show'] = 'alert alert-danger';
@@ -179,6 +187,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
 
         if (empty($_POST['doctor_mail'])) {
             $errors['mail'] = $missing;
+            $errors['missing'] = "Champs obligatoire"; 
         } else if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $_POST['doctor_mail'])) {
             $errors['mail'] = $wrong;
             $errors['show'] = 'alert alert-danger';
@@ -189,6 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
     if (isset($_POST['doctor_phone'])) {
         if (empty($_POST['doctor_phone'])) {
             $errors['phone'] = $missing;
+            $errors['missing'] = "Champs obligatoire"; 
         } else if (!preg_match('/^0[1-9]([-. ]?[0-9]{2}){4}$/', $_POST['doctor_phone'])) {
             $errors['phone'] = $wrong;
             $errors['show'] = 'alert alert-danger';
@@ -199,6 +209,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
     if (isset($_POST['doctor_phone_emergency'])) {
         if (empty($_POST['doctor_phone_emergency'])) {
             $errors['phone_emergency'] = $missing;
+            $errors['missing'] = "Champs obligatoire"; 
         } else if (!preg_match('/^0[1-9]([-. ]?[0-9]{2}){4}$/', $_POST['doctor_phone_emergency'])) {
             $errors['phone_emergency'] = $wrong;
             $errors['show'] = 'alert alert-danger';
@@ -208,12 +219,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
     if (isset($_POST['doctor_adress'])) {
         if (empty($_POST['doctor_adress'])) {
             $errors['adress'] = $missing;
+            $errors['missing'] = "Champs obligatoire"; 
         }
     }
 
     if (isset($_POST['doctor_password'])) {
         if (empty($_POST['doctor_password'])) {
             $errors['password'] = $missing;
+            $errors['missing'] = "Champs obligatoire"; 
         } else if (!preg_match('/^.{8,}$/', $_POST['doctor_password'])) {
             $errors['password'] = $wrong;
             $errors['show'] = 'alert alert-danger';
@@ -227,6 +240,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
 
         if (empty($_POST['confirmPass'])) {
             $errors['confirmPass'] = $missing;
+            $errors['missing'] = "Champs obligatoire"; 
         } else if (!preg_match('/^.{8,}$/', $_POST['confirmPass'])) {
             $errors['confirmPass'] = $wrong;
             $errors['show'] = 'alert alert-danger';
@@ -237,12 +251,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
     if (isset($_POST['specialty_id'])) {
         if (empty($_POST['specialty_id'])) {
             $errors['specialty'] = $missing;
+            $errors['missing'] = "Champs obligatoire"; 
         }
     }
 
     if (isset($_POST['doctor_photo'])) {
         if (empty($_POST['doctor_photo'])) {
             $errors['photo'] = $missing;
+            $errors['missing'] = "Champs obligatoire"; 
         }
     }
     if (isset($_FILES['doctor_photo']) && $_FILES['doctor_photo']['error'] == 0) {
@@ -291,6 +307,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         if (empty($_POST['patient_lastname'])) {
 
             $errors_patient['patient_name'] = $missing;
+            $errors_patient['missing'] = "Champs obligatoire"; 
         } else if (!preg_match('/^[a-zA-ZéèàêâùïüëöçÉÈÀÊÂÛÏÜËÖÇ -]+$/', $_POST['patient_lastname'])) {
 
             $errors_patient['patient_name'] = $wrong;
@@ -301,6 +318,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         if (empty($_POST['patient_firstname'])) {
 
             $errors_patient['patient_name'] = $missing;
+            $errors_patient['missing'] = "Champs obligatoire"; 
         } else if (!preg_match('/^[a-zA-ZéèàêâùïüëöçÉÈÀÊÂÛÏÜËÖÇ -]+$/', $_POST['patient_firstname'])) {
 
             $errors_patient['patient_name'] = $wrong;
@@ -309,17 +327,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         }
     }
 
-    if (isset($_POST['patient_birthdate'])) {
-
-        if (empty($_POST['patient_birthdate'])) {
-
-            $errors_patient['patient_birthdate'] = $missing;
-        } else if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $_POST['patient_birthdate'])) {
-
-            $errors_patient['patient_birthdate'] = $wrong;
-            $errors_patient['show'] = 'alert alert-danger';
-            $errors_patient['message'] = "Format incorrect";
-        }
+    if (isset ($_POST['patient_birthdate'])) {
+            
+            if (empty($_POST['patient_birthdate'])) {
+    
+                $errors_patient['patient_birthdate'] = $missing;
+                $errors_patient['missing'] = "Champs obligatoire";
+            } else if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $_POST['patient_birthdate'])) {
+    
+                $errors_patient['patient_birthdate'] = $wrong;
+                $errors_patient['show'] = 'alert alert-danger';
+                $errors_patient['message'] = "Format incorrect";
+            }
     }
 
     if (isset($_POST['patient_phone'])) {
@@ -327,6 +346,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         if (empty($_POST['patient_phone'])) {
 
             $errors_patient['patient_phone'] = $missing;
+            $errors_patient['missing'] = "Champs obligatoire"; 
         } else if (strlen($_POST['patient_phone']) != 10) {
 
             $errors_patient['patient_phone'] = $wrong;
@@ -350,6 +370,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         if (empty($_POST['patient_secu'])) {
 
             $errors_patient['patient_secu'] = $missing;
+            $errors_patient['missing'] = "Champs obligatoire"; 
         } else if (strlen($_POST['patient_secu']) != 15) {
 
             $errors_patient['patient_secu'] = $wrong;
@@ -373,6 +394,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         if (empty($_POST['patient_mail'])) {
 
             $errors_patient['patient_mail'] = $missing;
+            $errors_patient['missing'] = "Champs obligatoire"; 
         } else if (!filter_var($_POST['patient_mail'], FILTER_VALIDATE_EMAIL)) {
 
             $errors_patient['patient_mail'] = $wrong;
@@ -391,6 +413,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         if (empty($_POST['patient_adress'])) {
 
             $errors_patient['patient_adress'] = $missing;
+            $errors_patient['missing'] = "Champs obligatoire"; 
         } else if (!preg_match('/^[a-zA-Z0-9éèàêâùïüëöçÉÈÀÊÂÛÏÜËÖÇ -,]+$/', $_POST['patient_adress'])) {
 
             $errors_patient['patient_adress'] = $wrong;
