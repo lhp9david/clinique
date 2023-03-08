@@ -11,8 +11,7 @@ require_once '../models/patient.php';
 //     header('Location: controller-login.php');
 // }
 
-var_dump($_POST);
-var_dump($_FILES);
+
 
 $obj_patient = new Patient();
 
