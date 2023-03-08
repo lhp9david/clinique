@@ -187,7 +187,7 @@ class Patient
      * @return array
      */
 
-    public function checkIfPatientHasAppointment($patient_id, $appointment_date, $appointment_hour) : array
+    public function checkIfPatientHasAppointment($patient_id, $appointment_date, $appointment_hour) 
     {
         $query = $this->_pdo->prepare('SELECT * FROM cl_appointments WHERE patient_id = :patient_id AND appointment_date = :appointment_date AND appointment_hour = :appointment_hour');
         $query->execute([

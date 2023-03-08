@@ -26,6 +26,11 @@ if (isset($_SESSION["doctor_id"])) {
 }
 
 
+if(isset($_GET['logout'])){
+
+    session_destroy();
+    header('Location: ../index.php');
+}
 
 // Initialiser les variables d'erreur
 $wrong = '<i class="bi bi-x-circle-fill text-danger"></i>';

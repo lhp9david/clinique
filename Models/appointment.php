@@ -31,7 +31,8 @@ class Appointment
 
     public function DisplayAppointmentList(): array
     {
-        $query = $this->_pdo->prepare('SELECT * FROM cl_appointments');
+        /* select tous les rendez vous trier par date et heure */
+        $query = $this->_pdo->prepare('SELECT * FROM cl_appointments ORDER BY appointment_date, appointment_hour');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
