@@ -164,6 +164,29 @@ class Doctor
         $doctor = $query->fetch(PDO::FETCH_ASSOC);
         return $doctor;
     }
+
+    // methode afficher les spécialités
+    public function getSpecialtyName($specialty_id)
+    {
+        switch ($specialty_id) {
+            case 1:
+                return 'Ophtalmologue';
+                break;
+            case 2:
+                return 'Dermatologue';
+                break;
+            case 3:
+                return 'Gynécologue';
+                break;
+            case 4:
+                return 'Généraliste';
+                break;
+            default:
+                return 'Spécialité inconnue';
+                break;
+            
+            }
+        }
 }
 
 // créer une class Secretary
