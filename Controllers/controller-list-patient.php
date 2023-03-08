@@ -1,16 +1,15 @@
 <?php
 
-session_start();
-
 require_once '../config/env.php';
 require_once '../helpers/Database.php';
 require_once '../models/patient.php';
 
-// Check if the user is logged in
-// if (!isset($_SESSION['user'])) {
-//     header('Location: controller-login.php');
-// }
+session_start();
 
+if (!isset($_SESSION['secretary_id'])) { // Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion
+    header('location: controller-login.php');
+    exit;
+}
 
 
 $obj_patient = new Patient();
@@ -228,4 +227,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 require '../views/view-list-patient.php';
-?>

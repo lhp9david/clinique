@@ -2,6 +2,8 @@
 
 <?php include('../includes/head.php'); ?>
 
+
+
 <body>
     <header>
         <nav class="navbar fixed-top">
@@ -26,8 +28,10 @@
                             <li><a href="controller-doctor-appointments.php" class="dropdown-item"><button type="button" class="btn btn-outline-success rounded-5">Liste complète</button> </a></li>
                         </ul>
 
-                        <!-- button return -->
-                        <a href="controller-secretary.php"><button type="button" class="btn btn-secondary rounded-5"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/u-turn-to-left.png" /></button></a>
+                        <!-- button return, si c'est un médecin, le bouton n'apparait pas -->
+                        <?php if (isset($_SESSION['secretary_id'])) {
+                            echo '<a href="controller-secretary.php"><button type="button" class="btn btn-secondary rounded-5"><img src="https://img.icons8.com/ios-filled/24/FFFFFF/u-turn-to-left.png" /></button></a>';
+                        } ?>
                     </div>
                 </div>
             </div>
