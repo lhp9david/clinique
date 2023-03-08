@@ -39,12 +39,16 @@ select {
     width: 425px;
 }
 
-table.table {
-
+table.table  {
     background-color: rgba(255, 255, 255, 0.684);
     border-radius: 20px;
-
 }
+
+thead, tbody {
+    border-radius: 20px !important;
+    border-color: #f0f8ff00;
+}
+
 a {
     text-decoration: none;
     color: gray;
