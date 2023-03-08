@@ -11,6 +11,12 @@ if (!isset($_SESSION['doctor_id']) && (!isset($_SESSION['secretary_id']))) { // 
     header('location: controller-login.php');
     exit;
 }
+// Redirige le docteur sur la page ne contenant que ses rendez-vous
+if (isset($_SESSION['doctor_id']) && ($_SESSION['doctor_id'] != $_GET['doctor'])) {
+    header("location: controller-doctor-appointments.php?doctor=" . $_SESSION['doctor_id']);
+    exit;
+}
+
 
 class Appointments
 {
