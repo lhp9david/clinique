@@ -25,7 +25,7 @@
         </nav>
     </header>
 
-    <div class="container text-center mt-5 mb-5">
+    <div class="container text-center">
         <div class="row secretary">
             <div class="col m-1">
                 <div class="card container-fluid">
@@ -101,7 +101,6 @@
                         </div>
                         <div class="<?= $errors_patient['show'] ?? '' ?> rounded-5 mt-2 p-2">
                             <?= $errors_patient['message'] ?? '' ?>
-                            <?= $errors_patient['missing'] ?? '' ?>
                         </div>
                         <div class="<?= $errors_patient['show-missing'] ?? '' ?> rounded-5 mt-2 p-2">
                             <?= $errors_patient['missing'] ?? '' ?>
@@ -180,7 +179,6 @@
                             </div>
                             <div class="<?= $errors['show'] ?? '' ?> rounded-5 mt-2 p-2">
                                 <?= $errors['message'] ?? '' ?>
-                                <?= $errors['missing'] ?? '' ?>
                             </div>
                             <div class="<?= $errors['show-missing'] ?? '' ?> rounded-5 mt-2 p-2">
                                 <?= $errors['missing'] ?? '' ?>
@@ -234,7 +232,6 @@
                         </div>
                         <div class="<?= $errors_appointment['show'] ?? '' ?> rounded-5 mt-2 p-2">
                             <?= $errors_appointment['message'] ?? '' ?> 
-                            <?= $errors_appointment['missing'] ?? '' ?>
                         </div>
                         <div class="<?= $errors_appointment['show-missing'] ?? '' ?> rounded-5 mt-2 p-2">
                             <?= $errors_appointment['missing'] ?? '' ?>
