@@ -11,6 +11,9 @@ require_once '../models/patient.php';
 //     header('Location: controller-login.php');
 // }
 
+var_dump($_POST);
+var_dump($_FILES);
+
 $obj_patient = new Patient();
 
 $obj_patient->DisplayPatientList();
@@ -144,8 +147,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $errors_patient['message'] = "Format incorrect";
             }
         }
-
-        var_dump($_FILES);
 
         // **********************************************************
 
