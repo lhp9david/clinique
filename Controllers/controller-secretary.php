@@ -396,6 +396,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         }
     }
 
+
+  
+
     // **********************************************************
     // UPLOAD DE LA PHOTO DU PATIENT
 
