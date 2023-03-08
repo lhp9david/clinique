@@ -102,9 +102,9 @@
                         <div class="<?= $errors_patient['show'] ?? '' ?> rounded-5 mt-2 p-2">
                             <?= $errors_patient['message'] ?? '' ?>
                             <?= $errors_patient['missing'] ?? '' ?>
-                            <?= $errors_patient['message_mail'] ?? '' ?>
-                            <?= $errors_patient['message_phone'] ?? '' ?>
-                            <?= $errors_patient['message_secu'] ?? '' ?>
+                        </div>
+                        <div class="<?= $errors_patient['show-missing'] ?? '' ?> rounded-5 mt-2 p-2">
+                            <?= $errors_patient['missing'] ?? '' ?>
                         </div>
                         <div class="<?= $errors_patient['show-mail'] ?? '' ?> rounded-5 mt-2 p-2">
                             <?= $errors_patient['message_mail'] ?? '' ?>
@@ -182,6 +182,9 @@
                                 <?= $errors['message'] ?? '' ?>
                                 <?= $errors['missing'] ?? '' ?>
                             </div>
+                            <div class="<?= $errors['show-missing'] ?? '' ?> rounded-5 mt-2 p-2">
+                                <?= $errors['missing'] ?? '' ?>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -231,6 +234,9 @@
                         </div>
                         <div class="<?= $errors_appointment['show'] ?? '' ?> rounded-5 mt-2 p-2">
                             <?= $errors_appointment['message'] ?? '' ?> 
+                            <?= $errors_appointment['missing'] ?? '' ?>
+                        </div>
+                        <div class="<?= $errors_appointment['show-missing'] ?? '' ?> rounded-5 mt-2 p-2">
                             <?= $errors_appointment['missing'] ?? '' ?>
                         </div>
                         <div class="<?= $errors_appointment['show-error'] ?? '' ?> rounded-5 mt-2 p-2">
