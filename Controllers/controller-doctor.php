@@ -69,8 +69,8 @@ function displayDoctorList()
   foreach ($doctorList as $doctor) {
     echo '
         <tr>
-        <td>' . $doctor['doctor_lastname'] . '</td>
-        <td>' . $doctor['doctor_firstname'] . '</td>
+        <td>' . strtoupper($doctor['doctor_lastname']) . '</td>
+        <td>' . ucfirst($doctor['doctor_firstname']) . '</td>
         <td>' . $doctor['doctor_phone'] . '</td>
         <td>' . $doctor['doctor_phone_emergency'] . '</td>
         <td>' . $doctor['doctor_mail'] . '</td>
