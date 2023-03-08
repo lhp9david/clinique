@@ -45,7 +45,7 @@
     <main>
         <div class="container">
             <div class="row appointments">
-                <?php if (empty($appointmentList)) {
+                <?php if (empty($AppointmentList)) {
                     echo 
                     '
                         <div class="alert alert-primary rounded-5 text-center" role="alert">
