@@ -73,33 +73,31 @@
                     <div class="modal-body">
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_name'] ?? '<i class="bi bi-person-fill"></i>' ?></div>
-                            <input type="text" name="patient_lastname" id="name" class="form-control" placeholder="Nom" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_lastname'] ?? '' ?>"><span class="text-danger"><?= $errors_patient['patient_lastname'] ?? '' ?></span>
-                            <input type="text" name="patient_firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" aria-describedby="btnGroupAddon"  value="<?= $_POST['patient_firstname'] ?? '' ?>"><span class="text-danger"><?= $errors_patient['patient_firstname'] ?? '' ?></span>
+                            <input type="text" name="patient_lastname" id="name" class="form-control" placeholder="Nom" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_lastname'] ?? '' ?>">
+                            <input type="text" name="patient_firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" aria-describedby="btnGroupAddon"  value="<?= $_POST['patient_firstname'] ?? '' ?>">
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_birthdate'] ?? '<i class="bi bi-calendar"></i>' ?></div>
-                            <input type="date" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_birthdate'] ?? '' ?>"><span class="text-danger"><?= $errors_patient['patient_birthdate'] ?? '' ?></span>
+                            <input type="date" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_birthdate'] ?? '' ?>">
                         </div>
 
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_secu'] ?? '<i class="bi bi-file-earmark-medical-fill"></i>' ?></div>
-                            <input type="text" name="patient_secu" id="social" class="form-control" placeholder="Numéro de sécurité social" minlength="15" maxlength="15" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_secu'] ?? '' ?>"><span class="text-danger"><?= $errors_patient['patient_secu'] ?? '' ?></span>
+                            <input type="text" name="patient_secu" id="social" class="form-control" placeholder="Numéro de sécurité social" minlength="15" maxlength="15" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_secu'] ?? '' ?>">
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_mail'] ?? '<i class="bi bi-envelope-fill"></i>' ?></div>
-                            <input type="mail" name="patient_mail" id="mail" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_mail'] ?? '' ?>"><span class="text-danger"><?= $errors_patient['patient_mail'] ?? '' ?></span>
+                            <input type="mail" name="patient_mail" id="mail" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_mail'] ?? '' ?>">
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_phone'] ?? '<i class="bi bi-telephone-fill"></i>' ?></div>
-                            <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" minlength="10" maxlength="10" aria-label="Input group example" aria-describedby="btnGroupAddon"  value="<?= $_POST['patient_phone'] ?? '' ?>"><span class="text-danger"><?= $errors_patient['patient_phone'] ?? '' ?></span>
+                            <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" minlength="10" maxlength="10" aria-label="Input group example" aria-describedby="btnGroupAddon"  value="<?= $_POST['patient_phone'] ?? '' ?>">
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_adress'] ?? '<i class="bi bi-geo-alt-fill"></i>' ?></div>
-                            <input type="text" name="patient_adress" id="adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_adress'] ?? '' ?>"><span class="text-danger"><?= $errors_patient['patient_adress'] ?? '' ?></span>
-                        </div>
-                        <div class="input-group">
+                            <input type="text" name="patient_adress" id="adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_adress'] ?? '' ?>">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
-                            <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon"><span class="text-danger"><?= $errors_patient['patient_upload'] ?? '' ?></span>
+                            <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="<?= $errors_patient['show'] ?? '' ?> rounded-5 mt-2 p-2">
                             <?= $errors_patient['message'] ?? '' ?>

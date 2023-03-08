@@ -459,7 +459,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
 
         $success['show'] = "alert alert-success";
-        $success['patient'] = 'Nouveau docteur crée avec succès';
+        $success['patient'] = 'Nouveau patient crée avec succès';
     }
 
 
