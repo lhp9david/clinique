@@ -191,7 +191,7 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Créer une nouvelle consultation</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" method="POST">
+                <form action="controller-secretary.php" method="POST">
                     <div class="modal-body">
                         <!-- select patient (check BDD) -->
                         <div class="input-group">
