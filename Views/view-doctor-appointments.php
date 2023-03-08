@@ -15,8 +15,9 @@
                     </span>
                 </a>
                 <div>
-                    <a href="controller-login.php?action=logout"><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/external-solid-style-bomsymbols-/30/FFFFFF/external-design-web-design-device-solid-style-set-2-solid-style-bomsymbols--13.png" /></button></a>
-
+                    <?php if (!isset($_SESSION['secretary_id'])) { ?>
+                        <a href="controller-login.php?action=logout"><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/external-solid-style-bomsymbols-/30/FFFFFF/external-design-web-design-device-solid-style-set-2-solid-style-bomsymbols--13.png" /></button></a>
+                    <?php } ?>
                     <?php if (isset($_SESSION['secretary_id'])) { ?>
 
                         <!-- button select -->
