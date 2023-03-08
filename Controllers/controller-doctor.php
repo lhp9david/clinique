@@ -76,7 +76,9 @@ function displayDoctorList()
         <td>' . $doctor['doctor_mail'] . '</td>
         <td>' . $doc->getSpecialtyName($doctor['specialty_id']) . '</td>
         <td>' . $doctor['doctor_adress'] . '</td>
-        <td> <button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modal' . $doctor['doctor_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
+        <td> 
+        <a href="controller-info-doctor.php"><button type="button" class="btn btn-primary rounded-5"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/information.png"/></button></a>
+        <button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modal' . $doctor['doctor_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
         <button type="button" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modal' . $doctor['doctor_id'] . $doctor['doctor_lastname'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button></td>
         </tr>';
     echo '
