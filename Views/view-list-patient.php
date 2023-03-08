@@ -102,7 +102,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="../Controllers/controller-list-patient.php" method="POST" id="formEdit">
+              <form action="../Controllers/controller-list-patient.php" method="POST" id="formEdit<?= $patient['patient_id'] ?>" enctype="multipart/form-data">
                 <div class="input-group">
                   <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_name'] ?? '<i class="bi bi-person-fill"></i>' ?></div>
                   <input type="text" name="patient_lastname" id="patient_lastname" class="form-control" placeholder="Nom" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= $patient['patient_lastname'] ?>'>
@@ -132,7 +132,9 @@
                 <input type="hidden" name="patient_mail" value='<?= $patient['patient_mail'] ?>'>
                 <div class="input-group">
                   <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_upload'] ?? '<i class="bi bi-image-fill"></i>' ?></div>
-                  <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                  <label for="patient_photo" class="btn border">Choisissez une photo :</label>
+                  <input type="txt" class="form-control w-auto" value="<?= $patient['patient_photo'] ? $patient['patient_photo'] : 'Aucune photo sélectionnée' ?>">
+                  <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon" style="visibility:hidden;">
                 </div>
                 <div class="<?= $errors_patient['show'] ?? '' ?> rounded-5 mt-2 p-2">
                   <?= $errors_patient['message'] ?? '' ?>
@@ -142,7 +144,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-              <button type="submit" class="btn btn-outline-primary" onclick="document.forms['formEdit'].submit();">Modifier</button>
+              <button type="submit" class="btn btn-outline-primary" onclick="document.forms['formEdit<?= $patient['patient_id'] ?>'].submit();">Modifier</button>
             </div>
           </div>
         </div>

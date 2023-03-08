@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($_POST['patient_birthdate'])) {
 
             $errors_patient['patient_birthdate'] = $missing;
-        } else if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $_POST['patient_birthdate'])) {
+        } else if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', date('Y-m-d', strtotime($_POST['patient_birthdate'])))) {
 
             $errors_patient['patient_birthdate'] = $wrong;
             $errors_patient['show'] = 'alert alert-danger';
@@ -179,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $filename = basename($filepath); // I'm using the original name here, but you can also change the name of the file here
             $extension = $allowedTypes[$filetype];
-            $targetDirectory = __DIR__ . "/../uploads"; // __DIR__ is the directory of the current PHP file
+            $targetDirectory = "../uploads"; // __DIR__ is the directory of the current PHP file
 
             $newFilepath = $targetDirectory . "/" . $_FILES['patient_photo']['name'];
 
@@ -200,17 +200,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $patient_id = $_POST['patient_id'];
         $patient_lastname = $_POST['patient_lastname'];
         $patient_firstname = $_POST['patient_firstname'];
-        $patient_birthdate = $_POST['patient_birthdate'];
+        $patient_birthdate = date('Y-m-d', strtotime($_POST['patient_birthdate']));
         $patient_secu = $_POST['patient_secu'];
         $patient_mail = $_POST['patient_mail'];
         $patient_phone = $_POST['patient_phone'];
         $patient_adress = $_POST['patient_adress'];
 
-        if (isset($_FILES["patient_photo"]) && $_FILES["patient_photo"]['error'] = 0) {
+        if (isset($_FILES["patient_photo"]) && $_FILES["patient_photo"]['error'] == 0) {
             $patient_photo = $_FILES["patient_photo"]['name'];
+
             // recupèrer l'ancienne photo du patient et la supprimer du dossier uploads
-            if ($obj_patient->GetPhotoName($patient_photo) != ' ') {
-                unlink(__DIR__ . "/../uploads/" . $obj_patient->GetPhotoName($patient_photo));
+            if ($obj_patient->GetPhotoName($patient_id)['patient_photo'] !== '') {
+                $uploadname = "../uploads/" . $obj_patient->GetPhotoName($patient_id)['patient_photo'];
+                unlink($uploadname);
             }
         } else {
             $patient_photo = '';
@@ -219,11 +221,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $obj_patient->ModifyPatientInfo($patient_id, $patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
 
         echo 'Le patient a bien été modifié'; // PS : Message de debug personne ne le verra
-
         header('Location: /controllers/controller-list-patient.php');
     }
 }
-
-
 
 require '../views/view-list-patient.php';
