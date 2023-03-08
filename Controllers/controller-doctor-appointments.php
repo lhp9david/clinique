@@ -176,9 +176,9 @@ function displayDoctors() // Affiche la liste des médecins dans un select
 
     foreach ($doctors as $doctor) {
         if (isset($_GET['doctor']) && $_GET['doctor'] == $doctor['doctor_id']) {
-            echo '<li><a href="controller-doctor-appointments.php?doctor=' . $doctor['doctor_id'] . '" class="dropdown-item" value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
+            echo '<li><a href="controller-doctor-appointments.php?doctor=' . $doctor['doctor_id'] . '" class="dropdown-item" value="' . $doctor['doctor_id'] . '">Dr. ' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
         } else {
-            echo '<li><a href="controller-doctor-appointments.php?doctor=' . $doctor['doctor_id'] . '" class="dropdown-item" value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
+            echo '<li><a href="controller-doctor-appointments.php?doctor=' . $doctor['doctor_id'] . '" class="dropdown-item" value="' . $doctor['doctor_id'] . '">Dr. ' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</a></li>';
         }
     }
 }

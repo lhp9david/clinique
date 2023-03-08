@@ -87,7 +87,6 @@
               </td>
             </tr>
           <?php } ?>
-
         </tbody>
       </table>
     </div>
@@ -139,7 +138,6 @@
                   <?= $errors_patient['message'] ?? '' ?>
                   <?= $errors_patient['message_upload'] ?? '' ?>
                 </div>
-
               </form>
             </div>
             <div class="modal-footer">
