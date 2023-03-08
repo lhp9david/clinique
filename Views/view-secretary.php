@@ -194,14 +194,14 @@
     </div>
 
     <!-- Modal Ajout consultation -->
-    <div class="modal fade <?= !empty($errors_appointment) ? 'openModal' : '' ?>" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade <?= !empty($errors_appointment) || isset($_GET['id']) ? 'openModal' : '' ?>" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Créer une nouvelle consultation</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" method="POST">
+                <form action="controller-secretary.php" method="POST">
                     <div class="modal-body">
                         <!-- select patient (check BDD) -->
                         <div class="input-group">

@@ -158,7 +158,10 @@ function displayPatients() // Affiche la liste des patients dans un select, avec
     $patients = getPatients();
     echo '<option selected disabled>Choisir un patient</option>';
     foreach ($patients as $patient) {
-        echo '<option ' . (isset($_POST['patient']) && $_POST['patient'] == $patient['patient_id'] ? 'selected' : '') . ' value="' . $patient['patient_id'] . '">' . $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] . '</option>';
+        if (isset($_GET['id']) && $_GET['id'] == $patient['patient_id']) { // Si un patient est passé en paramètre GET depuis la page patient.php, on sélectionne ce patient par défaut
+            echo '<option selected value="' . $patient['patient_id'] . '">' . $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] . '</option>';
+        } else
+            echo '<option ' . (isset($_POST['patient']) && $_POST['patient'] == $patient['patient_id'] ? 'selected' : '') . ' value="' . $patient['patient_id'] . '">' . $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] . '</option>';
     }
 }
 
@@ -341,9 +344,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
             $errors_patient['missing'] = "Champs obligatoire"; 
         } else if (!preg_match('/^[a-zA-ZéèàêâùïüëöçÉÈÀÊÂÛÏÜËÖÇ -]+$/', $_POST['patient_firstname'])) {
 
-            $errors_patient['patient_name'] = $wrong; 
+            $errors_patient['patient_name'] = $wrong;
             $errors_patient['show'] = 'alert alert-danger';
-            $errors_patient['message']= "Format incorrect";
+            $errors_patient['message'] = "Format incorrect";
         }
     }
 
@@ -373,7 +376,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
             $errors_patient['patient_phone'] = $wrong;
             $errors_patient['show'] = 'alert alert-danger';
-            $errors_patient ['message'] = "Format incorrect";
+            $errors_patient['message'] = "Format incorrect";
         } else if (!preg_match('/^[0-9]{10}$/', $_POST['patient_phone'])) {
 
             $errors_patient['patient_phone'] = $wrong;
@@ -448,7 +451,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
     }
 
 
-  
+
 
     // **********************************************************
     // UPLOAD DE LA PHOTO DU PATIENT
@@ -458,63 +461,100 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         $fileSize = filesize($filepath);
         $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
         $filetype = finfo_file($fileinfo, $filepath);
+        if ($_FILES["patient_photo"]["error"] == 0) {
+            $filepath = $_FILES['patient_photo']['tmp_name'];
+            $fileSize = filesize($filepath);
+            $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
+            $filetype = finfo_file($fileinfo, $filepath);
 
-        if ($fileSize === 0) {
-            $errors_patient['patient_upload'] = "La photo est vide.";
+            if ($fileSize === 0) {
+                $errors_patient['patient_upload'] = "La photo est vide.";
+            }
+            if ($fileSize === 0) {
+                $errors_patient['patient_upload'] = "La photo est vide.";
+            }
+
+            if ($fileSize > 3145728) { // 3 MB (1 byte * 1024 * 1024 * 3 (for 3 MB))
+                $errors_patient['patient_upload'] = "La photo est trop volumineuse";
+            }
+            if ($fileSize > 3145728) { // 3 MB (1 byte * 1024 * 1024 * 3 (for 3 MB))
+                $errors_patient['patient_upload'] = "La photo est trop volumineuse";
+            }
+
+            $allowedTypes = [
+                'image/png' => 'png',
+                'image/jpeg' => 'jpg'
+            ];
+            $allowedTypes = [
+                'image/png' => 'png',
+                'image/jpeg' => 'jpg'
+            ];
+
+            if (!in_array($filetype, array_keys($allowedTypes))) {
+                $errors_patient['patient_upload'] = "Extension non valide.";
+            }
+            if (!in_array($filetype, array_keys($allowedTypes))) {
+                $errors_patient['patient_upload'] = "Extension non valide.";
+            }
+
+            $filename = basename($filepath); // I'm using the original name here, but you can also change the name of the file here
+            $extension = $allowedTypes[$filetype];
+            $targetDirectory = __DIR__ . "/../uploads"; // __DIR__ is the directory of the current PHP file
+            $filename = basename($filepath); // I'm using the original name here, but you can also change the name of the file here
+            $extension = $allowedTypes[$filetype];
+            $targetDirectory = __DIR__ . "/../uploads"; // __DIR__ is the directory of the current PHP file
+
+            $newFilepath = $targetDirectory . "/" . $_FILES['patient_photo']['name'];
+            $newFilepath = $targetDirectory . "/" . $_FILES['patient_photo']['name'];
+
+            if (!copy($filepath, $newFilepath)) { // Copy the file, returns false if failed
+                $errors_patient['patient_upload'] = "La photo n'a pas pu être sauvegardée.";
+            }
+            unlink($filepath); // Delete the temp file
+            if (!copy($filepath, $newFilepath)) { // Copy the file, returns false if failed
+                $errors_patient['patient_upload'] = "La photo n'a pas pu être sauvegardée.";
+            }
+            unlink($filepath); // Delete the temp file
+
+
+            echo "Upload réussi :)";
         }
-
-        if ($fileSize > 3145728) { // 3 MB (1 byte * 1024 * 1024 * 3 (for 3 MB))
-            $errors_patient['patient_upload'] = "La photo est trop volumineuse";
-        }
-
-        $allowedTypes = [
-            'image/png' => 'png',
-            'image/jpeg' => 'jpg'
-        ];
-
-        if (!in_array($filetype, array_keys($allowedTypes))) {
-            $errors_patient['patient_upload'] = "Extension non valide.";
-        }
-
-        $filename = basename($filepath); // I'm using the original name here, but you can also change the name of the file here
-        $extension = $allowedTypes[$filetype];
-        $targetDirectory = __DIR__ . "/../uploads"; // __DIR__ is the directory of the current PHP file
-
-        $newFilepath = $targetDirectory . "/" . $_FILES['patient_photo']['name'];
-
-        if (!copy($filepath, $newFilepath)) { // Copy the file, returns false if failed
-            $errors_patient['patient_upload'] = "La photo n'a pas pu être sauvegardée.";
-        }
-        unlink($filepath); // Delete the temp file
-
-
         echo "Upload réussi :)";
     }
 
     if (empty($errors_patient)) {
+        if (empty($errors_patient)) {
 
-        $patient_lastname = $_POST['patient_lastname'];
-        $patient_firstname = $_POST['patient_firstname'];
-        $patient_birthdate = $_POST['patient_birthdate'];
-        $patient_secu = $_POST['patient_secu'];
-        $patient_mail = $_POST['patient_mail'];
-        $patient_phone = $_POST['patient_phone'];
-        $patient_adress = $_POST['patient_adress'];
-        if ($_FILES['patient_photo']['error'] == 0) {
-            $patient_photo = $_FILES['patient_photo']['name'];
+            $patient_lastname = $_POST['patient_lastname'];
+            $patient_firstname = $_POST['patient_firstname'];
+            $patient_birthdate = $_POST['patient_birthdate'];
+            $patient_secu = $_POST['patient_secu'];
+            $patient_mail = $_POST['patient_mail'];
+            $patient_phone = $_POST['patient_phone'];
+            $patient_adress = $_POST['patient_adress'];
+            if ($_FILES['patient_photo']['error'] == 0) {
+                $patient_photo = $_FILES['patient_photo']['name'];
+            } else {
+                $patient_photo = '';
+            }
+            $patient_lastname = $_POST['patient_lastname'];
+            $patient_firstname = $_POST['patient_firstname'];
+            $patient_birthdate = $_POST['patient_birthdate'];
+            $patient_secu = $_POST['patient_secu'];
+            $patient_mail = $_POST['patient_mail'];
+            $patient_phone = $_POST['patient_phone'];
+            $patient_adress = $_POST['patient_adress'];
+            if ($_FILES['patient_photo']['error'] == 0) {
+                $patient_photo = $_FILES['patient_photo']['name'];
+            } else {
+                $patient_photo = '';
+            }
+
+            $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
+            $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
+
+            echo 'Le patient a bien été ajouté !';
         }
-        else {
-            $patient_photo = '';
-        }
-
-        $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
-
-        $success['show'] = "alert alert-success";
-        $success['patient'] = 'Nouveau patient crée avec succès';
     }
-
-
-
 }
-
 include '../Views/view-secretary.php';
