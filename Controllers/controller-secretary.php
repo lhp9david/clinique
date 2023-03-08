@@ -19,7 +19,7 @@ require_once '../Models/patient.php';
 class NewAppointment
 {
 
-    public static function verifyPost()
+    public static function verifyPost() // Vérification des données du formulaire d'ajout d'un rendez-vous
     {
         $errors_appointment = [];
         // Initialiser les variables d'erreur
