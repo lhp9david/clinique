@@ -13,7 +13,7 @@
                         <span class="text-muted h6">vous êtes connecté(e) en tant que secrétaire</span>
                     </span>
                 </a>
-                
+
                 <!-- fake toats message error / success -->
                 <div class="<?= $success['show'] ?? '' ?> rounded-5 m-0 p-2">
                     <?= $success['patient'] ?? '' ?>
@@ -74,7 +74,7 @@
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_name'] ?? '<i class="bi bi-person-fill"></i>' ?></div>
                             <input type="text" name="patient_lastname" id="name" class="form-control" placeholder="Nom" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_lastname'] ?? '' ?>">
-                            <input type="text" name="patient_firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" aria-describedby="btnGroupAddon"  value="<?= $_POST['patient_firstname'] ?? '' ?>">
+                            <input type="text" name="patient_firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_firstname'] ?? '' ?>">
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_birthdate'] ?? '<i class="bi bi-calendar"></i>' ?></div>
@@ -91,13 +91,18 @@
                         </div>
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_phone'] ?? '<i class="bi bi-telephone-fill"></i>' ?></div>
-                            <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" minlength="10" maxlength="10" aria-label="Input group example" aria-describedby="btnGroupAddon"  value="<?= $_POST['patient_phone'] ?? '' ?>">
+                            <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" minlength="10" maxlength="10" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_phone'] ?? '' ?>">
                         </div>
                         <div class="input-group">
+
                             <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_adress'] ?? '<i class="bi bi-geo-alt-fill"></i>' ?></div>
                             <input type="text" name="patient_adress" id="adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $_POST['patient_adress'] ?? '' ?>">
+                        </div>
+                        <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
-                            <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <label for="doctor_photo" class="btn border" onmouseover="this.style.background='#e9e3f1';" onmouseout="this.style.background='none';">Choisissez une photo :</label>
+                            <input type="txt" class="form-control">
+                            <input type="file" name="doctor_photo" id="doctor_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon" style=display:none>
                         </div>
                         <div class="<?= $errors_patient['show'] ?? '' ?> rounded-5 mt-2 p-2">
                             <?= $errors_patient['message'] ?? '' ?>
@@ -173,10 +178,13 @@
                                 <option value="3">Gynécologue</option>
                                 <option value="4">Généraliste</option>
                             </select>
-                            <div class="input-group">
-                                <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
-                                <input type="file" name="doctor_photo" id="photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
-                            </div>
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
+                            <label for="doctor_photo" class="btn border" onmouseover="this.style.background='#e9e3f1';" onmouseout="this.style.background='none';">Choisissez une photo :</label>
+                            <input type="txt" class="form-control">
+                            <input type="file" name="doctor_photo" id="doctor_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon" style=display:none>
+                        </div>
                             <div class="<?= $errors['show'] ?? '' ?> rounded-5 mt-2 p-2">
                                 <?= $errors['message'] ?? '' ?>
                             </div>
@@ -231,13 +239,14 @@
                             <input value='<?= $_POST['description'] ?? '' ?>' type="textarea" name="description" id="description" class="form-control" placeholder="Description" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="<?= $errors_appointment['show'] ?? '' ?> rounded-5 mt-2 p-2">
-                            <?= $errors_appointment['message'] ?? '' ?> 
+                            <?= $errors_appointment['message'] ?? '' ?>
+                            <?= $errors_appointment['missing'] ?? '' ?>
                         </div>
                         <div class="<?= $errors_appointment['show-missing'] ?? '' ?> rounded-5 mt-2 p-2">
                             <?= $errors_appointment['missing'] ?? '' ?>
                         </div>
                         <div class="<?= $errors_appointment['show-error'] ?? '' ?> rounded-5 mt-2 p-2">
-                            <?= $errors_appointment['error'] ?? '' ?> 
+                            <?= $errors_appointment['error'] ?? '' ?>
                         </div>
                     </div>
                     <div class="modal-footer">
