@@ -528,5 +528,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         echo 'Le patient a bien été ajouté !';
     }
 }
-
+}
 include '../Views/view-secretary.php';
