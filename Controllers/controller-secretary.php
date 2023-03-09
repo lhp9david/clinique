@@ -15,7 +15,7 @@ if (!isset($_SESSION['secretary_id'])) { // Si l'utilisateur n'est pas connecté
     exit;
 }
 
-
+var_dump($_FILES);
 // Initialisation du tableau d'erreurs
 $errors = [];
 $errors_patient = [];
