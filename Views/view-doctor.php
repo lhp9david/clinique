@@ -44,10 +44,10 @@
             <th scope="col">Nom</th>
             <th scope="col">Prénom</th>
             <th scope="col">Numéro de téléphone</th>
-            <th scope="col">Numéro d'urgence</th>
+            
             <th scope="col">Mail</th>
             <th scope="col">Spécialité</th>
-            <th scope="col">Adresse</th>
+           
             <th scope="col"></th>
 
           </tr>

@@ -53,7 +53,7 @@
   <div class="container">
 
     <div class="row patient">
-      <table class="table table-striped">
+      <table class="table">
         <thead>
           <tr>
             <th scope="col"></th>
@@ -68,13 +68,14 @@
 
           </tr>
         </thead>
+
         <tbody>
           <!-- fetch all clients -->
           <?php
           foreach ($patients as $patient) { ?>
-            <tr>
+            <tr class="patient_row" data-id="<?= $patient['patient_id'] ?>">
               <td>
-                <a href="controller-info-patient.php">
+                <a href="controller-info-patient.php?patient=<?= $patient['patient_id'] ?>">
                   <button type="button" class="btn btn-primary rounded-5">
                     <img src="https://img.icons8.com/ios-filled/20/FFFFFF/information.png" />
                   </button>
@@ -93,8 +94,48 @@
                 <button type="button" id="btnDelete" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modalDelete<?= $patient['patient_id'] ?>"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png"></button>
               </td>
             </tr>
+            <tr class="consultation<?= $patient['patient_id'] ?> appointment-bg" hidden>
+              <td colspan="9">
+                
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Date du rendez-vous</th>
+                        <th scope="col">Heure du rendez-vous</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Nom du médecin</th>
+                        <th scope="col">Prénom du médecin</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      $appointments = $obj_appointment->DisplayAppointmentListByPatient($patient['patient_id']);
+                      if (empty($appointments)) { ?>
+                        <tr>
+                          <td colspan="5" class="text-center">Aucun rendez-vous</td>
+                        </tr>
+                      <?php }
+                      else {
+                      foreach ($appointments as $appointment) { ?>
+                        <tr>
+                          <td><?= date('d/m/Y', strtotime($appointment['appointment_date'])) ?></td>
+                          <td><?= date('H:i', strtotime($appointment['appointment_hour'])) ?></td>
+                          <td><?= $appointment['appointment_description'] ?></td>
+                          <?php $doctor = $obj_doctor->getDoctorById($appointment['doctor_id']); ?>
+                          <td><?= $doctor[0]['doctor_lastname'] ?></td>
+                          <td><?= $doctor[0]['doctor_firstname'] ?></td>
+                        </tr>
+                      <?php }
+                      } ?>
+                    </tbody>
+                  </table>
+
+               
+              </td>
+            </tr>
           <?php } ?>
         </tbody>
+
       </table>
     </div>
 
@@ -117,7 +158,7 @@
                 </div>
                 <div class="input-group">
                   <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_birthdate'] ?? '<i class="bi bi-calendar"></i>' ?></div>
-                  <input type="date" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= date('d/m/Y', strtotime($patient['patient_birthdate'])) ?>'>
+                  <input type="date" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= $patient['patient_birthdate'] ?>'>
                 </div>
                 <div class="input-group">
                   <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_phone'] ?? '<i class="bi bi-telephone-fill"></i>' ?></div>
@@ -139,9 +180,7 @@
                 <input type="hidden" name="patient_mail" value='<?= $patient['patient_mail'] ?>'>
                 <div class="input-group">
                   <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_upload'] ?? '<i class="bi bi-image-fill"></i>' ?></div>
-                  <label for="patient_photo" class="btn border" onmouseover="this.style.background='#e9e3f1';" onmouseout="this.style.background='none';">Choisissez une photo :</label>
-                  <input type="txt" class="form-control" value="<?= $patient['patient_photo'] ? $patient['patient_photo'] : 'Aucune photo sélectionnée' ?>">
-                  <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon" style=display:none>
+                  <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
                 </div>
                 <div class="<?= $errors_patient['show'] ?? '' ?> rounded-5 mt-2 p-2">
                   <?= $errors_patient['message'] ?? '' ?>
@@ -180,6 +219,7 @@
     include '../includes/footer.php';
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="../assets/js/view-list-patient.js"></script>
 
 </body>
 
