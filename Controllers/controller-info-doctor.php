@@ -15,15 +15,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $doctor = $doc->getDoctorById($_GET['doctor']);
     
     // création des variables d'info
-    $doctor_id = $doctor[0]['doctor_id'];
-    $doctor_lastname = $doctor[0]['doctor_lastname'];
-    $doctor_firstname = $doctor[0]['doctor_firstname'];
-    $doctor_specialty =  $doc->getSpecialtyName($doctor[0]['specialty_id']);
-    $doctor_mail = $doctor[0]['doctor_mail'];
-    $doctor_phone = $doctor[0]['doctor_phone'];
-    $doctor_phone_emergency = $doctor[0]['doctor_phone_emergency'];
-    $doctor_adress = $doctor[0]['doctor_adress'];
-    $doctor_photo = $doctor[0]['doctor_photo'];
+    $doctor_id = $doctor['doctor_id'];
+    $doctor_lastname = $doctor['doctor_lastname'];
+    $doctor_firstname = $doctor['doctor_firstname'];
+    $doctor_specialty =  $doc->getSpecialtyName($doctor['specialty_id']);
+    $doctor_mail = $doctor['doctor_mail'];
+    $doctor_phone = $doctor['doctor_phone'];
+    $doctor_phone_emergency = $doctor['doctor_phone_emergency'];
+    $doctor_adress = $doctor['doctor_adress'];
+    $doctor_photo = $doctor['doctor_photo'];
 
   }
 }

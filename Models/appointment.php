@@ -133,13 +133,17 @@ class Appointment
         $query = $this->_pdo->prepare('SELECT COUNT(*) FROM cl_appointments');
         $query->execute();
         $count = $query->fetch();
-        return $count[0];
+        return $count;
        
     }
     /* calcul du premier article de la page*/
-    public function FirstArticle($page, $parPage): int
+    public function FirstArticle($premier, $parPage): int
     {
-        $firstArticle = ($page - 1) * $parPage;
-        return $firstArticle;
+      $query = $this->_pdo->prepare('SELECT * FROM cl_appointments ORDER BY appointment_date, appointment_hour LIMIT :premier, :parPage');
+        $query->bindValue(':premier', $premier, PDO::PARAM_INT);
+        $query->bindValue(':parPage', $parPage, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+
     }
 }

@@ -21,26 +21,141 @@ $doctorListName = $doc->getDoctorLastName();
 // méthode GET 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
+
   // Update des informations
   if (isset($_GET['doctor_id'])) {
 
     $doc = new Doctor();
     $doc = $doc->getDoctorById($_GET['doctor_id']);
+    $doctor_id = $doc['doctor_id'];
 
-    if ($doc == null) {
-      header('Location:controller-doctor.php');
-    } else {
-      if ($_GET['doctor_photo'] == '') {
-        $doctor_photo = $doc[0]['doctor_photo'];
+    // vérification que le "formulaire" est valide
+    $errors = [];
+    $wrong = '<i class="bi bi-x-circle-fill text-danger"></i>';
+    $missing = '<i class="bi bi-exclamation-circle-fill text-danger"></i>';
+
+    if (isset($_GET['doctor_lastname'])) {
+      if (empty($_GET['doctor_lastname'])) {
+        $errors['show-missing'] = 'alert alert-danger';
+        $errors['name'] = $missing;
+        $errors['missing'] = "Champs obligatoire";
+      } else if (!preg_match('/^[a-zA-ZÀ-ÿ-]+$/', $_GET['doctor_lastname'])) {
+        $errors['show-wrong'] = 'alert alert-danger';
+        $errors['name'] = $wrong;
+        $errors['message'] = 'Format incorrect';
+      } else {
+        $doctor_lastname = $_GET['doctor_lastname'];
+      }
+    }
+
+    if (isset($_GET['doctor_firstname'])) {
+      if (empty($_GET['doctor_firstname'])) {
+        $errors['show-missing'] = 'alert alert-danger';
+        $errors['name'] = $missing;
+        $errors['missing'] = "Champs obligatoire";
+      } else if (!preg_match('/^[a-zA-ZÀ-ÿ-]+$/', $_GET['doctor_firstname'])) {
+        $errors['show-wrong'] = 'alert alert-danger';
+        $errors['name'] = $wrong;
+        $errors['wrong'] = 'Format incorrect';
+      } else {
+        $doctor_firstname = $_GET['doctor_firstname'];
+      }
+    }
+
+    if (isset($_GET['doctor_mail'])) {
+
+      if (empty($_GET['doctor_mail'])) {
+        $errors['show-missing'] = 'alert alert-danger';
+        $errors['mail'] = $missing;
+        $errors['missing'] = "Champs obligatoire";
+      } else if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $_GET['doctor_mail'])) {
+        $errors['show-wrong'] = 'alert alert-danger';
+        $errors['mail'] = $wrong;
+        $errors['wrong'] = 'Format incorrect';
+      } else {
+        $doctor_mail = $_GET['doctor_mail'];
+      }
+    }
+
+    if (isset($_GET['doctor_phone'])) {
+      if (empty($_GET['doctor_phone'])) {
+        $errors['show-missing'] = 'alert alert-danger';
+        $errors['phone'] = $missing;
+        $errors['missing'] = "Champs obligatoire";
+      } else if (!preg_match('/^0[1-9]([-. ]?[0-9]{2}){4}$/', $_GET['doctor_phone'])) {
+        $errors['show-wrong'] = 'alert alert-danger';
+        $errors['phone'] = $wrong;
+        $errors['wrong'] = 'Format incorrect';
+      } else {
+        $doctor_phone = $_GET['doctor_phone'];
+      }
+    }
+
+    if (isset($_GET['doctor_phone_emergency'])) {
+      if (empty($_GET['doctor_phone_emergency'])) {
+        $errors['show-missing'] = 'alert alert-danger';
+        $errors['phone_emergency'] = $missing;
+        $errors['missing'] = "Champs obligatoire";
+      } else if (!preg_match('/^0[1-9]([-. ]?[0-9]{2}){4}$/', $_GET['doctor_phone_emergency'])) {
+        $errors['show-wrong'] = 'alert alert-danger';
+        $errors['phone_emergency'] = $missing;
+        $errors['wrong'] = 'Format incorrect';
+      } else {
+        $doctor_phone_emergency = $_GET['doctor_phone_emergency'];
+      }
+    }
+
+    if (isset($_GET['doctor_adress'])) {
+      if (empty($_GET['doctor_adress'])) {
+        $errors['show'] = 'alert alert-danger';
+        $errors['adress'] = $missing;
+        $errors['missing'] = "Champs obligatoire";
+      } else {
+        $doctor_adress = $_GET['doctor_adress'];
+      }
+    }
+
+    if (isset($_GET['specialty_id'])) {
+      if (empty($_GET['specialty_id'])) {
+        $errors['show'] = 'alert alert-danger';
+        $errors['specialty'] = $missing;
+        $errors['missing'] = "Champs obligatoire";
+      } else {
+        $specialty_id = $_GET['specialty_id'];
+      }
+    }
+
+    if (isset($_GET['doctor_photo'])) {
+      if (empty($_GET['doctor_photo'])) {
+        $doctor_photo = $doc['doctor_photo'];
       } else {
         $doctor_photo = $_GET['doctor_photo'];
       }
-      $doc = new Doctor();
-      $doc->updateDoctor($_GET['doctor_id'], $_GET['doctor_lastname'], $_GET['doctor_firstname'], $_GET['doctor_phone'], $_GET['doctor_phone_emergency'], $_GET['doctor_mail'], $_GET['doctor_adress'], $doctor_photo, $_GET['specialty_id']);
-      header('Location:controller-doctor.php');
     }
-  }
 
+    if (isset($_FILES['doctor_photo'])) {
+      if ($_FILES['doctor_photo']['size'] <= 1000000) {
+        $infosfichier = pathinfo($_FILES['doctor_photo']['name']);
+        $extension_upload = $infosfichier['extension'];
+        $extensions_autorisees = array('jpg', 'jpeg', 'png');
+        if (in_array($extension_upload, $extensions_autorisees)) {
+          move_uploaded_file($_FILES['doctor_photo']['tmp_name'], '../Uploads/' . basename($_FILES['doctor_photo']['name']));
+        }
+      }
+    }
+
+    if (empty($errors)) {
+      $errors['show'] = 'alert alert-success';
+      $errors['message'] = 'Modification réussie';
+      $doc = new Doctor();
+      $doc->updateDoctor($doctor_id, $doctor_lastname, $doctor_firstname, $doctor_phone, $doctor_phone_emergency, $doctor_mail, $doctor_adress, $doctor_photo, $specialty_id);
+    } else {
+      $errors['show'] = 'alert alert-danger';
+      $errors['message'] = 'Echec de la modification : ';
+    }
+     
+    }
+  
   // Supression du docteur
   if (isset($_GET['delete'])) {
     $doc = new Doctor();
@@ -54,121 +169,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
   }
 }
-
-// Affichage des docteurs
-function displayDoctorList()
-{
-  if (isset($_GET['doctor_select'])) {
-    // filtrage par nom
-    $doc = new Doctor();
-    $doctorList = $doc->getDoctorById($_GET['doctor_select']);
-  } else {
-    $doc = new Doctor();
-    $doctorList = $doc->displayDoctorList();
-  }
-  foreach ($doctorList as $doctor) {
-    echo '
-      <tr>
-        <td>
-          <a href="controller-info-doctor.php?doctor='.$doctor['doctor_id'].'">
-            <button type="button" class="btn btn-primary rounded-5">
-              <img src="https://img.icons8.com/ios-filled/20/FFFFFF/information.png"/>
-            </button>
-          </a>
-        </td>
-        <td>' . strtoupper($doctor['doctor_lastname']) . '</td>
-        <td>' . ucfirst($doctor['doctor_firstname']) . '</td>
-        <td>' . $doctor['doctor_phone'] . '</td>
-        
-        <td>' . $doctor['doctor_mail'] . '</td>
-        <td>' . $doc->getSpecialtyName($doctor['specialty_id']) . '</td>
-       
-          <td> 
-            <button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modal' . $doctor['doctor_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
-            <button type="button" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modal' . $doctor['doctor_id'] . $doctor['doctor_lastname'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button>
-          </td>
-      </tr>';
-    echo '
-        <div class="modal fade" id="modal' . $doctor['doctor_id'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier les informations</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <form action="" method="get">
-                <div class="modal-body">
-                  <input type="hidden" name="doctor_id" value="' . $doctor['doctor_id'] . '">
-                  <div class="input-group">
-                    <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-person-fill"></i></div>
-                    <input type="text" name="doctor_lastname" id="name" class="form-control" placeholder="Nom" aria-label="Input group example" aria-describedby="btnGroupAddon" value="' . $doctor['doctor_lastname'] . '">
-                    <input type="text" name="doctor_firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" aria-describedby="btnGroupAddon" value="' . $doctor['doctor_firstname'] . '">
-                  </div>
-                  <div class="input-group">
-                    <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></div>
-                    <input type="phone" name="doctor_phone" id="phone" class="form-control" placeholder="Téléphone" aria-label="Input group example" aria-describedby="btnGroupAddon" value="' . $doctor['doctor_phone'] . '">
-                  </div>
-                  <div class="input-group">
-                    <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-inbound-fill"></i></div>
-                    <input type="phone" name="doctor_phone_emergency" id="emergency_phone" class="form-control" placeholder="Téléphone d\'urgence" aria-label="Input group example" aria-describedby="btnGroupAddon" value="' . $doctor['doctor_phone_emergency'] . '">
-                  </div>
-                  <div class="input-group">
-                    <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-envelope-fill"></i></div>
-                    <input type="mail" name="doctor_mail" id="mail" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon" value="' . $doctor['doctor_mail'] . '">
-                  </div>
-                  <div class="input-group">
-                    <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-geo-alt-fill"></i></div>
-                    <input type="text" name="doctor_adress" id="adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon" value="' . $doctor['doctor_adress'] . '">
-                  </div>
-                  <div class="input-group">
-                    <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-activity"></i></div>
-                      <select name="specialty_id" id="specialty">
-                        <option value="" disabled>Specialité</option>
-                        <option value="1" ' . ($doctor['specialty_id'] == 1 ? 'selected' : '') . '>Ophtalmologue</option>
-                        <option value="2" ' . ($doctor['specialty_id'] == 2 ? 'selected' : '') . '>Dermatologue</option>
-                        <option value="3" ' . ($doctor['specialty_id'] == 3 ? 'selected' : '') . '>Gynécologue</option>
-                        <option value="4" ' . ($doctor['specialty_id'] == 4 ? 'selected' : '') . '>Généraliste</option>
-                      </select>
-                      <p> Fichier existant : "' . $doctor['doctor_photo'] . '" </p>
-                      <div class="input-group">
-                      <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
-                      <label for="doctor_photo" class="btn border" onmouseover="this.style.background="#e9e3f1";" onmouseout="this.style.background="none";">Choisissez une photo :</label>
-                      <input type="txt" class="form-control">
-                      <input type="file" name="doctor_photo" id="doctor_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon" style=display:none>
-                  </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-outline-primary">Modifier</button>
-                      </div>
-              </form>
-            </div>
-          </div>
-        </div>
-  </div>
-  </div>
-
-  <div class="modal fade" id="modal' . $doctor['doctor_id'] . '' . $doctor['doctor_lastname'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-body text-center">
-          <h6> Voulez-vous supprimer cet élément définitivement?</h6>
-          <!-- bouton delete -->
-          <div class="text-center">
-            <button type="button" class="btn btn-primary"><a href="controller-doctor.php?delete=' . $doctor['doctor_id'] . '"><span class="text-white">oui</span></a></button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">non</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>';
-  }
-}
-
-
-
-
-
-
 
 
 
