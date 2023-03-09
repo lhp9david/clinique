@@ -95,7 +95,7 @@
               </td>
             </tr>
             <tr class="consultation<?= $patient['patient_id'] ?> appointment-bg" hidden>
-              <td colspan="8">
+              <td colspan="9">
                 
                   <table class="table">
                     <thead>
@@ -105,7 +105,6 @@
                         <th scope="col">Description</th>
                         <th scope="col">Nom du médecin</th>
                         <th scope="col">Prénom du médecin</th>
-
                       </tr>
                     </thead>
                     <tbody>
@@ -159,7 +158,7 @@
                 </div>
                 <div class="input-group">
                   <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_birthdate'] ?? '<i class="bi bi-calendar"></i>' ?></div>
-                  <input type="date" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= date('d/m/Y', strtotime($patient['patient_birthdate'])) ?>'>
+                  <input type="date" name="patient_birthdate" id="patient_birthdate" class="form-control" placeholder="Date de naissance" aria-label="Input group example" aria-describedby="btnGroupAddon" value='<?= $patient['patient_birthdate'] ?>'>
                 </div>
                 <div class="input-group">
                   <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_phone'] ?? '<i class="bi bi-telephone-fill"></i>' ?></div>
@@ -181,9 +180,7 @@
                 <input type="hidden" name="patient_mail" value='<?= $patient['patient_mail'] ?>'>
                 <div class="input-group">
                   <div class="input-group-text" id="btnGroupAddon"><?= $errors_patient['patient_upload'] ?? '<i class="bi bi-image-fill"></i>' ?></div>
-                  <label for="patient_photo" class="btn border" onmouseover="this.style.background='#e9e3f1';" onmouseout="this.style.background='none';">Choisissez une photo :</label>
-                  <input type="txt" class="form-control" value="<?= $patient['patient_photo'] ? $patient['patient_photo'] : 'Aucune photo sélectionnée' ?>">
-                  <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon" style=display:none>
+                  <input type="file" name="patient_photo" id="patient_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
                 </div>
                 <div class="<?= $errors_patient['show'] ?? '' ?> rounded-5 mt-2 p-2">
                   <?= $errors_patient['message'] ?? '' ?>

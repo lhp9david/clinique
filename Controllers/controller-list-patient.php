@@ -20,12 +20,6 @@ $obj_doctor = new Doctor();
 
 //************************************************************ */
 
-
-var_dump($_FILES);
-var_dump($_POST);
-
-
-
 $obj_patient = new Patient();
 
 $obj_patient->DisplayPatientList();
@@ -208,8 +202,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Upload réussi :)"; // PS : Message de debug personne ne le verra
         }
     }
-
-    var_dump($errors_patient);
 
     if (empty($errors_patient)) {
 
