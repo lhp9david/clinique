@@ -41,13 +41,15 @@ class Appointments
             $patient = new Patient(); // Création d'un objet patient
             $patient = $patient->ConsultPatientInfo($appointment['patient_id']); // Récupère les informations du patient par rapport à son id
             $appointment['appointment_date'] = date('d/m/Y', strtotime($appointment['appointment_date'])); // Formate la date au format français
+            $doctorSpecialty = new Doctor(); // Création d'un objet doctor
+            $doctorSpecialty = $doctorSpecialty->getSpecialtyName($appointment['doctor_id']); // Récupère les informations du médecin par rapport à son id
             echo '<tr>';
-            echo '<td>' . strtoupper($patient['patient_lastname']). '</td>';
+            echo '<td>' . strtoupper($patient['patient_lastname']) . '</td>';
             echo '<td>' . ucfirst($patient['patient_firstname']) . '</td>';
             echo '<td>' . $appointment['appointment_date'] . ' </td>';
             echo '<td>' . $appointment['appointment_hour'] . '</td>';
             echo '<td>' . $patient['patient_phone'] . '</td>';
-            echo '<td>' . $patient['patient_secu'] . '</td>';
+            echo '<td>' . $doctorSpecialty . '</td>';
             if (isset($_SESSION['secretary_id'])) {
                 echo '<td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>';
                 echo '<button type="button" id="btnDelete" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modalDelete' . $appointment['appointment_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png"></button><td>';
