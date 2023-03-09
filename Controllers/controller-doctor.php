@@ -68,17 +68,26 @@ function displayDoctorList()
   }
   foreach ($doctorList as $doctor) {
     echo '
-        <tr>
-        <td>' . $doctor['doctor_lastname'] . '</td>
-        <td>' . $doctor['doctor_firstname'] . '</td>
+      <tr>
+        <td>
+          <a href="controller-info-doctor.php?doctor='.$doctor['doctor_id'].'">
+            <button type="button" class="btn btn-primary rounded-5">
+              <img src="https://img.icons8.com/ios-filled/20/FFFFFF/information.png"/>
+            </button>
+          </a>
+        </td>
+        <td>' . strtoupper($doctor['doctor_lastname']) . '</td>
+        <td>' . ucfirst($doctor['doctor_firstname']) . '</td>
         <td>' . $doctor['doctor_phone'] . '</td>
-        <td>' . $doctor['doctor_phone_emergency'] . '</td>
+        
         <td>' . $doctor['doctor_mail'] . '</td>
         <td>' . $doc->getSpecialtyName($doctor['specialty_id']) . '</td>
-        <td>' . $doctor['doctor_adress'] . '</td>
-        <td> <button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modal' . $doctor['doctor_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
-        <button type="button" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modal' . $doctor['doctor_id'] . $doctor['doctor_lastname'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button></td>
-        </tr>';
+       
+          <td> 
+            <button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modal' . $doctor['doctor_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
+            <button type="button" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modal' . $doctor['doctor_id'] . $doctor['doctor_lastname'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button>
+          </td>
+      </tr>';
     echo '
         <div class="modal fade" id="modal' . $doctor['doctor_id'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">

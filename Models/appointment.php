@@ -31,7 +31,8 @@ class Appointment
 
     public function DisplayAppointmentList(): array
     {
-        $query = $this->_pdo->prepare('SELECT * FROM cl_appointments');
+        /* select tous les rendez vous trier par date et heure */
+        $query = $this->_pdo->prepare('SELECT * FROM cl_appointments ORDER BY appointment_date, appointment_hour');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -126,4 +127,19 @@ class Appointment
         return $appointmentList;
     }
 
+    /* nombre de rendez vous*/
+    public function CountAppointment()
+    {
+        $query = $this->_pdo->prepare('SELECT COUNT(*) FROM cl_appointments');
+        $query->execute();
+        $count = $query->fetch();
+        return $count[0];
+       
+    }
+    /* calcul du premier article de la page*/
+    public function FirstArticle($page, $parPage): int
+    {
+        $firstArticle = ($page - 1) * $parPage;
+        return $firstArticle;
+    }
 }

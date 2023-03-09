@@ -35,20 +35,27 @@ class Appointments
             $appointmentList = new Appointment();
             $appointmentList = $appointmentList->DisplayAppointmentList();
         }
+
         foreach ($appointmentList as $appointment) {
+            // Si la liste est vide, on affiche un message
             $patient = new Patient(); // Création d'un objet patient
             $patient = $patient->ConsultPatientInfo($appointment['patient_id']); // Récupère les informations du patient par rapport à son id
             $appointment['appointment_date'] = date('d/m/Y', strtotime($appointment['appointment_date'])); // Formate la date au format français
+            $doctorSpecialty = new Doctor(); // Création d'un objet doctor
+            $doctorSpecialty = $doctorSpecialty->getSpecialtyName($appointment['doctor_id']); // Récupère les informations du médecin par rapport à son id
             echo '<tr>';
-            echo '<td>' . $patient['patient_firstname'] . '</td>';
-            echo '<td>' . $patient['patient_lastname'] . '</td>';
+            echo '<td>' . strtoupper($patient['patient_lastname']) . '</td>';
+            echo '<td>' . ucfirst($patient['patient_firstname']) . '</td>';
             echo '<td>' . $appointment['appointment_date'] . ' </td>';
             echo '<td>' . $appointment['appointment_hour'] . '</td>';
             echo '<td>' . $patient['patient_phone'] . '</td>';
-            echo '<td>' . $patient['patient_secu'] . '</td>';
-            echo '<td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>';
-            echo '<button type="button" id="btnDelete" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modalDelete' . $appointment['appointment_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png"></button><td>';
+            echo '<td>' . $doctorSpecialty . '</td>';
+            if (isset($_SESSION['secretary_id'])) {
+                echo '<td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>';
+                echo '<button type="button" id="btnDelete" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modalDelete' . $appointment['appointment_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png"></button><td>';
+            }
             echo '</tr>';
+
 
             // Modal de suppression
 
@@ -59,23 +66,15 @@ class Appointments
                   <h6> Voulez-vous supprimer cet élément définitivement?</h6>
                   <!-- bouton delete -->
                   <div class="text-center">
-                    <button type="button" class="btn btn-primary"><a href="controller-doctor.php?delete=' . $appointment['appointment_id'] . '"><span class="text-white">oui</span></a></button>
+                    <button type="button" class="btn btn-primary"><a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '"><span class="text-white">oui</span></a></button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">non</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>';
-            // CODE à utiliser demain à Mathis PAS TOUCHER
-            //   if (isset($_GET['doctor'])) {
-            //     echo '
-            //     <a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '&doctor=' . $_GET['doctor'] . '><button type=" button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button></a></td>';
-            //     } else {
-            //     echo '
-            //     <td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
-            //         <a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '"><button type="button" class="btn btn-danger rounded-5"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png" /></button></a>
-            //     </td>';
         }
+        return $appointmentList;
     }
 
     public static function displayAppointmentsModals() // Affiche les modals de modification des rendez-vous
@@ -194,7 +193,20 @@ function displayDoctors() // Affiche la liste des médecins dans un select
         }
     }
 }
+if(isset($_GET['page']) && !empty($_GET['page'])){
+    $currentPage = ($_GET['page']);
+    $appointments = new Appointment();
+    $nbAppointment = $appointments-> CountAppointment();
+    $parPage = 2;
+    $pages = ceil($nbAppointment / $parPage);
+    $premier = ($currentPage * $parPage) - $parPage;
+    $appointmentList = new Appointment();
+    $appointmentList = $appointmentList->firstArticle($premier, $parPage);
+}else{
+    $currentPage = 1;
+}
 
-
+$AppointmentList = new Appointments();
+$AppointmentList = $AppointmentList->GetAppointmentList(); // On récupère la liste des rendez-vous pour vérifier si elle est vide ou non, et afficher dans la vue un message d'erreur si elle l'est
 
 include('../Views/view-doctor-appointments.php');

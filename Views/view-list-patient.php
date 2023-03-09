@@ -56,7 +56,7 @@
       <table class="table">
         <thead>
           <tr>
-
+            <th scope="col"></th>
             <th scope="col">Nom</th>
             <th scope="col">Prénom</th>
             <th scope="col">Date de naissance</th>
@@ -74,8 +74,15 @@
           <?php
           foreach ($patients as $patient) { ?>
             <tr class="patient_row" data-id="<?= $patient['patient_id'] ?>">
-              <td><?= $patient['patient_lastname'] ?></td>
-              <td><?= $patient['patient_firstname'] ?></td>
+              <td>
+                <a href="controller-info-patient.php?patient=<?= $patient['patient_id'] ?>">
+                  <button type="button" class="btn btn-primary rounded-5">
+                    <img src="https://img.icons8.com/ios-filled/20/FFFFFF/information.png" />
+                  </button>
+                </a>
+              </td>
+              <td><?= strtoupper($patient['patient_lastname']) ?></td>
+              <td><?= ucfirst($patient['patient_firstname']) ?></td>
               <td><?= date('d/m/Y', strtotime($patient['patient_birthdate'])) ?></td>
               <td><?= $patient['patient_secu'] ?></td>
               <td><?= $patient['patient_mail'] ?></td>
