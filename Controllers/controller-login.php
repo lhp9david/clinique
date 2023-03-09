@@ -6,6 +6,10 @@ require('../config/env.php');
 
 session_start();
 
+$nb1 = rand(1, 100);
+$nb2 = rand(1, 5);
+$somme = $nb1 + $nb2;
+$_SESSION['resultat'] = $somme;
 
 // Gère la déconnexion
 if (isset($_GET["action"]) && $_GET["action"] == "logout") {
@@ -14,6 +18,10 @@ if (isset($_GET["action"]) && $_GET["action"] == "logout") {
     header("location: controller-login.php");
     exit;
 }
+
+
+
+    
 
 
 // Si l'utilisateur est déjà connecté et est un docteur, rediriger vers la page d'accueil
@@ -35,12 +43,13 @@ if(isset($_GET['logout'])){
 // Initialiser les variables d'erreur
 $wrong = '<i class="bi bi-x-circle-fill text-danger"></i>';
 $missing = '<i class="bi bi-exclamation-circle-fill text-danger"></i>';
+// verifier le captcha
 
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Créer un tableau vide d'erreurs
     $errorsArray = [];
-
+    
     // Vérifier si les champs sont vides
     if (empty(trim($_POST["login"])) || empty(trim($_POST["password"]))) {
         $errorsArray['error'] = $missing;
