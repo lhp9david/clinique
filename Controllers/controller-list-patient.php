@@ -3,6 +3,8 @@
 require_once '../config/env.php';
 require_once '../helpers/Database.php';
 require_once '../models/patient.php';
+require_once '../models/appointment.php';
+require_once '../models/doctor.php';
 
 session_start();
 
@@ -11,6 +13,12 @@ if (!isset($_SESSION['secretary_id'])) { // Si l'utilisateur n'est pas connecté
     exit;
 }
 
+//************************************************************ */
+
+$obj_appointment = new Appointment();
+$obj_doctor = new Doctor();
+
+//************************************************************ */
 
 $obj_patient = new Patient();
 

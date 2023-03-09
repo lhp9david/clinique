@@ -43,11 +43,11 @@ class Appointment
      * @return array
      */
 
-    public function DisplayAppointmentListByPatient($appointment_patient): array
+    public function DisplayAppointmentListByPatient($patient_id): array
     {
-        $query = $this->_pdo->prepare('SELECT * FROM cl_appointment WHERE appointment_patient = :appointment_patient');
+        $query = $this->_pdo->prepare('SELECT * FROM cl_appointments WHERE patient_id = :patient_id');
         $query->execute([
-            ':appointment_patient' => $appointment_patient,
+            ':patient_id' => $patient_id,
         ]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -133,13 +133,17 @@ class Appointment
         $query = $this->_pdo->prepare('SELECT COUNT(*) FROM cl_appointments');
         $query->execute();
         $count = $query->fetch();
-        return $count[0];
+        return $count;
        
     }
     /* calcul du premier article de la page*/
-    public function FirstArticle($page, $parPage): int
+    public function FirstArticle($premier, $parPage): int
     {
-        $firstArticle = ($page - 1) * $parPage;
-        return $firstArticle;
+      $query = $this->_pdo->prepare('SELECT * FROM cl_appointments ORDER BY appointment_date, appointment_hour LIMIT :premier, :parPage');
+        $query->bindValue(':premier', $premier, PDO::PARAM_INT);
+        $query->bindValue(':parPage', $parPage, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+
     }
 }

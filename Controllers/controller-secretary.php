@@ -461,7 +461,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
     // **********************************************************
     // UPLOAD DE LA PHOTO DU PATIENT
 
-    if ($_FILES["patient_photo"]["error"] == 0) {
+    if (isset($_FILES['patient_photo']) &&  $_FILES["patient_photo"]["error"] == 0) {
         $filepath = $_FILES['patient_photo']['tmp_name'];
         $fileSize = filesize($filepath);
         $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -509,25 +509,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
             $patient_mail = $_POST['patient_mail'];
             $patient_phone = $_POST['patient_phone'];
             $patient_adress = $_POST['patient_adress'];
-            if ($_FILES['patient_photo']['error'] == 0) {
-                $patient_photo = $_FILES['patient_photo']['name'];
-            } else {
-                $patient_photo = '';
-            }
-            $patient_lastname = $_POST['patient_lastname'];
-            $patient_firstname = $_POST['patient_firstname'];
-            $patient_birthdate = $_POST['patient_birthdate'];
-            $patient_secu = $_POST['patient_secu'];
-            $patient_mail = $_POST['patient_mail'];
-            $patient_phone = $_POST['patient_phone'];
-            $patient_adress = $_POST['patient_adress'];
-            if ($_FILES['patient_photo']['error'] == 0) {
+            if (isset($_FILES['patient_photo']) &&  $_FILES['patient_photo']['error'] == 0) {
                 $patient_photo = $_FILES['patient_photo']['name'];
             } else {
                 $patient_photo = '';
             }
 
-            $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
             $obj_patient->addNewPatient($patient_lastname, $patient_firstname, $patient_birthdate, $patient_secu, $patient_mail, $patient_phone, $patient_adress, $patient_photo);
 
             echo 'Le patient a bien été ajouté !';

@@ -4,7 +4,18 @@
 
 
 
+
+
+
+
+
+
+
+
 <body>
+
+
+
     <header>
         <nav class="navbar fixed-top">
             <div class="container-fluid">
@@ -43,6 +54,24 @@
         </nav>
     </header>
 
+
+
+
+    <!-- Pagination -->
+    <div class="mt-5 pt-5">
+        <nav class="mt-5 pt-5">
+            <!-- Pour chaque page, on affiche un lien vers la page -->
+            <?php for ($i = 1; $i <= $nbPage; $i++) : ?>
+                <a href="controller-doctor-appointments.php?page=<?= $i ?>"><?= $i ?></a>
+            <?php endfor; ?>
+        </nav>
+    </div>
+
+
+
+
+
+
     <main>
         <div class="container">
             <div class="row appointments">
@@ -67,7 +96,43 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php Appointments::displayAllAppointments(); ?> <!-- Affiche la liste des rendez-vous -->
+                                <!-- Affichage des RDV de la page -->
+
+                                <?php
+                                foreach ($appointmentsArray as $appointment) : ?>
+                                    <?php echo '<tr>';
+                                    echo '<td>' . strtoupper($appointment['patient_lastname']) . '</td>';
+                                    echo '<td>' . ucfirst($appointment['patient_firstname']) . '</td>';
+                                    echo '<td>' . $appointment['appointment_date'] . ' </td>';
+                                    echo '<td>' . $appointment['appointment_hour'] . '</td>';
+                                    echo '<td>' . $appointment['patient_phone'] . '</td>';
+                                    echo '<td>' . $appointment['doctor_specialty'] . '</td>';
+                                    if (isset($_SESSION['secretary_id'])) {
+                                        echo '<td><button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modifyAppointment' . $appointment['appointment_id'] . '" class="btn btn-primary"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>';
+                                        echo '<button type="button" id="btnDelete" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modalDelete' . $appointment['appointment_id'] . '"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png"></button><td>';
+                                    }
+                                    echo '</tr>';
+
+
+                                    // Modal de suppression
+
+                                    echo ' <div class="modal fade" id="modalDelete' . $appointment['appointment_id'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-body text-center">
+                  <h6> Voulez-vous supprimer cet élément définitivement?</h6>
+                  <!-- bouton delete -->
+                  <div class="text-center">
+                    <button type="button" class="btn btn-primary"><a href="controller-doctor-appointments.php?deleteAppointment=' . $appointment['appointment_id'] . '"><span class="text-white">oui</span></a></button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">non</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>'; ?>
+                                <?php endforeach;
+
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -75,25 +140,6 @@
 
             </div>
 
-
-            <nav>
-                    <ul class="pagination">
-                        <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
-                        <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                            <a href="../Controllers/controller-doctor-appoitments.php?page=<?= $currentPage - 1 ?>" class="page-link">Précédente</a>
-                        </li>
-                        <?php for($page = 1; $page <= $pages; $page++): ?>
-                          <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
-                          <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
-                                <a href="../Controllers/controller-doctor-appointments.php?page=<?= $page ?>" class="page-link"><?= $page ?></a>
-                            </li>
-                        <?php endfor ?>
-                          <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
-                          <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-                            <a href="../Controllers/controller-doctor-appointments.php?page=<?= $currentPage + 1 ?>" class="page-link">Suivante</a>
-                        </li>
-                    </ul>
-                </nav>
 
 
     </main>
