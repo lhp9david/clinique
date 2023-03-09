@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     $doc = new Doctor();
     $doc = $doc->getDoctorById($_GET['doctor_id']);
-    $doctor_id = $doc[0]['doctor_id'];
+    $doctor_id = $doc['doctor_id'];
 
     // vérification que le "formulaire" est valide
     $errors = [];
@@ -127,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     if (isset($_GET['doctor_photo'])) {
       if (empty($_GET['doctor_photo'])) {
-        $doctor_photo = $doc[0]['doctor_photo'];
+        $doctor_photo = $doc['doctor_photo'];
       } else {
         $doctor_photo = $_GET['doctor_photo'];
       }
