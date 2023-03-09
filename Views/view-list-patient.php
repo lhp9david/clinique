@@ -74,7 +74,7 @@
           foreach ($patients as $patient) { ?>
             <tr>
               <td>
-                <a href="controller-info-patient.php">
+                <a href="controller-info-patient.php?patient=<?= $patient['patient_id'] ?>">
                   <button type="button" class="btn btn-primary rounded-5">
                     <img src="https://img.icons8.com/ios-filled/20/FFFFFF/information.png" />
                   </button>
