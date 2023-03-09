@@ -10,8 +10,7 @@
                 <a class="navbar-brand" href="../Controllers/controller-secretary.php">
                     <img src="https://img.icons8.com/color/38/null/hospital-2.png" />
                     <span class="text-muted fw-bold">
-                        Informations de
-                        <!-- echo court nom du médecin -->
+                        Informations de <?= $doctor_lastname?> <?= $doctor_firstname ?>
                     </span>
                 </a>
                 <div>
@@ -28,11 +27,16 @@
                     <!-- doctor-photo en rounded circle-->
                     <div class="row mb-2">
                         <div class="col-4">
-                            <img src="https://img.icons8.com/officel/80/null/medical-doctor.png" alt="profil picture" class="rounded-circle border border-5 border-light" />
+                            <img src="../Uploads/<?php
+                            if ($doctor_photo == '') {
+                                echo 'default_doctor_photo.png';
+                            } else {
+                                echo $doctor_photo;
+                            } ?>" alt="profil picture" class="rounded-circle border border-5 border-light img-fluid" />
                         </div>
                         <div class="col p-3 text-start">
-                            <h5 class="card-title pt-2">NOM Prénom</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Spécialité</h6>
+                            <h5 class="card-title pt-2"><?= $doctor_lastname?> <?= $doctor_firstname ?></h5>
+                            <h6 class="card-subtitle mb-2 text-muted"><?= $doctor_specialty?></h6>
                         </div>
                     </div>
 
@@ -40,22 +44,22 @@
                         <!-- adresse mail -->
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-envelope-fill"></i></div>
-                            <input type="mail" name="mail" id="mail" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon" value="" disabled>
+                            <input type="mail" name="mail" id="mail" class="form-control" placeholder="Adresse mail" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $doctor_mail?>" disabled>
                         </div>
                         <!-- phone -->
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></div>
-                            <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" minlength="10" maxlength="10" aria-label="Input group example" aria-describedby="btnGroupAddon" value="" disabled>
+                            <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" minlength="10" maxlength="10" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $doctor_phone?>" disabled>
                         </div>
                         <!-- phone emergency -->
                         <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telephone-fill"></i></div>
-                            <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" minlength="10" maxlength="10" aria-label="Input group example" aria-describedby="btnGroupAddon" value="" disabled>
+                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-headset"></i></div>
+                            <input type="phone" name="patient_phone" id="phone" class="form-control" placeholder="Téléphone" minlength="10" maxlength="10" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $doctor_phone_emergency?>" disabled>
                         </div>
                         <!-- adress -->
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-geo-alt-fill"></i></div>
-                            <input type="text" name="patient_adress" id="adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon" value="" disabled>
+                            <input type="text" name="patient_adress" id="adress" class="form-control" placeholder="Adresse" aria-label="Input group example" aria-describedby="btnGroupAddon" value="<?= $doctor_adress?>" disabled>
                         </div>
 
                     </div>
