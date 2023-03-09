@@ -43,7 +43,7 @@ class NewAppointment
         } else {
             $errors_appointment['date'] = $missing;
             $errors_appointment['show-missing'] = 'alert alert-danger';
-            $errors_appointment['missing'] = "Champs obligatoire"; 
+            $errors_appointment['missing'] = "Champs obligatoire";
         }
 
         // Vérification de l'heure
@@ -58,7 +58,7 @@ class NewAppointment
         } else {
             $errors_appointment['hour'] = $missing;
             $errors_appointment['show-missing'] = 'alert alert-danger';
-            $errors_appointment['missing'] = "Champs obligatoire"; 
+            $errors_appointment['missing'] = "Champs obligatoire";
         }
 
         // Vérification de l'identifiant du patient
@@ -67,7 +67,7 @@ class NewAppointment
         } else {
             $errors_appointment['patient'] = $missing;
             $errors_appointment['show-missing'] = 'alert alert-danger';
-            $errors_appointment['missing'] = "Champs obligatoire"; 
+            $errors_appointment['missing'] = "Champs obligatoire";
         }
 
         // Vérification de l'identifiant du médecin
@@ -76,7 +76,7 @@ class NewAppointment
         } else {
             $errors_appointment['doctor'] = $missing;
             $errors_appointment['show-missing'] = 'alert alert-danger';
-            $errors_appointment['missing'] = "Champs obligatoire"; 
+            $errors_appointment['missing'] = "Champs obligatoire";
         }
 
         // Vérification de la description
@@ -85,7 +85,7 @@ class NewAppointment
         } else {
             $errors_appointment['description'] = $missing;
             $errors_appointment['show-missing'] = 'alert alert-danger';
-            $errors_appointment['missing'] = "Champs obligatoire"; 
+            $errors_appointment['missing'] = "Champs obligatoire";
         }
 
 
@@ -97,7 +97,7 @@ class NewAppointment
             if (empty($patient)) {
                 $errors_appointment['patient'] = $missing;
                 $errors_appointment['show-missing'] = 'alert alert-danger';
-                $errors_appointment['missing'] = "Champs obligatoire"; 
+                $errors_appointment['missing'] = "Champs obligatoire";
             } else {
                 // On vérifie si le patient n'a pas déjà un rendez-vous à cette date et à cette heure
                 $patient = new Patient();
@@ -147,7 +147,9 @@ function displayDoctors() // Affiche la liste des médecins dans un select, avec
     $doctors = getDoctors();
     echo '<option selected disabled>Choisir un médecin</option>';
     foreach ($doctors as $doctor) {
-        echo '<option ' . (isset($_POST['doctor']) && $_POST['doctor'] == $doctor['doctor_id'] ? 'selected' : '') . ' value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . '</option>';
+        $doctorSpecialty = new Doctor;
+        $doctorSpecialty = $doctorSpecialty->getSpecialtyName($doctor['specialty_id']); // On récupère le nom de la spécialité du médecin
+        echo '<option ' . (isset($_POST['doctor']) && $_POST['doctor'] == $doctor['doctor_id'] ? 'selected' : '') . ' value="' . $doctor['doctor_id'] . '">' . $doctor['doctor_lastname'] . ' ' . $doctor['doctor_firstname'] . ' - ' . $doctorSpecialty . '</option>';
     }
 }
 
@@ -181,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         if (empty($_POST['doctor_lastname'])) {
             $errors['name'] = $missing;
             $errors['show-missing'] = 'alert alert-danger';
-            $errors['missing'] = "Champs obligatoire"; 
+            $errors['missing'] = "Champs obligatoire";
         } else if (!preg_match('/^[a-zA-ZÀ-ÿ-]+$/', $_POST['doctor_lastname'])) {
             $errors['name'] = $wrong;
             $errors['show'] = 'alert alert-danger';
@@ -193,7 +195,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         if (empty($_POST['doctor_firstname'])) {
             $errors['name'] = $missing;
             $errors['show-missing'] = 'alert alert-danger';
-            $errors['missing'] = "Champs obligatoire"; 
+            $errors['missing'] = "Champs obligatoire";
         } else if (!preg_match('/^[a-zA-ZÀ-ÿ-]+$/', $_POST['doctor_firstname'])) {
             $errors['name'] = $wrong;
             $errors['show'] = 'alert alert-danger';
@@ -206,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         if (empty($_POST['doctor_mail'])) {
             $errors['mail'] = $missing;
             $errors['show-missing'] = 'alert alert-danger';
-            $errors['missing'] = "Champs obligatoire"; 
+            $errors['missing'] = "Champs obligatoire";
         } else if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $_POST['doctor_mail'])) {
             $errors['mail'] = $wrong;
             $errors['show'] = 'alert alert-danger';
@@ -218,7 +220,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         if (empty($_POST['doctor_phone'])) {
             $errors['phone'] = $missing;
             $errors['show-missing'] = 'alert alert-danger';
-            $errors['missing'] = "Champs obligatoire"; 
+            $errors['missing'] = "Champs obligatoire";
         } else if (!preg_match('/^0[1-9]([-. ]?[0-9]{2}){4}$/', $_POST['doctor_phone'])) {
             $errors['phone'] = $wrong;
             $errors['show'] = 'alert alert-danger';
@@ -230,7 +232,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         if (empty($_POST['doctor_phone_emergency'])) {
             $errors['phone_emergency'] = $missing;
             $errors['show-missing'] = 'alert alert-danger';
-            $errors['missing'] = "Champs obligatoire"; 
+            $errors['missing'] = "Champs obligatoire";
         } else if (!preg_match('/^0[1-9]([-. ]?[0-9]{2}){4}$/', $_POST['doctor_phone_emergency'])) {
             $errors['phone_emergency'] = $wrong;
             $errors['show'] = 'alert alert-danger';
@@ -241,7 +243,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         if (empty($_POST['doctor_adress'])) {
             $errors['adress'] = $missing;
             $errors['show-missing'] = 'alert alert-danger';
-            $errors['missing'] = "Champs obligatoire"; 
+            $errors['missing'] = "Champs obligatoire";
         }
     }
 
@@ -249,7 +251,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         if (empty($_POST['doctor_password'])) {
             $errors['password'] = $missing;
             $errors['show-missing'] = 'alert alert-danger';
-            $errors['missing'] = "Champs obligatoire"; 
+            $errors['missing'] = "Champs obligatoire";
         } else if (!preg_match('/^.{8,}$/', $_POST['doctor_password'])) {
             $errors['password'] = $wrong;
             $errors['show'] = 'alert alert-danger';
@@ -264,7 +266,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         if (empty($_POST['confirmPass'])) {
             $errors['confirmPass'] = $missing;
             $errors['show-missing'] = 'alert alert-danger';
-            $errors['missing'] = "Champs obligatoire"; 
+            $errors['missing'] = "Champs obligatoire";
         } else if (!preg_match('/^.{8,}$/', $_POST['confirmPass'])) {
             $errors['confirmPass'] = $wrong;
             $errors['show'] = 'alert alert-danger';
@@ -276,7 +278,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         if (empty($_POST['specialty_id'])) {
             $errors['specialty'] = $missing;
             $errors['show-missing'] = 'alert alert-danger';
-            $errors['missing'] = "Champs obligatoire"; 
+            $errors['missing'] = "Champs obligatoire";
         }
     }
 
@@ -284,7 +286,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitNewDoctor'])) {
         if (empty($_POST['doctor_photo'])) {
             $errors['photo'] = $missing;
             $errors['show-missing'] = 'alert alert-danger';
-            $errors['missing'] = "Champs obligatoire"; 
+            $errors['missing'] = "Champs obligatoire";
         }
     }
     if (isset($_FILES['doctor_photo']) && $_FILES['doctor_photo']['error'] == 0) {
@@ -334,7 +336,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
             $errors_patient['patient_name'] = $missing;
             $errors_patient['show-missing'] = 'alert alert-danger';
-            $errors_patient['missing'] = "Champs obligatoire"; 
+            $errors_patient['missing'] = "Champs obligatoire";
         } else if (!preg_match('/^[a-zA-ZéèàêâùïüëöçÉÈÀÊÂÛÏÜËÖÇ -]+$/', $_POST['patient_lastname'])) {
 
             $errors_patient['patient_name'] = $wrong;
@@ -346,7 +348,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
             $errors_patient['patient_name'] = $missing;
             $errors_patient['show-missing'] = 'alert alert-danger';
-            $errors_patient['missing'] = "Champs obligatoire"; 
+            $errors_patient['missing'] = "Champs obligatoire";
         } else if (!preg_match('/^[a-zA-ZéèàêâùïüëöçÉÈÀÊÂÛÏÜËÖÇ -]+$/', $_POST['patient_firstname'])) {
 
             $errors_patient['patient_name'] = $wrong;
@@ -355,19 +357,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         }
     }
 
-    if (isset ($_POST['patient_birthdate'])) {
-            
-            if (empty($_POST['patient_birthdate'])) {
-    
-                $errors_patient['patient_birthdate'] = $missing;
-                $errors_patient['show-missing'] = 'alert alert-danger';
-                $errors_patient['missing'] = "Champs obligatoire";
-            } else if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $_POST['patient_birthdate'])) {
-    
-                $errors_patient['patient_birthdate'] = $wrong;
-                $errors_patient['show'] = 'alert alert-danger';
-                $errors_patient['message'] = "Format incorrect";
-            }
+    if (isset($_POST['patient_birthdate'])) {
+
+        if (empty($_POST['patient_birthdate'])) {
+
+            $errors_patient['patient_birthdate'] = $missing;
+            $errors_patient['show-missing'] = 'alert alert-danger';
+            $errors_patient['missing'] = "Champs obligatoire";
+        } else if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $_POST['patient_birthdate'])) {
+
+            $errors_patient['patient_birthdate'] = $wrong;
+            $errors_patient['show'] = 'alert alert-danger';
+            $errors_patient['message'] = "Format incorrect";
+        }
     }
 
     if (isset($_POST['patient_phone'])) {
@@ -376,7 +378,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
             $errors_patient['patient_phone'] = $missing;
             $errors_patient['show-missing'] = 'alert alert-danger';
-            $errors_patient['missing'] = "Champs obligatoire"; 
+            $errors_patient['missing'] = "Champs obligatoire";
         } else if (strlen($_POST['patient_phone']) != 10) {
 
             $errors_patient['patient_phone'] = $wrong;
@@ -401,7 +403,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
             $errors_patient['patient_secu'] = $missing;
             $errors_patient['show-missing'] = 'alert alert-danger';
-            $errors_patient['missing'] = "Champs obligatoire"; 
+            $errors_patient['missing'] = "Champs obligatoire";
         } else if (strlen($_POST['patient_secu']) != 15) {
 
             $errors_patient['patient_secu'] = $wrong;
@@ -426,7 +428,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
             $errors_patient['patient_mail'] = $missing;
             $errors_patient['show-missing'] = 'alert alert-danger';
-            $errors_patient['missing'] = "Champs obligatoire"; 
+            $errors_patient['missing'] = "Champs obligatoire";
         } else if (!filter_var($_POST['patient_mail'], FILTER_VALIDATE_EMAIL)) {
 
             $errors_patient['patient_mail'] = $wrong;
@@ -446,7 +448,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
 
             $errors_patient['patient_adress'] = $missing;
             $errors_patient['show-missing'] = 'alert alert-danger';
-            $errors_patient['missing'] = "Champs obligatoire"; 
+            $errors_patient['missing'] = "Champs obligatoire";
         } else if (!preg_match('/^[a-zA-Z0-9éèàêâùïüëöçÉÈÀÊÂÛÏÜËÖÇ -,]+$/', $_POST['patient_adress'])) {
 
             $errors_patient['patient_adress'] = $wrong;
@@ -467,34 +469,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
         $filetype = finfo_file($fileinfo, $filepath);
 
-            if ($fileSize === 0) {
-                $errors_patient['patient_upload'] = "La photo est vide.";
-            }
+        if ($fileSize === 0) {
+            $errors_patient['patient_upload'] = "La photo est vide.";
+        }
 
-            if ($fileSize > 3145728) { // 3 MB (1 byte * 1024 * 1024 * 3 (for 3 MB))
-                $errors_patient['patient_upload'] = "La photo est trop volumineuse";
-            }
+        if ($fileSize > 3145728) { // 3 MB (1 byte * 1024 * 1024 * 3 (for 3 MB))
+            $errors_patient['patient_upload'] = "La photo est trop volumineuse";
+        }
 
-            $allowedTypes = [
-                'image/png' => 'png',
-                'image/jpeg' => 'jpg'
-            ];
+        $allowedTypes = [
+            'image/png' => 'png',
+            'image/jpeg' => 'jpg'
+        ];
 
-            if (!in_array($filetype, array_keys($allowedTypes))) {
-                $errors_patient['patient_upload'] = "Extension non valide.";
-            }
+        if (!in_array($filetype, array_keys($allowedTypes))) {
+            $errors_patient['patient_upload'] = "Extension non valide.";
+        }
 
 
-            $filename = basename($filepath); // I'm using the original name here, but you can also change the name of the file here
-            $extension = $allowedTypes[$filetype];
-            $targetDirectory = __DIR__ . "/../uploads"; // __DIR__ is the directory of the current PHP file
+        $filename = basename($filepath); // I'm using the original name here, but you can also change the name of the file here
+        $extension = $allowedTypes[$filetype];
+        $targetDirectory = __DIR__ . "/../uploads"; // __DIR__ is the directory of the current PHP file
 
-            $newFilepath = $targetDirectory . "/" . $_FILES['patient_photo']['name'];
+        $newFilepath = $targetDirectory . "/" . $_FILES['patient_photo']['name'];
 
-            if (!copy($filepath, $newFilepath)) { // Copy the file, returns false if failed
-                $errors_patient['patient_upload'] = "La photo n'a pas pu être sauvegardée.";
-            }
-            unlink($filepath); // Delete the temp file
+        if (!copy($filepath, $newFilepath)) { // Copy the file, returns false if failed
+            $errors_patient['patient_upload'] = "La photo n'a pas pu être sauvegardée.";
+        }
+        unlink($filepath); // Delete the temp file
 
         echo "Upload réussi :)";
     }

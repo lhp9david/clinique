@@ -11,7 +11,7 @@
                 <a class="navbar-brand" href="../Controllers/controller-secretary.php">
                     <img src="https://img.icons8.com/color/38/null/hospital-2.png" />
                     <span class="text-muted fw-bold">
-                    <?=$_SESSION['doctor_lastname'] ?? 'Liste des consultations'?></p>
+                        <?= $_SESSION['doctor_lastname'] ?? 'Liste des consultations' ?></p>
                     </span>
                 </a>
                 <div>
@@ -47,7 +47,7 @@
         <div class="container">
             <div class="row appointments">
                 <?php if (empty($AppointmentList)) {
-                    echo 
+                    echo
                     '
                         <div class="alert alert-primary rounded-5 text-center" role="alert">
                         <i class="bi bi-info-circle-fill"></i> Vous n\'avez aucun rendez-vous
@@ -63,7 +63,7 @@
                                     <th scope="col">Date du rendez-vous</th>
                                     <th scope="col">Heure du rendez-vous</th>
                                     <th scope="col">Téléphone</th>
-                                    <th scope="col">Numéro de Sécu</th>
+                                    <th scope="col">Spécialité</th>
                                 </tr>
                             </thead>
                             <tbody>
