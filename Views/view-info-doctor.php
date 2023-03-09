@@ -64,7 +64,7 @@
 
                     </div>
 
-                    <a href="#" class="btn btn-outline-primary mt-3 rounded-5">Liste des consultations</a>
+                    <a href="controller-doctor-appointments.php?doctor=<?= $doctor_id ?>" class="btn btn-outline-primary mt-3 rounded-5">Liste des consultations</a>
                 </div>
             </div>
         </div>

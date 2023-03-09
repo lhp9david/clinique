@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $doctor = $doc->getDoctorById($_GET['doctor']);
     
     // création des variables d'info
+    $doctor_id = $doctor[0]['doctor_id'];
     $doctor_lastname = $doctor[0]['doctor_lastname'];
     $doctor_firstname = $doctor[0]['doctor_firstname'];
     $doctor_specialty =  $doc->getSpecialtyName($doctor[0]['specialty_id']);
