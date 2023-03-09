@@ -127,4 +127,19 @@ class Appointment
         return $appointmentList;
     }
 
+    /* nombre de rendez vous*/
+    public function CountAppointment()
+    {
+        $query = $this->_pdo->prepare('SELECT COUNT(*) FROM cl_appointments');
+        $query->execute();
+        $count = $query->fetch();
+        return $count[0];
+       
+    }
+    /* calcul du premier article de la page*/
+    public function FirstArticle($page, $parPage): int
+    {
+        $firstArticle = ($page - 1) * $parPage;
+        return $firstArticle;
+    }
 }
