@@ -191,6 +191,19 @@ function displayDoctors() // Affiche la liste des médecins dans un select
         }
     }
 }
+if(isset($_GET['page']) && !empty($_GET['page'])){
+    $currentPage = ($_GET['page']);
+    $appointments = new Appointment();
+    $nbAppointment = $appointments-> CountAppointment();
+    $parPage = 2;
+    $pages = ceil($nbAppointment / $parPage);
+    $premier = ($currentPage * $parPage) - $parPage;
+    $appointmentList = new Appointment();
+    $appointmentList = $appointmentList->firstArticle($premier, $parPage);
+}else{
+    $currentPage = 1;
+}
+
 $AppointmentList = new Appointments();
 $AppointmentList = $AppointmentList->GetAppointmentList(); // On récupère la liste des rendez-vous pour vérifier si elle est vide ou non, et afficher dans la vue un message d'erreur si elle l'est
 
