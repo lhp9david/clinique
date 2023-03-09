@@ -1,4 +1,9 @@
 <html>
+<script>
+    function onSubmit(token) {
+        document.getElementById("demo-form").submit();
+    }
+</script>
 
 <body>
     <?php include "../includes/head.php"; ?>
@@ -25,7 +30,7 @@
                                         <input type="password" class="form-control" placeholder="Mot de passe" aria-label="Input group example" aria-describedby="btnGroupAddon" name="password">
                                     </div>
 
-                                 
+                                    <div class="g-recaptcha" data-sitekey="6Le8Y-gkAAAAAET4a0j0cageT9rpKpLWnIDrt1-2"></div>
 
                                     <!-- Submit -->
                                     <button class="btn btn-primary m-3" type="submit">se connecter</button>
@@ -44,6 +49,8 @@
 
     <?php include "../includes/footer.php"; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+ 
 </body>
 
 </html>

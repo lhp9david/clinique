@@ -6,10 +6,6 @@ require('../config/env.php');
 
 session_start();
 
-$nb1 = rand(1, 100);
-$nb2 = rand(1, 5);
-$somme = $nb1 + $nb2;
-$_SESSION['resultat'] = $somme;
 
 // Gère la déconnexion
 if (isset($_GET["action"]) && $_GET["action"] == "logout") {
@@ -18,6 +14,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "logout") {
     header("location: controller-login.php");
     exit;
 }
+
 
 
 
@@ -58,6 +55,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $login = trim($_POST["login"]);
         $password = trim($_POST["password"]);
     }
+
+    // Vérifier si le captcha est vide
+    if(isset($_POST['g-recaptcha-response'])){
+        $captcha=$_POST['g-recaptcha-response'];
+      }
+      if(!$captcha){
+        header('Location: ../index.php');
+        exit;
+      }
+
+      // verifier la key 
+      $secretKey = "6Le8Y-gkAAAAAPtwRPyXPTZ5KgxgQpf_BKzskY6O";
+      $ip = $_SERVER['REMOTE_ADDR'];
+      // post request to server
+      $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
+      $response = file_get_contents($url);
+      $responseKeys = json_decode($response,true);
+      // should return JSON with success as true
+      if($responseKeys["success"]) {
+      } 
 
     // Vérifier si le tableau d'erreurs est vide
     if (empty($errorsArray)) {
