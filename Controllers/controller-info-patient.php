@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $patient_id = $patient['patient_id'];
     $patient_lastname = $patient['patient_lastname'];
     $patient_firstname = $patient['patient_firstname'];
-    $patient_birthdate = $patient['patient_birthdate'];
+    $patient_birthdate = date('d/m/Y', strtotime($patient['patient_birthdate']));
     $patient_secu = $patient['patient_secu'];
     $patient_mail = $patient['patient_mail'];
     $patient_phone = $patient['patient_phone'];
@@ -28,8 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
   }
 }
-
-  
 
 
 include('../Views/view-info-patient.php');

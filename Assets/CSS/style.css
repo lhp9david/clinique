@@ -73,4 +73,10 @@ footer {
 
 .dropdown-item.search {
     width : 300px !important;
+
+}
+
+.appointment-bg {
+    background-color: #e5e5f7;
+    background: repeating-linear-gradient( -45deg, #7679b8, #767cf7 5px, #e5e5f7 5px, #e5e5f7 15px );
 }

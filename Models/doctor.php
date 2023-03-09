@@ -138,7 +138,7 @@ class Doctor
         $query->execute([
             ':doctor_id' => $doctor_id,
         ]);
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
 
     // afficher tous les noms des docteurs
@@ -183,6 +183,15 @@ class Doctor
                 return 'Spécialité inconnue';
                 break;
         }
+    }
+    public function getSpecialtyNameByDoctorId($doctor_id)
+    {
+        $query = $this->_pdo->prepare('SELECT specialty_id FROM cl_doctors WHERE doctor_id = :doctor_id');
+        $query->execute([
+            ':doctor_id' => $doctor_id,
+        ]);
+        $specialty_id = $query->fetch(PDO::FETCH_ASSOC);
+        return $this->getSpecialtyName($specialty_id['specialty_id']);
     }
 }
 
@@ -239,4 +248,5 @@ class Secretary
             return false;
         }
     }
+
 }

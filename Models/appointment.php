@@ -43,11 +43,11 @@ class Appointment
      * @return array
      */
 
-    public function DisplayAppointmentListByPatient($appointment_patient): array
+    public function DisplayAppointmentListByPatient($patient_id): array
     {
-        $query = $this->_pdo->prepare('SELECT * FROM cl_appointment WHERE appointment_patient = :appointment_patient');
+        $query = $this->_pdo->prepare('SELECT * FROM cl_appointments WHERE patient_id = :patient_id');
         $query->execute([
-            ':appointment_patient' => $appointment_patient,
+            ':patient_id' => $patient_id,
         ]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
