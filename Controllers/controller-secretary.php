@@ -521,4 +521,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newPatient'])) {
         }
     }
 }
+
+
 include '../Views/view-secretary.php';
