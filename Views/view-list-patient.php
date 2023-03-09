@@ -123,8 +123,8 @@
                           <td><?= date('H:i', strtotime($appointment['appointment_hour'])) ?></td>
                           <td><?= $appointment['appointment_description'] ?></td>
                           <?php $doctor = $obj_doctor->getDoctorById($appointment['doctor_id']); ?>
-                          <td><?= $doctor[0]['doctor_lastname'] ?></td>
-                          <td><?= $doctor[0]['doctor_firstname'] ?></td>
+                          <td><?= $doctor['doctor_lastname'] ?></td>
+                          <td><?= $doctor['doctor_firstname'] ?></td>
                         </tr>
                       <?php }
                       } ?>
