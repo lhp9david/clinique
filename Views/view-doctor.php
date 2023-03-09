@@ -7,11 +7,11 @@
   <header>
     <nav class="navbar fixed-top">
       <div class="container-fluid">
-      <a class="navbar-brand" href="../Controllers/controller-secretary.php">
-          <img src="https://img.icons8.com/color/38/null/hospital-2.png"/>
+        <a class="navbar-brand" href="../Controllers/controller-secretary.php">
+          <img src="https://img.icons8.com/color/38/null/hospital-2.png" />
           <span class="text-muted fw-bold">
             Liste des médecins
-          </span> 
+          </span>
         </a>
         <div>
           <!-- button select -->
@@ -40,7 +40,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
-
+            <th scope="col"></th>
             <th scope="col">Nom</th>
             <th scope="col">Prénom</th>
             <th scope="col">Numéro de téléphone</th>

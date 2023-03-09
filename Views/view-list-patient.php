@@ -56,7 +56,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
-
+            <th scope="col"></th>
             <th scope="col">Nom</th>
             <th scope="col">Prénom</th>
             <th scope="col">Date de naissance</th>
@@ -73,6 +73,13 @@
           <?php
           foreach ($patients as $patient) { ?>
             <tr>
+              <td>
+                <a href="controller-info-patient.php">
+                  <button type="button" class="btn btn-primary rounded-5">
+                    <img src="https://img.icons8.com/ios-filled/20/FFFFFF/information.png" />
+                  </button>
+                </a>
+              </td>
               <td><?= strtoupper($patient['patient_lastname']) ?></td>
               <td><?= ucfirst($patient['patient_firstname']) ?></td>
               <td><?= date('d/m/Y', strtotime($patient['patient_birthdate'])) ?></td>
@@ -153,19 +160,19 @@
       <!-- modal delete -->
       <div class="modal" tabindex="-1" id="modalDelete<?= $patient['patient_id'] ?>" aria-labelledby="modalDeleteLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-body text-center">
-                <h6> Voulez-vous supprimer cet élément définitivement?</h6>
-                <div class="text-center">
-                  <p class="text-center"><strong><?= $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] ?></strong></p>
-                  <form action="../Controllers/controller-list-patient.php" method="get">
-                    <button type="submit" class="btn btn-primary" name='delete' value='<?= $patient['patient_id'] ?>'>Oui</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">non</button>
-                  </form>
-                </div>
+          <div class="modal-content">
+            <div class="modal-body text-center">
+              <h6> Voulez-vous supprimer cet élément définitivement?</h6>
+              <div class="text-center">
+                <p class="text-center"><strong><?= $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] ?></strong></p>
+                <form action="../Controllers/controller-list-patient.php" method="get">
+                  <button type="submit" class="btn btn-primary" name='delete' value='<?= $patient['patient_id'] ?>'>Oui</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">non</button>
+                </form>
               </div>
             </div>
           </div>
+        </div>
       </div>
     <?php } ?>
 

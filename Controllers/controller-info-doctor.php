@@ -3,4 +3,4 @@
 
 
 
-include('../Views/view-doctor-info.php');
+include('../Views/view-info-doctor.php');
