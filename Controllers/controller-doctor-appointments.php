@@ -42,7 +42,9 @@ class Appointments
             $patient = $patient->ConsultPatientInfo($appointment['patient_id']); // Récupère les informations du patient par rapport à son id
             $appointment['appointment_date'] = date('d/m/Y', strtotime($appointment['appointment_date'])); // Formate la date au format français
             $doctorSpecialty = new Doctor(); // Création d'un objet doctor
-            $doctorSpecialty = $doctorSpecialty->getSpecialtyName($appointment['doctor_id']); // Récupère les informations du médecin par rapport à son id
+            $doctorSpecialty = $doctorSpecialty->getSpecialtyNameByDoctorId($appointment['doctor_id']); // Récupère la spécialité du médecin par rapport à son id
+
+
             echo '<tr>';
             echo '<td>' . strtoupper($patient['patient_lastname']) . '</td>';
             echo '<td>' . ucfirst($patient['patient_firstname']) . '</td>';
@@ -101,8 +103,8 @@ class Appointments
                             </div>
                             <div class="input-group">
                                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-heart-pulse"></i></div>
-                                <input type="text" name="doctor_lastname" id="name" class="form-control" placeholder="Nom" aria-label="Input group example" disabled aria-describedby="btnGroupAddon" value="' . $doctor[0]['doctor_lastname'] . '">
-                                <input type="text" name="doctor_firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" disabled aria-describedby="btnGroupAddon" value="' . $doctor[0]['doctor_firstname'] . '">
+                                <input type="text" name="doctor_lastname" id="name" class="form-control" placeholder="Nom" aria-label="Input group example" disabled aria-describedby="btnGroupAddon" value="' . $doctor['doctor_lastname'] . '">
+                                <input type="text" name="doctor_firstname" id="firstname" class="form-control" placeholder="Prénom" aria-label="Input group example" disabled aria-describedby="btnGroupAddon" value="' . $doctor['doctor_firstname'] . '">
                             </div>
        
                             <div class="input-group">
@@ -193,20 +195,71 @@ function displayDoctors() // Affiche la liste des médecins dans un select
         }
     }
 }
-if(isset($_GET['page']) && !empty($_GET['page'])){
-    $currentPage = ($_GET['page']);
-    $appointments = new Appointment();
-    $nbAppointment = $appointments-> CountAppointment();
-    $parPage = 2;
-    $pages = ceil($nbAppointment / $parPage);
-    $premier = ($currentPage * $parPage) - $parPage;
-    $appointmentList = new Appointment();
-    $appointmentList = $appointmentList->firstArticle($premier, $parPage);
-}else{
-    $currentPage = 1;
-}
+
+// Pagination
 
 $AppointmentList = new Appointments();
 $AppointmentList = $AppointmentList->GetAppointmentList(); // On récupère la liste des rendez-vous pour vérifier si elle est vide ou non, et afficher dans la vue un message d'erreur si elle l'est
+
+$max = 5; // Nombre de rendez-vous par page
+$nbAppointment = count($AppointmentList); // Nombre total de rendez-vous
+$nbPage = ceil($nbAppointment / $max); // Nombre de pages
+
+// Pour chaque page, on ajoute les deux rendez-vous dans un tableau correspondant à la page
+for ($i = 1; $i <= $nbPage; $i++) {
+    $appointmentList[$i] = array_slice($AppointmentList, ($i - 1) * $max, $max);
+}
+
+$page = 1; // Page par défaut
+foreach ($appointmentList as $appointmentPage) { // Pour chaque page de rendez-vous
+    $page++;
+}
+function getAppointmentsofpage($page, $appointmentList) // Retourne la liste des rendez-vous d'une page
+{
+    return $appointmentList[$page];
+}
+
+
+if (isset($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] <= $nbPage) { // Si la page est passée en paramètre et qu'elle est comprise entre 1 et le nombre de pages
+    $page = $_GET['page']; // On récupère la pages
+    $appointmentsOfThisPage = getAppointmentsofpage($page, $appointmentList); // On récupère la liste des rendez-vous de la page
+    $appointmentsArray = getAppointmentInfos($appointmentsOfThisPage); // On récupère les informations des rendez-vous de la page
+} else { // Sinon
+    $page = 1; // On affiche la page 1
+    $appointmentsOfThisPage = getAppointmentsofpage($page, $appointmentList); // On récupère la liste des rendez-vous de la page
+    $appointmentsArray = getAppointmentInfos($appointmentsOfThisPage); // On récupère les informations des rendez-vous de la page
+}
+
+function getAppointmentInfos($appointmentsOfThisPage)
+{
+    $appointmentsArray = array(); // Création d'un tableau pour stocker les rendez-vous
+
+    foreach ($appointmentsOfThisPage as $appointment) { // Pour chaque rendez-vous
+
+        $patient = new Patient(); // Création d'un objet patient
+        $patient = $patient->ConsultPatientInfo($appointment['patient_id']); // Récupère les informations du patient par rapport à son id
+        $appointment['appointment_date'] = date('d/m/Y', strtotime($appointment['appointment_date'])); // Formate la date au format français
+        $doctorSpecialty = new Doctor(); // Création d'un objet doctor
+        $doctorSpecialty = $doctorSpecialty->getSpecialtyNameByDoctorId($appointment['doctor_id']); // Récupère la spécialité du médecin par rapport à son id
+        // On ajoute les informations du rendez-vous dans le tableau
+        $appointmentsArray[] = array(
+            'appointment_id' => $appointment['appointment_id'],
+            'appointment_date' => $appointment['appointment_date'],
+            'appointment_hour' => $appointment['appointment_hour'],
+            'appointment_description' => $appointment['appointment_description'],
+            'patient_lastname' => $patient['patient_lastname'],
+            'patient_firstname' => $patient['patient_firstname'],
+            'doctor_specialty' => $doctorSpecialty,
+            'doctor_id' => $appointment['doctor_id'],
+            'patient_phone' => $patient['patient_phone'],
+        );
+    }
+    return $appointmentsArray;
+}
+
+
+
+
+
 
 include('../Views/view-doctor-appointments.php');
