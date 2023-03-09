@@ -3,6 +3,8 @@
 require_once '../config/env.php';
 require_once '../helpers/Database.php';
 require_once '../models/patient.php';
+require_once '../models/appointment.php';
+require_once '../models/doctor.php';
 
 session_start();
 
@@ -10,6 +12,18 @@ if (!isset($_SESSION['secretary_id'])) { // Si l'utilisateur n'est pas connecté
     header('location: controller-login.php');
     exit;
 }
+
+//************************************************************ */
+
+$obj_appointment = new Appointment();
+$obj_doctor = new Doctor();
+
+//************************************************************ */
+
+
+var_dump($_FILES);
+var_dump($_POST);
+
 
 
 $obj_patient = new Patient();
@@ -194,6 +208,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Upload réussi :)"; // PS : Message de debug personne ne le verra
         }
     }
+
+    var_dump($errors_patient);
 
     if (empty($errors_patient)) {
 

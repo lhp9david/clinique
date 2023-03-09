@@ -53,7 +53,7 @@
   <div class="container">
 
     <div class="row patient">
-      <table class="table table-striped">
+      <table class="table">
         <thead>
           <tr>
 
@@ -68,11 +68,12 @@
 
           </tr>
         </thead>
+
         <tbody>
           <!-- fetch all clients -->
           <?php
           foreach ($patients as $patient) { ?>
-            <tr>
+            <tr class="patient_row" data-id="<?= $patient['patient_id'] ?>">
               <td><?= $patient['patient_lastname'] ?></td>
               <td><?= $patient['patient_firstname'] ?></td>
               <td><?= date('d/m/Y', strtotime($patient['patient_birthdate'])) ?></td>
@@ -86,8 +87,49 @@
                 <button type="button" id="btnDelete" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modalDelete<?= $patient['patient_id'] ?>"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png"></button>
               </td>
             </tr>
+            <tr class="consultation<?= $patient['patient_id'] ?> appointment-bg" hidden>
+              <td colspan="8">
+                
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Date du rendez-vous</th>
+                        <th scope="col">Heure du rendez-vous</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Nom du médecin</th>
+                        <th scope="col">Prénom du médecin</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      $appointments = $obj_appointment->DisplayAppointmentListByPatient($patient['patient_id']);
+                      if (empty($appointments)) { ?>
+                        <tr>
+                          <td colspan="5" class="text-center">Aucun rendez-vous</td>
+                        </tr>
+                      <?php }
+                      else {
+                      foreach ($appointments as $appointment) { ?>
+                        <tr>
+                          <td><?= date('d/m/Y', strtotime($appointment['appointment_date'])) ?></td>
+                          <td><?= date('H:i', strtotime($appointment['appointment_hour'])) ?></td>
+                          <td><?= $appointment['appointment_description'] ?></td>
+                          <?php $doctor = $obj_doctor->getDoctorById($appointment['doctor_id']); ?>
+                          <td><?= $doctor[0]['doctor_lastname'] ?></td>
+                          <td><?= $doctor[0]['doctor_firstname'] ?></td>
+                        </tr>
+                      <?php }
+                      } ?>
+                    </tbody>
+                  </table>
+
+               
+              </td>
+            </tr>
           <?php } ?>
         </tbody>
+
       </table>
     </div>
 
@@ -153,19 +195,19 @@
       <!-- modal delete -->
       <div class="modal" tabindex="-1" id="modalDelete<?= $patient['patient_id'] ?>" aria-labelledby="modalDeleteLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-body text-center">
-                <h6> Voulez-vous supprimer cet élément définitivement?</h6>
-                <div class="text-center">
-                  <p class="text-center"><strong><?= $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] ?></strong></p>
-                  <form action="../Controllers/controller-list-patient.php" method="get">
-                    <button type="submit" class="btn btn-primary" name='delete' value='<?= $patient['patient_id'] ?>'>Oui</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">non</button>
-                  </form>
-                </div>
+          <div class="modal-content">
+            <div class="modal-body text-center">
+              <h6> Voulez-vous supprimer cet élément définitivement?</h6>
+              <div class="text-center">
+                <p class="text-center"><strong><?= $patient['patient_lastname'] . ' ' . $patient['patient_firstname'] ?></strong></p>
+                <form action="../Controllers/controller-list-patient.php" method="get">
+                  <button type="submit" class="btn btn-primary" name='delete' value='<?= $patient['patient_id'] ?>'>Oui</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">non</button>
+                </form>
               </div>
             </div>
           </div>
+        </div>
       </div>
     <?php } ?>
 
@@ -173,6 +215,7 @@
     include '../includes/footer.php';
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="../assets/js/view-list-patient.js"></script>
 
 </body>
 
