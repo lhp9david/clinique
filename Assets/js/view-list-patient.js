@@ -1,10 +1,27 @@
 console.log('view-list-patient.js loaded');
 const patients = document.querySelectorAll('.patient_row');
+const buttons = document.querySelectorAll('#btnConsultation');
 
-patients.forEach(patient => {
-    patient.addEventListener('click', function () {
+buttons.forEach(button => {
+    button.addEventListener('click', function () {
+
+        let id = button.parentElement.parentElement.getAttribute('data-id');
+
+        // Remove rotate(180deg) from buttons that weren't clicked
+        buttons.forEach(btn => {
+            if (btn.parentElement.parentElement.getAttribute('data-id') != id) {
+                btn.removeAttribute('style');
+            }
+        });
+
+        if (!button.getAttribute('style')) {
+            button.style.transform = 'rotate(180deg)';
+        }
+        else {
+            button.removeAttribute('style');
+        }
+
         patients.forEach(element => {
-            let id = patient.getAttribute('data-id');
             if (element.dataset.id != id) {
 
                 if (!element.nextElementSibling.hasAttribute('hidden')) {
