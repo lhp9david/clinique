@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
       }
     }
 
-    if (isset($_FILES['doctor_photo'])) {
+    if (isset($_FILES['doctor_photo']) && $_FILES['doctor_photo']['error'] == 0) {
       if ($_FILES['doctor_photo']['size'] <= 1000000) {
         $infosfichier = pathinfo($_FILES['doctor_photo']['name']);
         $extension_upload = $infosfichier['extension'];
