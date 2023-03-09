@@ -9,7 +9,7 @@ if (!isset($_SESSION['secretary_id'])) { // Si l'utilisateur n'est une secrétai
   header('location: controller-login.php');
   exit;
 }
-
+var_dump($_FILES);
 // affichage des docteurs en table
 $doc = new Doctor();
 $doctorList = $doc->displayDoctorList();
@@ -134,11 +134,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
 
     if (isset($_FILES['doctor_photo']) && $_FILES['doctor_photo']['error'] == 0) {
+      echo 'ok';
       if ($_FILES['doctor_photo']['size'] <= 1000000) {
         $infosfichier = pathinfo($_FILES['doctor_photo']['name']);
         $extension_upload = $infosfichier['extension'];
         $extensions_autorisees = array('jpg', 'jpeg', 'png');
-        if (in_array($extension_upload, $extensions_autorisees)) {
+        if (!in_array($extension_upload, $extensions_autorisees)) {
+          $errors['missing'] = "ok";
           move_uploaded_file($_FILES['doctor_photo']['tmp_name'], '../Uploads/' . basename($_FILES['doctor_photo']['name']));
         }
       }

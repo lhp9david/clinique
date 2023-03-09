@@ -56,7 +56,7 @@ class Doctor
 
     public function displayDoctorList(): array
     {
-        $query = $this->_pdo->prepare('SELECT * FROM cl_doctors');
+        $query = $this->_pdo->prepare('SELECT * FROM cl_doctors INNER JOIN cl_specialties ON cl_doctors.specialty_id = cl_specialties.specialty_id');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -99,7 +99,7 @@ class Doctor
     // méthode pour récupérer les docteurs
     public function getDoctors()
     {
-        $query = "SELECT * FROM `cl_doctors`";
+        $query = "SELECT * FROM `cl_doctors` INNER JOIN cl_specialties ON cl_doctors.specialty_id = cl_specialties.specialty_id" ;
         $result = $this->_pdo->prepare($query);
         $result->execute();
         $doctors = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -184,6 +184,7 @@ class Doctor
                 break;
         }
     }
+        
     public function getSpecialtyNameByDoctorId($doctor_id)
     {
         $query = $this->_pdo->prepare('SELECT specialty_id FROM cl_doctors WHERE doctor_id = :doctor_id');
@@ -250,3 +251,4 @@ class Secretary
     }
 
 }
+?>

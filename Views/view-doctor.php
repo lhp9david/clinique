@@ -82,7 +82,9 @@
               <td><?= $doctor['doctor_phone'] ?></td>
 
               <td><?= $doctor['doctor_mail'] ?></td>
-              <td><?= $doc->getSpecialtyName($doctor['specialty_id']) ?></td>
+              <td><?= $doctor['specialty_name'] ?></td>
+
+             
 
               <td>
                 <button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modal<?= $doctor['doctor_id'] ?>"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
