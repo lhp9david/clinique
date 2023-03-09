@@ -18,7 +18,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "logout") {
 
 
 
-    
+
 
 
 // Si l'utilisateur est déjà connecté et est un docteur, rediriger vers la page d'accueil
@@ -31,7 +31,7 @@ if (isset($_SESSION["doctor_id"])) {
 }
 
 
-if(isset($_GET['logout'])){
+if (isset($_GET['logout'])) {
 
     session_destroy();
     header('Location: ../index.php');
@@ -46,7 +46,7 @@ $missing = '<i class="bi bi-exclamation-circle-fill text-danger"></i>';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Créer un tableau vide d'erreurs
     $errorsArray = [];
-    
+
     // Vérifier si les champs sont vides
     if (empty(trim($_POST["login"])) || empty(trim($_POST["password"]))) {
         $errorsArray['error'] = $missing;
@@ -57,24 +57,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Vérifier si le captcha est vide
-    if(isset($_POST['g-recaptcha-response'])){
-        $captcha=$_POST['g-recaptcha-response'];
-      }
-      if(!$captcha){
-        header('Location: ../index.php');
-        exit;
-      }
+    if (isset($_POST['g-recaptcha-response'])) {
+        $captcha = $_POST['g-recaptcha-response'];
 
-      // verifier la key 
-      $secretKey = "6Le8Y-gkAAAAAPtwRPyXPTZ5KgxgQpf_BKzskY6O";
-      $ip = $_SERVER['REMOTE_ADDR'];
-      // post request to server
-      $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
-      $response = file_get_contents($url);
-      $responseKeys = json_decode($response,true);
-      // should return JSON with success as true
-      if($responseKeys["success"]) {
-      } 
+        // verifier la key 
+        $secretKey = "6Le8Y-gkAAAAAPtwRPyXPTZ5KgxgQpf_BKzskY6O";
+        $ip = $_SERVER['REMOTE_ADDR'];
+        // post request to server
+        $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
+        $response = file_get_contents($url);
+        $responseKeys = json_decode($response, true);
+        // should return JSON with success as true
+        if (!$responseKeys["success"]) {
+            $errorsArray['captcha'] = 'vous êtes un robot';
+        }
+    }
+    if (!$captcha) {
+        $errorsArray['captcha'] = 'veuillez cocher la case';
+    }
+
 
     // Vérifier si le tableau d'erreurs est vide
     if (empty($errorsArray)) {

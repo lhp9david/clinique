@@ -31,6 +31,8 @@
                                     </div>
 
                                     <div class="g-recaptcha" data-sitekey="6Le8Y-gkAAAAAET4a0j0cageT9rpKpLWnIDrt1-2"></div>
+                                    <?= $errorsArray['captcha'] ?? '' ?>
+
 
                                     <!-- Submit -->
                                     <button class="btn btn-primary m-3" type="submit">se connecter</button>

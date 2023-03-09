@@ -180,7 +180,7 @@
                             <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
                             <label for="doctor_photo" class="btn border" onmouseover="this.style.background='#e9e3f1';" onmouseout="this.style.background='none';">Choisissez une photo :</label>
                             <input type="txt" class="form-control">
-                            <input type="file" name="doctor_photo" id="doctor_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon" style=display:none>
+                            <input type="file" name="doctor_photo" id="doctor_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon" >
                         </div>
                             <div class="<?= $errors['show'] ?? '' ?> rounded-5 mt-2 p-2">
                                 <?= $errors['message'] ?? '' ?>
