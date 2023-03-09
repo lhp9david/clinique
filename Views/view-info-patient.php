@@ -30,9 +30,12 @@
                             <img src="../Uploads/<?php
                             if ($patient_photo == '') {
                                 echo 'default_patient_photo.png';
-                            } else {
+                            } else if (!file_exists('../Uploads/' . $patient_photo)) {
+                                echo 'default_patient_photo.png';
+                            } 
+                            else {
                                 echo $patient_photo;
-                            } ?>" alt="profil picture" class="rounded-circle border border-5 border-light" />
+                            } ?>" alt="profil picture" class="img-fluid rounded-circle border border-5 border-light " />
                         </div>
                         <div class="col p-3 text-start">
                             <h5 class="card-title pt-2"><?= $patient_lastname?> <?= $patient_firstname ?></h5>
@@ -63,7 +66,7 @@
                         </div>
                     </div>
 
-                    <a href="#" class="btn btn-outline-primary mt-3 rounded-5">Liste des consultations</a>
+                    <a href="../Controllers/controller-list-patient.php" class="btn btn-outline-primary mt-3 rounded-5">Liste des consultations</a>
                 </div>
             </div>
         </div>
