@@ -175,6 +175,70 @@ if (isset($_GET['delete'])) {
   }
 }
 
+// Pagination
+$DoctorList = new Doctor();
+$DoctorList = $DoctorList->GetDoctors(); // On récupère la liste des rendez-vous pour vérifier si elle est vide ou non, et afficher dans la vue un message d'erreur si elle l'est
+
+$max = 2; // Nombre de rendez-vous par page
+$nbDoctors = count($DoctorList); // Nombre total de rendez-vous
+$nbPage = ceil($nbDoctors / $max); // Nombre de pages
+
+// Pour chaque page, on ajoute les deux rendez-vous dans un tableau correspondant à la page
+for ($i = 1; $i <= $nbPage; $i++) {
+    $DoctorList[$i] = array_slice($DoctorList, ($i - 1) * $max, $max);
+}
+
+$page = 1; // Page par défaut
+foreach ($DoctorList as $doctorPage) { // Pour chaque page de rendez-vous
+    $page++;
+}
+function getDoctorsofpage($page, $DoctorList) // Retourne la liste des rendez-vous d'une page
+{
+    return $DoctorList[$page];
+}
+
+
+if (isset($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] <= $nbPage) { // Si la page est passée en paramètre et qu'elle est comprise entre 1 et le nombre de pages
+    $page = $_GET['page']; // On récupère la pages
+    $doctorsOfThisPage = getDoctorsofpage($page, $DoctorList); // On récupère la liste des rendez-vous de la page
+    $doctorsArray = getDoctorInfos($doctorsOfThisPage); // On récupère les informations des rendez-vous de la page
+} else { // Sinon
+    $page = 1; // On affiche la page 1
+    $doctorsOfThisPage = getDoctorsofpage($page, $DoctorList); // On récupère la liste des rendez-vous de la page
+    $doctorsArray = getDoctorInfos($doctorsOfThisPage); // On récupère les informations des rendez-vous de la page
+}
+
+function getDoctorInfos($doctorsOfThisPage)
+{
+    $doctorsArray = array(); // Création d'un tableau pour stocker les rendez-vous
+
+    foreach ($doctorsOfThisPage as $doctor) { // Pour chaque rendez-vous
+
+        $doc = new Doctor(); // Création d'un objet patient
+        $doc = $doc->getDoctorById($doctor['doctor_id']); // On récupère les informations du patient correspondant au rendez-vous
+
+        $doctorSpecialty = new Doctor(); // Création d'un objet doctor
+        $doctorSpecialty = $doctorSpecialty->getSpecialtyNameByDoctorId($doctor['doctor_id']); // Récupère la spécialité du médecin par rapport à son id        
+        // On ajoute les informations du rendez-vous dans le tableau
+        $doctorsArray[] = array(
+            'doctor_id' => $doctor['doctor_id'],
+            'doctor_lastname' => $doctor['doctor_lastname'],
+            'doctor_firstname' => $doctor['doctor_firstname'],
+            'doctor_phone' => $doctor['doctor_phone'],
+            'doctor_phone_emergency' => $doctor['doctor_phone_emergency'],
+            'doctor_mail' => $doctor['doctor_mail'],
+            'doctor_adress' => $doctor['doctor_adress'],
+            'doctor_photo' => $doctor['doctor_photo'],
+            'specialty_id' => $doctor['specialty_id'],
+            'specialty_name' => $doctorSpecialty,
+          
+            
+        );
+    }
+    return $doctorsArray;
+}
+
+
 
 
 
