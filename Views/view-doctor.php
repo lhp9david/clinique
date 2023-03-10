@@ -85,7 +85,7 @@
               <td><?= $doctor['doctor_mail'] ?></td>
               <td><?= $doctor['specialty_name'] ?></td>
 
-             
+
 
               <td>
                 <button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modal<?= $doctor['doctor_id'] ?>"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
@@ -102,7 +102,7 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier les informations</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <form action="" method="get" enctype="multipart/form-data">
+                  <form action="" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                       <input type="hidden" name="doctor_id" value="<?= $doctor['doctor_id'] ?>">
                       <div class="input-group">
@@ -135,13 +135,15 @@
                           <option value="3" <?= ($doctor['specialty_id'] == 3 ? 'selected' : '') ?>>Gynécologue</option>
                           <option value="4" <?= ($doctor['specialty_id'] == 4 ? 'selected' : '') ?>>Généraliste</option>
                         </select>
-                        <img src="../Uploads/<?= $doctor['doctor_photo'] ?>" alt="" class="w-25">
+
                         <div class="input-group">
                           <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
-                          <label for="doctor_photo" class="btn border" onmouseover="this.style.background='#e9e3f1';" onmouseout="this.style.background='none';">Choisissez une photo :</label>
-                          <input type="txt" class="form-control">
-                          <input type="file" name="doctor_photo" id="doctor_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon" >
+                          <input type="file" name="doctor_photo" id="doctor_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
+                        <div class="row justify-content-center mt-1">
+                          <img src="../Uploads/<?= $doctor['doctor_photo'] ?>" alt="" class="w-25 rounded-5 img-fluid">
+                        </div>
+
                       </div>
                       <div class="<?= $errors['show-wrong'] ?? '' ?> rounded-5 mt-2 p-2">
                         <?= $errors['wrong'] ?? '' ?>
