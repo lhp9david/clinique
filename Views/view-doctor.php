@@ -185,6 +185,16 @@
 ?>
 
 </tbody>
+<tfoot>
+  <tr>
+    <td colspan="7">
+      <div class="text-center fw-bold">
+        <!-- PAGINATION -->
+
+      </div>
+    </td>
+  </tr>
+</tfoot>
 </table>
 </div>
 
