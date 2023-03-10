@@ -56,17 +56,6 @@
 
 
 
-            <!-- Pagination -->
-
-            <div class="">
-                <nav class="">
-                    <!-- Pour chaque page, on affiche un lien vers la page -->
-                    <?php for ($i = 1; $i <= $nbPage; $i++) : ?>
-                        <a href="controller-doctor-appointments.php?page=<?= $i ?>"><?= $i ?></a>
-                    <?php endfor; ?>
-                </nav>
-            </div>
-
 
 
 
@@ -76,7 +65,7 @@
     <main>
         <div class="container">
             <div class="row appointments">
-                <?php if (empty($AppointmentList)) {
+                <?php if (empty($appointmentList)) {
                     echo
                     '
                         <div class="alert alert-primary rounded-5 text-center" role="alert">
@@ -134,12 +123,34 @@
                                 <?php endforeach;
 
                                 ?>
+
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="text-center fw-bold">
+                                            <?php for ($i = 1; $i <= $nbPage; $i++) : ?>
+                                                <a href="controller-doctor-appointments.php?page=<?= $i ?><?= isset($_GET['doctor']) ? '&doctor=' . $_GET['doctor'] : '' ?>" class="text-primary"><?= $i ?></a>
+                                            <?php endfor; ?>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tfoot>
                         </table>
                     </div>
                 <?php } ?>
 
+                <!-- Pagination -->
+
+
+                <!-- Pour chaque page, on affiche un lien vers la page -->
+
+
+
             </div>
+
+        </div>
 
 
 

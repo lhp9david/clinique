@@ -197,17 +197,22 @@ function displayDoctors() // Affiche la liste des médecins dans un select
 }
 
 // Pagination
-
-$AppointmentList = new Appointments();
-$AppointmentList = $AppointmentList->GetAppointmentList(); // On récupère la liste des rendez-vous pour vérifier si elle est vide ou non, et afficher dans la vue un message d'erreur si elle l'est
+// Si le doctor est passé en paramètre, on récupère la liste des rendez-vous du docteur, sinon on récupère la liste de tous les rendez-vous
+if (isset($_GET['doctor'])) {
+    $appointmentList = new Appointments();
+    $appointmentList = $appointmentList->GetAppointmentListByDoctor($_GET['doctor']);
+} else {
+    $appointmentList = new Appointments();
+    $appointmentList = $appointmentList->GetAppointmentList();
+}
 
 $max = 2; // Nombre de rendez-vous par page
-$nbAppointment = count($AppointmentList); // Nombre total de rendez-vous
+$nbAppointment = count($appointmentList); // Nombre total de rendez-vous
 $nbPage = ceil($nbAppointment / $max); // Nombre de pages
 
 // Pour chaque page, on ajoute les deux rendez-vous dans un tableau correspondant à la page
 for ($i = 1; $i <= $nbPage; $i++) {
-    $appointmentList[$i] = array_slice($AppointmentList, ($i - 1) * $max, $max);
+    $appointmentList[$i] = array_slice($appointmentList, ($i - 1) * $max, $max);
 }
 
 $page = 1; // Page par défaut
@@ -216,12 +221,15 @@ foreach ($appointmentList as $appointmentPage) { // Pour chaque page de rendez-v
 }
 function getAppointmentsofpage($page, $appointmentList) // Retourne la liste des rendez-vous d'une page
 {
-    return $appointmentList[$page];
+    if (!empty($appointmentList[$page])) {
+        return $appointmentList[$page];
+    }
 }
 
 
+
 if (isset($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] <= $nbPage) { // Si la page est passée en paramètre et qu'elle est comprise entre 1 et le nombre de pages
-    $page = $_GET['page']; // On récupère la pages
+    $page = $_GET['page']; // On récupère la page
     $appointmentsOfThisPage = getAppointmentsofpage($page, $appointmentList); // On récupère la liste des rendez-vous de la page
     $appointmentsArray = getAppointmentInfos($appointmentsOfThisPage); // On récupère les informations des rendez-vous de la page
 } else { // Sinon
@@ -233,30 +241,31 @@ if (isset($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] <= $nbPage) { // 
 function getAppointmentInfos($appointmentsOfThisPage)
 {
     $appointmentsArray = array(); // Création d'un tableau pour stocker les rendez-vous
+    if (!empty($appointmentsOfThisPage)) {
+        foreach ($appointmentsOfThisPage as $appointment) { // Pour chaque rendez-vous
 
-    foreach ($appointmentsOfThisPage as $appointment) { // Pour chaque rendez-vous
-
-        $patient = new Patient(); // Création d'un objet patient
-        $patient = $patient->ConsultPatientInfo($appointment['patient_id']); // Récupère les informations du patient par rapport à son id
-        $appointment['appointment_date'] = date('d/m/Y', strtotime($appointment['appointment_date'])); // Formate la date au format français
-        $doctorSpecialty = new Doctor(); // Création d'un objet doctor
-        $doctorSpecialty = $doctorSpecialty->getSpecialtyNameByDoctorId($appointment['doctor_id']); // Récupère la spécialité du médecin par rapport à son id
-        // On ajoute les informations du rendez-vous dans le tableau
-        $appointmentsArray[] = array(
-            'appointment_id' => $appointment['appointment_id'],
-            'appointment_date' => $appointment['appointment_date'],
-            'appointment_hour' => $appointment['appointment_hour'],
-            'appointment_description' => $appointment['appointment_description'],
-            'patient_lastname' => $patient['patient_lastname'],
-            'patient_firstname' => $patient['patient_firstname'],
-            'doctor_specialty' => $doctorSpecialty,
-            'doctor_id' => $appointment['doctor_id'],
-            'patient_phone' => $patient['patient_phone'],
-        );
+            $patient = new Patient(); // Création d'un objet patient
+            $patient = $patient->ConsultPatientInfo($appointment['patient_id']); // Récupère les informations du patient par rapport à son id
+            $appointment['appointment_date'] = date('d/m/Y', strtotime($appointment['appointment_date'])); // Formate la date au format français
+            $doctorSpecialty = new Doctor(); // Création d'un objet doctor
+            $doctorSpecialty = $doctorSpecialty->getSpecialtyNameByDoctorId($appointment['doctor_id']); // Récupère la spécialité du médecin par rapport à son id
+            // On ajoute les informations du rendez-vous dans le tableau
+            $appointmentsArray[] = array(
+                'appointment_id' => $appointment['appointment_id'],
+                'appointment_date' => $appointment['appointment_date'],
+                'appointment_hour' => $appointment['appointment_hour'],
+                'appointment_description' => $appointment['appointment_description'],
+                'patient_lastname' => $patient['patient_lastname'],
+                'patient_firstname' => $patient['patient_firstname'],
+                'doctor_specialty' => $doctorSpecialty,
+                'doctor_id' => $appointment['doctor_id'],
+                'patient_phone' => $patient['patient_phone'],
+            );
+        }
     }
+
     return $appointmentsArray;
 }
-
 
 
 
