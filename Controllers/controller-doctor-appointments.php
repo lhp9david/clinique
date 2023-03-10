@@ -201,7 +201,7 @@ function displayDoctors() // Affiche la liste des médecins dans un select
 $AppointmentList = new Appointments();
 $AppointmentList = $AppointmentList->GetAppointmentList(); // On récupère la liste des rendez-vous pour vérifier si elle est vide ou non, et afficher dans la vue un message d'erreur si elle l'est
 
-$max = 2; // Nombre de rendez-vous par page
+$max = 5; // Nombre de rendez-vous par page
 $nbAppointment = count($AppointmentList); // Nombre total de rendez-vous
 $nbPage = ceil($nbAppointment / $max); // Nombre de pages
 

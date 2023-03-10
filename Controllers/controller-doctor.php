@@ -9,7 +9,7 @@ if (!isset($_SESSION['secretary_id'])) { // Si l'utilisateur n'est une secrétai
   header('location: controller-login.php');
   exit;
 }
-var_dump($_FILES);
+
 // affichage des docteurs en table
 $doc = new Doctor();
 $doctorList = $doc->displayDoctorList();
