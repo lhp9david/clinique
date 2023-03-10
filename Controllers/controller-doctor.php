@@ -136,6 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $extensions_autorisees = array('jpg', 'jpeg', 'png');
         if (in_array($extension_upload, $extensions_autorisees)) {
           
+
           move_uploaded_file($_FILES['doctor_photo']['tmp_name'], '../Uploads/' . basename($_FILES['doctor_photo']['name']));
           if ($doc['doctor_photo']) {
             $doctor_photo_path = '../Uploads/' . $doc['doctor_photo'];
