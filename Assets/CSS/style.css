@@ -9,7 +9,7 @@ body {
 }
 
 .modal-body {
-    padding: 1;
+    padding: 1rem;
 }
 
 .row.login,.row.secretary, .row.patient, .row.doctor, .row.appointments {
