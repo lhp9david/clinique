@@ -3,6 +3,13 @@ const patients = document.querySelectorAll('.patient_row');
 const buttons = document.querySelectorAll('#btnConsultation');
 
 buttons.forEach(button => {
+    button.addEventListener('mouseover', function () {
+        button.firstElementChild.src = "https://img.icons8.com/ios-glyphs/20/FFFFFF/expand-arrow--v1.png"
+    })
+    button.addEventListener('mouseout', function () {
+        button.firstElementChild.src = "https://img.icons8.com/ios-glyphs/20/000000/expand-arrow--v1.png"
+    })
+
     button.addEventListener('click', function () {
 
         let id = button.parentElement.parentElement.getAttribute('data-id');
@@ -32,6 +39,8 @@ buttons.forEach(button => {
         });
     });
 });
+
+
 
 window.onload = function () {
     let patient = document.querySelectorAll('.patient_row');
