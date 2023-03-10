@@ -137,8 +137,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           
           move_uploaded_file($_FILES['doctor_photo']['tmp_name'], '../Uploads/' . basename($_FILES['doctor_photo']['name']));
           
-          if(!empty($doc['doctor_photo'])) {
-            unlink('../Uploads/' . $doc['doctor_photo']);
+          if (!empty($doc['doctor_photo'])) {
+            $doctor_photo_path = '../Uploads/' . $doc['doctor_photo'];
+            if (file_exists($doctor_photo_path)) {
+              unlink($doctor_photo_path);
+            }
           }
 
         }

@@ -8,6 +8,9 @@ body {
     overflow-x: hidden;
 }
 
+.modal-body {
+    padding: 1;
+}
 
 .row.login,.row.secretary, .row.patient, .row.doctor, .row.appointments {
     height: 100vh;
