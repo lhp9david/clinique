@@ -56,17 +56,6 @@
 
 
 
-            <!-- Pagination -->
-
-            <div class="">
-                <nav class="">
-                    <!-- Pour chaque page, on affiche un lien vers la page -->
-                    <?php for ($i = 1; $i <= $nbPage; $i++) : ?>
-                        <a href="controller-doctor-appointments.php?page=<?= $i ?>"><?= $i ?></a>
-                    <?php endfor; ?>
-                </nav>
-            </div>
-
 
 
 
@@ -134,12 +123,34 @@
                                 <?php endforeach;
 
                                 ?>
+
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="text-center fw-bold">
+                                            <?php for ($i = 1; $i <= $nbPage; $i++) : ?>
+                                                <a href="controller-doctor-appointments.php?page=<?= $i ?>" class="text-primary"><?= $i ?></a>
+                                            <?php endfor; ?>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tfoot>
                         </table>
                     </div>
                 <?php } ?>
 
+                <!-- Pagination -->
+
+
+                <!-- Pour chaque page, on affiche un lien vers la page -->
+
+
+
             </div>
+
+        </div>
 
 
 

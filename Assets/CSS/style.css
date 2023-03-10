@@ -52,10 +52,13 @@ table.table  {
     border-radius: 20px;
 }
 
-thead, tbody {
+thead, tbody, tfoot {
     border-radius: 20px !important;
     border-color: #f0f8ff00;
 }
+
+
+
 
 a {
     text-decoration: none;
