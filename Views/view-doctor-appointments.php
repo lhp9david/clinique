@@ -56,16 +56,16 @@
 
 
 
-            <!-- Pagination -->
+    <!-- Pagination -->
 
-            <div class="">
-                <nav class="">
-                    <!-- Pour chaque page, on affiche un lien vers la page -->
-                    <?php for ($i = 1; $i <= $nbPage; $i++) : ?>
-                        <a href="controller-doctor-appointments.php?page=<?= $i ?>"><?= $i ?></a>
-                    <?php endfor; ?>
-                </nav>
-            </div>
+    <div class="">
+        <nav class="">
+            <!-- Pour chaque page, on affiche un lien vers la page -->
+            <?php for ($i = 1; $i <= $nbPage; $i++) : ?>
+                <a href="controller-doctor-appointments.php?page=<?= $i ?>"><?= $i ?></a>
+            <?php endfor; ?>
+        </nav>
+    </div>
 
 
 
@@ -76,7 +76,7 @@
     <main>
         <div class="container">
             <div class="row appointments">
-                <?php if (empty($AppointmentList)) {
+                <?php if (empty($appointmentList)) {
                     echo
                     '
                         <div class="alert alert-primary rounded-5 text-center" role="alert">
