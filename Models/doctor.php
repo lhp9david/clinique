@@ -138,8 +138,18 @@ class Doctor
         $query->execute([
             ':doctor_id' => $doctor_id,
         ]);
-        return $query->fetch(PDO::FETCH_ASSOC);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+     // méthode pour afficher un docteur (id)
+     public function getDoctorInfoById($doctor_id)
+     {
+         $query = $this->_pdo->prepare('SELECT * FROM cl_doctors WHERE doctor_id = :doctor_id');
+         $query->execute([
+             ':doctor_id' => $doctor_id,
+         ]);
+         return $query->fetch(PDO::FETCH_ASSOC);
+     }
 
     // afficher tous les noms des docteurs
     public function getDoctorLastname()
@@ -183,6 +193,7 @@ class Doctor
                 return 'Spécialité inconnue';
                 break;
         }
+        
     }
         
     public function getSpecialtyNameByDoctorId($doctor_id)

@@ -1,6 +1,7 @@
 <html>
 
-<?php include('../includes/head.php'); ?>
+<?php include('../includes/head.php');
+?>
 
 <body>
   <header>
@@ -63,11 +64,17 @@
             // filtrage par nom
             $doc = new Doctor();
             $doctorList = $doc->getDoctorById($_GET['doctor_select']);
+            $doctorSpecialty = $doc->getSpecialtyName($doctor['specialty_id']);
+
           } else {
             $doc = new Doctor();
             $doctorList = $doctorsArray;
           }
+
           foreach ($doctorList as $doctor) {
+           
+            $doctor['specialty_name'] = $doctor['specialty_name'] ?? $doctorSpecialty;
+
           ?>
 
             <tr>
@@ -78,10 +85,9 @@
                   </button>
                 </a>
               </td>
-              <td><?= strtoupper($doctor['doctor_lastname']) ?></td>
-              <td><?= ucfirst($doctor['doctor_firstname']) ?></td>
+              <td><?= $doctor['doctor_lastname'] ?></td>
+              <td><?= $doctor['doctor_firstname'] ?></td>
               <td><?= $doctor['doctor_phone'] ?></td>
-
               <td><?= $doctor['doctor_mail'] ?></td>
               <td><?= $doctor['specialty_name'] ?></td>
 
@@ -141,7 +147,7 @@
                           <input type="file" name="doctor_photo" id="doctor_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                         <div class="row justify-content-center mt-1 w-100">
-                          <div class="text-center"> 
+                          <div class="text-center">
                             <p class="text-secondary">Fichier actuel : </p>
                             <img src="../Uploads/<?= $doctor['doctor_photo'] ?>" alt="" class="w-25 rounded-5 img-fluid">
                           </div>

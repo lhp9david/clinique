@@ -149,7 +149,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $doctor_photo = $doc['doctor_photo'];
     }
 
-
     if (empty($errors)) {
       $errors['show'] = 'alert alert-success';
       $errors['message'] = 'Modification réussie';
@@ -192,6 +191,7 @@ $page = 1; // Page par défaut
 foreach ($DoctorList as $doctorPage) { // Pour chaque page de rendez-vous
     $page++;
 }
+
 function getDoctorsofpage($page, $DoctorList) // Retourne la liste des rendez-vous d'une page
 {
     return $DoctorList[$page];
