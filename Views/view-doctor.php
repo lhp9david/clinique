@@ -85,7 +85,7 @@
               <td><?= $doctor['doctor_mail'] ?></td>
               <td><?= $doctor['specialty_name'] ?></td>
 
-             
+
 
               <td>
                 <button type="button" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modal<?= $doctor['doctor_id'] ?>"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
@@ -135,12 +135,15 @@
                           <option value="3" <?= ($doctor['specialty_id'] == 3 ? 'selected' : '') ?>>Gynécologue</option>
                           <option value="4" <?= ($doctor['specialty_id'] == 4 ? 'selected' : '') ?>>Généraliste</option>
                         </select>
-                        <img src="../Uploads/<?= $doctor['doctor_photo'] ?>" alt="" class="w-25">
-                          <div class="input-group">
-                            <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
-                            <input type="file" name="doctor_photo" id="doctor_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon" >
+
+                        <div class="input-group">
+                          <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-image-fill"></i></div>
+                          <input type="file" name="doctor_photo" id="doctor_photo" class="form-control" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
-                        
+                        <div class="row justify-content-center mt-1">
+                          <img src="../Uploads/<?= $doctor['doctor_photo'] ?>" alt="" class="w-25 rounded-5 img-fluid">
+                        </div>
+
                       </div>
                       <div class="<?= $errors['show-wrong'] ?? '' ?> rounded-5 mt-2 p-2">
                         <?= $errors['wrong'] ?? '' ?>

@@ -18,7 +18,7 @@ $doctorList = $doc->displayDoctorList();
 $doc = new Doctor();
 $doctorListName = $doc->getDoctorLastName();
 
-// méthode GET 
+// méthode POST 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
@@ -136,13 +136,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (in_array($extension_upload, $extensions_autorisees)) {
           
           move_uploaded_file($_FILES['doctor_photo']['tmp_name'], '../Uploads/' . basename($_FILES['doctor_photo']['name']));
+          
+          if(!empty($doc['doctor_photo'])) {
+            unlink('../Uploads/' . $doc['doctor_photo']);
+          }
+
         }
       }
     } else {
       $doctor_photo = $doc['doctor_photo'];
     }
-
-
 
 
     if (empty($errors)) {
@@ -155,21 +158,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $errors['message'] = 'Echec de la modification : ';
     }
   }
-
-  // Supression du docteur
-  if (isset($_POST['delete'])) {
-    $doc = new Doctor();
-    $doc = $doc->getDoctorById($_POST['delete']);
-    if ($doc == null) {
-      header('Location:controller-doctor.php');
-    } else {
-      $doc = new Doctor();
-      $doc->deleteDoctor($_POST['delete']);
-      header('Location:controller-doctor.php');
-    }
-  }
 }
 
+// Supression du docteur
+if (isset($_GET['delete'])) {
+  $doc = new Doctor();
+  $doc = $doc->getDoctorById($_GET['delete']);
+  if ($doc == null) {
+    header('Location:controller-doctor.php');
+  } else {
+    $doc = new Doctor();
+    $doc->deleteDoctor($_GET['delete']);
+    header('Location:controller-doctor.php');
+  }
+}
 
 
 
