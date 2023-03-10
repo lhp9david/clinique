@@ -89,35 +89,34 @@
               <td><?= $patient['patient_phone'] ?></td>
               <td><?= $patient['patient_adress'] ?></td>
               <td>
-              <button type="button" id="btnConsultation" class="btn btn-outline-dark rounded-5"><img src="https://img.icons8.com/ios-glyphs/20/000000/expand-arrow--v1.png"/></button>
+                <button type="button" id="btnConsultation" class="btn btn-outline-dark rounded-5"><img src="https://img.icons8.com/ios-glyphs/20/000000/expand-arrow--v1.png" /></button>
                 <button type="button" id="btnAddApptmt" class="btn btn-success rounded-5"><a href="./controller-secretary.php?id=<?= $patient['patient_id'] ?>"><img src="https://img.icons8.com/material-rounded/20/FFFFFF/person-calendar.png" alt="Prendre RDV"></a></button>
                 <button type="button" id="btnEdit" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $patient['patient_id'] ?>"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
                 <button type="button" id="btnDelete" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modalDelete<?= $patient['patient_id'] ?>"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png"></button>
-                
+
               </td>
             </tr>
             <tr class="consultation<?= $patient['patient_id'] ?> appointment-bg" hidden>
               <td colspan="9">
-                
-                  <table class="table" style="background-color : rgba(255, 255, 255, 0.4);">
-                    <thead>
+
+                <table class="table" style="background-color : rgba(255, 255, 255, 0.4);">
+                  <thead>
+                    <tr>
+                      <th scope="col">Date du rendez-vous</th>
+                      <th scope="col">Heure du rendez-vous</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Nom du médecin</th>
+                      <th scope="col">Prénom du médecin</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $appointments = $obj_appointment->DisplayAppointmentListByPatient($patient['patient_id']);
+                    if (empty($appointments)) { ?>
                       <tr>
-                        <th scope="col">Date du rendez-vous</th>
-                        <th scope="col">Heure du rendez-vous</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Nom du médecin</th>
-                        <th scope="col">Prénom du médecin</th>
+                        <td colspan="5" class="text-center">Aucun rendez-vous</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      $appointments = $obj_appointment->DisplayAppointmentListByPatient($patient['patient_id']);
-                      if (empty($appointments)) { ?>
-                        <tr>
-                          <td colspan="5" class="text-center">Aucun rendez-vous</td>
-                        </tr>
-                      <?php }
-                      else {
+                      <?php } else {
                       foreach ($appointments as $appointment) { ?>
                         <tr>
                           <td><?= date('d/m/Y', strtotime($appointment['appointment_date'])) ?></td>
@@ -127,17 +126,26 @@
                           <td><?= $doctor['doctor_lastname'] ?></td>
                           <td><?= $doctor['doctor_firstname'] ?></td>
                         </tr>
-                      <?php }
-                      } ?>
-                    </tbody>
-                  </table>
+                    <?php }
+                    } ?>
+                  </tbody>
+                </table>
 
-               
+
               </td>
             </tr>
           <?php } ?>
         </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="7">
+              <div class="text-center fw-bold">
+                <!-- PAGINATION -->
 
+              </div>
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
 
