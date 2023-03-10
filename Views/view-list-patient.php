@@ -89,10 +89,11 @@
               <td><?= $patient['patient_phone'] ?></td>
               <td><?= $patient['patient_adress'] ?></td>
               <td>
+              <button type="button" id="btnConsultation" class="btn btn-outline-dark rounded-5"><img src="https://img.icons8.com/ios-glyphs/20/000000/expand-arrow--v1.png"/></button>
                 <button type="button" id="btnAddApptmt" class="btn btn-success rounded-5"><a href="./controller-secretary.php?id=<?= $patient['patient_id'] ?>"><img src="https://img.icons8.com/material-rounded/20/FFFFFF/person-calendar.png" alt="Prendre RDV"></a></button>
                 <button type="button" id="btnEdit" class="btn btn-info rounded-5" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $patient['patient_id'] ?>"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/edit.png" /></button>
                 <button type="button" id="btnDelete" class="btn btn-danger rounded-5" data-bs-toggle="modal" data-bs-target="#modalDelete<?= $patient['patient_id'] ?>"><img src="https://img.icons8.com/ios-filled/20/FFFFFF/delete-forever.png"></button>
-                <button type="button" id="btnConsultation" class="btn btn-warning rounded-5"><img src="https://img.icons8.com/ios-glyphs/20/FFFFFF/expand-arrow--v1.png"/></button>
+                
               </td>
             </tr>
             <tr class="consultation<?= $patient['patient_id'] ?> appointment-bg" hidden>
@@ -123,8 +124,8 @@
                           <td><?= date('H:i', strtotime($appointment['appointment_hour'])) ?></td>
                           <td><?= $appointment['appointment_description'] ?></td>
                           <?php $doctor = $obj_doctor->getDoctorById($appointment['doctor_id']); ?>
-                          <td><?= $doctor[0]['doctor_lastname'] ?></td>
-                          <td><?= $doctor[0]['doctor_firstname'] ?></td>
+                          <td><?= $doctor['doctor_lastname'] ?></td>
+                          <td><?= $doctor['doctor_firstname'] ?></td>
                         </tr>
                       <?php }
                       } ?>
