@@ -12,33 +12,36 @@ buttons.forEach(button => {
 
     button.addEventListener('click', function () {
 
-        let id = button.parentElement.parentElement.getAttribute('data-id');
+        let id = button.parentElement.parentElement.getAttribute('data-id')
 
         // Remove rotate(180deg) from buttons that weren't clicked
         buttons.forEach(btn => {
             if (btn.parentElement.parentElement.getAttribute('data-id') != id) {
-                btn.removeAttribute('style');
+                btn.removeAttribute('style')
             }
         });
 
         if (!button.getAttribute('style')) {
-            button.style.transform = 'rotate(180deg)';
+            button.style.transform = 'rotate(180deg)'
         }
         else {
-            button.removeAttribute('style');
+            button.removeAttribute('style')
         }
 
         patients.forEach(element => {
-            if (element.dataset.id != id) {
+            
+                if (element.dataset.id != id) {
 
-                if (!element.nextElementSibling.hasAttribute('hidden')) {
-                    element.nextElementSibling.toggleAttribute('hidden');
+                    if (!element.nextElementSibling.hasAttribute('hidden')) {
+                        element.nextElementSibling.toggleAttribute('hidden')
+                    }
+
                 }
-            }
-            document.querySelector('.consultation' + id).toggleAttribute('hidden');
-        });
-    });
-});
+                document.querySelector('.consultation' + id).toggleAttribute('hidden')
+
+        })
+    })
+})
 
 
 
