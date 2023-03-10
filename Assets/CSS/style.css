@@ -83,7 +83,15 @@ footer {
 
 .appointment-bg {
     position: relative;
-    transition: transform 0.5s;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 300ms;
+}
+
+.appointment-bg[hidden] {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
 }
 
 .appointment-bg td {
@@ -102,5 +110,14 @@ footer {
     background: repeating-linear-gradient( -45deg, #7679b8, #767cf7 5px, #e5e5f7 5px, #e5e5f7 15px );
     z-index: -1;
 }
+
+#btnConsultation {
+    transition: transform 0.3s ease;
+}
+
+
+
+
+
 
 
