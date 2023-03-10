@@ -125,6 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       }
     }
 
+    
     if (isset($_FILES['doctor_photo'])) {
       $doctor_photo = $_FILES['doctor_photo']['name'];
 
@@ -136,11 +137,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (in_array($extension_upload, $extensions_autorisees)) {
           
           move_uploaded_file($_FILES['doctor_photo']['tmp_name'], '../Uploads/' . basename($_FILES['doctor_photo']['name']));
-          
-          if(!empty($doc['doctor_photo'])) {
-            unlink('../Uploads/' . $doc['doctor_photo']);
+          if ($doc['doctor_photo']) {
+            $doctor_photo_path = '../Uploads/' . $doc['doctor_photo'];
+            if (file_exists($doctor_photo_path)) {
+              unlink($doctor_photo_path);
+            }
           }
-
         }
       }
     } else {
