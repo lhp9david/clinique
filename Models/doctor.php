@@ -4,6 +4,16 @@ class Doctor
 {
 
     private object $_pdo;
+    private int $doctor_id;
+    private string $doctor_lastname;
+    private string $doctor_firstname;
+    private string $doctor_phone;
+    private string $doctor_phone_emergency;
+    private string $doctor_mail;
+    private string $doctor_adress;
+    private string $doctor_photo;
+    private string $doctor_password;
+    private int $specialty_id;
 
     // méthode magique pour get les attributs
     public function __get($attribut)
@@ -95,6 +105,33 @@ class Doctor
             return false;
         }
     }
+
+/**
+ * methode pour vérifier si le mail existe déjà
+ * 
+ * @param string $doctor_mail mail du docteur
+ * @return mixed array|false
+ * 
+ */
+     
+    public static function checkMail(string $doctor_mail) : mixed
+    {
+        $pdo = Database::connect();
+        $query = "SELECT * FROM `cl_doctors` WHERE `doctor_mail` = :doctor_mail";
+        $result = $pdo->prepare($query);
+        $result->bindValue(':doctor_mail', $doctor_mail, PDO::PARAM_STR);
+        if ($result->execute()) {
+            if ($result->rowCount() > 0) {
+                return $result->fetch(PDO::FETCH_ASSOC);
+            } else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+
 
     // méthode pour récupérer les docteurs
     public function getDoctors()
@@ -196,59 +233,3 @@ class Doctor
     }
 }
 
-// créer une class Secretary
-class Secretary
-{
-    private int $secretary_id;
-    private string $secretary_login;
-    private string $secretary_password;
-
-    private object $_pdo;
-
-    // méthode magique pour get les attributs
-    public function __get($attribut)
-    {
-        return $this->$attribut;
-    }
-
-    // méthode magique pour set les attributs
-    public function __set($attribut, $value)
-    {
-        $this->$attribut = $value;
-    }
-
-    // créer un constructeur pour instancier la connexion
-    public function __construct()
-    {
-        $this->_pdo = Database::connect();
-    }
-
-    // méthode pour se connecter
-    public function login()
-    {
-        // requête pour vérifier si le login et le mot de passe correspondent
-        $query = "SELECT * FROM `cl_secretary` WHERE `secretary_login` = :secretary_login AND `secretary_password` = :secretary_password";
-        $result = $this->_pdo->prepare($query);
-        // assigner les valeurs aux marqueurs nominatifs
-        $result->bindValue(':secretary_login', $this->secretary_login, PDO::PARAM_STR);
-        $result->bindValue(':secretary_password', $this->secretary_password, PDO::PARAM_STR);
-        // exécuter la requête
-        $result->execute();
-        // vérifier si la requête a retourné un résultat
-        if ($result->rowCount() > 0) {
-            // assigner les données de la requête à des variables
-            $data = $result->fetch(PDO::FETCH_OBJ);
-            // assigner les données de la requête aux attributs de l'objet
-            $this->secretary_id = $data->secretary_id;
-            $this->secretary_login = $data->secretary_login;
-            $this->secretary_password = $data->secretary_password;
-            // retourner true
-            return true;
-        } else {
-            // retourner false
-            return false;
-        }
-    }
-
-}
-?>
