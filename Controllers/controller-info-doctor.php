@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   if (isset($_GET['doctor'])) {
 
     $doc = new Doctor();
-    $doctor = $doc->getDoctorById($_GET['doctor']);
+    $doctor = $doc->getDoctorInfoById($_GET['doctor']);
     
     // création des variables d'info
     $doctor_id = $doctor['doctor_id'];
